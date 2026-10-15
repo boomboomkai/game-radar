@@ -16,7 +16,7 @@ h1{margin:0;font-size:28px;letter-spacing:.02em}
 #chips button{font:inherit;font-size:14px;background:none;border:1px solid var(--ln);color:var(--mu);border-radius:6px;padding:2px 12px;cursor:pointer}
 #chips button[aria-pressed=true]{background:var(--ac);border-color:var(--ac);color:#fff}
 button:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
-.item{display:grid;grid-template-columns:5px 1fr;background:var(--row);border-radius:6px;margin:8px 0;overflow:hidden}
+.item{display:grid;grid-template-columns:5px 1fr auto;background:var(--row);border-radius:6px;margin:8px 0;overflow:hidden}
 .item i{background:#888}.item[data-p=Steam] i{background:#2a6f97}.item[data-p=Epic] i{background:#6b6b80}.item[data-p=EA] i{background:#d1393b}
 .item[data-p=Nintendo] i{background:#e60012}.item[data-p=PlayStation] i{background:#1f4fd8}.item[data-p=Xbox] i{background:#107c10}
 .item div{padding:10px 14px}.item a{color:var(--tx);text-decoration:none;font-weight:600}.item a:hover{color:var(--ac);text-decoration:underline}
@@ -27,6 +27,8 @@ video{width:100%;max-width:480px;border-radius:6px;margin:6px 0;background:#000}
 .rv{border-left:3px solid var(--ln);padding-left:10px;margin:8px 0;font-size:14px}.rv b{font-weight:600}.rv .m{margin-top:2px}
 .ok{color:var(--free)}svg.ch{width:100%;max-width:360px;height:auto;display:block;margin:6px 0}svg.ch path{fill:none;stroke:var(--ac);stroke-width:2}
 h4{margin:12px 0 2px;font-size:14px}
+.cvl{align-self:start;margin:10px 10px 10px 0}.cv{width:184px;height:auto;aspect-ratio:460/215;object-fit:cover;border-radius:4px;display:block;background:var(--ln)}
+@media(max-width:520px){.cv{width:112px}}
 #msg{color:var(--mu);padding:24px 0}#err{font-size:13px;color:var(--mu);margin-top:28px;border-top:1px solid var(--ln);padding-top:10px}
 </style></head><body><main>
 <h1>遊戲情報雷達</h1><div id="upd">載入中…</div>
@@ -56,6 +58,10 @@ function detail(i){
  ${g.desc?`<p class="m">${esc(g.desc)}</p>`:""}${shots?`<div class="shots">${shots}</div>`:""}${vid}
  <h4>Steam 評價</h4><div class="m">${sum}${g.metacritic?`;Metacritic ${esc(g.metacritic)}`:""}</div>${rv}
  <h4>價格走勢</h4>${chart(i.appid,g)}</details>`}
+function cover(i){
+ if(!i.appid)return"";const g=G.apps&&G.apps[i.appid];
+ const src=(g&&g.header)||`https://cdn.cloudflare.steamstatic.com/steam/apps/${i.appid}/header.jpg`;
+ return `<a class="cvl" href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img class="cv" loading="lazy" src="${esc(safe(src))}" alt=""></a>`}
 function meta(i){
  if(tab==="free"){const n=i.status==="next";return `<span class="free">${n?"即將免費":"免費中"}</span> ${i.start&&n?tw(i.start)+" 起,":""}至 ${tw(i.end)}(台北時間)${i.desc?" ,"+esc(i.desc):""}`}
  if(tab==="news")return tw(i.date);
@@ -68,9 +74,10 @@ function render(){
  const ps=["全部",...new Set(items.map(i=>i.platform))];if(!ps.includes(plat))plat="全部";
  $("chips").innerHTML=ps.map(p=>`<button aria-pressed="${p===plat}" data-p="${esc(p)}">${esc(p)}</button>`).join("");
  const show=items.filter(i=>plat==="全部"||i.platform===plat);
- $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(i.platform)}"><i></i><div><a href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a><div class="m">${esc(i.platform)}:${meta(i)}</div>${i.appid?detail(i):""}</div></div>`).join("");
+ $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(i.platform)}"><i></i><div><a href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a><div class="m">${esc(i.platform)}:${meta(i)}</div>${i.appid?detail(i):""}</div>${cover(i)}</div>`).join("");
  $("msg").textContent=show.length?"":(D.updated?"這個分類目前沒有資料。":"還沒有資料,請先在 GitHub 的 Actions 頁手動執行一次 update-data。");
 }
+document.addEventListener("error",e=>{if(e.target.classList&&e.target.classList.contains("cv"))e.target.closest(".cvl").remove()},true);
 document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.t){tab=b.dataset.t;plat="全部"}if(b.dataset.p)plat=b.dataset.p;render()});
 const j=u=>fetch(u+"?_="+Date.now()).then(r=>r.json()).catch(()=>null);
 j("games.json").then(g=>{if(g)G=g;render()});j("history.json").then(h=>{if(h)H=h;render()});
