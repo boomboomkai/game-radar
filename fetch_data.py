@@ -219,10 +219,149 @@ SOURCES = [
     ("epic_news", "news", gnews("Epic Games Store", "Epic")),
     ("steam_new", "new", lambda: steam_section("new_releases")),
     ("steam_soon", "soon", lambda: steam_section("coming_soon")),
+    ("ios_free", "free", lambda: ios_compute()[0]),
+    ("ios_deals", "deals", lambda: ios_compute()[1]),
+    ("ios_news", "news", rss("https://toucharcade.com/feed/", "iOS")),
+    ("ios_news_tw", "news", gnews("App Store 遊戲 限免 OR 特價 OR 新作", "iOS")),
+    ("android_news", "news", gnews("Google Play 遊戲 限免 OR 特價 OR 新作", "Android")),
 ]
 if os.environ.get("RAWG_API_KEY"):  # 有設定金鑰才啟用:涵蓋 PS / Xbox / Nintendo 的新作
     SOURCES += [("rawg_new", "new", lambda: fetch_rawg(-30, 0)),
                 ("rawg_soon", "soon", lambda: fetch_rawg(1, 120))]
+
+
+# ---------- 跨平台比價(PC 商店 + iOS + Android)與手機平台 ----------
+_FX = {}
+_STORES = {}
+_IOS = {}
+MOBILE = Path(__file__).parent / "mobile_prices.json"
+ALLOW_EMPTY = {"ios_free", "ios_deals"}   # 這些來源沒有項目是正常的(要累積價格紀錄才看得出降價)
+
+
+def get_fx(prev):
+    """美元換台幣匯率;抓不到就沿用上一次的數字"""
+    try:
+        return float(json.loads(get("https://open.er-api.com/v6/latest/USD"))["rates"]["TWD"])
+    except Exception:
+        return prev
+
+
+def store_names():
+    if not _STORES:
+        try:
+            for s in json.loads(get("https://www.cheapshark.com/api/1.0/stores")):
+                _STORES[str(s["storeID"])] = s["storeName"]
+        except Exception:
+            pass
+    return _STORES
+
+
+def fetch_cheapshark(appid):
+    """CheapShark:各 PC 商店現價、歷史最低價、英文名稱"""
+    rows = json.loads(get(f"https://www.cheapshark.com/api/1.0/games?steamAppID={appid}"))
+    if not rows:
+        return None
+    info = json.loads(get("https://www.cheapshark.com/api/1.0/games?id=" + rows[0]["gameID"]))
+    c = info.get("cheapestPriceEver") or {}
+    low = ({"usd": c.get("price"), "date": datetime.fromtimestamp(c["date"], timezone.utc).date().isoformat()}
+           if c.get("date") else None)
+    names = store_names()
+    deals = [{"store": names.get(str(d["storeID"]), "商店 " + str(d["storeID"])), "sid": str(d["storeID"]),
+              "usd": float(d["price"]), "url": "https://www.cheapshark.com/redirect?dealID=" + d["dealID"]}
+             for d in info.get("deals", [])]
+    return {"low": low, "deals": deals, "en": (info.get("info") or {}).get("title") or rows[0].get("external", "")}
+
+
+def find_ios(title):
+    url = "https://itunes.apple.com/search?entity=software&country=tw&limit=5&term=" + urllib.parse.quote(title)
+    for r in json.loads(get(url)).get("results", []):
+        if "6014" in [str(x) for x in r.get("genreIds", [])] and norm(r.get("trackName", "")) == norm(title):
+            return {"price": float(r.get("price") or 0), "url": r.get("trackViewUrl", "")}
+    return None
+
+
+def find_android(title):
+    """用非官方的 google-play-scraper 查 Google Play;沒安裝或失敗就略過"""
+    try:
+        from google_play_scraper import search
+    except ImportError:
+        return None
+    for r in search(title, lang="zh_TW", country="tw", n_hits=5):
+        if (norm(r.get("title", "")) == norm(title) and r.get("price") is not None
+                and r.get("currency") in (None, "", "TWD")):
+            return {"price": float(r["price"]), "url": "https://play.google.com/store/apps/details?id=" + r["appId"]}
+    return None
+
+
+def build_compare(g, cs, appid):
+    fx = _FX.get("rate")
+    rows = []
+    if g.get("price"):
+        rows.append({"store": "Steam(台灣區)", "twd": g["price"]["final"],
+                     "url": f"https://store.steampowered.com/app/{appid}"})
+    for d in (cs or {}).get("deals", []):
+        if d["sid"] == "1":      # CheapShark 的 Steam 是美國區價格,改用上面的台灣區價格
+            continue
+        rows.append({"store": d["store"], "usd": d["usd"], "twd": round(d["usd"] * fx) if fx else None, "url": d["url"]})
+    en = (cs or {}).get("en") or ""
+    if en:
+        for fn, label in ((find_ios, "App Store(iOS)"), (find_android, "Google Play(Android)")):
+            try:
+                r = fn(en)
+            except Exception:
+                r = None
+            if r:
+                rows.append({"store": label, "twd": r["price"], "url": r["url"]})
+    return {"fx": fx, "en": en, "rows": rows} if rows else None
+
+
+def ios_age(s):
+    m = re.search(r"\d+", str(s or ""))
+    if not m:
+        return None
+    n = int(m[0])
+    return 0 if n <= 4 else 6 if n <= 9 else 12 if n <= 12 else 18
+
+
+def parse_ios_lookup(d):
+    apps = []
+    for r in d.get("results", []):
+        if "6014" not in [str(x) for x in r.get("genreIds", [])]:   # 6014 = 遊戲
+            continue
+        apps.append({"id": str(r["trackId"]), "title": r["trackName"], "price": float(r.get("price") or 0),
+                     "cur": r.get("currency", "TWD"), "url": r.get("trackViewUrl", ""),
+                     "img": r.get("artworkUrl512") or r.get("artworkUrl100", ""),
+                     "age": ios_age(r.get("contentAdvisoryRating") or r.get("trackContentRating"))})
+    return apps
+
+
+def ios_compute():
+    """App Store 台灣區付費榜:每次記錄價格,現價低於近 60 天高點就算特價 / 限免"""
+    if "d" in _IOS:
+        return _IOS["d"]
+    top = json.loads(get("https://rss.applemarketingtools.com/api/v2/tw/apps/top-paid/100/apps.json"))["feed"]["results"]
+    ids = ",".join(r["id"] for r in top)
+    apps = parse_ios_lookup(json.loads(get("https://itunes.apple.com/lookup?country=tw&id=" + ids)))
+    hist = load(MOBILE, {})
+    today = datetime.now(timezone.utc).date()
+    free, deals = [], []
+    for a in apps:
+        h = hist.get(a["id"], {})
+        peak, pd = h.get("max", a["price"]), h.get("pd", today.isoformat())
+        if (today - datetime.fromisoformat(pd).date()).days > 60 or a["price"] >= peak:
+            peak, pd = a["price"], today.isoformat()
+        hist[a["id"]] = {"title": a["title"], "price": a["price"], "max": peak, "pd": pd, "seen": today.isoformat()}
+        base = {"platform": "iOS", "title": a["title"], "url": a["url"], "image": a["img"], "square": True, "age": a["age"]}
+        if a["price"] == 0 and peak > 0:
+            free.append({**base, "status": "now", "desc": f"原價 {a['cur']} {peak:,.0f}"})
+        elif 0 < a["price"] < peak:
+            pct = round((1 - a["price"] / peak) * 100)
+            deals.append({**base, "pct": pct, "desc": f"-{pct}%  {a['cur']} {a['price']:,.0f}(原價 {peak:,.0f})"})
+    hist = {k: v for k, v in hist.items() if (today - datetime.fromisoformat(v["seen"]).date()).days <= 60}
+    MOBILE.write_text(json.dumps(hist, ensure_ascii=False), "utf-8")
+    deals.sort(key=lambda i: -i["pct"])
+    _IOS["d"] = (free, deals)
+    return _IOS["d"]
 
 
 # ---------- 遊戲詳情(畫面、影片、評論)與價格歷史 ----------
@@ -326,9 +465,14 @@ def fetch_game(appid):
         txt = json.loads(get(base + "&language=english&num_per_page=3"))
     g["reviews"] = parse_reviews(summ, txt)
     try:
-        g["low"] = fetch_lowest(appid)
+        cs = fetch_cheapshark(appid)
     except Exception:
-        g["low"] = None
+        cs = None
+    g["low"] = cs["low"] if cs else None
+    try:
+        g["compare"] = build_compare(g, cs, appid)
+    except Exception:
+        g["compare"] = None
     return g
 
 
@@ -336,12 +480,14 @@ def enrich(new):
     """替限免/特價項目補上 appid,更新 games.json(詳情)與 history.json(每日價格)。回傳失敗數。"""
     games = load(GAMES, {"apps": {}, "map": {}})
     hist = load(HISTORY, {})
+    games["fx"] = get_fx(games.get("fx"))
+    _FX["rate"] = games["fx"]
     now = datetime.now(timezone.utc)
     today = now.date().isoformat()
     fails, ids = 0, []
     for sec in ("free", "deals", "new", "soon"):
         for it in new[sec]:
-            if not it.get("appid") and sec == "free":
+            if not it.get("appid") and sec == "free" and it["platform"] not in ("iOS", "Android"):
                 key = norm(it["title"])
                 if key not in games["map"]:
                     try:
@@ -388,7 +534,7 @@ def main():
     for src, section, fn in SOURCES:
         try:
             items = fn()
-            if not items:
+            if not items and src not in ALLOW_EMPTY:
                 raise ValueError("沒有解析到任何項目")
         except Exception as ex:
             errors.append(f"{src}: {type(ex).__name__}: {ex}")
