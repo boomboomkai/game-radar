@@ -162,6 +162,9 @@ def plat_label(name):
     return "PC" if n == "pc" else None
 
 
+RAWG_AGE = {"everyone": 0, "everyone-10-plus": 6, "teen": 12, "mature": 18, "adults-only": 18}
+
+
 def parse_rawg(d):
     items = []
     for g in d.get("results", []):
@@ -172,7 +175,8 @@ def parse_rawg(d):
                 labels.append(lab)
         items.append({"platform": labels[0] if labels else "其他", "platforms": labels or ["其他"],
                       "title": g["name"], "release": g.get("released") or "", "image": g.get("background_image") or "",
-                      "desc": "", "url": f"https://rawg.io/games/{g['slug']}"})
+                      "desc": "", "age": RAWG_AGE.get((g.get("esrb_rating") or {}).get("slug") or ""),
+                      "url": f"https://rawg.io/games/{g['slug']}"})
     return items
 
 
@@ -197,6 +201,8 @@ def merge_dupes(items):
         for f in ("platforms", "image", "release", "appid"):
             if it.get(f) and not a.get(f):
                 a[f] = it[f]
+        if a.get("age") is None and it.get("age") is not None:
+            a["age"] = it["age"]
     return list(out.values())
 
 
@@ -246,6 +252,26 @@ def find_appid(title):
     return 0
 
 
+def tw_age(ratings, required_age=0):
+    """把 Steam 提供的 PEGI / ESRB / required_age 換算成台灣分級的 0/6/12/15/18。
+    這是參考換算,不是台灣官方分級;完全沒資料時回傳 None。"""
+    r = ratings or {}
+    m = re.search(r"\d+", str((r.get("pegi") or {}).get("rating", "")))
+    if m:
+        n = int(m[0])
+        return 0 if n <= 3 else 6 if n <= 7 else 12 if n <= 12 else 15 if n <= 16 else 18
+    esrb = str((r.get("esrb") or {}).get("rating", "")).lower()
+    if esrb in {"e": 0, "e10": 6, "t": 12, "m": 18, "ao": 18}:
+        return {"e": 0, "e10": 6, "t": 12, "m": 18, "ao": 18}[esrb]
+    try:
+        ra = int(required_age or 0)
+    except ValueError:
+        ra = 0
+    if ra:
+        return 0 if ra < 6 else 6 if ra < 12 else 12 if ra < 15 else 15 if ra < 17 else 18
+    return None
+
+
 def parse_details(d):
     po = d.get("price_overview") or {}
     movies = []
@@ -254,7 +280,7 @@ def parse_details(d):
         movies.append({"name": m.get("name", ""), "thumb": m.get("thumbnail", ""),
                        "mp4": mp4.get("480") or mp4.get("max") or ""})
     rel = (d.get("release_date") or {}).get("date", "")
-    return {"release": rel, "release_iso": parse_release(rel), "name": d.get("name", ""), "header": d.get("header_image", ""), "desc": d.get("short_description", ""),
+    return {"age": tw_age(d.get("ratings"), d.get("required_age")), "release": rel, "release_iso": parse_release(rel), "name": d.get("name", ""), "header": d.get("header_image", ""), "desc": d.get("short_description", ""),
             "metacritic": (d.get("metacritic") or {}).get("score"),
             "shots": [{"t": s.get("path_thumbnail", ""), "f": s.get("path_full", "")}
                       for s in (d.get("screenshots") or [])[:6]],
