@@ -224,6 +224,8 @@ SOURCES = [
     ("ios_news", "news", rss("https://toucharcade.com/feed/", "iOS")),
     ("ios_news_tw", "news", gnews("App Store 遊戲 限免 OR 特價 OR 新作", "iOS")),
     ("android_news", "news", gnews("Google Play 遊戲 限免 OR 特價 OR 新作", "Android")),
+    ("ios_top", "mobile", lambda: ios_top()),
+    ("android_top", "mobile", lambda: android_top()),
 ]
 if os.environ.get("RAWG_API_KEY"):  # 有設定金鑰才啟用:涵蓋 PS / Xbox / Nintendo 的新作
     SOURCES += [("rawg_new", "new", lambda: fetch_rawg(-30, 0)),
@@ -331,7 +333,9 @@ def parse_ios_lookup(d):
         apps.append({"id": str(r["trackId"]), "title": r["trackName"], "price": float(r.get("price") or 0),
                      "cur": r.get("currency", "TWD"), "url": r.get("trackViewUrl", ""),
                      "img": r.get("artworkUrl512") or r.get("artworkUrl100", ""),
-                     "age": ios_age(r.get("contentAdvisoryRating") or r.get("trackContentRating"))})
+                     "age": ios_age(r.get("contentAdvisoryRating") or r.get("trackContentRating")),
+                     "rating": float(r["averageUserRating"]) if r.get("averageUserRating") else None,
+                     "count": int(r.get("userRatingCount") or 0)})
     return apps
 
 
@@ -360,8 +364,78 @@ def ios_compute():
     hist = {k: v for k, v in hist.items() if (today - datetime.fromisoformat(v["seen"]).date()).days <= 60}
     MOBILE.write_text(json.dumps(hist, ensure_ascii=False), "utf-8")
     deals.sort(key=lambda i: -i["pct"])
+    _IOS["apps"] = apps
     _IOS["d"] = (free, deals)
     return _IOS["d"]
+
+
+# ---------- 手機付費遊戲榜(iOS / Android 各取評價最好且評論最多的前 10 名) ----------
+ANDROID_QUERIES = ["買斷 遊戲", "付費 遊戲 無廣告", "premium game no ads", "paid rpg game",
+                   "paid strategy game", "paid puzzle game", "paid platformer game"]   # Android 沒有榜單,靠這些關鍵字找候選
+ANDROID_CACHE = Path(__file__).parent / "android_top.json"
+
+
+def bayes(r, n, m=4.2, c=200):
+    """貝氏平均:評分高、評論多的排前面,評論太少的高分不會直接上榜"""
+    return (n * r + c * m) / (n + c)
+
+
+def android_age(s):
+    s = str(s or "")
+    if re.search(r"Adults|成人|18", s):
+        return 18
+    if re.search(r"Mature|17|成熟", s):
+        return 18
+    if re.search(r"Teen|青少年|12", s):
+        return 12
+    if "10" in s:
+        return 6
+    if re.search(r"Everyone|所有|3\+", s):
+        return 0
+    return None
+
+
+def ios_top(n=10):
+    ios_compute()
+    pool = [a for a in _IOS["apps"] if a["price"] > 0 and a.get("rating") and a.get("count")]
+    pool.sort(key=lambda a: -bayes(a["rating"], a["count"]))
+    return [{"platform": "iOS", "rank": i, "title": a["title"], "desc": f"{a['cur']} {a['price']:,.0f}",
+             "url": a["url"], "image": a["img"], "square": True, "age": a["age"],
+             "rating": round(a["rating"], 1), "count": a["count"]} for i, a in enumerate(pool[:n], 1)]
+
+
+def android_top(n=10):
+    c = load(ANDROID_CACHE, {})
+    if c.get("t") and c.get("items") and \
+            (datetime.now(timezone.utc) - datetime.fromisoformat(c["t"])).total_seconds() < 20 * 3600:
+        return c["items"]                      # 一天只重抓一次,避免請求太多
+    from google_play_scraper import app, search
+    cands = {}
+    for q in ANDROID_QUERIES:
+        for r in search(q, lang="zh_TW", country="tw", n_hits=30):
+            if ((r.get("price") or 0) > 0 and str(r.get("genreId") or "GAME").startswith("GAME")
+                    and (r.get("score") or 0) >= 4.0):
+                cands.setdefault(r["appId"], r)
+        time.sleep(0.5)
+    detail = []
+    for appid in sorted(cands, key=lambda k: -(cands[k].get("score") or 0))[:30]:
+        try:
+            d = app(appid, lang="zh_TW", country="tw")
+        except Exception:
+            continue
+        time.sleep(0.5)
+        if d.get("score") and d.get("ratings") and (d.get("price") or 0) > 0:
+            detail.append(d)
+    detail.sort(key=lambda d: -bayes(d["score"], d["ratings"]))
+    items = [{"platform": "Android", "rank": i, "title": d["title"],
+              "desc": f"{d.get('currency') or 'TWD'} {d['price']:,.0f}",
+              "url": d.get("url") or "https://play.google.com/store/apps/details?id=" + d["appId"],
+              "image": d.get("icon", ""), "square": True, "age": android_age(d.get("contentRating")),
+              "rating": round(d["score"], 1), "count": d["ratings"]} for i, d in enumerate(detail[:n], 1)]
+    if items:
+        ANDROID_CACHE.write_text(json.dumps({"t": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                                             "items": items}, ensure_ascii=False), "utf-8")
+    return items
 
 
 # ---------- 遊戲詳情(畫面、影片、評論)與價格歷史 ----------
@@ -529,7 +603,7 @@ def enrich(new):
 
 def main():
     old = json.loads(OUT.read_text("utf-8")) if OUT.exists() else {}
-    new = {"free": [], "deals": [], "news": [], "new": [], "soon": []}
+    new = {"free": [], "deals": [], "news": [], "new": [], "soon": [], "mobile": []}
     errors = []
     for src, section, fn in SOURCES:
         try:
