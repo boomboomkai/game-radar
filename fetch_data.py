@@ -277,7 +277,7 @@ def fetch_cheapshark(appid):
 def find_ios(title):
     url = "https://itunes.apple.com/search?entity=software&country=tw&limit=5&term=" + urllib.parse.quote(title)
     for r in json.loads(get(url)).get("results", []):
-        if "6014" in [str(x) for x in r.get("genreIds", [])] and norm(r.get("trackName", "")) == norm(title):
+        if str(r.get("primaryGenreId", "")) == "6014" and norm(r.get("trackName", "")) == norm(title):
             return {"price": float(r.get("price") or 0), "url": r.get("trackViewUrl", "")}
     return None
 
@@ -317,6 +317,22 @@ def build_compare(g, cs, appid):
     return {"fx": fx, "en": en, "rows": rows} if rows else None
 
 
+def ios_chart_ids():
+    """App Store 台灣區「遊戲」付費榜的 app id。
+    新版 RSS(applemarketingtools)的付費榜不含遊戲分類,所以先用舊版 RSS 指定遊戲分類 6014,失敗才退回新版。"""
+    try:
+        d = json.loads(get("https://itunes.apple.com/tw/rss/toppaidapplications/limit=100/genre=6014/json"))
+        entries = d["feed"]["entry"]
+        if isinstance(entries, dict):
+            entries = [entries]
+        ids = [e["id"]["attributes"]["im:id"] for e in entries]
+        if ids:
+            return ids
+    except Exception:
+        pass
+    return [r["id"] for r in json.loads(get("https://rss.applemarketingtools.com/api/v2/tw/apps/top-paid/100/apps.json"))["feed"]["results"]]
+
+
 def ios_age(s):
     m = re.search(r"\d+", str(s or ""))
     if not m:
@@ -328,7 +344,7 @@ def ios_age(s):
 def parse_ios_lookup(d):
     apps = []
     for r in d.get("results", []):
-        if "6014" not in [str(x) for x in r.get("genreIds", [])]:   # 6014 = 遊戲
+        if str(r.get("primaryGenreId", "")) != "6014":   # 6014 = 遊戲;只收主分類是遊戲的,避免把學習、工具類 App 混進來
             continue
         apps.append({"id": str(r["trackId"]), "title": r["trackName"], "price": float(r.get("price") or 0),
                      "cur": r.get("currency", "TWD"), "url": r.get("trackViewUrl", ""),
@@ -343,8 +359,7 @@ def ios_compute():
     """App Store 台灣區付費榜:每次記錄價格,現價低於近 60 天高點就算特價 / 限免"""
     if "d" in _IOS:
         return _IOS["d"]
-    top = json.loads(get("https://rss.applemarketingtools.com/api/v2/tw/apps/top-paid/100/apps.json"))["feed"]["results"]
-    ids = ",".join(r["id"] for r in top)
+    ids = ",".join(ios_chart_ids())
     apps = parse_ios_lookup(json.loads(get("https://itunes.apple.com/lookup?country=tw&id=" + ids)))
     hist = load(MOBILE, {})
     today = datetime.now(timezone.utc).date()
