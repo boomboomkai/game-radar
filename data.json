@@ -13,17 +13,6 @@
   },
   {
    "platform": "Epic",
-   "title": "Bad Cheese",
-   "status": "now",
-   "start": "2026-10-15T15:00:00.000Z",
-   "end": "2026-10-22T15:00:00.000Z",
-   "desc": "原價 $179.00",
-   "url": "https://store.epicgames.com/zh-Hant/p/bad-cheese-4256d9",
-   "src": "epic",
-   "appid": 0
-  },
-  {
-   "platform": "Epic",
    "title": "Agent A - 偽裝遊戲",
    "status": "now",
    "start": "2026-10-15T15:00:00.000Z",
@@ -66,24 +55,6 @@
   },
   {
    "platform": "Steam",
-   "title": "Street Fighter 6",
-   "desc": "-60%  TWD 452(原價 1,130)",
-   "pct": 60,
-   "url": "https://store.steampowered.com/app/1364780",
-   "appid": 1364780,
-   "src": "steam"
-  },
-  {
-   "platform": "Steam",
-   "title": "Grand Theft Auto V 強化版",
-   "desc": "-56%  TWD 589(原價 1,340)",
-   "pct": 56,
-   "url": "https://store.steampowered.com/app/3240220",
-   "appid": 3240220,
-   "src": "steam"
-  },
-  {
-   "platform": "Steam",
    "title": "BOMBANANA!",
    "desc": "-40%  TWD 105(原價 175)",
    "pct": 40,
@@ -93,11 +64,29 @@
   },
   {
    "platform": "Steam",
-   "title": "魔骰遊戲 : Invokyr",
-   "desc": "-25%  TWD 186(原價 249)",
-   "pct": 25,
-   "url": "https://store.steampowered.com/app/3883570",
-   "appid": 3883570,
+   "title": "Chained Beasts",
+   "desc": "-35%  TWD 245(原價 377)",
+   "pct": 35,
+   "url": "https://store.steampowered.com/app/3569420",
+   "appid": 3569420,
+   "src": "steam"
+  },
+  {
+   "platform": "Steam",
+   "title": "RuneScape: Dragonwilds 符文世界：龍之荒野",
+   "desc": "-30%  TWD 453(原價 648)",
+   "pct": 30,
+   "url": "https://store.steampowered.com/app/1374490",
+   "appid": 1374490,
+   "src": "steam"
+  },
+  {
+   "platform": "Steam",
+   "title": "LEGO® 蝙蝠俠™：黑暗騎士傳奇",
+   "desc": "-30%  TWD 1,504(原價 2,149)",
+   "pct": 30,
+   "url": "https://store.steampowered.com/app/2215200",
+   "appid": 2215200,
    "src": "steam"
   },
   {
@@ -196,6 +185,34 @@
   },
   {
    "platform": "PlayStation",
+   "title": "'Call of Duty Tax' Blamed for Softer CoD Reception by Marketing Lead",
+   "url": "https://www.pushsquare.com/news/2026/10/call-of-duty-tax-blamed-for-softer-cod-reception-by-marketing-lead",
+   "date": "2026-10-15T19:45:00+00:00",
+   "src": "playstation"
+  },
+  {
+   "platform": "PlayStation",
+   "title": "Hit Co-Op Game Peak Officially Confirmed for PS5, and It's Coming Very Soon",
+   "url": "https://www.pushsquare.com/news/2026/10/hit-co-op-game-peak-officially-confirmed-for-ps5-and-its-coming-very-soon",
+   "date": "2026-10-15T19:30:00+00:00",
+   "src": "playstation"
+  },
+  {
+   "platform": "PlayStation",
+   "title": "The Third Version of Arizona Sunshine Is Dated for January 2027",
+   "url": "https://www.pushsquare.com/news/2026/10/the-third-version-of-arizona-sunshine-is-dated-for-january-2027",
+   "date": "2026-10-15T19:00:00+00:00",
+   "src": "playstation"
+  },
+  {
+   "platform": "PlayStation",
+   "title": "Cyberpunk 2's Director Is a Big Reason to Be Hyped for the Secretive 2077 Sequel",
+   "url": "https://www.pushsquare.com/news/2026/10/cyberpunk-2s-director-is-a-big-reason-to-be-hyped-for-the-secretive-2077-sequel",
+   "date": "2026-10-15T18:30:00+00:00",
+   "src": "playstation"
+  },
+  {
+   "platform": "PlayStation",
    "title": "Control Resonant Cuts Through the Crazy PS5 Release Schedule with 1 Million Sales",
    "url": "https://www.pushsquare.com/news/2026/10/control-resonant-cuts-through-the-crazy-ps5-release-schedule-with-1-million-sales",
    "date": "2026-10-15T18:00:00+00:00",
@@ -220,34 +237,6 @@
    "title": "PS5's Saros Already an Official Award Winner",
    "url": "https://www.pushsquare.com/news/2026/10/ps5s-saros-already-an-official-award-winner",
    "date": "2026-10-15T16:30:00+00:00",
-   "src": "playstation"
-  },
-  {
-   "platform": "PlayStation",
-   "title": "Movie Review: Street Fighter - Gaudy Testosterone-Fuelled Action Film Is Fun But Not a Knockout",
-   "url": "https://www.pushsquare.com/features/movie-review-street-fighter-gaudy-testosterone-fuelled-action-film-is-fun-but-not-a-knockout",
-   "date": "2026-10-15T16:00:00+00:00",
-   "src": "playstation"
-  },
-  {
-   "platform": "PlayStation",
-   "title": "JRPG-Inspired Edge of Memories Ducks GTA 6, Delayed to a 'Quieter Period' on PS5",
-   "url": "https://www.pushsquare.com/news/2026/10/jrpg-inspired-edge-of-memories-ducks-gta-6-delayed-to-a-quieter-period-on-ps5",
-   "date": "2026-10-15T15:30:00+00:00",
-   "src": "playstation"
-  },
-  {
-   "platform": "PlayStation",
-   "title": "GTA 6's Original Music Score Is Composed by Excellent French Electronic Duo Justice",
-   "url": "https://www.pushsquare.com/news/2026/10/gta-6s-original-music-score-is-composed-by-excellent-french-electronic-duo-justice",
-   "date": "2026-10-15T15:00:00+00:00",
-   "src": "playstation"
-  },
-  {
-   "platform": "PlayStation",
-   "title": "Viral Hit Supermarket Simulator Finally Opens Its Doors on PS5 This November",
-   "url": "https://www.pushsquare.com/news/2026/10/viral-hit-supermarket-simulator-finally-opens-its-doors-on-ps5-this-november",
-   "date": "2026-10-15T14:00:00+00:00",
    "src": "playstation"
   },
   {
@@ -364,6 +353,13 @@
   },
   {
    "platform": "Steam",
+   "title": "音樂節奏遊戲《MR. RECORDS》公開關卡編輯器 Steam 新品節試玩版同步更新 - Paradaily",
+   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFB1VTY3OWRXT3VUMDhXYWlRU3ZqajlVWmZscHJISEdNcnJhZ0hpNXYtcVZMTkUyYUhvdk1IbkZaZE5QWnVseGtaUzlHdklhdExFaTNIYW83cm81cmdVdG9XYjlnTW5lODBKVkREcWZ0cVlYRDB1SkFjeg?oc=5",
+   "date": "2026-10-15T20:00:00+00:00",
+   "src": "steam_news"
+  },
+  {
+   "platform": "Steam",
    "title": "《Hubert》Steam 上市 化身牧羊犬趕羊 內心獨白吐槽「你們真的很臭」 - Ludens Media",
    "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5PWmU3eWV6ZE5Dam1xdHl2NkVjS1J4QVk1NjRHQUNTdmtZX1M0OHFlMENHVDB4cEtRTXBmZXNZQTJ5YktEQk1XQ0hKOW5kZHd0NmZWUUFYYWJaT3lCSU1ZclMtQm1kREJXVUdqRFBnRQ?oc=5",
    "date": "2026-10-15T16:29:00+00:00",
@@ -374,6 +370,13 @@
    "title": "開放世界生存建造遊戲《不朽之樹》Demo 於 Steam 新品節開放試玩，支援連線- 遊戲新聞 - PChome Online 新聞",
    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPOGtiNHhIRlZwMm04cV92clJWVzdkY0htRnA1OU44dlJ4dkotOGtQcjdON2tGTGtfenlTTGg2X3BocUNGZm50b2VjSGRMcmE4QkJzbl9ZREg0c0VZYkZMbU5XdEZUTEV5UVIxMmlyeWNzb09HRXQ4bGRjbFoyTmNOXy1jMWV2dWFj?oc=5",
    "date": "2026-10-15T15:10:31+00:00",
+   "src": "steam_news"
+  },
+  {
+   "platform": "Steam",
+   "title": "你能在兩小時內破完嗎？全新獨立遊戲《退掉這款遊戲》挑戰 Steam 退款機制極限 - Yahoo新聞",
+   "url": "https://news.google.com/rss/articles/CBMi_wJBVV95cUxNT3ZrMjZBeHVCWU4tVFI0dGRNQjVONEJrUEdJTTd4T3ZQS0hRWUpkN05YaUUwZjFnVFdQRlRUTnhhWUhmaWl4Z3h5bk1NbXlJREdiVWYzVnBkSjBjMDVfR2ctTFo4djd5Y0tMMndhWndPMjhoR1lQRmNlWGdhaDNDNGJjSEdOVFZQZUNDTkNha3FjMld4c0dTUFVTdFNDOFVhR0F0MDlLdjliQzVLNXpSVFZJWk8wOHlpQXpRMm91bG5VRkEwOHRmY01qOEZUbURobnFhb0dMQXdsaThBZlhBNm12MXdtZ3VQY0dxZ2xoNmx0Q3dtQ2FUQ01MVGhKX01tZXF6SDFDU3pRMGU0aUEtQkJuRUJrMFVlNDMwNl9FMDQwUklmeVBYdkdVTDdJbVREblVtbnJNUXhXTWJOTlQwejFmM0VjYmZKTFczVlJ3TlNvb054SmsxTlJ2alJ2M2hXd0JqVzNDaXRneWU2ZGQ2UEdkWkRzdlAzNGMtY3lLdw?oc=5",
+   "date": "2026-10-15T12:00:00+00:00",
    "src": "steam_news"
   },
   {
@@ -402,20 +405,6 @@
    "title": "《彈藥學.exe》Steam免費試玩版極度好評 爆改槍械體驗上千種配件與擬真彈道 - 4Gamers",
    "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQS0Y4ZGNfcXlHMGRueWdJTnY1cXZDaHBaVDJrMEVSUDZ0ZjdRcmw5aWxLVDdrVjlVNlEtSWFkNGdQcm45MXBXc2tILXVqcl80LTFYemUyd2hCZFl6WWp1WHA5S2pySnluS2pqWG9ZQnQ2QW1kX3JBYjFWR2tzV3pqdjB6Z2hqYUttTTFRUDBoVQ?oc=5",
    "date": "2026-10-15T03:39:11+00:00",
-   "src": "steam_news"
-  },
-  {
-   "platform": "Steam",
-   "title": "芬蘭民俗敘事冒險《黑森林迷蹤》Steam 正式發售 深入森林尋找失蹤祖父 - Ludens Media",
-   "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE5pWnJINHY2T0ZKcjhyX2VqZDEzNnNTQnpMc1FFaXdrVld2ZDBGdnprQjhaNUhuY3FyWkxnNS1wY0NVeUNxNXRYc0tiaXlWTjE5Tk9zN2xsXzZheUIzeUdMR2p1dGxfaXc?oc=5",
-   "date": "2026-10-15T03:35:00+00:00",
-   "src": "steam_news"
-  },
-  {
-   "platform": "Steam",
-   "title": "《Father, Son & Holy Guns》10 月 19 日 Steam 新品節推出試玩版4 人合作迎戰洛夫克拉夫特外神 - Ludens Media",
-   "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFB3OFVNVW8zZ01zeF9MMjg4M2s3eEZXR0x3N3BhajJTWk91NTc2Tm8ydUxUWUtrNzlJYXpDbDMyQVFUa2FuYnFXVzZkWUVFZnROYWpjQXg3V2FsamNndlFQUV82RXFrT19ZaUhMbXZFZw?oc=5",
-   "date": "2026-10-15T03:05:00+00:00",
    "src": "steam_news"
   },
   {
@@ -646,10 +635,146 @@
  "new": [
   {
    "platform": "Steam",
+   "title": "Heartfall — A Tale in Three Lives",
+   "desc": "",
+   "url": "https://store.steampowered.com/app/5257930",
+   "appid": 5257930,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Hero Chains of Destiny",
+   "desc": "TWD 216",
+   "url": "https://store.steampowered.com/app/4019700",
+   "appid": 4019700,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Portal Pool",
+   "desc": "TWD 64",
+   "url": "https://store.steampowered.com/app/5106830",
+   "appid": 5106830,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Lights On My Screen",
+   "desc": "TWD 175",
+   "url": "https://store.steampowered.com/app/5278930",
+   "appid": 5278930,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Chobots - Your Family Game",
+   "desc": "",
+   "url": "https://store.steampowered.com/app/5196510",
+   "appid": 5196510,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Genesis - The Original LPMud",
+   "desc": "",
+   "url": "https://store.steampowered.com/app/4022530",
+   "appid": 4022530,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Under Review",
+   "desc": "TWD 85",
+   "url": "https://store.steampowered.com/app/4836150",
+   "appid": 4836150,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Project RedTeam: Contract Offensive",
+   "desc": "TWD 166",
+   "url": "https://store.steampowered.com/app/4980910",
+   "appid": 4980910,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Market is Fine",
+   "desc": "TWD 99",
+   "url": "https://store.steampowered.com/app/4415380",
+   "appid": 4415380,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Alveron - Withering Roots",
+   "desc": "TWD 320",
+   "url": "https://store.steampowered.com/app/2358540",
+   "appid": 2358540,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Cheat With Me, Not On Me",
+   "desc": "TWD 95",
+   "url": "https://store.steampowered.com/app/5188980",
+   "appid": 5188980,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "DREGS",
+   "desc": "TWD 198",
+   "url": "https://store.steampowered.com/app/4660920",
+   "appid": 4660920,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "HENTAI CAVEMAN",
+   "desc": "TWD 111",
+   "url": "https://store.steampowered.com/app/5209500",
+   "appid": 5209500,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Streamstead",
+   "desc": "TWD 93",
+   "url": "https://store.steampowered.com/app/4884630",
+   "appid": 4884630,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Panchofobia",
+   "desc": "TWD 95",
+   "url": "https://store.steampowered.com/app/4568220",
+   "appid": 4568220,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Squad Weapon Skins - Recon Team Pack ",
+   "desc": "",
+   "url": "https://store.steampowered.com/app/4841320",
+   "appid": 4841320,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
    "title": "Pestilence",
    "desc": "TWD 119",
    "url": "https://store.steampowered.com/app/3525940",
    "appid": 3525940,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Kingdoms Test Of Time",
+   "desc": "TWD 206",
+   "url": "https://store.steampowered.com/app/3345650",
+   "appid": 3345650,
    "src": "steam_new"
   },
   {
@@ -666,142 +791,6 @@
    "desc": "",
    "url": "https://store.steampowered.com/app/4251070",
    "appid": 4251070,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Hunt Me",
-   "desc": "TWD 188",
-   "url": "https://store.steampowered.com/app/3026770",
-   "appid": 3026770,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Fatal Train",
-   "desc": "TWD 125",
-   "url": "https://store.steampowered.com/app/3193920",
-   "appid": 3193920,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Odd Town",
-   "desc": "TWD 247",
-   "url": "https://store.steampowered.com/app/2688780",
-   "appid": 2688780,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Hentai Miyu",
-   "desc": "TWD 17",
-   "url": "https://store.steampowered.com/app/5231590",
-   "appid": 5231590,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Folded Fables: Tidy Up The Dragon Hoard",
-   "desc": "TWD 122",
-   "url": "https://store.steampowered.com/app/4995030",
-   "appid": 4995030,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Chicks In Trouble",
-   "desc": "TWD 140",
-   "url": "https://store.steampowered.com/app/4048470",
-   "appid": 4048470,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Mimic Busters",
-   "desc": "TWD 108",
-   "url": "https://store.steampowered.com/app/5167420",
-   "appid": 5167420,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Spymaster",
-   "desc": "TWD 348",
-   "url": "https://store.steampowered.com/app/4391420",
-   "appid": 4391420,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Smash & Grab",
-   "desc": "",
-   "url": "https://store.steampowered.com/app/5278650",
-   "appid": 5278650,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Chained Beasts",
-   "desc": "TWD 245",
-   "url": "https://store.steampowered.com/app/3569420",
-   "appid": 3569420,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Cosmogonia",
-   "desc": "TWD 41",
-   "url": "https://store.steampowered.com/app/5133200",
-   "appid": 5133200,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Backrooms Adventure",
-   "desc": "TWD 105",
-   "url": "https://store.steampowered.com/app/5321960",
-   "appid": 5321960,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Order Picker Simulator",
-   "desc": "TWD 162",
-   "url": "https://store.steampowered.com/app/4798110",
-   "appid": 4798110,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "夢迴症",
-   "desc": "TWD 288",
-   "url": "https://store.steampowered.com/app/3611760",
-   "appid": 3611760,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "愛莉在哪？",
-   "desc": "TWD 46",
-   "url": "https://store.steampowered.com/app/5328000",
-   "appid": 5328000,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Game of Fitna Vol. 1",
-   "desc": "TWD 457",
-   "url": "https://store.steampowered.com/app/2725340",
-   "appid": 2725340,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Jigsaw Stories",
-   "desc": "TWD 135",
-   "url": "https://store.steampowered.com/app/4396090",
-   "appid": 4396090,
    "src": "steam_new"
   },
   {
@@ -1080,82 +1069,82 @@
  "soon": [
   {
    "platform": "Steam",
-   "title": "Sudoku University",
+   "title": "天邪鬼ノ悪夢",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5100340",
-   "appid": 5100340,
+   "url": "https://store.steampowered.com/app/5180330",
+   "appid": 5180330,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "Echoes of Another Sky Demo",
-   "desc": "",
-   "url": "https://store.steampowered.com/app/5392260",
-   "appid": 5392260,
+   "title": "永恆傳奇 Remastered",
+   "desc": "TWD 990",
+   "url": "https://store.steampowered.com/app/3470960",
+   "appid": 3470960,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "Scam With Your Friends",
+   "title": "Rock Hunter",
    "desc": "",
-   "url": "https://store.steampowered.com/app/4954910",
-   "appid": 4954910,
+   "url": "https://store.steampowered.com/app/5338290",
+   "appid": 5338290,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "Hackebein's Object Tracking",
+   "title": "AMPANIC",
    "desc": "",
-   "url": "https://store.steampowered.com/app/3140770",
-   "appid": 3140770,
+   "url": "https://store.steampowered.com/app/4644170",
+   "appid": 4644170,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "Giblings",
+   "title": "Forty Depths Beneath Knossos: The Minotaur's Maze Demo",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5025950",
-   "appid": 5025950,
+   "url": "https://store.steampowered.com/app/5383390",
+   "appid": 5383390,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "Flavio The Ghost Clown Demo",
+   "title": "Tactics Arena",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5406080",
-   "appid": 5406080,
+   "url": "https://store.steampowered.com/app/5255210",
+   "appid": 5255210,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "Heroes vs Orcs: Tower Defense",
+   "title": "Vanisha",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5371030",
-   "appid": 5371030,
+   "url": "https://store.steampowered.com/app/4555270",
+   "appid": 4555270,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "Silly Souls",
+   "title": "Lyfe of the Blade",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5292680",
-   "appid": 5292680,
+   "url": "https://store.steampowered.com/app/5218930",
+   "appid": 5218930,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "Next Eye",
+   "title": "根据地 Demo",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5369150",
-   "appid": 5369150,
+   "url": "https://store.steampowered.com/app/5284610",
+   "appid": 5284610,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "Project RedTeam: Contract Offensive",
+   "title": "Succuquest",
    "desc": "",
-   "url": "https://store.steampowered.com/app/4980910",
-   "appid": 4980910,
+   "url": "https://store.steampowered.com/app/2100270",
+   "appid": 2100270,
    "src": "steam_soon"
   },
   {
@@ -1435,7 +1424,152 @@
    "src": "rawg_soon"
   }
  ],
- "updated": "2026-10-15T18:20:55+00:00",
+ "mobile": [
+  {
+   "platform": "iOS",
+   "rank": 1,
+   "title": "Wagotabi（和語旅）：學習日語",
+   "desc": "TWD 150",
+   "url": "https://apps.apple.com/tw/app/wagotabi-%E5%92%8C%E8%AA%9E%E6%97%85-%E5%AD%B8%E7%BF%92%E6%97%A5%E8%AA%9E/id6474207287?uo=4",
+   "image": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/cd/0f/0f/cd0f0f6a-e79f-2504-2281-5fe8cdb7ae69/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
+   "square": true,
+   "age": 0,
+   "rating": 5.0,
+   "count": 187,
+   "src": "ios_top"
+  },
+  {
+   "platform": "Android",
+   "rank": 1,
+   "title": "EDGE Extended",
+   "desc": "TWD 91",
+   "url": "https://play.google.com/store/apps/details?id=net.mobigame.edge.extended&hl=zh_TW&gl=tw",
+   "image": "https://play-lh.googleusercontent.com/9mu5omt-ZoPt4TrRd1V8fRndy0rVSK8_K4Z7PQju83OSrwy5vRw5lTdnKkIrxvq726UIPemGoEF6veD9WBIdJA",
+   "square": true,
+   "age": null,
+   "rating": 5,
+   "count": 3285,
+   "src": "android_top"
+  },
+  {
+   "platform": "Android",
+   "rank": 2,
+   "title": "方塊解放運動高級版",
+   "desc": "TWD 31",
+   "url": "https://play.google.com/store/apps/details?id=com.kiragames.unblockme&hl=zh_TW&gl=tw",
+   "image": "https://play-lh.googleusercontent.com/3YjbVJXrFF7SrtNBSl37dRSAKlkG1ox56xvn5kNKu2If4aOal6kzUPskznnuKrvaIk1gdsmG48s7aobkaKgUUg",
+   "square": true,
+   "age": null,
+   "rating": 4.9,
+   "count": 5676,
+   "src": "android_top"
+  },
+  {
+   "platform": "Android",
+   "rank": 3,
+   "title": "Brotato: Premium",
+   "desc": "TWD 160",
+   "url": "https://play.google.com/store/apps/details?id=com.brotato.shooting.survivors.games.paid.android&hl=zh_TW&gl=tw",
+   "image": "https://play-lh.googleusercontent.com/e65rLwwpGKaAnXbrVqDliDL45j19jBMf_6Gt5w8UF_OdgyUFScEN1DAjRGT6WgfADg0oNCGuM3lt7-ZN-yQL",
+   "square": true,
+   "age": null,
+   "rating": 4.9,
+   "count": 61144,
+   "src": "android_top"
+  },
+  {
+   "platform": "Android",
+   "rank": 4,
+   "title": "Halls of Torment: Premium",
+   "desc": "TWD 160",
+   "url": "https://play.google.com/store/apps/details?id=com.halls.of.torment.paid.gp&hl=zh_TW&gl=tw",
+   "image": "https://play-lh.googleusercontent.com/hkiik1uhmoRC3ldQgcC8Evo2vv5DvdrxRDUG3vhbpXh4NPMzzZ_NQZ60C61nZGdQ4zAA1XJbjaIP3LLvpL5pdA",
+   "square": true,
+   "age": 12,
+   "rating": 4.8,
+   "count": 20125,
+   "src": "android_top"
+  },
+  {
+   "platform": "Android",
+   "rank": 5,
+   "title": "A Little to the Left: Stars",
+   "desc": "TWD 75",
+   "url": "https://play.google.com/store/apps/details?id=com.SecretModeLimited.ALittletotheLeftSeeingStars&hl=zh_TW&gl=tw",
+   "image": "https://play-lh.googleusercontent.com/IYUCTEXlYAx_1vZkUG8RuCnpjRa9VpRl40F2N8xg91cAnMrwLS39FlKHDnl-ZQ2TmTzKA7hwj3nkPChgD2rsI3M",
+   "square": true,
+   "age": null,
+   "rating": 4.9,
+   "count": 988,
+   "src": "android_top"
+  },
+  {
+   "platform": "Android",
+   "rank": 6,
+   "title": "Summer Catchers",
+   "desc": "TWD 34",
+   "url": "https://play.google.com/store/apps/details?id=com.noodlecake.summercatchers&hl=zh_TW&gl=tw",
+   "image": "https://play-lh.googleusercontent.com/UclGfDMFePx7Ncp8J1D2sSKU9sZAzbuhYUgw6O7qQkEjJrfjtz0C5dtEX3BVlFaKlsAVioSMLzFl9uHrnzz1",
+   "square": true,
+   "age": null,
+   "rating": 4.8,
+   "count": 1197,
+   "src": "android_top"
+  },
+  {
+   "platform": "Android",
+   "rank": 7,
+   "title": "鋼鐵戰隊",
+   "desc": "TWD 94",
+   "url": "https://play.google.com/store/apps/details?id=com.ironhidegames.android.ironmarines.invasion.rts&hl=zh_TW&gl=tw",
+   "image": "https://play-lh.googleusercontent.com/rjeg3Lpm-A13mTKI_n-rqQK42N985FaAjt_wSdgsxxdbm_a5esp-noSNkU56c8TIAZY59IiLWy9f5xuoq6X_",
+   "square": true,
+   "age": null,
+   "rating": 4.7,
+   "count": 9541,
+   "src": "android_top"
+  },
+  {
+   "platform": "Android",
+   "rank": 8,
+   "title": "Hyperforma Premium",
+   "desc": "TWD 150",
+   "url": "https://play.google.com/store/apps/details?id=com.herocraft.game.hyperforma.cyber.hack.arcade.premium&hl=zh_TW&gl=tw",
+   "image": "https://play-lh.googleusercontent.com/54DJ_1tIGqz--oHJr9BFtfMqVc2g9savpP3l_1wpd-nQjYxEnLERHXB-beTL-2y4IemvOyM8iCKSo6Ie-0r2Tw",
+   "square": true,
+   "age": null,
+   "rating": 4.7,
+   "count": 4260,
+   "src": "android_top"
+  },
+  {
+   "platform": "Android",
+   "rank": 9,
+   "title": "Dealer's Life 2",
+   "desc": "TWD 199",
+   "url": "https://play.google.com/store/apps/details?id=com.AbyteEntertainment.DealersLife2&hl=zh_TW&gl=tw",
+   "image": "https://play-lh.googleusercontent.com/iL9v8XonGv-uoi_jDwLGad7_Nb85sVVLNkXAXxU-ahVxUoVrJhLRw0S9oThb2F9wAj2bOlakpjkWCPDagk56",
+   "square": true,
+   "age": 12,
+   "rating": 4.6,
+   "count": 9467,
+   "src": "android_top"
+  },
+  {
+   "platform": "Android",
+   "rank": 10,
+   "title": "King of Defense Premium",
+   "desc": "TWD 93",
+   "url": "https://play.google.com/store/apps/details?id=com.gcenter.kingofdefense.merge.tower.td&hl=zh_TW&gl=tw",
+   "image": "https://play-lh.googleusercontent.com/iqI9JfbsUAXD_3mdyrhuZnqcWijz7_cstFMJGoczl6D_YbH0c0R3JgowMDv9gUwKP6YUsP_eJijN1gwdKF00oTY",
+   "square": true,
+   "age": null,
+   "rating": 4.6,
+   "count": 11431,
+   "src": "android_top"
+  }
+ ],
+ "updated": "2026-10-15T22:36:13+00:00",
  "errors": [
   "cheapshark: HTTPError: HTTP Error 400: Bad Request"
  ]
