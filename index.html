@@ -18,7 +18,7 @@ h1{margin:0;font-size:28px;letter-spacing:.02em}
 button:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
 .item{display:grid;grid-template-columns:5px 1fr auto;background:var(--row);border-radius:6px;margin:8px 0;overflow:hidden}
 .item i{background:#888}.item[data-p=Steam] i{background:#2a6f97}.item[data-p=Epic] i{background:#6b6b80}.item[data-p=EA] i{background:#d1393b}
-.item[data-p=Nintendo] i{background:#e60012}.item[data-p=PlayStation] i{background:#1f4fd8}.item[data-p=Xbox] i{background:#107c10}
+.item[data-p=Nintendo] i{background:#e60012}.item[data-p=PlayStation] i{background:#1f4fd8}.item[data-p=Xbox] i{background:#107c10}.item[data-p=PC] i{background:#7a5af5}
 .item div{padding:10px 14px}.item a{color:var(--tx);text-decoration:none;font-weight:600}.item a:hover{color:var(--ac);text-decoration:underline}
 .m{font-size:14px;color:var(--mu)}.free{color:var(--free);font-weight:600}
 details{margin-top:8px}summary{cursor:pointer;color:var(--ac);font-size:14px}
@@ -32,9 +32,9 @@ h4{margin:12px 0 2px;font-size:14px}
 #msg{color:var(--mu);padding:24px 0}#err{font-size:13px;color:var(--mu);margin-top:28px;border-top:1px solid var(--ln);padding-top:10px}
 </style></head><body><main>
 <h1>遊戲情報雷達</h1><div id="upd">載入中…</div>
-<div role="tablist" id="tabs"></div><div id="chips"></div><div id="list"></div><div id="msg"></div><div id="err"></div>
+<div role="tablist" id="tabs"></div><div id="chips"></div><div id="list"></div><div id="msg"></div><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS</div>
 <script>
-const TABS=[["news","最新消息"],["free","限時免費"],["deals","特價消息"]];
+const TABS=[["news","最新消息"],["free","限時免費"],["deals","特價消息"],["new","新上架"],["soon","即將上架"]];
 let D={free:[],deals:[],news:[]},G={apps:{}},H={},tab="free",plat="全部";
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -57,12 +57,15 @@ function detail(i){
  return `<details><summary>畫面、影片、評論與價格走勢</summary>
  ${g.desc?`<p class="m">${esc(g.desc)}</p>`:""}${shots?`<div class="shots">${shots}</div>`:""}${vid}
  <h4>Steam 評價</h4><div class="m">${sum}${g.metacritic?`;Metacritic ${esc(g.metacritic)}`:""}</div>${rv}
- <h4>價格走勢</h4>${chart(i.appid,g)}</details>`}
+ ${g.price?`<h4>價格走勢</h4>${chart(i.appid,g)}`:""}</details>`}
 function cover(i){
- if(!i.appid)return"";const g=G.apps&&G.apps[i.appid];
- const src=(g&&g.header)||`https://cdn.cloudflare.steamstatic.com/steam/apps/${i.appid}/header.jpg`;
+ if(!i.appid&&!i.image)return"";const g=G.apps&&G.apps[i.appid];
+ const src=i.image||(g&&g.header)||`https://cdn.cloudflare.steamstatic.com/steam/apps/${i.appid}/header.jpg`;
  return `<a class="cvl" href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img class="cv" loading="lazy" src="${esc(safe(src))}" alt=""></a>`}
+const pl=i=>i.platforms||[i.platform];
+const dt=i=>((G.apps&&G.apps[i.appid])||{}).release_iso||i.release||"";
 function meta(i){
+ if(tab==="new"||tab==="soon"){const g=G.apps&&G.apps[i.appid];const r=(g&&g.release)||i.release||"";return (tab==="new"?"上架 ":"預計 ")+esc(r||"日期未定")+(i.desc?","+esc(i.desc):"")}
  if(tab==="free"){const n=i.status==="next";return `<span class="free">${n?"即將免費":"免費中"}</span> ${i.start&&n?tw(i.start)+" 起,":""}至 ${tw(i.end)}(台北時間)${i.desc?" ,"+esc(i.desc):""}`}
  if(tab==="news")return tw(i.date);
  return esc(i.desc)}
@@ -71,10 +74,11 @@ function render(){
  let items=[...(D[tab]||[])];
  if(tab==="news")items.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
  if(tab==="free")items.sort((a,b)=>(a.status==="next")-(b.status==="next"));
- const ps=["全部",...new Set(items.map(i=>i.platform))];if(!ps.includes(plat))plat="全部";
+ if(tab==="new"||tab==="soon"){const k=x=>dt(x)||(tab==="new"?"0000":"9999");items.sort((a,b)=>tab==="new"?k(b).localeCompare(k(a)):k(a).localeCompare(k(b)))}
+ const ps=["全部",...new Set(items.flatMap(pl))];if(!ps.includes(plat))plat="全部";
  $("chips").innerHTML=ps.map(p=>`<button aria-pressed="${p===plat}" data-p="${esc(p)}">${esc(p)}</button>`).join("");
- const show=items.filter(i=>plat==="全部"||i.platform===plat);
- $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(i.platform)}"><i></i><div><a href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a><div class="m">${esc(i.platform)}:${meta(i)}</div>${i.appid?detail(i):""}</div>${cover(i)}</div>`).join("");
+ const show=items.filter(i=>plat==="全部"||pl(i).includes(plat));
+ $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(pl(i)[0])}"><i></i><div><a href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a><div class="m">${esc(pl(i).join(" / "))}:${meta(i)}</div>${i.appid?detail(i):""}</div>${cover(i)}</div>`).join("");
  $("msg").textContent=show.length?"":(D.updated?"這個分類目前沒有資料。":"還沒有資料,請先在 GitHub 的 Actions 頁手動執行一次 update-data。");
 }
 document.addEventListener("error",e=>{if(e.target.classList&&e.target.classList.contains("cv"))e.target.closest(".cvl").remove()},true);
