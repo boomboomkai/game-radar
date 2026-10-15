@@ -171,7 +171,7 @@ def parse_details(d):
         mp4 = m.get("mp4") or {}
         movies.append({"name": m.get("name", ""), "thumb": m.get("thumbnail", ""),
                        "mp4": mp4.get("480") or mp4.get("max") or ""})
-    return {"name": d.get("name", ""), "desc": d.get("short_description", ""),
+    return {"name": d.get("name", ""), "header": d.get("header_image", ""), "desc": d.get("short_description", ""),
             "metacritic": (d.get("metacritic") or {}).get("score"),
             "shots": [{"t": s.get("path_thumbnail", ""), "f": s.get("path_full", "")}
                       for s in (d.get("screenshots") or [])[:6]],
