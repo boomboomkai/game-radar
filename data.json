@@ -1686,9 +1686,8 @@
    "src": "android_top"
   }
  ],
- "updated": "2026-10-15T22:49:07+00:00",
+ "updated": "2026-10-15T23:05:00+00:00",
  "errors": [
-  "cheapshark: HTTPError: HTTP Error 400: Bad Request",
-  "rawg_soon: HTTPError: HTTP Error 502: Bad Gateway"
+  "cheapshark: RuntimeError: 所有寫法都失敗:HTTP 400 https://www.cheapshark.com/api/1.0/deals {\"error\": \"Missing or generic User-Agent header detected. Please ident | HTTP 400 https://www.cheapshark.com/api/1.0/deals {\"error\": \"Missing or generic User-Agent header detected. Please ident"
  ]
 }
