@@ -27,12 +27,16 @@ video{width:100%;max-width:480px;border-radius:6px;margin:6px 0;background:#000}
 .rv{border-left:3px solid var(--ln);padding-left:10px;margin:8px 0;font-size:14px}.rv b{font-weight:600}.rv .m{margin-top:2px}
 .ok{color:var(--free)}svg.ch{width:100%;max-width:360px;height:auto;display:block;margin:6px 0}svg.ch path{fill:none;stroke:var(--ac);stroke-width:2}
 h4{margin:12px 0 2px;font-size:14px}
+.age{display:inline-block;vertical-align:middle;margin-left:8px;width:38px;border:2px solid var(--c,#8a94a6);border-radius:4px;overflow:hidden;background:#fff;text-align:center;line-height:1;font-weight:400}
+.age b{display:block;background:var(--c,#8a94a6);color:#fff;font-size:15px;font-weight:700;padding:3px 0 2px}.age sup{font-size:9px;vertical-align:top;margin-left:1px}
+.age u{display:block;text-decoration:none;color:#111;font-size:9px;padding:2px 0}
+.age[data-a="0"]{--c:#3fa535}.age[data-a="6"]{--c:#00a0e9}.age[data-a="12"]{--c:#f5c800}.age[data-a="12"] b{color:#1a1a1a}.age[data-a="15"]{--c:#f08300}.age[data-a="18"]{--c:#d7000f}
 .cvl{align-self:start;margin:10px 10px 10px 0}.cv{width:184px;height:auto;aspect-ratio:460/215;object-fit:cover;border-radius:4px;display:block;background:var(--ln)}
 @media(max-width:520px){.cv{width:112px}}
 #msg{color:var(--mu);padding:24px 0}#err{font-size:13px;color:var(--mu);margin-top:28px;border-top:1px solid var(--ln);padding-top:10px}
 </style></head><body><main>
 <h1>遊戲情報雷達</h1><div id="upd">載入中…</div>
-<div role="tablist" id="tabs"></div><div id="chips"></div><div id="list"></div><div id="msg"></div><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS</div>
+<div role="tablist" id="tabs"></div><div id="chips"></div><div id="list"></div><div id="msg"></div><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS。分級圖示依 Steam / RAWG 提供的 PEGI、ESRB 資料換算,僅供參考,非台灣官方分級,請以遊戲包裝或文化部公告為準。</div>
 <script>
 const TABS=[["news","最新消息"],["free","限時免費"],["deals","特價消息"],["new","新上架"],["soon","即將上架"]];
 let D={free:[],deals:[],news:[]},G={apps:{}},H={},tab="free",plat="全部";
@@ -62,6 +66,13 @@ function cover(i){
  if(!i.appid&&!i.image)return"";const g=G.apps&&G.apps[i.appid];
  const src=i.image||(g&&g.header)||`https://cdn.cloudflare.steamstatic.com/steam/apps/${i.appid}/header.jpg`;
  return `<a class="cvl" href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img class="cv" loading="lazy" src="${esc(safe(src))}" alt=""></a>`}
+const AGE={0:"普遍級",6:"保護級",12:"輔12級",15:"輔15級",18:"限制級"};
+function ageBadge(i){
+ const g=G.apps&&G.apps[i.appid];let a=i.age;
+ if((a===undefined||a===null)&&g&&g.age!==undefined)a=g.age;
+ if(a===undefined)return"";
+ if(a===null)return `<span class="age" title="沒有取得分級資料"><b>?</b><u>未知</u></span>`;
+ return `<span class="age" data-a="${a}" title="${AGE[a]} ${a}+(依 PEGI/ESRB 資料換算,非台灣官方分級)"><b>${a}<sup>+</sup></b><u>${AGE[a]}</u></span>`}
 const pl=i=>i.platforms||[i.platform];
 const dt=i=>((G.apps&&G.apps[i.appid])||{}).release_iso||i.release||"";
 function meta(i){
@@ -78,7 +89,7 @@ function render(){
  const ps=["全部",...new Set(items.flatMap(pl))];if(!ps.includes(plat))plat="全部";
  $("chips").innerHTML=ps.map(p=>`<button aria-pressed="${p===plat}" data-p="${esc(p)}">${esc(p)}</button>`).join("");
  const show=items.filter(i=>plat==="全部"||pl(i).includes(plat));
- $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(pl(i)[0])}"><i></i><div><a href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a><div class="m">${esc(pl(i).join(" / "))}:${meta(i)}</div>${i.appid?detail(i):""}</div>${cover(i)}</div>`).join("");
+ $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(pl(i)[0])}"><i></i><div><a href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a>${ageBadge(i)}<div class="m">${esc(pl(i).join(" / "))}:${meta(i)}</div>${i.appid?detail(i):""}</div>${cover(i)}</div>`).join("");
  $("msg").textContent=show.length?"":(D.updated?"這個分類目前沒有資料。":"還沒有資料,請先在 GitHub 的 Actions 頁手動執行一次 update-data。");
 }
 document.addEventListener("error",e=>{if(e.target.classList&&e.target.classList.contains("cv"))e.target.closest(".cvl").remove()},true);
