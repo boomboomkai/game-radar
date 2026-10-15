@@ -84,6 +84,15 @@
   },
   {
    "platform": "Steam",
+   "title": "ARC Raiders",
+   "desc": "-50%  TWD 645(原價 1,290)",
+   "pct": 50,
+   "url": "https://store.steampowered.com/app/1808500",
+   "appid": 1808500,
+   "src": "steam"
+  },
+  {
+   "platform": "Steam",
    "title": "《電馭叛客 2077：自由幻局》",
    "desc": "-40%  TWD 479(原價 799)",
    "pct": 40,
@@ -98,15 +107,6 @@
    "pct": 40,
    "url": "https://store.steampowered.com/app/4656000",
    "appid": 4656000,
-   "src": "steam"
-  },
-  {
-   "platform": "Steam",
-   "title": "魔骰遊戲 : Invokyr",
-   "desc": "-25%  TWD 186(原價 249)",
-   "pct": 25,
-   "url": "https://store.steampowered.com/app/3883570",
-   "appid": 3883570,
    "src": "steam"
   },
   {
@@ -441,7 +441,7 @@
   },
   {
    "platform": "Epic",
-   "title": "Epic Games啟動器重製預覽版開放下載 啟動時間約Steam一半 - 4Gamers",
+   "title": "Epic Games啟動器2.0重製開放預覽版 啟動時間約Steam一半 - 4Gamers",
    "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPaUNGbmpWRXFPSjdVY2xac19PdXZ5VjE2Q0dtb1F0LUp5RVJUYmhfMVFhQWhKSDZtZkxzclVXLTJ2X3ZDRDB1aW95cHowaFJNem90d05CbDA5TzZjSEVmUUJVWG1kdnBYRjlPd2tNTlRaaWxyOTBPa2pVM2F2NHY5S0dqOTQ5N2tKMWY2NmM1b2ItdFZQc1d4RTNQOEJhaldo?oc=5",
    "date": "2026-10-15T03:57:56+00:00",
    "src": "epic_news"
@@ -554,7 +554,15 @@
    "desc": "TWD 790",
    "url": "https://store.steampowered.com/app/4231820",
    "appid": 4231820,
-   "src": "steam_new"
+   "src": "steam_new",
+   "platforms": [
+    "PC",
+    "PlayStation",
+    "Xbox",
+    "Nintendo"
+   ],
+   "image": "https://media.rawg.io/media/games/429/42928697eb80feb13e6087170a10565a.jpeg",
+   "release": "2026-10-15"
   },
   {
    "platform": "Steam",
@@ -635,6 +643,262 @@
    "url": "https://store.steampowered.com/app/4870960",
    "appid": 4870960,
    "src": "steam_new"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC"
+   ],
+   "title": "Enshrouded",
+   "release": "2026-10-15",
+   "image": "https://media.rawg.io/media/games/23a/23a1c71366aea4341aec483c9dd08a59.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/enshrouded-2",
+   "src": "rawg_new"
+  },
+  {
+   "platform": "PlayStation",
+   "platforms": [
+    "PlayStation"
+   ],
+   "title": "Marvel's Wolverine",
+   "release": "2026-09-15",
+   "image": "https://media.rawg.io/media/games/28d/28d61be51ec0411e24c28f71122dcaaf.jpeg",
+   "desc": "",
+   "age": 18,
+   "url": "https://rawg.io/games/wolverine-2022",
+   "src": "rawg_new"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC",
+    "PlayStation",
+    "Xbox"
+   ],
+   "title": "Control Resonant",
+   "release": "2026-09-24",
+   "image": "https://media.rawg.io/media/games/bfc/bfc7b45c6e9d3e21bb1c613c16c088f2.jpeg",
+   "desc": "",
+   "age": 18,
+   "url": "https://rawg.io/games/control-resonant",
+   "src": "rawg_new"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC",
+    "Xbox"
+   ],
+   "title": "Gears of War: E-Day",
+   "release": "2026-10-06",
+   "image": "https://media.rawg.io/media/games/c85/c85991ad8164824715377e603a2d7693.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/gears-of-war-e-day",
+   "src": "rawg_new"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC",
+    "PlayStation",
+    "Xbox"
+   ],
+   "title": "Valor Mortis",
+   "release": "2026-10-13",
+   "image": "https://media.rawg.io/media/games/61d/61d1431d20f9f6e19b27cb89aa4a4402.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/valor-mortis",
+   "src": "rawg_new"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC",
+    "PlayStation"
+   ],
+   "title": "Silent Hill: Townfall",
+   "release": "2026-09-23",
+   "image": "https://media.rawg.io/media/games/8ff/8ff55788736c59fcb7b814d862c2ae6f.jpeg",
+   "desc": "",
+   "age": 18,
+   "url": "https://rawg.io/games/silent-hill-townfall-2",
+   "src": "rawg_new"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC",
+    "PlayStation",
+    "Xbox"
+   ],
+   "title": "End of Abyss",
+   "release": "2026-10-01",
+   "image": "https://media.rawg.io/media/games/9b7/9b755942f5c8006891c20e50095dae09.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/end-of-abyss",
+   "src": "rawg_new"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC",
+    "PlayStation",
+    "Xbox"
+   ],
+   "title": "Star Wars: Galactic Racer",
+   "release": "2026-10-06",
+   "image": "https://media.rawg.io/media/games/553/5536c25da9711a39a5c4d752361de551.jpg",
+   "desc": "",
+   "age": 6,
+   "url": "https://rawg.io/games/star-wars-galactic-racer",
+   "src": "rawg_new"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC"
+   ],
+   "title": "Nivalis",
+   "release": "2026-09-30",
+   "image": "https://media.rawg.io/media/screenshots/696/696638dca1d39d65168401c821f28519.jpg",
+   "desc": "",
+   "age": 18,
+   "url": "https://rawg.io/games/nivalis",
+   "src": "rawg_new"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC",
+    "PlayStation",
+    "Xbox"
+   ],
+   "title": "Ace Combat 8: Wings of Theve",
+   "release": "2026-10-02",
+   "image": "https://media.rawg.io/media/games/541/541d6c97a674635d68ea3d19737f090b.jpg",
+   "desc": "",
+   "age": 12,
+   "url": "https://rawg.io/games/ace-combat-8-wings-of-theve",
+   "src": "rawg_new"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC",
+    "PlayStation",
+    "Xbox",
+    "Nintendo"
+   ],
+   "title": "Clive Barker's Hellraiser: Revival",
+   "release": "2026-10-08",
+   "image": "https://media.rawg.io/media/games/816/8167f331942bc2cb8a6711938cd17f5c.jpg",
+   "desc": "",
+   "age": 18,
+   "url": "https://rawg.io/games/clive-barkers-hellraiser-revival",
+   "src": "rawg_new"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC"
+   ],
+   "title": "Well Dweller",
+   "release": "2026-09-21",
+   "image": "https://media.rawg.io/media/screenshots/38d/38d60abc464f6ddee22f8f3bcb10d4c0.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/well-dweller",
+   "src": "rawg_new"
+  },
+  {
+   "platform": "其他",
+   "platforms": [
+    "其他"
+   ],
+   "title": "Silver Pines",
+   "release": "2026-10-08",
+   "image": "https://media.rawg.io/media/games/a09/a095493defc44ec3ea6484d9c33209af.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/silver-pines",
+   "src": "rawg_new"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC",
+    "PlayStation",
+    "Nintendo"
+   ],
+   "title": "Trails in the Sky 2nd Chapter",
+   "release": "2026-09-17",
+   "image": "https://media.rawg.io/media/screenshots/2be/2be279f15824d0dfdb1c1499569e4e6f.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/trails-in-the-sky-2nd-chapter",
+   "src": "rawg_new"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC",
+    "PlayStation",
+    "Xbox"
+   ],
+   "title": "Aniimo",
+   "release": "2026-09-16",
+   "image": "https://media.rawg.io/media/screenshots/21b/21b53e57144d6fc9b7c07d51b56e5da7.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/aniimo",
+   "src": "rawg_new"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC"
+   ],
+   "title": "Graveyard Keeper 2",
+   "release": "2026-09-21",
+   "image": "https://media.rawg.io/media/screenshots/83c/83c07c37053d0d4663a1ed9b6d75ac64.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/graveyard-keeper-2",
+   "src": "rawg_new"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC",
+    "PlayStation",
+    "Xbox",
+    "Nintendo"
+   ],
+   "title": "EA SPORTS FC 27",
+   "release": "2026-09-25",
+   "image": "https://media.rawg.io/media/screenshots/d9b/d9b0ef34a249647310c5bc7577ce68e3.jpg",
+   "desc": "",
+   "age": 0,
+   "url": "https://rawg.io/games/ea-sports-fc-27",
+   "src": "rawg_new"
+  },
+  {
+   "platform": "PlayStation",
+   "platforms": [
+    "PlayStation"
+   ],
+   "title": "Ghost of Yōtei: Echoes of Sekigahara",
+   "release": "2026-10-01",
+   "image": "https://media.rawg.io/media/screenshots/c36/c369c40764cab0de8491d414289cbf6c.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/ghost-of-yotei-echoes-of-sekigahara",
+   "src": "rawg_new"
   }
  ],
  "soon": [
@@ -665,7 +929,7 @@
   {
    "platform": "Steam",
    "title": "Shelf Stacker: Toy Store",
-   "desc": "",
+   "desc": "TWD 117",
    "url": "https://store.steampowered.com/app/5232090",
    "appid": 5232090,
    "src": "steam_soon"
@@ -717,9 +981,285 @@
    "url": "https://store.steampowered.com/app/5290990",
    "appid": 5290990,
    "src": "steam_soon"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC",
+    "PlayStation",
+    "Xbox"
+   ],
+   "title": "Prince of Persia: The Sands of Time Remake",
+   "release": "2026-12-31",
+   "image": "https://media.rawg.io/media/games/b92/b92b55aeab9ed1777104f71f4b22a613.jpg",
+   "desc": "",
+   "age": 12,
+   "url": "https://rawg.io/games/prince-of-persia-the-sands-of-time-remake",
+   "src": "rawg_soon"
+  },
+  {
+   "platform": "PlayStation",
+   "platforms": [
+    "PlayStation",
+    "Xbox"
+   ],
+   "title": "Grand Theft Auto VI",
+   "release": "2026-11-19",
+   "image": "https://media.rawg.io/media/games/734/7342a1cd82c8997ec620084ae4c2e7e4.jpg",
+   "desc": "",
+   "age": 18,
+   "url": "https://rawg.io/games/grand-theft-aito-vi",
+   "src": "rawg_soon"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC"
+   ],
+   "title": "Path of Exile 2",
+   "release": "2026-12-11",
+   "image": "https://media.rawg.io/media/games/401/4010e56adceb7db58ba42d1189796d5e.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/path-of-exile-2",
+   "src": "rawg_soon"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC",
+    "PlayStation"
+   ],
+   "title": "Phantom Blade Zero",
+   "release": "2026-10-29",
+   "image": "https://media.rawg.io/media/games/25f/25f536a977488f12ef8a6d013e50fda1.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/phantom-blade-zero",
+   "src": "rawg_soon"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC",
+    "PlayStation",
+    "Xbox"
+   ],
+   "title": "Tomb Raider: Legacy of Atlantis",
+   "release": "2027-02-12",
+   "image": "https://media.rawg.io/media/games/c2b/c2b8a3ef89b3edd35c1804dc0d68d7bb.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/tomb-raider-legacy-of-atlantis",
+   "src": "rawg_soon"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC",
+    "PlayStation",
+    "Xbox"
+   ],
+   "title": "Titan Quest 2",
+   "release": "2027-01-19",
+   "image": "https://media.rawg.io/media/games/233/233b58ed99520a1e0b19109f7263f011.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/titan-quest-2",
+   "src": "rawg_soon"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC",
+    "PlayStation",
+    "Xbox"
+   ],
+   "title": "Metro 2039",
+   "release": "2027-02-04",
+   "image": "https://media.rawg.io/media/games/4a5/4a5865eca8376e08a8e31ce278b5248f.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/metro-2039",
+   "src": "rawg_soon"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC",
+    "PlayStation"
+   ],
+   "title": "ananta",
+   "release": "2027-01-15",
+   "image": "https://media.rawg.io/media/screenshots/21f/21ffdb58671720697c5e7382b021755b.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/ananta",
+   "src": "rawg_soon"
+  },
+  {
+   "platform": "其他",
+   "platforms": [
+    "其他"
+   ],
+   "title": "Call of Duty: Modern Warfare 4",
+   "release": "2026-10-23",
+   "image": "https://media.rawg.io/media/games/a93/a9304d97c8f264da59566a0f5e0a2181.jpeg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/call-of-duty-modern-warfare-4",
+   "src": "rawg_soon"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC",
+    "PlayStation",
+    "Xbox"
+   ],
+   "title": "Rayman Legends Retold",
+   "release": "2026-12-03",
+   "image": "https://media.rawg.io/media/games/ed9/ed92bdc98d563301e94ae3e9663e8107.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/rayman-legends-retold",
+   "src": "rawg_soon"
+  },
+  {
+   "platform": "PlayStation",
+   "platforms": [
+    "PlayStation"
+   ],
+   "title": "Until Dawn 2",
+   "release": "2027-01-28",
+   "image": "https://media.rawg.io/media/games/145/145c294309a243d11c95f176e29e62e0.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/until-dawn-2-2",
+   "src": "rawg_soon"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC",
+    "PlayStation",
+    "Xbox",
+    "Nintendo"
+   ],
+   "title": "Final Fantasy Resonance",
+   "release": "2026-10-22",
+   "image": "https://media.rawg.io/media/games/e51/e51aab3845c598b52a2881c3f7155f76.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/final-fantasy-resonance",
+   "src": "rawg_soon"
+  },
+  {
+   "platform": "Nintendo",
+   "platforms": [
+    "Nintendo"
+   ],
+   "title": "The Legend of Zelda: Ocarina of Time",
+   "release": "2026-11-05",
+   "image": "https://media.rawg.io/media/games/c3b/c3bc70310175785b0c9d7bfc93624d5f.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/the-legend-of-zelda-ocarina-of-time-2",
+   "src": "rawg_soon"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC"
+   ],
+   "title": "Mycopunk",
+   "release": "2026-10-20",
+   "image": "https://media.rawg.io/media/games/cbf/cbf5b06692e82e312a5dc9db32ed5b4c.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/mycopunk",
+   "src": "rawg_soon"
+  },
+  {
+   "platform": "Nintendo",
+   "platforms": [
+    "Nintendo"
+   ],
+   "title": "Metroid Ravenous",
+   "release": "2027-01-28",
+   "image": "https://media.rawg.io/media/games/582/5821d65020c1ac624d985d20e966765f.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/metroid-ravenous",
+   "src": "rawg_soon"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC"
+   ],
+   "title": "Beautiful Light",
+   "release": "2026-12-01",
+   "image": "https://media.rawg.io/media/screenshots/3c5/3c511506ba31902bbdcbf963219ef77c.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/beautiful-light",
+   "src": "rawg_soon"
+  },
+  {
+   "platform": "其他",
+   "platforms": [
+    "其他"
+   ],
+   "title": "Stranger Than Heaven",
+   "release": "2027-01-15",
+   "image": "https://media.rawg.io/media/games/d81/d813ab759628d14efa6754e7664ca317.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/stranger-than-heaven",
+   "src": "rawg_soon"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC"
+   ],
+   "title": "Stupid Never Dies",
+   "release": "2026-10-21",
+   "image": "https://media.rawg.io/media/games/41c/41c5448f15d06825947791da15489f92.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/stupid-never-dies",
+   "src": "rawg_soon"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC"
+   ],
+   "title": "Tenebris Somnia",
+   "release": "2026-10-16",
+   "image": "https://media.rawg.io/media/games/97b/97b849dfc43f7634e65c0fccbf6c737d.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/tenebris-somnia-demo",
+   "src": "rawg_soon"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC"
+   ],
+   "title": "Remothered: Red Nun's Legacy",
+   "release": "2026-10-26",
+   "image": "https://media.rawg.io/media/screenshots/7ea/7ea439920ce17884b49e2e3988f8786a.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/remothered-red-nuns-legacy",
+   "src": "rawg_soon"
   }
  ],
- "updated": "2026-10-15T07:34:27+00:00",
+ "updated": "2026-10-15T07:48:13+00:00",
  "errors": [
   "cheapshark: HTTPError: HTTP Error 400: Bad Request"
  ]
