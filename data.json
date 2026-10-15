@@ -1,1 +1,317 @@
-{"updated":null,"free":[],"deals":[],"news":[],"errors":[]}
+{
+ "free": [
+  {
+   "platform": "Epic",
+   "title": "熊視眈眈 (Out of Sight)",
+   "status": "now",
+   "start": "2026-10-08T15:00:00.000Z",
+   "end": "2026-10-15T15:00:00.000Z",
+   "desc": "原價 $259.00",
+   "url": "https://store.epicgames.com/zh-Hant/p/out-of-sight-b96ca8",
+   "src": "epic",
+   "appid": 0
+  },
+  {
+   "platform": "Epic",
+   "title": "Bad Cheese",
+   "status": "next",
+   "start": "2026-10-15T15:00:00.000Z",
+   "end": "2026-10-22T15:00:00.000Z",
+   "desc": "原價 $179.00",
+   "url": "https://store.epicgames.com/zh-Hant/p/bad-cheese-4256d9",
+   "src": "epic",
+   "appid": 0
+  },
+  {
+   "platform": "Epic",
+   "title": "Agent A - 偽裝遊戲",
+   "status": "next",
+   "start": "2026-10-15T15:00:00.000Z",
+   "end": "2026-10-22T15:00:00.000Z",
+   "desc": "原價 $278.00",
+   "url": "https://store.epicgames.com/zh-Hant/p/agent-a-a-puzzle-in-disguise-42fe5f",
+   "src": "epic",
+   "appid": 0
+  },
+  {
+   "platform": "Epic",
+   "title": "TerraScape",
+   "status": "now",
+   "start": "2026-10-08T15:00:00.000Z",
+   "end": "2026-10-15T15:00:00.000Z",
+   "desc": "原價 $235.00",
+   "url": "https://store.epicgames.com/zh-Hant/p/terrascape-2b12b1",
+   "src": "epic",
+   "appid": 2290000
+  }
+ ],
+ "deals": [
+  {
+   "platform": "Steam",
+   "title": "Warhammer 40,000: Space Marine 2",
+   "desc": "-75%  TWD 397(原價 1,590)",
+   "pct": 75,
+   "url": "https://store.steampowered.com/app/2183900",
+   "appid": 2183900,
+   "src": "steam"
+  },
+  {
+   "platform": "Steam",
+   "title": "Cyberpunk 2077",
+   "desc": "-70%  TWD 479(原價 1,599)",
+   "pct": 70,
+   "url": "https://store.steampowered.com/app/1091500",
+   "appid": 1091500,
+   "src": "steam"
+  },
+  {
+   "platform": "Steam",
+   "title": "Street Fighter 6",
+   "desc": "-60%  TWD 452(原價 1,130)",
+   "pct": 60,
+   "url": "https://store.steampowered.com/app/1364780",
+   "appid": 1364780,
+   "src": "steam"
+  },
+  {
+   "platform": "Steam",
+   "title": "Grand Theft Auto V 強化版",
+   "desc": "-56%  TWD 589(原價 1,340)",
+   "pct": 56,
+   "url": "https://store.steampowered.com/app/3240220",
+   "appid": 3240220,
+   "src": "steam"
+  },
+  {
+   "platform": "Steam",
+   "title": "《電馭叛客 2077：自由幻局》",
+   "desc": "-40%  TWD 479(原價 799)",
+   "pct": 40,
+   "url": "https://store.steampowered.com/app/2138330",
+   "appid": 2138330,
+   "src": "steam"
+  },
+  {
+   "platform": "Steam",
+   "title": "BOMBANANA!",
+   "desc": "-40%  TWD 105(原價 175)",
+   "pct": 40,
+   "url": "https://store.steampowered.com/app/4656000",
+   "appid": 4656000,
+   "src": "steam"
+  },
+  {
+   "platform": "Steam",
+   "title": "魔骰遊戲 : Invokyr",
+   "desc": "-25%  TWD 186(原價 249)",
+   "pct": 25,
+   "url": "https://store.steampowered.com/app/3883570",
+   "appid": 3883570,
+   "src": "steam"
+  },
+  {
+   "platform": "Steam",
+   "title": "over the hill",
+   "desc": "-20%  TWD 375(原價 469)",
+   "pct": 20,
+   "url": "https://store.steampowered.com/app/2929250",
+   "appid": 2929250,
+   "src": "steam"
+  },
+  {
+   "platform": "Steam",
+   "title": "Japanese Ramen Simulator",
+   "desc": "-15%  TWD 261(原價 308)",
+   "pct": 15,
+   "url": "https://store.steampowered.com/app/4968640",
+   "appid": 4968640,
+   "src": "steam"
+  },
+  {
+   "platform": "Steam",
+   "title": "Trash Day",
+   "desc": "-10%  TWD 142(原價 158)",
+   "pct": 10,
+   "url": "https://store.steampowered.com/app/3314580",
+   "appid": 3314580,
+   "src": "steam"
+  }
+ ],
+ "news": [
+  {
+   "platform": "EA",
+   "title": "沙烏地 PIF 傳將把 EA 與 Savvy Games 深度整併 內部擔心縮減成本計畫會帶來裁員 - Ludens Media",
+   "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBQekhGSXlqOXIxeVdTeXVZeWxNV0FXblNlVlRBS3FKSExrREMwbF9NQXFNcEFtS0k1RHVuZThUcThBV2hIU01qUWtUMWF3N3UwWDVDbDBvS0Vmd3hHaDRzVjlWc0VwdTlJb2pyNWh2STQ?oc=5",
+   "date": "2026-09-12T02:03:00+00:00",
+   "src": "ea"
+  },
+  {
+   "platform": "EA",
+   "title": "【遊戲產業】沙烏地再出手！傳擬整併EA與Savvy Games，打造橫跨3A、體育與手遊的遊戲巨頭 - 優分析UAnalyze",
+   "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5JSFlpSF9iblQ2bk1xb1hwR1U2RzJNUFBnRFdiZGFPNlNqR1dteXJ3cUp4cFlVU0I4N3phMWpPRVZKMTB3eHZFZi16VnhISWV5aUR6LWlR?oc=5",
+   "date": "2026-09-11T07:00:00+00:00",
+   "src": "ea"
+  },
+  {
+   "platform": "EA",
+   "title": "三大唱片與 EA 砸錢力挺，Stability AI 獲 7,600 萬美元新注資 - TechNews 科技新報",
+   "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9PTVduSmdNVGNHX2Z5OTZIc3JFOWdlU0RiZFd6clFSUG4zdVgzOWV1ZjZwUVAzaFVLMTNtM2owQW1uY2wyNFJFdFl1OVFtM1BMaHRnYnRxMXQ0ZzE5ZWpuRnZSUzItcU1xUkJhZEQyNVk?oc=5",
+   "date": "2026-08-26T07:00:00+00:00",
+   "src": "ea"
+  },
+  {
+   "platform": "EA",
+   "title": "【Business】「全美最爛公司」EA 美商藝電收購案：這筆550 億美元的交易，背後暗藏多少黑暗政治？ - GQ Taiwan",
+   "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxORkxCOTdsbmFrVkViZGZJd1pIRkg2dFk0T0s5NTlQQ0gyZWhHMTZ6dzFEZm1nSU1XWUYxWnBUS3QxZW1wRHB6T3V0TEFYSnhEajBpd3M0WFFsdmFxQUtoQWRXS3YxYzRWUXV3d25BV2lZd2Z3dVp0WHFOYnFhRzcyRFV2Vm56RXFDemtRa1JwbTRtTVZqUlF4Zw?oc=5",
+   "date": "2026-08-07T07:00:00+00:00",
+   "src": "ea"
+  },
+  {
+   "platform": "EA",
+   "title": "史上最大槓桿收購！沙國正式完成550億美元EA收購案 - 自由電子報3C科技",
+   "url": "https://news.google.com/rss/articles/CBMiR0FVX3lxTE1vczJ6NDF6OTZaci13ZkR5WU42YzRndUlyQlVSTl9ZeFhYS0FFRk9lYWNtLUt4V3JmSk96T2NLVzdkTXotcnFZ0gFMQVVfeXFMUDAydUpMQ1MxVVktVXdWTC1KVUgxN2w2UHdUTnYxVm41S3lNMkx6WmhfX1ZMenBPVkxlU0ZhdktRYTIwY1Rwcjd1S0RSZQ?oc=5",
+   "date": "2026-08-06T07:00:00+00:00",
+   "src": "ea"
+  },
+  {
+   "platform": "EA",
+   "title": "EA 美商藝電以每股 210 美元現金將公司下市轉為財團私有化 - XFastest News",
+   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE0yUUwtOE5DQzREU3JiVVZBREZPTkZPV25DTTVIZGp5LVpBQUN0Vk5tR0hFcGlQWm80eFZaRlFRRHhiS2wzYm03LVlPd0dNQmZsX0VyR29uOGR6TGpWalRpWmtYTFd1TjV4SUtzcVVickJpQQ?oc=5",
+   "date": "2026-08-06T07:00:00+00:00",
+   "src": "ea"
+  },
+  {
+   "platform": "EA",
+   "title": "沙國財團天價收購EA！公司私有化藏隱憂 削減7億支出恐掀裁員風暴？ - udn遊戲角落",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBOLVRScWRiem9jdHhrdlIyTTc3NHc1blUta3lFMTk0LU4zSnBPdC11TDFRSjVLanE0OGFENzBGNVJxMmFIbDJBRTZudmtQamNZNXM0MXFVcDhrQdIBX0FVX3lxTE9xaUhBMUFFQkRIQUdWX2xPTjk2RmtzOV9UdzdJSHNxRzR6U0lvZWQwYjh4dnlFOHlEZEg2eUxzUFZSSHA1M3hXSmpPSkY4WXlBME96TFptSkV5Z0lQT25z?oc=5",
+   "date": "2026-08-06T07:00:00+00:00",
+   "src": "ea"
+  },
+  {
+   "platform": "EA",
+   "title": "美商藝電 550 億美元易主私有化 體育遊戲主管升任營運總裁 - 樂聯網",
+   "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTFBKVGw0NkR2MVBIdDVlWTZjSldPLVhEQS1BZzd2VUpMNk1RLVRacFJuU09jX0pWdmRjYVllUi1YdTlQRW41X08tUVdmOA?oc=5",
+   "date": "2026-08-06T07:00:00+00:00",
+   "src": "ea"
+  },
+  {
+   "platform": "Steam",
+   "title": "Steam超佛政策也變成遊戲核心挑戰！獨立新作挑戰全球玩家：2小時內通關歡迎去退費！ - Yahoo新聞",
+   "url": "https://news.google.com/rss/articles/CBMiiwRBVV95cUxNV01Pbk9GZ0VZb3pzWWlKRk9teHdrbXRSbGVlSEFXQ0t1SnU1STR6LUlleWcxWVB6LWJsRzZPanVMRS1QSS1vQXZscld2eXNPTlRZYTktQ1o4bXdaOHZrd0I2YzJxMWpxWEJlWThvOEtVM1hMSHNuOUtpU095Y3k1Umk5dHY5MXZyRWdLRFl4ajdmUkMwX2R6U1pIWThJZ1lQWXFydnRIVjdDYklGaEJjdkh2NW05a2RUanRwTGswemdyVDlwQ1ExZWtxbzlqc2VoWm1jOE1ybGhsMDVWNUJFZ01aVHZMbjhhV3ZWTWY3NTQwNDhCMXRmc0J0Y0RLdEp4RVh4dTg2WGhmSVNtdkZmclJXQXktVGNTZ0xHWHhRQUhRT3VqTTBteWx4QzhFTFlLVDJzbWI0MVhVN1pXd1BMbjhlTzBBTWJCSzR6TVJGbVN5VnFiRDI0Wlp2UDMxa192VFppR2c5Sk5XbnlsZFdjZER3T0JGVF85UzZmbGx4MUdKM1pjRXVweFI3bkhDVnVzWm5VaXctVi01aW5FLUtJRy1MdU9xM2ROYk1fbTlwNDFJZ01GdXhtZ0luNWNVSnNTbDU0T0JJcFZSTzZxR3g5ZEp1bnlXZmtTUWRTdkRSc1FKbFp0SEtLOUdsRzRWb3pEWHpvLXdMZTFpVGtwOF9feXE3LW91cTlSTnhn?oc=5",
+   "date": "2026-10-15T06:06:09+00:00",
+   "src": "steam_news"
+  },
+  {
+   "platform": "Steam",
+   "title": "《彈藥學.exe》Steam免費試玩版極度好評 爆改槍械體驗上千種配件與擬真彈道 - 4Gamers",
+   "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQS0Y4ZGNfcXlHMGRueWdJTnY1cXZDaHBaVDJrMEVSUDZ0ZjdRcmw5aWxLVDdrVjlVNlEtSWFkNGdQcm45MXBXc2tILXVqcl80LTFYemUyd2hCZFl6WWp1WHA5S2pySnluS2pqWG9ZQnQ2QW1kX3JBYjFWR2tzV3pqdjB6Z2hqYUttTTFRUDBoVQ?oc=5",
+   "date": "2026-10-15T03:39:11+00:00",
+   "src": "steam_news"
+  },
+  {
+   "platform": "Steam",
+   "title": "《Father, Son & Holy Guns》10 月 19 日 Steam 新品節推出試玩版4 人合作迎戰洛夫克拉夫特外神 - Ludens Media",
+   "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFB3OFVNVW8zZ01zeF9MMjg4M2s3eEZXR0x3N3BhajJTWk91NTc2Tm8ydUxUWUtrNzlJYXpDbDMyQVFUa2FuYnFXVzZkWUVFZnROYWpjQXg3V2FsamNndlFQUV82RXFrT19ZaUhMbXZFZw?oc=5",
+   "date": "2026-10-15T03:05:00+00:00",
+   "src": "steam_news"
+  },
+  {
+   "platform": "Steam",
+   "title": "開放世界生存建造遊戲《不朽之樹》Demo 於 Steam 新品節開放試玩，支援連線 - Paradaily",
+   "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNWnFGRi1LQTJPb2NBbVg5bGZmaVIwOXpZT1V4a3FyLWF4aDB4V3ZTdUFqYy1FSU5SZVB5LUZRcWlDN3ViMHdnZkpSaWc1UFpqR3ZuR2hpQmdhNi1YTmtZTGM5anRITEswTDRPdzBfWEJ3c3NTN1hZQjViU2xkOGs5U1Vn?oc=5",
+   "date": "2026-10-15T02:55:53+00:00",
+   "src": "steam_news"
+  },
+  {
+   "platform": "Steam",
+   "title": "《over the hill》Steam 上市 1 至 4 人越野探索 8 折至 10 月 29 日 - Ludens Media",
+   "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBwYnA2Z0d2ek85NHdsS21xSm80c0V2Y3k4eGtCa1JaVncxMXFzWFNsSUQtdzhabDZmME9pWGpIb0ZlX0hMTi13TDlQS2dHV040eHlCenNUdFlSMW85c1hRZGVVZmJkeHhzU1JSYmtRRjRXdi1SekE?oc=5",
+   "date": "2026-10-15T02:02:00+00:00",
+   "src": "steam_news"
+  },
+  {
+   "platform": "Steam",
+   "title": "恐怖打字遊戲外傳《Dyping Working：監視型專注伴侶》公開 Steam 專頁 - https://gamelife.tw/",
+   "url": "https://news.google.com/rss/articles/CBMizwJBVV95cUxPSDlORzZGazMxa19XbVg0T2t0QzlHelNaOUdGSUZqWlNfWEZoRUowckY4S1FJVS1hQjU2YlRvd2lfcEdlSGRQUWhqWUR1bnBJaWhPbXB5ZG9wbDVxRFdHdDFpV3BFcXA3UnpjMkw1YjZoWTRBaUJNMUJ0eW04QzdRX2xzX2psM1JOTTBlME00UGpzZVM5MjhlZWh2TjctSGczWkVSMlIxLXRYaUpqaHowSEpKUU9jTWJyTlFzMGlqZWFqNWlzSU5mbTAzOGRDSm5CaDRsUlNzeVZnN1lTc0lvcVZHaWVVTzZEa3ZrdG8yTWRsNS1USkhvMXhoZDdVaENrR2oyQkdHWG1nVkJYSFZDbXUzUnMxZXRYdVJaTmxYdVROZ0lyaUZkOEVWTy1zNWJYdVNKdE1SMmlNN19GQVhSN0I2dHRJVVFCcVJrYkp1Zw?oc=5",
+   "date": "2026-10-15T01:08:58+00:00",
+   "src": "steam_news"
+  },
+  {
+   "platform": "Steam",
+   "title": "《Fantasy Blacksmith Simulator》Steam 免費試玩版開放 正式版支援繁體中文 - Ludens Media",
+   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9JazRNb3pzM2VMWTFMNzdIdlJjNmVqZXJKQzdCNWZBMUZiXzRUWWdrNTRqNGVFRGN3MnlsVFB0UDdfQ3F6ZXVNbW5Id0pLN05hQWJtd0RlVFpHaUhFZmVjLUZPNEFmQWVrb1YzZHNyZkN2MEVaQXk0?oc=5",
+   "date": "2026-10-14T14:27:00+00:00",
+   "src": "steam_news"
+  },
+  {
+   "platform": "Steam",
+   "title": "《ANTHEM#9》開發者新作《blockia》Steam 頁面公開 收錄逾 120 種零件與攝影模式 - Ludens Media",
+   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE05UmZKRTFmdnM4S01KQUFSeXBoYlgtYko4cFMwREhkTXZRdGZyTHoyOWtqOHdhd2FodlNHbzA2b25xQTRQVEtKdkNzLXhIOEZJX3lGOUw2b2wyOGtlVi1fSV9GS2ZsQUpNWjVfVHVnLTN4NlJJVEdpcw?oc=5",
+   "date": "2026-10-14T13:52:00+00:00",
+   "src": "steam_news"
+  },
+  {
+   "platform": "Epic",
+   "title": "瞬間破功？Epic吹客戶端載入速度比Steam快 不到一天又被超車 - udn遊戲角落",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1Ha2I0RHR3dXpyYXhfd3hIcDNPdTRrUGM2eTU5dkpxaThaTE5LSWw4bmI1NGNlT3Y5dVFuc1FFdXJzQWhnQ1pxOVBXWElPVlV4X2Y2TUR2TVEwQdIBX0FVX3lxTE1wazhPdUFXVnJ6NUFEb0pxRGptVjE3V0JYaXZZWTAtbHZ2WjFsak9qQWpKQUFsZHFFY2xhalk5VE5iZkpvZDAtQ2s0RmVEbXF6TklycjJDdHpNLVZEb0ZB?oc=5",
+   "date": "2026-10-15T06:59:19+00:00",
+   "src": "epic_news"
+  },
+  {
+   "platform": "Epic",
+   "title": "比Steam快5秒就想贏？Epic新啟動器宣傳被玩家酸爆：完全搞錯重點 - Yahoo新聞",
+   "url": "https://news.google.com/rss/articles/CBMijANBVV95cUxOSEpjNm0zVkQ1SEVkeWZoWTBqMVh4ZDRocG4td2UzZnl2bVVvVTZTSE5ISW9BSUpVLTRleFRBMU56bGhqV2drNDM4UFZycGIwTDZ3MUVFZE1Vd241ZTVaS2pHdmZwcnFLVmkyNGNFSTZIc2E1TW9PUXA1LTJIMmZvY2VhQTg1eF9mazBsVTZrblRqWV9oNWRyanE0bWJhQ20td29PQkNwaXdsbjZZZzEydmdBQllNME9IR05UUnF1QXpTQ1FpZk05ZC1LTzJCS2hrc3NRM0VDbVZhV25xdzBkWllsdWJnX280VmtnY2kzNmJtQjRCSlJNaGZpdmpMMENHUVpsRkZtMl8yUldNejlzTXdJczRBNzQzZkp2cklSNWpMOWY4VTctMTlGTGhqam9TVVBtcnYyYkRvaWVEUDFxTnRrSjVWa3FqZGNXWENMLS00VWNLYWE3bzQ1ZFFlMTFEYlpadmlBSmp5eG04YklwQ3RYZi1vWnZKYkt6NThmMnY0NC16VktDQzFpa24?oc=5",
+   "date": "2026-10-15T06:27:07+00:00",
+   "src": "epic_news"
+  },
+  {
+   "platform": "Epic",
+   "title": "Epic Games Store 啟動器預覽版開放 2018 年上線以來最大改版 遊戲庫可自訂分類 - Ludens Media",
+   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE91dURRRVhZWU83UWVBYWZxcndZVTU2V1YtUXdFSHBqVkZYcDNySHk3aUpsWllFZHU2MVFOcGRJdVhGWVlURFpOWnh2ckxRbnFfdW52NV9IWVNpOXZCem1HNFluaXlPSE9zSGk4ZFFLMGwzQQ?oc=5",
+   "date": "2026-10-15T05:17:00+00:00",
+   "src": "epic_news"
+  },
+  {
+   "platform": "Epic",
+   "title": "Epic Games啟動器重製預覽版開放下載 啟動時間約Steam一半 - 4Gamers",
+   "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPaUNGbmpWRXFPSjdVY2xac19PdXZ5VjE2Q0dtb1F0LUp5RVJUYmhfMVFhQWhKSDZtZkxzclVXLTJ2X3ZDRDB1aW95cHowaFJNem90d05CbDA5TzZjSEVmUUJVWG1kdnBYRjlPd2tNTlRaaWxyOTBPa2pVM2F2NHY5S0dqOTQ5N2tKMWY2NmM1b2ItdFZQc1d4RTNQOEJhaldo?oc=5",
+   "date": "2026-10-15T03:57:56+00:00",
+   "src": "epic_news"
+  },
+  {
+   "platform": "Epic",
+   "title": "揮別牛步卡頓！全新 Epic Games 啟動器預覽版登場：AI 輔助開發、首度原生登陸 Linux - TechSpace 鐵客空間",
+   "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9nUm1YeXlDOVBYMTNQTktlYVFwT1VvZjVwVlRBZmtzQ214YWxyMm5vZ2Z3RjNFNEdXVEt3dkh0VlJnanNSUF9id0JfcnVqUHl3TlhBQmg3VVp5dW9vYllTWFJlUnVacllzUXM0VnZJcE4?oc=5",
+   "date": "2026-10-15T01:05:59+00:00",
+   "src": "epic_news"
+  },
+  {
+   "platform": "Epic",
+   "title": "《戰慄深隧 2039》預購全面開跑 - https://gamelife.tw/",
+   "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQZUJLYjltV2FlcjVqcVlfc0xfNVFjR19hQkdnUERGQWxhc3pMbms3U1p1RDU0cUdkaGdubGpCT2pXeHUxUWtkVnF4TDJZOGdIX3RXWWFCMkt1d0NQRzdNVjZLR3JTWHJNaWlkWkFZRlNwSFYtcnVoWFNwdGpWelkyYmpBUE5Fd1huS2hOY2tGempGUmUxSEJzT2dzSWFSRFg2c2RMNkF3WmNMdUYxU2lucEZ3dDZfek5jcGM5bHpVOXJ5OE5xNF9yREczVjBoSzdBTm9qbl9UMDNSMmM?oc=5",
+   "date": "2026-10-15T00:59:50+00:00",
+   "src": "epic_news"
+  },
+  {
+   "platform": "Epic",
+   "title": "Epic Games推出全新極速啟動器、首登Linux，卻因大裁員後高調吹捧AI引爆公關災難 - Mashdigi",
+   "url": "https://news.google.com/rss/articles/CBMimAJBVV95cUxNLVlqeVVDeTJmTWZnbXlYZjBqRlJOTVNxQWY2d3BrdUZlWXhhOUdpdUlwRGFaRjZmc0VnUVZOell0WGc3YjRKTlZXSjdMbmFfN25iWmFORURFTV90VHhISFhjcXUwOFRNcFRENGZRdUZicmVfY0J3bE9VUkNyRkJjc0xCem5BdUpJY2IwMVp4VExraGozeXRxcHp5VFgxNk9jbGxvWTVMNHA1TlpjMDFLellkVzZmVTdwSW9zRzlqMzBvRDltanZTb2QyVW94aktjZ3J4eHRuMllpRlpESHV1OGlHeFV6NHBkVXh1c2VacmJRc1l6bFhvVFFLVjhzUF9DNEh2S0ZXYlltQ0xoV2d4MXA0djhVNEYz?oc=5",
+   "date": "2026-10-15T00:00:50+00:00",
+   "src": "epic_news"
+  },
+  {
+   "platform": "Epic",
+   "title": "《戰慄深隧2039》預購開跑標準版、豪華版與收藏版內容全解析- 遊戲新聞 - PChome Online 新聞",
+   "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQWUtoazhMXzdrdmhlMUw1LUJVazh3WHdLVmszeGtxYVpWUlZGRkxKU0wxbHBBYWNMdURBTEZLYWt4ZVc2eWxHS3RXUWNaTEUxeWpGTTVheTZJQThXSVN4V2tOaHliZGh0aWswMm1PNVA2UWlra1N0bWxkNERuRGtkTGs3c2c?oc=5",
+   "date": "2026-10-14T14:28:06+00:00",
+   "src": "epic_news"
+  }
+ ],
+ "updated": "2026-10-15T07:14:24+00:00",
+ "errors": [
+  "cheapshark: HTTPError: HTTP Error 400: Bad Request",
+  "nintendo: HTTPError: HTTP Error 403: Forbidden",
+  "playstation: HTTPError: HTTP Error 403: Forbidden",
+  "xbox: HTTPError: HTTP Error 403: Forbidden"
+ ]
+}
