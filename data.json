@@ -55,11 +55,11 @@
   },
   {
    "platform": "Steam",
-   "title": "BOMBANANA!",
-   "desc": "-40%  TWD 105(原價 175)",
-   "pct": 40,
-   "url": "https://store.steampowered.com/app/4656000",
-   "appid": 4656000,
+   "title": "Street Fighter 6",
+   "desc": "-60%  TWD 452(原價 1,130)",
+   "pct": 60,
+   "url": "https://store.steampowered.com/app/1364780",
+   "appid": 1364780,
    "src": "steam"
   },
   {
@@ -91,20 +91,20 @@
   },
   {
    "platform": "Steam",
+   "title": "魔骰遊戲 : Invokyr",
+   "desc": "-25%  TWD 186(原價 249)",
+   "pct": 25,
+   "url": "https://store.steampowered.com/app/3883570",
+   "appid": 3883570,
+   "src": "steam"
+  },
+  {
+   "platform": "Steam",
    "title": "over the hill",
    "desc": "-20%  TWD 375(原價 469)",
    "pct": 20,
    "url": "https://store.steampowered.com/app/2929250",
    "appid": 2929250,
-   "src": "steam"
-  },
-  {
-   "platform": "Steam",
-   "title": "Japanese Ramen Simulator",
-   "desc": "-15%  TWD 261(原價 308)",
-   "pct": 15,
-   "url": "https://store.steampowered.com/app/4968640",
-   "appid": 4968640,
    "src": "steam"
   },
   {
@@ -444,8 +444,8 @@
   },
   {
    "platform": "Epic",
-   "title": "瞬間破功？Epic吹客戶端載入速度比Steam快 不到一天又被超車 - udn遊戲角落",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1Ha2I0RHR3dXpyYXhfd3hIcDNPdTRrUGM2eTU5dkpxaThaTE5LSWw4bmI1NGNlT3Y5dVFuc1FFdXJzQWhnQ1pxOVBXWElPVlV4X2Y2TUR2TVEwQdIBX0FVX3lxTE1wazhPdUFXVnJ6NUFEb0pxRGptVjE3V0JYaXZZWTAtbHZ2WjFsak9qQWpKQUFsZHFFY2xhalk5VE5iZkpvZDAtQ2s0RmVEbXF6TklycjJDdHpNLVZEb0ZB?oc=5",
+   "title": "瞬間破功？Epic吹客戶端載入速度比Steam快 不到一天又被反超車 - udn遊戲角落",
+   "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1wazhPdUFXVnJ6NUFEb0pxRGptVjE3V0JYaXZZWTAtbHZ2WjFsak9qQWpKQUFsZHFFY2xhalk5VE5iZkpvZDAtQ2s0RmVEbXF6TklycjJDdHpNLVZEb0ZB0gFfQVVfeXFMTXBrOE91QVdWcno1QURvSnFEam1WMTdXQlhpdllZMC1sdnZaMWxqT2pBakpBQWxkcUVjbGFqWTlUTmJmSm9kMC1DazRGZURtcXpOSXJyMkN0ek0tVkRvRkE?oc=5",
    "date": "2026-10-15T06:59:19+00:00",
    "src": "epic_news"
   },
@@ -1686,8 +1686,8 @@
    "src": "android_top"
   }
  ],
- "updated": "2026-10-15T23:05:00+00:00",
+ "updated": "2026-10-15T23:20:16+00:00",
  "errors": [
-  "cheapshark: RuntimeError: 所有寫法都失敗:HTTP 400 https://www.cheapshark.com/api/1.0/deals {\"error\": \"Missing or generic User-Agent header detected. Please ident | HTTP 400 https://www.cheapshark.com/api/1.0/deals {\"error\": \"Missing or generic User-Agent header detected. Please ident"
+  "cheapshark: RuntimeError: 4 種寫法都失敗,第一個錯誤:HTTP 400 [cloudflare] {\"error\": \"Missing or generic User-Agent header detected. Please identify your client with a descriptive User-Agent (e.g., 'MyApp/1.0 (contact@example @ https://www.cheapshark.com/api/1.0/deals"
  ]
 }
