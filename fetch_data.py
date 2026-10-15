@@ -15,13 +15,19 @@ from pathlib import Path
 
 OUT = Path(__file__).parent / "data.json"
 HEADERS = {"User-Agent": "Mozilla/5.0 (game-radar; personal project)"}
+# CheapShark、RAWG 要求用「說明用途的 User-Agent」,太通用的(例如 Mozilla/5.0)會被擋成 400
+API_UA = f"GameRadar/1.0 (+https://github.com/{os.environ.get('GITHUB_REPOSITORY', 'local-run')})"
+
+
+def api_headers(url):
+    return {"User-Agent": API_UA} if ("cheapshark.com" in url or "rawg.io" in url) else HEADERS
 
 
 def get(url, timeout=25, tries=3):
     """下載網址內容。遇到 429 / 5xx 或連線逾時會自動重試;失敗訊息會附上伺服器回應(不含網址參數,避免洩漏金鑰)。"""
     for attempt in range(tries):
         time.sleep(0.25)  # 放慢一點,避免被限流
-        req = urllib.request.Request(url, headers=HEADERS)
+        req = urllib.request.Request(url, headers=api_headers(url))
         try:
             with urllib.request.urlopen(req, timeout=timeout) as r:
                 return r.read().decode("utf-8", "replace")
@@ -488,6 +494,8 @@ def android_top(n=10):
 GAMES = Path(__file__).parent / "games.json"
 HISTORY = Path(__file__).parent / "history.json"
 MAX_APPS = 60          # 每次最多處理幾款遊戲,避免請求過多
+SCHEMA = 2            # 詳情資料格式版本;舊版資料(缺比價 / 史低)會自動重抓一次
+_CS_ERR = []
 REFRESH_HOURS = 20     # 詳情超過這個時數才重抓
 
 
@@ -586,8 +594,9 @@ def fetch_game(appid):
     g["reviews"] = parse_reviews(summ, txt)
     try:
         cs = fetch_cheapshark(appid)
-    except Exception:
+    except Exception as ex:
         cs = None
+        _CS_ERR.append(str(ex)[:160])
     g["low"] = cs["low"] if cs else None
     try:
         g["compare"] = build_compare(g, cs, appid)
@@ -621,7 +630,7 @@ def enrich(new):
     for appid in ids[:MAX_APPS]:
         k = str(appid)
         old = games["apps"].get(k)
-        if old and (now - datetime.fromisoformat(old["fetched"])).total_seconds() < REFRESH_HOURS * 3600:
+        if old and old.get("v") == SCHEMA and (now - datetime.fromisoformat(old["fetched"])).total_seconds() < REFRESH_HOURS * 3600:
             old["seen"] = today
             continue
         try:
@@ -629,7 +638,7 @@ def enrich(new):
         except Exception:
             fails += 1
             continue
-        g["fetched"], g["seen"] = now.isoformat(timespec="seconds"), today
+        g["fetched"], g["seen"], g["v"] = now.isoformat(timespec="seconds"), today, SCHEMA
         games["apps"][k] = g
         if g.get("price"):
             pts = hist.setdefault(k, [])
@@ -668,6 +677,8 @@ def main():
         fails = enrich(new)
         if fails:
             errors.append(f"details: {fails} 筆遊戲詳情抓取失敗")
+        if _CS_ERR:
+            errors.append(f"cheapshark_details: {_CS_ERR[0]}(共 {len(_CS_ERR)} 筆)")
     except Exception as ex:
         errors.append(f"details: {type(ex).__name__}: {ex}")
     new["updated"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
