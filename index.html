@@ -18,25 +18,25 @@ h1{margin:0;font-size:clamp(22px,2.4vw + 14px,32px);letter-spacing:.02em}
 #chips button[aria-pressed=true]{background:var(--ac);border-color:var(--ac);color:#fff}
 button:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
 #list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,440px),1fr));gap:10px;align-items:start;margin-top:10px}
-.item{display:grid;grid-template-columns:5px minmax(0,1fr) auto;background:var(--row);border-radius:6px;overflow:hidden}
-.item i{background:#888}.item[data-p=Steam] i{background:#2a6f97}.item[data-p=Epic] i{background:#6b6b80}.item[data-p=EA] i{background:#d1393b}
+.item{display:grid;grid-template-columns:5px minmax(0,1fr) auto;background:var(--row);border-radius:6px;overflow:hidden;min-width:0;max-width:100%}
+.item i{background:#888;grid-row:1 / span 2}.item[data-p=Steam] i{background:#2a6f97}.item[data-p=Epic] i{background:#6b6b80}.item[data-p=EA] i{background:#d1393b}
 .item[data-p=Nintendo] i{background:#e60012}.item[data-p=PlayStation] i{background:#1f4fd8}.item[data-p=Xbox] i{background:#107c10}.item[data-p=PC] i{background:#7a5af5}
-.item>div{padding:10px 14px;min-width:0;overflow-wrap:anywhere}.item a{color:var(--tx);text-decoration:none;font-weight:600}.item a:hover{color:var(--ac);text-decoration:underline}
+.item>div{padding:10px 14px;min-width:0;overflow-wrap:anywhere}.item>.dt{grid-column:2 / -1;padding:0 14px 12px}.item a{color:var(--tx);text-decoration:none;font-weight:600}.item a:hover{color:var(--ac);text-decoration:underline}
 .m{font-size:14px;color:var(--mu)}.free{color:var(--free);font-weight:600}
-details{margin-top:8px}summary{cursor:pointer;color:var(--ac);font-size:14px}
-.shots{display:flex;gap:6px;overflow-x:auto;margin:8px 0}.shots img{height:clamp(72px,18vw,110px);border-radius:4px;display:block}
+details{margin-top:0;min-width:0;max-width:100%}summary{cursor:pointer;color:var(--ac);font-size:14px}
+.shots{display:flex;gap:6px;overflow-x:auto;max-width:100%;margin:8px 0;padding-bottom:4px;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}.shots img{flex:none;scroll-snap-align:start;height:clamp(72px,18vw,110px);border-radius:4px;display:block}
 video{width:100%;max-width:480px;border-radius:6px;margin:6px 0;background:#000}
 .rv{border-left:3px solid var(--ln);padding-left:10px;margin:8px 0;font-size:14px}.rv b{font-weight:600}.rv .m{margin-top:2px}
 .ok{color:var(--free)}svg.ch{width:100%;max-width:360px;height:auto;display:block;margin:6px 0}svg.ch path{fill:none;stroke:var(--ac);stroke-width:2}
 h4{margin:12px 0 2px;font-size:14px}
-.pct{font-weight:700;font-size:1.08em;margin:0 6px 0 4px}
+.pct,.orig,.now{white-space:nowrap}.pct{font-weight:700;font-size:1.08em;margin:0 6px 0 4px}
 .orig{color:var(--og);text-decoration:line-through;text-decoration-thickness:2px;margin-right:6px}
 .now{color:var(--np);font-weight:700;font-size:1.12em}
 .age{display:inline-block;vertical-align:middle;margin-left:8px;width:38px;border:2px solid var(--c,#8a94a6);border-radius:4px;overflow:hidden;background:#fff;text-align:center;line-height:1;font-weight:400}
 .age b{display:block;background:var(--c,#8a94a6);color:#fff;font-size:15px;font-weight:700;padding:3px 0 2px}.age sup{font-size:9px;vertical-align:top;margin-left:1px}
 .age u{display:block;text-decoration:none;color:#111;font-size:9px;padding:2px 0}
 .age[data-a="0"]{--c:#3fa535}.age[data-a="6"]{--c:#00a0e9}.age[data-a="12"]{--c:#f5c800}.age[data-a="12"] b{color:#1a1a1a}.age[data-a="15"]{--c:#f08300}.age[data-a="18"]{--c:#d7000f}
-.cvl{align-self:start;margin:10px 10px 10px 0}.cv{width:clamp(96px,22vw,184px);height:auto;aspect-ratio:460/215;object-fit:cover;border-radius:4px;display:block;background:var(--ln)}
+.cvl{align-self:start;margin:10px 10px 10px 0}.cv{width:clamp(96px,22vw,150px);height:auto;aspect-ratio:460/215;object-fit:cover;border-radius:4px;display:block;background:var(--ln)}
 @media(min-width:1800px){main{max-width:1560px}}
 @media(max-width:380px){.cvl{margin-right:8px}.item>div{padding:8px 10px}.m{font-size:13px}}
 @media(pointer:coarse){[role=tab]{padding:12px 0}#chips button{padding:8px 14px}summary{padding:8px 0}}
@@ -69,6 +69,7 @@ function detail(i){
  ${g.desc?`<p class="m">${esc(g.desc)}</p>`:""}${shots?`<div class="shots">${shots}</div>`:""}${vid}
  <h4>Steam 評價</h4><div class="m">${sum}${g.metacritic?`;Metacritic ${esc(g.metacritic)}`:""}</div>${rv}
  ${g.price?`<h4>價格走勢</h4>${chart(i.appid,g)}`:""}</details>`}
+function dtBlock(i){const h=i.appid?detail(i):"";return h?`<div class="dt">${h}</div>`:""}
 function cover(i){
  if(!i.appid&&!i.image)return"";const g=G.apps&&G.apps[i.appid];
  const src=i.image||(g&&g.header)||`https://cdn.cloudflare.steamstatic.com/steam/apps/${i.appid}/header.jpg`;
@@ -83,7 +84,7 @@ function ageBadge(i){
 const pl=i=>i.platforms||[i.platform];
 const dt=i=>((G.apps&&G.apps[i.appid])||{}).release_iso||i.release||"";
 function pctColor(p){const t=Math.min(1,Math.max(0,(p-10)/80));return `hsl(${Math.round(125*(1-t))},78%,var(--pl))`}
-const money=(c,n)=>c+(/[A-Za-z]$/.test(c)?" ":"")+n;
+const money=(c,n)=>c+(/[A-Za-z]$/.test(c)?"\u00a0":"")+n;
 function priceHtml(d){
  d=d||"";let m=/^-(\d+)%\s+(\D*?)\s*([\d,.]+)\(原價\s+([\d,.]+)\)$/.exec(d);
  if(m){const p=+m[1],c=m[2].trim();return `<span class="pct" style="color:${pctColor(p)}">-${p}%</span><s class="orig">${esc(money(c,m[4]))}</s><b class="now">${esc(money(c,m[3]))}</b>`}
@@ -104,7 +105,7 @@ function render(){
  const ps=["全部",...new Set(items.flatMap(pl))];if(!ps.includes(plat))plat="全部";
  $("chips").innerHTML=ps.map(p=>`<button aria-pressed="${p===plat}" data-p="${esc(p)}">${esc(p)}</button>`).join("");
  const show=items.filter(i=>plat==="全部"||pl(i).includes(plat));
- $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(pl(i)[0])}"><i></i><div><a href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a>${ageBadge(i)}<div class="m">${esc(pl(i).join(" / "))}:${meta(i)}</div>${i.appid?detail(i):""}</div>${cover(i)}</div>`).join("");
+ $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(pl(i)[0])}"><i></i><div><a href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a>${ageBadge(i)}<div class="m">${esc(pl(i).join(" / "))}:${meta(i)}</div></div>${cover(i)}${dtBlock(i)}</div>`).join("");
  $("msg").textContent=show.length?"":(D.updated?"這個分類目前沒有資料。":"還沒有資料,請先在 GitHub 的 Actions 頁手動執行一次 update-data。");
 }
 document.addEventListener("error",e=>{if(e.target.classList&&e.target.classList.contains("cv"))e.target.closest(".cvl").remove()},true);
