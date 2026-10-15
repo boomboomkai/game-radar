@@ -5,6 +5,7 @@ import json
 import os
 import re
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -16,11 +17,25 @@ OUT = Path(__file__).parent / "data.json"
 HEADERS = {"User-Agent": "Mozilla/5.0 (game-radar; personal project)"}
 
 
-def get(url, timeout=25):
-    time.sleep(0.25)  # 放慢一點,避免被限流
-    req = urllib.request.Request(url, headers=HEADERS)
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return r.read().decode("utf-8", "replace")
+def get(url, timeout=25, tries=3):
+    """下載網址內容。遇到 429 / 5xx 或連線逾時會自動重試;失敗訊息會附上伺服器回應(不含網址參數,避免洩漏金鑰)。"""
+    for attempt in range(tries):
+        time.sleep(0.25)  # 放慢一點,避免被限流
+        req = urllib.request.Request(url, headers=HEADERS)
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return r.read().decode("utf-8", "replace")
+        except urllib.error.HTTPError as e:
+            if e.code in (429, 500, 502, 503, 504) and attempt < tries - 1:
+                time.sleep(2 * (attempt + 1))
+                continue
+            body = e.read().decode("utf-8", "replace")[:150].replace("\n", " ")
+            raise RuntimeError(f"HTTP {e.code} {url.split('?')[0]} {body}") from None
+        except (urllib.error.URLError, TimeoutError):
+            if attempt < tries - 1:
+                time.sleep(2 * (attempt + 1))
+                continue
+            raise
 
 
 # ---------- Epic 限免 ----------
@@ -85,10 +100,25 @@ def parse_cheapshark(rows):
     return items
 
 
-def fetch_cheapshark():
-    url = ("https://www.cheapshark.com/api/1.0/deals?storeID=1,7,25&onSale=1&pageSize=12"
-           "&sortBy=Deal+Rating&metacritic=75")
-    return parse_cheapshark(json.loads(get(url)))
+def fetch_cheapshark_deals():
+    """CheapShark 熱門特價。曾經回傳 400,所以依序嘗試幾種參數 / 編碼寫法,第一個成功的就用。"""
+    base = "https://www.cheapshark.com/api/1.0/deals?"
+    variants = [
+        ({"storeID": "1,7,25", "onSale": 1, "pageSize": 12, "sortBy": "Deal Rating", "metacritic": 75}, urllib.parse.quote_plus),
+        ({"storeID": "1,7,25", "onSale": 1, "pageSize": 12, "sortBy": "Deal Rating", "metacritic": 75}, urllib.parse.quote),
+        ({"storeID": "1,7,25", "onSale": 1, "pageSize": 12, "sortBy": "Savings"}, urllib.parse.quote),
+        ({"onSale": 1, "pageSize": 12}, urllib.parse.quote),
+    ]
+    errs = []
+    for params, via in variants:
+        try:
+            rows = json.loads(get(base + urllib.parse.urlencode(params, safe=",", quote_via=via)))
+            if rows:
+                return parse_cheapshark(rows)
+            errs.append("空結果")
+        except Exception as ex:
+            errs.append(str(ex)[:120])
+    raise RuntimeError("所有寫法都失敗:" + " | ".join(errs[:2]))
 
 
 # ---------- 新聞 RSS ----------
@@ -210,7 +240,7 @@ def merge_dupes(items):
 SOURCES = [
     ("epic", "free", fetch_epic),
     ("steam", "deals", fetch_steam),
-    ("cheapshark", "deals", fetch_cheapshark),
+    ("cheapshark", "deals", fetch_cheapshark_deals),
     ("nintendo", "news", rss("https://www.nintendolife.com/feeds/latest", "Nintendo")),
     ("playstation", "news", rss("https://www.pushsquare.com/feeds/latest", "PlayStation")),
     ("xbox", "news", rss("https://www.purexbox.com/feeds/latest", "Xbox")),
