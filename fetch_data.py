@@ -2,6 +2,7 @@
 """抓取各平台限免、特價、新聞,輸出 data.json。只用標準函式庫,不需安裝套件。
 任何一個來源失敗時,保留該來源上一次的資料,並把錯誤記在 data.json 的 errors。"""
 import json
+import os
 import re
 import time
 import urllib.parse
@@ -123,6 +124,82 @@ def gnews(query, platform):
     return rss(f"https://news.google.com/rss/search?q={q}&hl=zh-TW&gl=TW&ceid=TW:zh-Hant", platform)
 
 
+# ---------- 新上架 / 即將上架 ----------
+_FC = {}
+
+
+def steam_section(key, limit=20):
+    """Steam 首頁分類:new_releases(新上架)、coming_soon(即將上架)"""
+    if "d" not in _FC:
+        _FC["d"] = json.loads(get("https://store.steampowered.com/api/featuredcategories?cc=tw&l=tchinese"))
+    return parse_steam_section(_FC["d"], key, limit)
+
+
+def parse_steam_section(d, key, limit=20):
+    items = []
+    for g in d[key]["items"][:limit]:
+        fin = g.get("final_price")
+        items.append({"platform": "Steam", "title": g["name"],
+                      "desc": f"{g.get('currency', '')} {fin / 100:,.0f}" if fin else "",
+                      "url": f"https://store.steampowered.com/app/{g['id']}", "appid": g["id"]})
+    return items
+
+
+def parse_release(s):
+    """把 Steam 的繁中日期『2026 年 11 月 3 日』轉成 2026-11-03,看不懂就回傳空字串"""
+    m = re.search(r"(\d{4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日", s or "")
+    if m:
+        return f"{int(m[1]):04d}-{int(m[2]):02d}-{int(m[3]):02d}"
+    m = re.search(r"\d{4}-\d{2}-\d{2}", s or "")
+    return m[0] if m else ""
+
+
+def plat_label(name):
+    n = name.lower()
+    for k, v in (("playstation", "PlayStation"), ("xbox", "Xbox"), ("nintendo", "Nintendo")):
+        if k in n:
+            return v
+    return "PC" if n == "pc" else None
+
+
+def parse_rawg(d):
+    items = []
+    for g in d.get("results", []):
+        labels = []
+        for p in g.get("platforms") or []:
+            lab = plat_label(p["platform"]["name"])
+            if lab and lab not in labels:
+                labels.append(lab)
+        items.append({"platform": labels[0] if labels else "其他", "platforms": labels or ["其他"],
+                      "title": g["name"], "release": g.get("released") or "", "image": g.get("background_image") or "",
+                      "desc": "", "url": f"https://rawg.io/games/{g['slug']}"})
+    return items
+
+
+def fetch_rawg(days_from, days_to):
+    from datetime import timedelta
+    t = datetime.now(timezone.utc).date()
+    rng = f"{t + timedelta(days=days_from)},{t + timedelta(days=days_to)}"
+    url = ("https://api.rawg.io/api/games?key=" + os.environ["RAWG_API_KEY"] +
+           f"&dates={rng}&ordering=-added&page_size=20")
+    return parse_rawg(json.loads(get(url)))
+
+
+def merge_dupes(items):
+    """同名遊戲只留一筆,把另一筆的平台、封面、日期補進來"""
+    out = {}
+    for it in items:
+        k = norm(it["title"])
+        if k not in out:
+            out[k] = it
+            continue
+        a = out[k]
+        for f in ("platforms", "image", "release", "appid"):
+            if it.get(f) and not a.get(f):
+                a[f] = it[f]
+    return list(out.values())
+
+
 # (來源代號, 放進哪一區, 抓取函式)
 SOURCES = [
     ("epic", "free", fetch_epic),
@@ -134,13 +211,18 @@ SOURCES = [
     ("ea", "news", gnews("EA Games OR 美商藝電", "EA")),
     ("steam_news", "news", gnews("Steam 遊戲 新聞", "Steam")),
     ("epic_news", "news", gnews("Epic Games Store", "Epic")),
+    ("steam_new", "new", lambda: steam_section("new_releases")),
+    ("steam_soon", "soon", lambda: steam_section("coming_soon")),
 ]
+if os.environ.get("RAWG_API_KEY"):  # 有設定金鑰才啟用:涵蓋 PS / Xbox / Nintendo 的新作
+    SOURCES += [("rawg_new", "new", lambda: fetch_rawg(-30, 0)),
+                ("rawg_soon", "soon", lambda: fetch_rawg(1, 120))]
 
 
 # ---------- 遊戲詳情(畫面、影片、評論)與價格歷史 ----------
 GAMES = Path(__file__).parent / "games.json"
 HISTORY = Path(__file__).parent / "history.json"
-MAX_APPS = 30          # 每次最多處理幾款遊戲,避免請求過多
+MAX_APPS = 60          # 每次最多處理幾款遊戲,避免請求過多
 REFRESH_HOURS = 20     # 詳情超過這個時數才重抓
 
 
@@ -171,7 +253,8 @@ def parse_details(d):
         mp4 = m.get("mp4") or {}
         movies.append({"name": m.get("name", ""), "thumb": m.get("thumbnail", ""),
                        "mp4": mp4.get("480") or mp4.get("max") or ""})
-    return {"name": d.get("name", ""), "header": d.get("header_image", ""), "desc": d.get("short_description", ""),
+    rel = (d.get("release_date") or {}).get("date", "")
+    return {"release": rel, "release_iso": parse_release(rel), "name": d.get("name", ""), "header": d.get("header_image", ""), "desc": d.get("short_description", ""),
             "metacritic": (d.get("metacritic") or {}).get("score"),
             "shots": [{"t": s.get("path_thumbnail", ""), "f": s.get("path_full", "")}
                       for s in (d.get("screenshots") or [])[:6]],
@@ -230,7 +313,7 @@ def enrich(new):
     now = datetime.now(timezone.utc)
     today = now.date().isoformat()
     fails, ids = 0, []
-    for sec in ("free", "deals"):
+    for sec in ("free", "deals", "new", "soon"):
         for it in new[sec]:
             if not it.get("appid") and sec == "free":
                 key = norm(it["title"])
@@ -274,7 +357,7 @@ def enrich(new):
 
 def main():
     old = json.loads(OUT.read_text("utf-8")) if OUT.exists() else {}
-    new = {"free": [], "deals": [], "news": []}
+    new = {"free": [], "deals": [], "news": [], "new": [], "soon": []}
     errors = []
     for src, section, fn in SOURCES:
         try:
@@ -287,6 +370,8 @@ def main():
         for i in items:
             i["src"] = src
         new[section].extend(items)
+    for sec in ("new", "soon"):
+        new[sec] = merge_dupes(new[sec])
     try:
         fails = enrich(new)
         if fails:
@@ -296,6 +381,7 @@ def main():
     new["updated"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     new["errors"] = errors
     OUT.write_text(json.dumps(new, ensure_ascii=False, indent=1), "utf-8")
+    print(f"new={len(new['new'])} soon={len(new['soon'])}", end=" ")
     print(f"free={len(new['free'])} deals={len(new['deals'])} news={len(new['news'])} errors={len(errors)}")
     for e in errors:
         print("  !", e)
