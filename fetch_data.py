@@ -30,7 +30,8 @@ def get(url, timeout=25, tries=3):
                 time.sleep(2 * (attempt + 1))
                 continue
             body = e.read().decode("utf-8", "replace")[:150].replace("\n", " ")
-            raise RuntimeError(f"HTTP {e.code} {url.split('?')[0]} {body}") from None
+            server = e.headers.get("Server", "?") if e.headers else "?"
+            raise RuntimeError(f"HTTP {e.code} [{server}] {body} @ {url.split('?')[0]}") from None
         except (urllib.error.URLError, TimeoutError):
             if attempt < tries - 1:
                 time.sleep(2 * (attempt + 1))
@@ -117,8 +118,8 @@ def fetch_cheapshark_deals():
                 return parse_cheapshark(rows)
             errs.append("空結果")
         except Exception as ex:
-            errs.append(str(ex)[:120])
-    raise RuntimeError("所有寫法都失敗:" + " | ".join(errs[:2]))
+            errs.append(str(ex)[:220])
+    raise RuntimeError("4 種寫法都失敗,第一個錯誤:" + errs[0])
 
 
 # ---------- 新聞 RSS ----------
