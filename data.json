@@ -55,15 +55,6 @@
   },
   {
    "platform": "Steam",
-   "title": "Street Fighter 6",
-   "desc": "-60%  TWD 452(原價 1,130)",
-   "pct": 60,
-   "url": "https://store.steampowered.com/app/1364780",
-   "appid": 1364780,
-   "src": "steam"
-  },
-  {
-   "platform": "Steam",
    "title": "Chained Beasts",
    "desc": "-35%  TWD 245(原價 377)",
    "pct": 35,
@@ -109,6 +100,15 @@
   },
   {
    "platform": "Steam",
+   "title": "Japanese Ramen Simulator",
+   "desc": "-15%  TWD 261(原價 308)",
+   "pct": 15,
+   "url": "https://store.steampowered.com/app/4968640",
+   "appid": 4968640,
+   "src": "steam"
+  },
+  {
+   "platform": "Steam",
    "title": "霧鎖王國 (Enshrouded)",
    "desc": "-10%  TWD 701(原價 779)",
    "pct": 10,
@@ -124,6 +124,114 @@
    "url": "https://store.steampowered.com/app/3314580",
    "appid": 3314580,
    "src": "steam"
+  },
+  {
+   "platform": "GOG",
+   "title": "The Witcher 3: Wild Hunt  Remastered",
+   "pct": 50,
+   "desc": "-50%  US$24.99(原價 49.99)",
+   "url": "https://www.cheapshark.com/redirect?dealID=OR%2BVz0QIAULaNU5tjUdvoTs3iqGm6lodrS%2BXzXvxPXg%3D",
+   "appid": 292030,
+   "src": "cheapshark"
+  },
+  {
+   "platform": "Steam",
+   "title": "Silver Pines",
+   "pct": 38,
+   "desc": "-38%  US$22.26(原價 35.98)",
+   "url": "https://www.cheapshark.com/redirect?dealID=HNPl2c6%2BV040vKq07rLwKPiQSYrZsTs4Zo%2FSqEhREYE%3D",
+   "appid": 2333000,
+   "src": "cheapshark"
+  },
+  {
+   "platform": "Steam",
+   "title": "Unity of Command II",
+   "pct": 90,
+   "desc": "-90%  US$2.99(原價 29.99)",
+   "url": "https://www.cheapshark.com/redirect?dealID=fwNwzWaH9FmEtHMgvo6sAC3Rh%2BYLdvHR2LPBx21jh9U%3D",
+   "appid": 809230,
+   "src": "cheapshark"
+  },
+  {
+   "platform": "GOG",
+   "title": "Metro 2033 Redux",
+   "pct": 90,
+   "desc": "-90%  US$1.99(原價 19.99)",
+   "url": "https://www.cheapshark.com/redirect?dealID=0lJwpbepaimkcrhG1GOnffv3tDxFtmjkuOzBzsT0TUQ%3D",
+   "appid": 286690,
+   "src": "cheapshark"
+  },
+  {
+   "platform": "GOG",
+   "title": "Disco Elysium - The Final Cut",
+   "pct": 75,
+   "desc": "-75%  US$9.99(原價 39.99)",
+   "url": "https://www.cheapshark.com/redirect?dealID=fo%2BHT27GrgZT0g2USsPLQ2dVGTnq%2Fb%2FBnY2L2%2Bi8BWk%3D",
+   "appid": 632470,
+   "src": "cheapshark"
+  },
+  {
+   "platform": "Steam",
+   "title": "Injustice 2",
+   "pct": 90,
+   "desc": "-90%  US$4.99(原價 49.99)",
+   "url": "https://www.cheapshark.com/redirect?dealID=3Z4THVFnoVlZCAuD20HvK0GVRSsN0lYUx2brrp%2FgHu0%3D",
+   "appid": 627270,
+   "src": "cheapshark"
+  },
+  {
+   "platform": "Steam",
+   "title": "Mortal Kombat 11 Ultimate",
+   "pct": 85,
+   "desc": "-85%  US$8.99(原價 59.99)",
+   "url": "https://www.cheapshark.com/redirect?dealID=hBzFkwXV5CCVfkjbLZexRx1fhOrxUk1Idvnte3OGtao%3D",
+   "appid": 518699,
+   "src": "cheapshark"
+  },
+  {
+   "platform": "GOG",
+   "title": "Lacuna  A Sci-Fi Noir Adventure",
+   "pct": 90,
+   "desc": "-90%  US$1.59(原價 15.99)",
+   "url": "https://www.cheapshark.com/redirect?dealID=w5%2Fj0I5ToPSnuQErvQ7GznyqiXeL9n4TpaObgAGl6Fg%3D",
+   "appid": 1364100,
+   "src": "cheapshark"
+  },
+  {
+   "platform": "Steam",
+   "title": "Hogwarts Legacy",
+   "pct": 90,
+   "desc": "-90%  US$5.99(原價 59.99)",
+   "url": "https://www.cheapshark.com/redirect?dealID=ItzaKCtDAPDq8RCrn48ObsYBlbZFBaoCNeZ9gTSPvrY%3D",
+   "appid": 990080,
+   "src": "cheapshark"
+  },
+  {
+   "platform": "Steam",
+   "title": "Mortal Kombat11",
+   "pct": 90,
+   "desc": "-90%  US$4.99(原價 49.99)",
+   "url": "https://www.cheapshark.com/redirect?dealID=LC4E%2BARf7Ilc9Y%2ByK5ObmKRrtjxEwY5%2Bu97zrBdi%2Bj8%3D",
+   "appid": 976310,
+   "src": "cheapshark"
+  },
+  {
+   "platform": "Steam",
+   "title": "Shadowgrounds Survivor",
+   "pct": 90,
+   "desc": "-90%  US$0.99(原價 9.99)",
+   "url": "https://www.cheapshark.com/redirect?dealID=fWiWe66c%2BRD0iC3wIKwwX8yxZuxj4YaKKRyiA5AABxk%3D",
+   "appid": 11200,
+   "src": "cheapshark"
+  },
+  {
+   "platform": "GOG",
+   "title": "The Textorcist: The Story of Ray Bibbia",
+   "pct": 90,
+   "desc": "-90%  US$1.49(原價 14.99)",
+   "url": "https://www.cheapshark.com/redirect?dealID=ir3SKl0AKDCrjbvHlyIvc4Xi%2B8ljQte105BqAFqIZQ4%3D",
+   "appid": 940680,
+   "src": "cheapshark"
   }
  ],
  "news": [
@@ -185,6 +293,13 @@
   },
   {
    "platform": "PlayStation",
+   "title": "Animal Evolution Sim Ancestors Gets Surprise PS5 Version, Free Upgrade for PS4 Owners",
+   "url": "https://www.pushsquare.com/news/2026/10/animal-evolution-sim-ancestors-gets-surprise-ps5-version-free-upgrade-for-ps4-owners",
+   "date": "2026-10-15T23:30:00+00:00",
+   "src": "playstation"
+  },
+  {
+   "platform": "PlayStation",
    "title": "'Call of Duty Tax' Blamed for Softer CoD Reception by Marketing Lead",
    "url": "https://www.pushsquare.com/news/2026/10/call-of-duty-tax-blamed-for-softer-cod-reception-by-marketing-lead",
    "date": "2026-10-15T19:45:00+00:00",
@@ -230,13 +345,6 @@
    "title": "Fans of Baldur's Gate and Old-School RPGs Need to See Lair of Leviathan",
    "url": "https://www.pushsquare.com/news/2026/10/fans-of-baldurs-gate-and-old-school-rpgs-need-to-see-lair-of-leviathan",
    "date": "2026-10-15T17:00:00+00:00",
-   "src": "playstation"
-  },
-  {
-   "platform": "PlayStation",
-   "title": "PS5's Saros Already an Official Award Winner",
-   "url": "https://www.pushsquare.com/news/2026/10/ps5s-saros-already-an-official-award-winner",
-   "date": "2026-10-15T16:30:00+00:00",
    "src": "playstation"
   },
   {
@@ -1686,8 +1794,8 @@
    "src": "android_top"
   }
  ],
- "updated": "2026-10-15T23:20:16+00:00",
+ "updated": "2026-10-15T23:41:58+00:00",
  "errors": [
-  "cheapshark: RuntimeError: 4 種寫法都失敗,第一個錯誤:HTTP 400 [cloudflare] {\"error\": \"Missing or generic User-Agent header detected. Please identify your client with a descriptive User-Agent (e.g., 'MyApp/1.0 (contact@example @ https://www.cheapshark.com/api/1.0/deals"
+  "details: 1 筆遊戲詳情抓取失敗"
  ]
 }
