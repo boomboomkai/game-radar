@@ -47,9 +47,9 @@ h4{margin:12px 0 2px;font-size:14px}
 #msg{color:var(--mu);padding:24px 0}#err{font-size:13px;color:var(--mu);margin-top:28px;border-top:1px solid var(--ln);padding-top:10px}
 </style></head><body><main>
 <h1>遊戲情報雷達</h1><div id="upd">載入中…</div>
-<div role="tablist" id="tabs"></div><div id="chips"></div><div id="list"></div><div id="msg"></div><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS、Apple iTunes、匯率來自 <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a>。史低價是 CheapShark 的美元紀錄換算,僅供參考。分級圖示依 Steam / RAWG 提供的 PEGI、ESRB 資料換算,僅供參考,非台灣官方分級,請以遊戲包裝或文化部公告為準。</div>
+<div role="tablist" id="tabs"></div><div id="chips"></div><div id="list"></div><div id="msg"></div><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS、Apple iTunes、Google Play(非官方)、匯率來自 <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a>。手機付費榜依評分與評論數綜合排序,iOS 取自 App Store 台灣區付費榜,Android 靠關鍵字搜尋找候選,可能漏掉部分遊戲。史低價是 CheapShark 的美元紀錄換算,僅供參考。分級圖示依 Steam / RAWG 提供的 PEGI、ESRB 資料換算,僅供參考,非台灣官方分級,請以遊戲包裝或文化部公告為準。</div>
 <script>
-const TABS=[["news","最新消息"],["free","限時免費"],["deals","特價消息"],["new","新上架"],["soon","即將上架"]];
+const TABS=[["news","最新消息"],["free","限時免費"],["deals","特價消息"],["new","新上架"],["soon","即將上架"],["mobile","手機付費榜"]];
 let D={free:[],deals:[],news:[]},G={apps:{}},H={},tab="free",plat="全部";
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -114,6 +114,7 @@ function priceHtml(d){
  if(d==="限時免費")return `<span class="pct" style="color:${pctColor(100)}">-100%</span><b class="now">免費</b>`;
  return esc(d)}
 function meta(i){
+ if(tab==="mobile")return `<b>#${i.rank}</b> ${esc(i.desc)} ・ <span class="nw">★ ${esc(i.rating)}(${Number(i.count).toLocaleString()} 則評論)</span>`;
  if(tab==="new"||tab==="soon"){const g=G.apps&&G.apps[i.appid];const r=(g&&g.release)||i.release||"";return (tab==="new"?"上架 ":"預計 ")+esc(r||"日期未定")+(i.desc?","+esc(i.desc):"")}
  if(tab==="free"){const n=i.status==="next";return `<span class="free">${n?"即將免費":"免費中"}</span> ${i.start&&n?tw(i.start)+" 起,":""}${i.end?"至 "+tw(i.end)+"(台北時間)":"(限時,結束時間不明)"}${i.desc?" ,"+priceHtml(i.desc):""}`}
  if(tab==="news")return tw(i.date);
@@ -123,6 +124,7 @@ function render(){
  let items=[...(D[tab]||[])];
  if(tab==="news")items.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
  if(tab==="free")items.sort((a,b)=>(a.status==="next")-(b.status==="next"));
+ if(tab==="mobile")items.sort((a,b)=>a.platform===b.platform?a.rank-b.rank:(a.platform==="iOS"?-1:1));
  if(tab==="new"||tab==="soon"){const k=x=>dt(x)||(tab==="new"?"0000":"9999");items.sort((a,b)=>tab==="new"?k(b).localeCompare(k(a)):k(a).localeCompare(k(b)))}
  const ps=["全部",...new Set(items.flatMap(pl))];if(!ps.includes(plat))plat="全部";
  $("chips").innerHTML=ps.map(p=>`<button aria-pressed="${p===plat}" data-p="${esc(p)}">${esc(p)}</button>`).join("");
