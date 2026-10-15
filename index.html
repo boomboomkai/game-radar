@@ -20,7 +20,7 @@ button:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
 #list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,440px),1fr));gap:10px;align-items:start;margin-top:10px}
 .item{display:grid;grid-template-columns:5px minmax(0,1fr) auto;background:var(--row);border-radius:6px;overflow:hidden;min-width:0;max-width:100%}
 .item i{background:#888;grid-row:1 / span 2}.item[data-p=Steam] i{background:#2a6f97}.item[data-p=Epic] i{background:#6b6b80}.item[data-p=EA] i{background:#d1393b}
-.item[data-p=Nintendo] i{background:#e60012}.item[data-p=PlayStation] i{background:#1f4fd8}.item[data-p=Xbox] i{background:#107c10}.item[data-p=PC] i{background:#7a5af5}
+.item[data-p=Nintendo] i{background:#e60012}.item[data-p=PlayStation] i{background:#1f4fd8}.item[data-p=Xbox] i{background:#107c10}.item[data-p=PC] i{background:#7a5af5}.item[data-p=iOS] i{background:#8e8e93}.item[data-p=Android] i{background:#2fa84f}
 .item>div{padding:10px 14px;min-width:0;overflow-wrap:anywhere}.item>.dt{grid-column:2 / -1;padding:0 14px 12px}.item a{color:var(--tx);text-decoration:none;font-weight:600}.item a:hover{color:var(--ac);text-decoration:underline}
 .m{font-size:14px;color:var(--mu)}.free{color:var(--free);font-weight:600}
 details{margin-top:0;min-width:0;max-width:100%}summary{cursor:pointer;color:var(--ac);font-size:14px}
@@ -29,6 +29,9 @@ video{width:100%;max-width:480px;border-radius:6px;margin:6px 0;background:#000}
 .rv{border-left:3px solid var(--ln);padding-left:10px;margin:8px 0;font-size:14px}.rv b{font-weight:600}.rv .m{margin-top:2px}
 .ok{color:var(--free)}svg.ch{width:100%;max-width:360px;height:auto;display:block;margin:6px 0}svg.ch path{fill:none;stroke:var(--ac);stroke-width:2}
 h4{margin:12px 0 2px;font-size:14px}
+.cv.sq{object-fit:contain}.m a,.cmp a{font-weight:400;color:var(--ac)}.cmp td:last-child{white-space:nowrap}
+.best{display:inline-block;font-size:12px;font-weight:600;color:var(--og);border:1px solid var(--og);border-radius:4px;padding:0 6px;margin-left:4px;white-space:nowrap}
+.tw{overflow-x:auto;max-width:100%}table.cmp{border-collapse:collapse;width:100%;font-size:14px}.cmp td{padding:5px 8px 5px 0;border-bottom:1px solid var(--ln);vertical-align:top}.cmp tr.bst td{background:rgba(23,128,61,.1)}
 .pct,.orig,.now{white-space:nowrap}.pct{font-weight:700;font-size:1.08em;margin:0 6px 0 4px}
 .orig{color:var(--og);text-decoration:line-through;text-decoration-thickness:2px;margin-right:6px}
 .now{color:var(--np);font-weight:700;font-size:1.12em}
@@ -43,7 +46,7 @@ h4{margin:12px 0 2px;font-size:14px}
 #msg{color:var(--mu);padding:24px 0}#err{font-size:13px;color:var(--mu);margin-top:28px;border-top:1px solid var(--ln);padding-top:10px}
 </style></head><body><main>
 <h1>遊戲情報雷達</h1><div id="upd">載入中…</div>
-<div role="tablist" id="tabs"></div><div id="chips"></div><div id="list"></div><div id="msg"></div><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS。分級圖示依 Steam / RAWG 提供的 PEGI、ESRB 資料換算,僅供參考,非台灣官方分級,請以遊戲包裝或文化部公告為準。</div>
+<div role="tablist" id="tabs"></div><div id="chips"></div><div id="list"></div><div id="msg"></div><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS、Apple iTunes、匯率來自 <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a>。分級圖示依 Steam / RAWG 提供的 PEGI、ESRB 資料換算,僅供參考,非台灣官方分級,請以遊戲包裝或文化部公告為準。</div>
 <script>
 const TABS=[["news","最新消息"],["free","限時免費"],["deals","特價消息"],["new","新上架"],["soon","即將上架"]];
 let D={free:[],deals:[],news:[]},G={apps:{}},H={},tab="free",plat="全部";
@@ -68,12 +71,24 @@ function detail(i){
  return `<details><summary>畫面、影片、評論與價格走勢</summary>
  ${g.desc?`<p class="m">${esc(g.desc)}</p>`:""}${shots?`<div class="shots">${shots}</div>`:""}${vid}
  <h4>Steam 評價</h4><div class="m">${sum}${g.metacritic?`;Metacritic ${esc(g.metacritic)}`:""}</div>${rv}
- ${g.price?`<h4>價格走勢</h4>${chart(i.appid,g)}`:""}</details>`}
+ ${g.price?`<h4>價格走勢</h4>${chart(i.appid,g)}`:""}${cmpHtml(i,g)}</details>`}
+const cmpRows=g=>(g&&g.compare&&g.compare.rows)||[];
+function bestOf(rows){const v=rows.filter(r=>r.twd>0);return v.length<2?null:v.reduce((a,b)=>b.twd<a.twd?b:a)}
+function bestChip(i){
+ const b=bestOf(cmpRows(G.apps&&G.apps[i.appid]));if(!b)return"";
+ return `<span class="best">${/^Steam/.test(b.store)?"Steam 台灣區已是最低價":"最划算:"+esc(b.store)+" 約 NT$ "+Math.round(b.twd).toLocaleString()+(/iOS|Android/.test(b.store)?"(手機版,內容可能不同)":"")}</span>`}
+function cmpHtml(i,g){
+ const c=g.compare;if(!c||!c.rows||!c.rows.length)return"";
+ const rows=[...c.rows].sort((a,b)=>(a.twd>0?a.twd:1e12)-(b.twd>0?b.twd:1e12)),best=bestOf(rows);
+ const tr=rows.map(r=>`<tr${r===best?' class="bst"':""}><td>${esc(r.store)}${r===best?' <b class="ok">最划算</b>':""}${/iOS|Android/.test(r.store)?' <span class="m">手機版</span>':""}</td><td>${r.twd===0?"免費":r.twd>0?(r.usd!=null?"約 ":"")+"NT$ "+Math.round(r.twd).toLocaleString():"—"}${r.usd!=null?` <span class="m">(US$${esc(r.usd)})</span>`:""}</td><td><a href="${esc(safe(r.url))}" target="_blank" rel="noopener noreferrer">前往</a></td></tr>`).join("");
+ const nm=encodeURIComponent(c.en||i.title);
+ const cons=[["PlayStation","PS5"],["Xbox","Xbox"],["Switch","Nintendo Switch"]].map(([n,q])=>`<a href="https://www.google.com/search?q=${nm}+${encodeURIComponent(q)}+價格" target="_blank" rel="noopener noreferrer">${n}</a>`).join("、");
+ return `<h4>各平台價格比較</h4><div class="tw"><table class="cmp">${tr}</table></div><div class="m">美元價格以 1 美元約 ${c.fx?c.fx.toFixed(1):"?"} 台幣估算。第三方商店的金鑰可能有地區限制,手機版內容可能和電腦版不同,價格不含稅與手續費。主機版沒有公開價格資料,請自行搜尋:${cons}</div>`}
 function dtBlock(i){const h=i.appid?detail(i):"";return h?`<div class="dt">${h}</div>`:""}
 function cover(i){
  if(!i.appid&&!i.image)return"";const g=G.apps&&G.apps[i.appid];
  const src=i.image||(g&&g.header)||`https://cdn.cloudflare.steamstatic.com/steam/apps/${i.appid}/header.jpg`;
- return `<a class="cvl" href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img class="cv" loading="lazy" data-app="${esc(i.appid||"")}" src="${esc(safe(src))}" alt=""></a>`}
+ return `<a class="cvl" href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img class="cv${i.square?" sq":""}" loading="lazy" data-app="${esc(i.appid||"")}" src="${esc(safe(src))}" alt=""></a>`}
 const AGE={0:"普遍級",6:"保護級",12:"輔12級",15:"輔15級",18:"限制級"};
 function ageBadge(i){
  const g=G.apps&&G.apps[i.appid];let a=i.age;
@@ -93,7 +108,7 @@ function priceHtml(d){
  return esc(d)}
 function meta(i){
  if(tab==="new"||tab==="soon"){const g=G.apps&&G.apps[i.appid];const r=(g&&g.release)||i.release||"";return (tab==="new"?"上架 ":"預計 ")+esc(r||"日期未定")+(i.desc?","+esc(i.desc):"")}
- if(tab==="free"){const n=i.status==="next";return `<span class="free">${n?"即將免費":"免費中"}</span> ${i.start&&n?tw(i.start)+" 起,":""}至 ${tw(i.end)}(台北時間)${i.desc?" ,"+priceHtml(i.desc):""}`}
+ if(tab==="free"){const n=i.status==="next";return `<span class="free">${n?"即將免費":"免費中"}</span> ${i.start&&n?tw(i.start)+" 起,":""}${i.end?"至 "+tw(i.end)+"(台北時間)":"(限時,結束時間不明)"}${i.desc?" ,"+priceHtml(i.desc):""}`}
  if(tab==="news")return tw(i.date);
  return priceHtml(i.desc)}
 function render(){
@@ -105,7 +120,7 @@ function render(){
  const ps=["全部",...new Set(items.flatMap(pl))];if(!ps.includes(plat))plat="全部";
  $("chips").innerHTML=ps.map(p=>`<button aria-pressed="${p===plat}" data-p="${esc(p)}">${esc(p)}</button>`).join("");
  const show=items.filter(i=>plat==="全部"||pl(i).includes(plat));
- $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(pl(i)[0])}"><i></i><div><a href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a>${ageBadge(i)}<div class="m">${esc(pl(i).join(" / "))}:${meta(i)}</div></div>${cover(i)}${dtBlock(i)}</div>`).join("");
+ $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(pl(i)[0])}"><i></i><div><a href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a>${ageBadge(i)}<div class="m">${esc(pl(i).join(" / "))}:${meta(i)}${bestChip(i)}</div></div>${cover(i)}${dtBlock(i)}</div>`).join("");
  $("msg").textContent=show.length?"":(D.updated?"這個分類目前沒有資料。":"還沒有資料,請先在 GitHub 的 Actions 頁手動執行一次 update-data。");
 }
 const shotPick={};
