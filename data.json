@@ -93,20 +93,20 @@
   },
   {
    "platform": "Steam",
+   "title": "Sekiro™: Shadows Die Twice - GOTY Edition",
+   "desc": "-50%  TWD 795(原價 1,590)",
+   "pct": 50,
+   "url": "https://store.steampowered.com/app/814380",
+   "appid": 814380,
+   "src": "steam"
+  },
+  {
+   "platform": "Steam",
    "title": "《電馭叛客 2077：自由幻局》",
    "desc": "-40%  TWD 479(原價 799)",
    "pct": 40,
    "url": "https://store.steampowered.com/app/2138330",
    "appid": 2138330,
-   "src": "steam"
-  },
-  {
-   "platform": "Steam",
-   "title": "BOMBANANA!",
-   "desc": "-40%  TWD 105(原價 175)",
-   "pct": 40,
-   "url": "https://store.steampowered.com/app/4656000",
-   "appid": 4656000,
    "src": "steam"
   },
   {
@@ -120,24 +120,38 @@
   },
   {
    "platform": "Steam",
+   "title": "Big Walk",
+   "desc": "-20%  TWD 295(原價 369)",
+   "pct": 20,
+   "url": "https://store.steampowered.com/app/1478500",
+   "appid": 1478500,
+   "src": "steam"
+  },
+  {
+   "platform": "Steam",
    "title": "Japanese Ramen Simulator",
    "desc": "-15%  TWD 261(原價 308)",
    "pct": 15,
    "url": "https://store.steampowered.com/app/4968640",
    "appid": 4968640,
    "src": "steam"
-  },
-  {
-   "platform": "Steam",
-   "title": "Trash Day",
-   "desc": "-10%  TWD 142(原價 158)",
-   "pct": 10,
-   "url": "https://store.steampowered.com/app/3314580",
-   "appid": 3314580,
-   "src": "steam"
   }
  ],
  "news": [
+  {
+   "platform": "Nintendo",
+   "title": "This Gorgeous 'Stop-Motion' Adventure Swims Onto Switch 2 Next Month",
+   "url": "https://www.nintendolife.com/news/2026/10/this-gorgeous-stop-motion-adventure-swims-onto-switch-2-next-month",
+   "date": "2026-10-15T09:45:00+00:00",
+   "src": "nintendo"
+  },
+  {
+   "platform": "Nintendo",
+   "title": "Zelda Switch 2 Console Is Back In Stock At Smyths In The UK",
+   "url": "https://www.nintendolife.com/news/2026/10/zelda-switch-2-console-is-back-in-stock-at-smyths-in-the-uk",
+   "date": "2026-10-15T09:00:00+00:00",
+   "src": "nintendo"
+  },
   {
    "platform": "Nintendo",
    "title": "ICYMI: Zelda: Ocarina Of Time On Switch 2 Has A Museum & Boss Time Trial Mode",
@@ -181,18 +195,18 @@
    "src": "nintendo"
   },
   {
-   "platform": "Nintendo",
-   "title": "Guide: When Is Modern Warfare 4's Early Access Release For The Campaign & DMZ Modes?",
-   "url": "https://www.nintendolife.com/guides/modern-warfare-4-early-access-campaign-dmz-release-time-date-mw4",
-   "date": "2026-10-14T17:30:00+00:00",
-   "src": "nintendo"
+   "platform": "PlayStation",
+   "title": "Game of the Month: Onimusha: Way of the Sword (September 2026)",
+   "url": "https://www.pushsquare.com/features/game-of-the-month-onimusha-way-of-the-sword-september-2026",
+   "date": "2026-10-15T12:15:00+00:00",
+   "src": "playstation"
   },
   {
-   "platform": "Nintendo",
-   "title": "Review: Clive Barker's Hellraiser: Revival (Switch 2) - A Hellish Adaptation, In Several Ways",
-   "url": "https://www.nintendolife.com/reviews/nintendo-switch-2/clive-barkers-hellraiser-revival",
-   "date": "2026-10-14T17:00:00+00:00",
-   "src": "nintendo"
+   "platform": "PlayStation",
+   "title": "PS Plus Premium Members Treated to More New PS5 Demos Next Week",
+   "url": "https://www.pushsquare.com/news/2026/10/ps-plus-premium-members-treated-to-more-new-ps5-demos-next-week",
+   "date": "2026-10-15T11:45:00+00:00",
+   "src": "playstation"
   },
   {
    "platform": "PlayStation",
@@ -237,18 +251,25 @@
    "src": "playstation"
   },
   {
-   "platform": "PlayStation",
-   "title": "PS5 Pro Easily the Best Place to Play The Witcher 3 Remastered on Console, Finds Digital Foundry",
-   "url": "https://www.pushsquare.com/news/2026/10/ps5-pro-easily-the-best-place-to-play-the-witcher-3-remastered-on-console-finds-digital-foundry",
-   "date": "2026-10-14T17:00:00+00:00",
-   "src": "playstation"
+   "platform": "Xbox",
+   "title": "The First Review Has Dropped For Final Fantasy Resonance, Hints At Campaign Length",
+   "url": "https://www.purexbox.com/news/2026/10/the-first-review-has-dropped-for-final-fantasy-resonance-hints-at-campaign-length",
+   "date": "2026-10-15T12:00:00+00:00",
+   "src": "xbox"
   },
   {
-   "platform": "PlayStation",
-   "title": "Sony's Missing First-Party Games Have Returned to PS Store in the US",
-   "url": "https://www.pushsquare.com/news/2026/10/sonys-missing-first-party-games-have-returned-to-ps-store-in-the-us",
-   "date": "2026-10-14T16:45:00+00:00",
-   "src": "playstation"
+   "platform": "Xbox",
+   "title": "Big Walk Developer Issues Statement On Why The Game Won't Be Coming To Xbox",
+   "url": "https://www.purexbox.com/news/2026/10/big-walk-developer-issues-statement-on-why-the-game-wont-be-coming-to-xbox",
+   "date": "2026-10-15T11:00:00+00:00",
+   "src": "xbox"
+  },
+  {
+   "platform": "Xbox",
+   "title": "15 Xbox Games Are Out Today, Including A Polished Port Of An Iconic Xbox 360 Masterpiece (October 15)",
+   "url": "https://www.purexbox.com/news/2026/10/15-xbox-games-are-out-today-including-a-polished-port-of-an-iconic-xbox-360-masterpiece-october-15",
+   "date": "2026-10-15T10:00:00+00:00",
+   "src": "xbox"
   },
   {
    "platform": "Xbox",
@@ -283,27 +304,6 @@
    "title": "Guide: Call Of Duty: Modern Warfare 4 Release Date, Release Times & Everything You Need To Know On Xbox & PC",
    "url": "https://www.purexbox.com/guides/call-of-duty-modern-warfare-4-release-date-release-times-and-everything-you-need-to-know-on-xbox-and-pc",
    "date": "2026-10-14T14:00:00+00:00",
-   "src": "xbox"
-  },
-  {
-   "platform": "Xbox",
-   "title": "Review: Toy Story: Retro Roundup! + Toy Story 3 Complete Edition (Xbox) - A Welcome Trip Down Memory Lane",
-   "url": "https://www.purexbox.com/reviews/toy-story-retro-roundup-plus-toy-story-3-complete-edition-xbox-a-welcome-trip-down-memory-lane",
-   "date": "2026-10-14T13:00:00+00:00",
-   "src": "xbox"
-  },
-  {
-   "platform": "Xbox",
-   "title": "30+ Xbox Games & DLC Are Reduced By 75% In The Fallout Day Franchise Sale",
-   "url": "https://www.purexbox.com/news/2026/10/30plus-xbox-games-and-dlc-are-reduced-by-75percent-in-the-fallout-day-franchise-sale",
-   "date": "2026-10-14T11:00:00+00:00",
-   "src": "xbox"
-  },
-  {
-   "platform": "Xbox",
-   "title": "10 Xbox Games Are Available Today, Including A Retro FPS Sequel Worthy Of The Imperium (October 14)",
-   "url": "https://www.purexbox.com/news/2026/10/10-xbox-games-are-available-today-including-a-retro-fps-sequel-worthy-of-the-imperium-october-14",
-   "date": "2026-10-14T10:00:00+00:00",
    "src": "xbox"
   },
   {
@@ -364,9 +364,23 @@
   },
   {
    "platform": "Steam",
-   "title": "Steam超佛政策也變成遊戲核心挑戰！獨立新作挑戰全球玩家：2小時內通關歡迎去退費！ - Yahoo新聞",
-   "url": "https://news.google.com/rss/articles/CBMiiwRBVV95cUxNV01Pbk9GZ0VZb3pzWWlKRk9teHdrbXRSbGVlSEFXQ0t1SnU1STR6LUlleWcxWVB6LWJsRzZPanVMRS1QSS1vQXZscld2eXNPTlRZYTktQ1o4bXdaOHZrd0I2YzJxMWpxWEJlWThvOEtVM1hMSHNuOUtpU095Y3k1Umk5dHY5MXZyRWdLRFl4ajdmUkMwX2R6U1pIWThJZ1lQWXFydnRIVjdDYklGaEJjdkh2NW05a2RUanRwTGswemdyVDlwQ1ExZWtxbzlqc2VoWm1jOE1ybGhsMDVWNUJFZ01aVHZMbjhhV3ZWTWY3NTQwNDhCMXRmc0J0Y0RLdEp4RVh4dTg2WGhmSVNtdkZmclJXQXktVGNTZ0xHWHhRQUhRT3VqTTBteWx4QzhFTFlLVDJzbWI0MVhVN1pXd1BMbjhlTzBBTWJCSzR6TVJGbVN5VnFiRDI0Wlp2UDMxa192VFppR2c5Sk5XbnlsZFdjZER3T0JGVF85UzZmbGx4MUdKM1pjRXVweFI3bkhDVnVzWm5VaXctVi01aW5FLUtJRy1MdU9xM2ROYk1fbTlwNDFJZ01GdXhtZ0luNWNVSnNTbDU0T0JJcFZSTzZxR3g5ZEp1bnlXZmtTUWRTdkRSc1FKbFp0SEtLOUdsRzRWb3pEWHpvLXdMZTFpVGtwOF9feXE3LW91cTlSTnhn?oc=5",
-   "date": "2026-10-15T06:06:09+00:00",
+   "title": "《明日方舟：終末地》Steam 版上線 同一帳號可跨平台接續拓荒進度 - Ludens Media",
+   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1jSDh2MjNlZG1hNjhSV1lVSjFFNXNjemxXOExaOHBPTlFlc0FJRmZHQkVGRlFxMEpkMWROUTdycG1fUWRKWEQ5TkpQOEFOY3F5MmpOZ3pkY0xzX0VnY2xqVEZta0ZpVVlJY0ZhYkZ2bjNMbnd6SDVHQw?oc=5",
+   "date": "2026-10-15T11:48:00+00:00",
+   "src": "steam_news"
+  },
+  {
+   "platform": "Steam",
+   "title": "Steam新遊戲竟鼓勵玩家退款！開發者嗆「有本事2小時內破關」還送專屬成就 - Yahoo新聞",
+   "url": "https://news.google.com/rss/articles/CBMizwNBVV95cUxNODFsc1hldzRqaEVQcXF5dkNSbThtMzY5SjBRVUFITzM1M2J4Y2xkX1Fxb3NIWXRXVVozdVlMUnRjWkQzWndLNlZEZzJwYkJHbDBoTmI1T1FkM25ERklVbDFDUkRodmtYZHB6ZzNSdS1KWFpwTkN4SHo4WmdRQlI2VXROdFpTTFlUWGR5cVZsbUhWNlQ4NXBLdWVodHJxRlRfanBfLTR5R1RqbDROdS14LVRIbUJqdUpySnhIeUtzYkI4eFduWFlSNUU1RzkwV0p2Nnlramgzek9OQVUxNFIyWUxCM3dTTHBYd0JzbmxCcjYyWWxIcnpHYUEwZHBTam9HLUMtTV9iM1Z1dXR0NS13T2M0a2FsNHVXN3BTUkVyTnl4QWM3TXltZ21EUmRXc29NOUEzNlJSRklUN0VhT1IwQUh4aGpBbTNiR0RJQ3Zmdl9EYjZ5SnFOMnpMQ3lUNUlwQ3NsZGFtT1B2bGpqZnVqQXJFTjVRU1RiZE51cXBnck9tN0U0bk1hWGpmZnUyRlp1cGNraHVwQWViQU4yVmJBeFFISFNoU3pxU0tGclRqM3daQXpXUlNLSV9UaUFYbGlrb0V0aGFRNUtvcDRNcFdZ?oc=5",
+   "date": "2026-10-15T10:29:18+00:00",
+   "src": "steam_news"
+  },
+  {
+   "platform": "Steam",
+   "title": "敘事冒險遊戲《黑森林迷蹤》揭開古老秘密 – 現已於 STEAM 上架 - Paradaily",
+   "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxONnZ5ZWtXN0ZBQzJGR0lvOU9jRlNxWVp0NDNYblV3aWFFZUY0YnZqYWRYZmhUXzI4RC1FaHJRZGpYajFGcmZMYms4OUsyeWk3cUQzX2hEX24xTktuaTYxQTFVMDZWSzFPQ0NkUjFaMmUtdVBYcHpMbExrb1FGd2M4bA?oc=5",
+   "date": "2026-10-15T03:46:23+00:00",
    "src": "steam_news"
   },
   {
@@ -392,44 +406,51 @@
   },
   {
    "platform": "Steam",
+   "title": "【新作發表】方塊拼圖 × 牌組構築 Roguelike《Yomino》Steam 商店頁面正式上線 - Paradaily",
+   "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9KaVJJRnMwZUpSY0JGbmpkWFVPcFR4OEU4NGNDUVNvYVVvd1Z1VC1qcWZWTHpRUGFJTERpV203bWZQXzBYUXNfUTRGelRBVXp2UE54TEFqRnhSYlZSUVhMa3gtMUw1V29pbmJMOFlEdGhWTzVMbnBpY3VqN2thVkU?oc=5",
+   "date": "2026-10-15T02:43:51+00:00",
+   "src": "steam_news"
+  },
+  {
+   "platform": "Steam",
    "title": "《over the hill》Steam 上市 1 至 4 人越野探索 8 折至 10 月 29 日 - Ludens Media",
    "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBwYnA2Z0d2ek85NHdsS21xSm80c0V2Y3k4eGtCa1JaVncxMXFzWFNsSUQtdzhabDZmME9pWGpIb0ZlX0hMTi13TDlQS2dHV040eHlCenNUdFlSMW85c1hRZGVVZmJkeHhzU1JSYmtRRjRXdi1SekE?oc=5",
    "date": "2026-10-15T02:02:00+00:00",
    "src": "steam_news"
   },
   {
-   "platform": "Steam",
-   "title": "恐怖打字遊戲外傳《Dyping Working：監視型專注伴侶》公開 Steam 專頁 - https://gamelife.tw/",
-   "url": "https://news.google.com/rss/articles/CBMizwJBVV95cUxPSDlORzZGazMxa19XbVg0T2t0QzlHelNaOUdGSUZqWlNfWEZoRUowckY4S1FJVS1hQjU2YlRvd2lfcEdlSGRQUWhqWUR1bnBJaWhPbXB5ZG9wbDVxRFdHdDFpV3BFcXA3UnpjMkw1YjZoWTRBaUJNMUJ0eW04QzdRX2xzX2psM1JOTTBlME00UGpzZVM5MjhlZWh2TjctSGczWkVSMlIxLXRYaUpqaHowSEpKUU9jTWJyTlFzMGlqZWFqNWlzSU5mbTAzOGRDSm5CaDRsUlNzeVZnN1lTc0lvcVZHaWVVTzZEa3ZrdG8yTWRsNS1USkhvMXhoZDdVaENrR2oyQkdHWG1nVkJYSFZDbXUzUnMxZXRYdVJaTmxYdVROZ0lyaUZkOEVWTy1zNWJYdVNKdE1SMmlNN19GQVhSN0I2dHRJVVFCcVJrYkp1Zw?oc=5",
-   "date": "2026-10-15T01:08:58+00:00",
-   "src": "steam_news"
+   "platform": "Epic",
+   "title": "Epic炫耀啟動器比Steam快5秒！玩家狂酸搞錯重點：就算Steam開4小時也不換 - Yahoo新聞",
+   "url": "https://news.google.com/rss/articles/CBMioANBVV95cUxPd2lXcFJmNmN4M2lWSTB5cmNNbFpBZ3ctdmMtejZZVEtNQnJ0enA4aE5mdC15UlhZcUszQ0J6dFRmelE5Y2JUVFR5a29qUnM3OFBoLUM2SWxKUUVuQmRKUExneUVVdDJkQkxmQ1REa0hjWGZaQXBXeHJaTzhjYjJaVTJOQjEycEREOE9RVm5aUDFtOE1MOWVFbkY2cTNlS2ZjU292REt1Ukh1NVJ3cXdBcGFYVW9nSkFXVXQ5WEhXZW5EYkNDOXBsWGNMVXh5aGxid2d0bXpobG1kRC1sZXh1cVgxdjJqU0xVU2tna2s4RU9JLV9SeUlBd0M3ZGVhMmFTYk9DaW92YlhfMUVfdVM0bzF5cEQ2dkNnWUtXNUVTeXYwX293UkFKQlJtV3J5RS1QS04wM2l1eU1USjRyLUlrQWtHd2UyUDM1SDlGNmJ4dFNKVWpyRkJVbUtkRlRlcWRLOHVCN1o4QkY2WUZvWGdLVmd4U3ZYWEhQb2NTLVhwN1JzUWJzSlpEZzFfYmlrVnMxUHV5THlGLVBENWdCeURhRA?oc=5",
+   "date": "2026-10-15T10:31:23+00:00",
+   "src": "epic_news"
   },
   {
-   "platform": "Steam",
-   "title": "《Fantasy Blacksmith Simulator》Steam 免費試玩版開放 正式版支援繁體中文 - Ludens Media",
-   "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9JazRNb3pzM2VMWTFMNzdIdlJjNmVqZXJKQzdCNWZBMUZiXzRUWWdrNTRqNGVFRGN3MnlsVFB0UDdfQ3F6ZXVNbW5Id0pLN05hQWJtd0RlVFpHaUhFZmVjLUZPNEFmQWVrb1YzZHNyZkN2MEVaQXk0?oc=5",
-   "date": "2026-10-14T14:27:00+00:00",
-   "src": "steam_news"
+   "platform": "Epic",
+   "title": "Vibe Coding做的！Epic Games新版啟動器上線，號稱比Steam更快 - 加密城市CryptoCity",
+   "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNYUpORG94QTRObUFwVElSenAtU0JpdU81bG5PZEEwX196NFVMUzY1cUdOT3YzQTFiajI3UXRTeHNlR08xVXVvZ2pOeFVETTdRcjZKYlJRXzVEb0pGU201Rmk2Q25hOTBVYVNJOFd6eW5EZXAydzB5bGlDT1QydkUweXRYWjFfNkgtRWJsdjZFV1R2aFBvRmxxSg?oc=5",
+   "date": "2026-10-15T09:59:32+00:00",
+   "src": "epic_news"
   },
   {
-   "platform": "Steam",
-   "title": "《ANTHEM#9》開發者新作《blockia》Steam 頁面公開 收錄逾 120 種零件與攝影模式 - Ludens Media",
-   "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE05UmZKRTFmdnM4S01KQUFSeXBoYlgtYko4cFMwREhkTXZRdGZyTHoyOWtqOHdhd2FodlNHbzA2b25xQTRQVEtKdkNzLXhIOEZJX3lGOUw2b2wyOGtlVi1fSV9GS2ZsQUpNWjVfVHVnLTN4NlJJVEdpcw?oc=5",
-   "date": "2026-10-14T13:52:00+00:00",
-   "src": "steam_news"
+   "platform": "Epic",
+   "title": "Epic Games推新版啟動器 採AI輔助開發並首度支援Linux - TVBS新聞網",
+   "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTE5LcnkwR0xhNS1RbXFPVWU3XzdJMnA2bC1ZVmtfYk1wU1UxYUJGVDdWQWVRUUx4aHdnay03OWhvR3I3SE1iQWdteG5CZ0p3Zw?oc=5",
+   "date": "2026-10-15T09:51:00+00:00",
+   "src": "epic_news"
+  },
+  {
+   "platform": "Epic",
+   "title": "Epic 公告：我們用 AI 重寫了啟動器！開平台比 Steam 快 - 動區動趨",
+   "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOVkJhYkZCSVFlb3RZRkx0MFZ3Q25wZXEyaDRHaGRKcklTbV9tcFpXMHBHTHpWWERZRUFvel9uTklzS1J2SEhFeUJ1ZWs5bFJIRXVmOXpLUlV4aGpHMVRPZWRoSTFxaGo4RnZyZ0RMTGhuTUxuV09YWlhtVi1tTXhVX1BnaUlWRDZqYURlR2MxcXdOQQ?oc=5",
+   "date": "2026-10-15T08:31:47+00:00",
+   "src": "epic_news"
   },
   {
    "platform": "Epic",
    "title": "瞬間破功？Epic吹客戶端載入速度比Steam快 不到一天又被超車 - udn遊戲角落",
    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1Ha2I0RHR3dXpyYXhfd3hIcDNPdTRrUGM2eTU5dkpxaThaTE5LSWw4bmI1NGNlT3Y5dVFuc1FFdXJzQWhnQ1pxOVBXWElPVlV4X2Y2TUR2TVEwQdIBX0FVX3lxTE1wazhPdUFXVnJ6NUFEb0pxRGptVjE3V0JYaXZZWTAtbHZ2WjFsak9qQWpKQUFsZHFFY2xhalk5VE5iZkpvZDAtQ2s0RmVEbXF6TklycjJDdHpNLVZEb0ZB?oc=5",
    "date": "2026-10-15T06:59:19+00:00",
-   "src": "epic_news"
-  },
-  {
-   "platform": "Epic",
-   "title": "比Steam快5秒就想贏？Epic新啟動器宣傳被玩家酸爆：完全搞錯重點 - Yahoo新聞",
-   "url": "https://news.google.com/rss/articles/CBMijANBVV95cUxOSEpjNm0zVkQ1SEVkeWZoWTBqMVh4ZDRocG4td2UzZnl2bVVvVTZTSE5ISW9BSUpVLTRleFRBMU56bGhqV2drNDM4UFZycGIwTDZ3MUVFZE1Vd241ZTVaS2pHdmZwcnFLVmkyNGNFSTZIc2E1TW9PUXA1LTJIMmZvY2VhQTg1eF9mazBsVTZrblRqWV9oNWRyanE0bWJhQ20td29PQkNwaXdsbjZZZzEydmdBQllNME9IR05UUnF1QXpTQ1FpZk05ZC1LTzJCS2hrc3NRM0VDbVZhV25xdzBkWllsdWJnX280VmtnY2kzNmJtQjRCSlJNaGZpdmpMMENHUVpsRkZtMl8yUldNejlzTXdJczRBNzQzZkp2cklSNWpMOWY4VTctMTlGTGhqam9TVVBtcnYyYkRvaWVEUDFxTnRrSjVWa3FqZGNXWENMLS00VWNLYWE3bzQ1ZFFlMTFEYlpadmlBSmp5eG04YklwQ3RYZi1vWnZKYkt6NThmMnY0NC16VktDQzFpa24?oc=5",
-   "date": "2026-10-15T06:27:07+00:00",
    "src": "epic_news"
   },
   {
@@ -452,36 +473,151 @@
    "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9nUm1YeXlDOVBYMTNQTktlYVFwT1VvZjVwVlRBZmtzQ214YWxyMm5vZ2Z3RjNFNEdXVEt3dkh0VlJnanNSUF9id0JfcnVqUHl3TlhBQmg3VVp5dW9vYllTWFJlUnVacllzUXM0VnZJcE4?oc=5",
    "date": "2026-10-15T01:05:59+00:00",
    "src": "epic_news"
-  },
-  {
-   "platform": "Epic",
-   "title": "《戰慄深隧 2039》預購全面開跑 - https://gamelife.tw/",
-   "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxQZUJLYjltV2FlcjVqcVlfc0xfNVFjR19hQkdnUERGQWxhc3pMbms3U1p1RDU0cUdkaGdubGpCT2pXeHUxUWtkVnF4TDJZOGdIX3RXWWFCMkt1d0NQRzdNVjZLR3JTWHJNaWlkWkFZRlNwSFYtcnVoWFNwdGpWelkyYmpBUE5Fd1huS2hOY2tGempGUmUxSEJzT2dzSWFSRFg2c2RMNkF3WmNMdUYxU2lucEZ3dDZfek5jcGM5bHpVOXJ5OE5xNF9yREczVjBoSzdBTm9qbl9UMDNSMmM?oc=5",
-   "date": "2026-10-15T00:59:50+00:00",
-   "src": "epic_news"
-  },
-  {
-   "platform": "Epic",
-   "title": "Epic Games推出全新極速啟動器、首登Linux，卻因大裁員後高調吹捧AI引爆公關災難 - Mashdigi",
-   "url": "https://news.google.com/rss/articles/CBMimAJBVV95cUxNLVlqeVVDeTJmTWZnbXlYZjBqRlJOTVNxQWY2d3BrdUZlWXhhOUdpdUlwRGFaRjZmc0VnUVZOell0WGc3YjRKTlZXSjdMbmFfN25iWmFORURFTV90VHhISFhjcXUwOFRNcFRENGZRdUZicmVfY0J3bE9VUkNyRkJjc0xCem5BdUpJY2IwMVp4VExraGozeXRxcHp5VFgxNk9jbGxvWTVMNHA1TlpjMDFLellkVzZmVTdwSW9zRzlqMzBvRDltanZTb2QyVW94aktjZ3J4eHRuMllpRlpESHV1OGlHeFV6NHBkVXh1c2VacmJRc1l6bFhvVFFLVjhzUF9DNEh2S0ZXYlltQ0xoV2d4MXA0djhVNEYz?oc=5",
-   "date": "2026-10-15T00:00:50+00:00",
-   "src": "epic_news"
-  },
-  {
-   "platform": "Epic",
-   "title": "《戰慄深隧2039》預購開跑標準版、豪華版與收藏版內容全解析- 遊戲新聞 - PChome Online 新聞",
-   "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQWUtoazhMXzdrdmhlMUw1LUJVazh3WHdLVmszeGtxYVpWUlZGRkxKU0wxbHBBYWNMdURBTEZLYWt4ZVc2eWxHS3RXUWNaTEUxeWpGTTVheTZJQThXSVN4V2tOaHliZGh0aWswMm1PNVA2UWlra1N0bWxkNERuRGtkTGs3c2c?oc=5",
-   "date": "2026-10-14T14:28:06+00:00",
-   "src": "epic_news"
   }
  ],
  "new": [
+  {
+   "platform": "Steam",
+   "title": "Raid Sky",
+   "desc": "TWD 57",
+   "url": "https://store.steampowered.com/app/5337260",
+   "appid": 5337260,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "DayZ Badlands",
+   "desc": "TWD 656",
+   "url": "https://store.steampowered.com/app/3816030",
+   "appid": 3816030,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Tidy Till Dawn",
+   "desc": "TWD 105",
+   "url": "https://store.steampowered.com/app/5270770",
+   "appid": 5270770,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Gem Warrior R",
+   "desc": "TWD 136",
+   "url": "https://store.steampowered.com/app/3323440",
+   "appid": 3323440,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Tokyo Canvas",
+   "desc": "TWD 159",
+   "url": "https://store.steampowered.com/app/5123950",
+   "appid": 5123950,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Thinki - Brain Games",
+   "desc": "",
+   "url": "https://store.steampowered.com/app/5231360",
+   "appid": 5231360,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Area 37",
+   "desc": "TWD 250",
+   "url": "https://store.steampowered.com/app/2478820",
+   "appid": 2478820,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "HAUNT",
+   "desc": "TWD 108",
+   "url": "https://store.steampowered.com/app/3175590",
+   "appid": 3175590,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "CUSTOM ORDER MAID 3D2 It's a Night Magic Happy Funny October ALL in ONE Pack",
+   "desc": "TWD 277",
+   "url": "https://store.steampowered.com/app/5353050",
+   "appid": 5353050,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "龍之劍:覺醒 - 服裝：黑色舞台的吟遊詩人",
+   "desc": "TWD 74",
+   "url": "https://store.steampowered.com/app/5245440",
+   "appid": 5245440,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "龍之劍:覺醒 - 服裝：藍色行進見習服",
+   "desc": "TWD 74",
+   "url": "https://store.steampowered.com/app/5245420",
+   "appid": 5245420,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "龍之劍:覺醒 - 服裝：王室儀仗騎士服",
+   "desc": "TWD 74",
+   "url": "https://store.steampowered.com/app/5245430",
+   "appid": 5245430,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "WhoIsHe",
+   "desc": "TWD 68",
+   "url": "https://store.steampowered.com/app/4928910",
+   "appid": 4928910,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Navy Island Confidential",
+   "desc": "TWD 138",
+   "url": "https://store.steampowered.com/app/4153730",
+   "appid": 4153730,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Wolfsschanze – Operation Götterdämmerung",
+   "desc": "TWD 246",
+   "url": "https://store.steampowered.com/app/4249690",
+   "appid": 4249690,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Fairy Hotel - Enchanted Kingdom",
+   "desc": "TWD 339",
+   "url": "https://store.steampowered.com/app/4201960",
+   "appid": 4201960,
+   "src": "steam_new"
+  },
   {
    "platform": "Steam",
    "title": "Tribal Trouble: Resurrected",
    "desc": "",
    "url": "https://store.steampowered.com/app/3945720",
    "appid": 3945720,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Freakopoly",
+   "desc": "TWD 159",
+   "url": "https://store.steampowered.com/app/5314260",
+   "appid": 5314260,
    "src": "steam_new"
   },
   {
@@ -494,154 +630,10 @@
   },
   {
    "platform": "Steam",
-   "title": "Bluey's Happy Snaps",
-   "desc": "TWD 1,190",
-   "url": "https://store.steampowered.com/app/3064040",
-   "appid": 3064040,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "山瘟",
-   "desc": "TWD 141",
-   "url": "https://store.steampowered.com/app/4327330",
-   "appid": 4327330,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "The Jackbox Party Pack 12",
-   "desc": "TWD 561",
-   "url": "https://store.steampowered.com/app/4199960",
-   "appid": 4199960,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Colors Of V",
-   "desc": "TWD 159",
-   "url": "https://store.steampowered.com/app/5214490",
-   "appid": 5214490,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "放置地下城：无尽远征",
-   "desc": "TWD 81",
-   "url": "https://store.steampowered.com/app/5242520",
-   "appid": 5242520,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "壽司自動化",
-   "desc": "TWD 134",
-   "url": "https://store.steampowered.com/app/5326650",
-   "appid": 5326650,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "My Elf Gym Adventure!",
-   "desc": "TWD 71",
-   "url": "https://store.steampowered.com/app/5019450",
-   "appid": 5019450,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Castlevania: Belmont's Curse",
-   "desc": "TWD 790",
-   "url": "https://store.steampowered.com/app/4231820",
-   "appid": 4231820,
-   "src": "steam_new",
-   "platforms": [
-    "PC",
-    "PlayStation",
-    "Xbox",
-    "Nintendo"
-   ],
-   "image": "https://media.rawg.io/media/games/429/42928697eb80feb13e6087170a10565a.jpeg",
-   "release": "2026-10-15"
-  },
-  {
-   "platform": "Steam",
-   "title": "迷宮球",
-   "desc": "TWD 103",
-   "url": "https://store.steampowered.com/app/3678730",
-   "appid": 3678730,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Harvest Moon®: Echoes of Teradea",
-   "desc": "TWD 858",
-   "url": "https://store.steampowered.com/app/3591180",
-   "appid": 3591180,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "LaserWaves",
-   "desc": "TWD 261",
-   "url": "https://store.steampowered.com/app/5247290",
-   "appid": 5247290,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "A Bad Dream: Trypophobia",
-   "desc": "TWD 93",
-   "url": "https://store.steampowered.com/app/5165970",
-   "appid": 5165970,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Unitra: Real-Time Voice Translation For Gamers",
-   "desc": "",
-   "url": "https://store.steampowered.com/app/4642720",
-   "appid": 4642720,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Desktop Mate IA DLC",
-   "desc": "TWD 328",
-   "url": "https://store.steampowered.com/app/5345380",
-   "appid": 5345380,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "ReGLOSS: CROSS",
-   "desc": "TWD 95",
-   "url": "https://store.steampowered.com/app/4808150",
-   "appid": 4808150,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Chinese Parents - E-Sports Life DLC",
-   "desc": "TWD 40",
-   "url": "https://store.steampowered.com/app/1576170",
-   "appid": 1576170,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "劍擲者",
-   "desc": "TWD 81",
-   "url": "https://store.steampowered.com/app/4474400",
-   "appid": 4474400,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "名利场2：冒牌富少",
-   "desc": "TWD 221",
-   "url": "https://store.steampowered.com/app/4870960",
-   "appid": 4870960,
+   "title": "叨叨巫師",
+   "desc": "TWD 110",
+   "url": "https://store.steampowered.com/app/3955960",
+   "appid": 3955960,
    "src": "steam_new"
   },
   {
@@ -761,6 +753,21 @@
   {
    "platform": "PC",
    "platforms": [
+    "PC",
+    "PlayStation",
+    "Xbox"
+   ],
+   "title": "Ace Combat 8: Wings of Theve",
+   "release": "2026-10-02",
+   "image": "https://media.rawg.io/media/games/541/541d6c97a674635d68ea3d19737f090b.jpg",
+   "desc": "",
+   "age": 12,
+   "url": "https://rawg.io/games/ace-combat-8-wings-of-theve",
+   "src": "rawg_new"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
     "PC"
    ],
    "title": "Nivalis",
@@ -776,14 +783,15 @@
    "platforms": [
     "PC",
     "PlayStation",
-    "Xbox"
+    "Xbox",
+    "Nintendo"
    ],
-   "title": "Ace Combat 8: Wings of Theve",
-   "release": "2026-10-02",
-   "image": "https://media.rawg.io/media/games/541/541d6c97a674635d68ea3d19737f090b.jpg",
+   "title": "Castlevania: Belmont's Curse",
+   "release": "2026-10-15",
+   "image": "https://media.rawg.io/media/games/429/42928697eb80feb13e6087170a10565a.jpeg",
    "desc": "",
-   "age": 12,
-   "url": "https://rawg.io/games/ace-combat-8-wings-of-theve",
+   "age": null,
+   "url": "https://rawg.io/games/castlevania-belmonts-curse",
    "src": "rawg_new"
   },
   {
@@ -904,82 +912,82 @@
  "soon": [
   {
    "platform": "Steam",
-   "title": "Real Zombie Survivors Demo",
+   "title": "Warehouseman Demo",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5360210",
-   "appid": 5360210,
+   "url": "https://store.steampowered.com/app/5375160",
+   "appid": 5375160,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "Deforest a Planet Demo",
+   "title": "Pixel Washer",
+   "desc": "TWD 233",
+   "url": "https://store.steampowered.com/app/2572060",
+   "appid": 2572060,
+   "src": "steam_soon"
+  },
+  {
+   "platform": "Steam",
+   "title": "War Footing",
+   "desc": "TWD 194",
+   "url": "https://store.steampowered.com/app/4727860",
+   "appid": 4727860,
+   "src": "steam_soon"
+  },
+  {
+   "platform": "Steam",
+   "title": "The First Pixel Demo",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5436430",
-   "appid": 5436430,
+   "url": "https://store.steampowered.com/app/5295310",
+   "appid": 5295310,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "姆明：瘋狂夏日",
+   "title": "Sobakistan: The Land of Dogs Demo",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5252270",
-   "appid": 5252270,
+   "url": "https://store.steampowered.com/app/5207390",
+   "appid": 5207390,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "Shelf Stacker: Toy Store",
-   "desc": "TWD 117",
-   "url": "https://store.steampowered.com/app/5232090",
-   "appid": 5232090,
-   "src": "steam_soon"
-  },
-  {
-   "platform": "Steam",
-   "title": "Thinki - Brain Games",
+   "title": "WonderLang Russian",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5231360",
-   "appid": 5231360,
+   "url": "https://store.steampowered.com/app/5185460",
+   "appid": 5185460,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "HAUNT",
+   "title": "College Hockey 27",
    "desc": "",
-   "url": "https://store.steampowered.com/app/3175590",
-   "appid": 3175590,
+   "url": "https://store.steampowered.com/app/5280910",
+   "appid": 5280910,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "來都來了，下去吧你！ 試玩版",
+   "title": "Neant Survivors",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5218950",
-   "appid": 5218950,
+   "url": "https://store.steampowered.com/app/5248530",
+   "appid": 5248530,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "Navy Island Confidential",
-   "desc": "TWD 138",
-   "url": "https://store.steampowered.com/app/4153730",
-   "appid": 4153730,
-   "src": "steam_soon"
-  },
-  {
-   "platform": "Steam",
-   "title": "Tokyo Canvas",
+   "title": "Refuel Together Demo",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5123950",
-   "appid": 5123950,
+   "url": "https://store.steampowered.com/app/4081230",
+   "appid": 4081230,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "Battle Gaze Soundtrack",
+   "title": "Labyrinth A Way Out",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5290990",
-   "appid": 5290990,
+   "url": "https://store.steampowered.com/app/4738910",
+   "appid": 4738910,
    "src": "steam_soon"
   },
   {
@@ -1259,7 +1267,7 @@
    "src": "rawg_soon"
   }
  ],
- "updated": "2026-10-15T07:48:13+00:00",
+ "updated": "2026-10-15T12:22:01+00:00",
  "errors": [
   "cheapshark: HTTPError: HTTP Error 400: Bad Request"
  ]
