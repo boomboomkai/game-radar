@@ -29,7 +29,8 @@ video{width:100%;max-width:480px;border-radius:6px;margin:6px 0;background:#000}
 .rv{border-left:3px solid var(--ln);padding-left:10px;margin:8px 0;font-size:14px}.rv b{font-weight:600}.rv .m{margin-top:2px}
 .ok{color:var(--free)}svg.ch{width:100%;max-width:360px;height:auto;display:block;margin:6px 0}svg.ch path{fill:none;stroke:var(--ac);stroke-width:2}
 h4{margin:12px 0 2px;font-size:14px}
-.cv.sq{object-fit:contain}.m a,.cmp a{font-weight:400;color:var(--ac)}.cmp td:last-child{white-space:nowrap}
+.cv.sq{object-fit:contain}.low{color:var(--mu)}.nw{white-space:nowrap}
+.lowtag{display:inline-block;background:var(--np);color:#fff;border-radius:4px;padding:0 6px;font-size:12px;font-weight:600;white-space:nowrap}.lowtag.near{background:none;color:var(--np);border:1px solid var(--np)}.m a,.cmp a{font-weight:400;color:var(--ac)}.cmp td:last-child{white-space:nowrap}
 .best{display:inline-block;font-size:12px;font-weight:600;color:var(--og);border:1px solid var(--og);border-radius:4px;padding:0 6px;margin-left:4px;white-space:nowrap}
 .tw{overflow-x:auto;max-width:100%}table.cmp{border-collapse:collapse;width:100%;font-size:14px}.cmp td{padding:5px 8px 5px 0;border-bottom:1px solid var(--ln);vertical-align:top}.cmp tr.bst td{background:rgba(23,128,61,.1)}
 .pct,.orig,.now{white-space:nowrap}.pct{font-weight:700;font-size:1.08em;margin:0 6px 0 4px}
@@ -46,7 +47,7 @@ h4{margin:12px 0 2px;font-size:14px}
 #msg{color:var(--mu);padding:24px 0}#err{font-size:13px;color:var(--mu);margin-top:28px;border-top:1px solid var(--ln);padding-top:10px}
 </style></head><body><main>
 <h1>遊戲情報雷達</h1><div id="upd">載入中…</div>
-<div role="tablist" id="tabs"></div><div id="chips"></div><div id="list"></div><div id="msg"></div><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS、Apple iTunes、匯率來自 <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a>。分級圖示依 Steam / RAWG 提供的 PEGI、ESRB 資料換算,僅供參考,非台灣官方分級,請以遊戲包裝或文化部公告為準。</div>
+<div role="tablist" id="tabs"></div><div id="chips"></div><div id="list"></div><div id="msg"></div><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS、Apple iTunes、匯率來自 <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a>。史低價是 CheapShark 的美元紀錄換算,僅供參考。分級圖示依 Steam / RAWG 提供的 PEGI、ESRB 資料換算,僅供參考,非台灣官方分級,請以遊戲包裝或文化部公告為準。</div>
 <script>
 const TABS=[["news","最新消息"],["free","限時免費"],["deals","特價消息"],["new","新上架"],["soon","即將上架"]];
 let D={free:[],deals:[],news:[]},G={apps:{}},H={},tab="free",plat="全部";
@@ -72,6 +73,12 @@ function detail(i){
  ${g.desc?`<p class="m">${esc(g.desc)}</p>`:""}${shots?`<div class="shots">${shots}</div>`:""}${vid}
  <h4>Steam 評價</h4><div class="m">${sum}${g.metacritic?`;Metacritic ${esc(g.metacritic)}`:""}</div>${rv}
  ${g.price?`<h4>價格走勢</h4>${chart(i.appid,g)}`:""}${cmpHtml(i,g)}</details>`}
+function lowChip(i){
+ const g=G.apps&&G.apps[i.appid];if(!g||!g.low||!g.low.usd)return"";
+ const fx=G.fx||(g.compare&&g.compare.fx);if(!fx)return"";
+ const low=Math.round(parseFloat(g.low.usd)*fx),cur=g.price&&g.price.final;
+ let tag="";if(cur>0){const r=cur/low;tag=r<=1.02?'<span class="lowtag">目前已是史低</span>':r<=1.15?'<span class="lowtag near">接近史低</span>':""}
+ return `<div class="m low" title="依 CheapShark 的美元史低價,用即時匯率換算,實際台灣區史低可能不同">歷史最低 約 NT$ ${low.toLocaleString()} <span class="nw">(US$${esc(g.low.usd)},${esc(g.low.date)})</span> ${tag}</div>`}
 const cmpRows=g=>(g&&g.compare&&g.compare.rows)||[];
 function bestOf(rows){const v=rows.filter(r=>r.twd>0);return v.length<2?null:v.reduce((a,b)=>b.twd<a.twd?b:a)}
 function bestChip(i){
@@ -120,7 +127,7 @@ function render(){
  const ps=["全部",...new Set(items.flatMap(pl))];if(!ps.includes(plat))plat="全部";
  $("chips").innerHTML=ps.map(p=>`<button aria-pressed="${p===plat}" data-p="${esc(p)}">${esc(p)}</button>`).join("");
  const show=items.filter(i=>plat==="全部"||pl(i).includes(plat));
- $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(pl(i)[0])}"><i></i><div><a href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a>${ageBadge(i)}<div class="m">${esc(pl(i).join(" / "))}:${meta(i)}${bestChip(i)}</div></div>${cover(i)}${dtBlock(i)}</div>`).join("");
+ $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(pl(i)[0])}"><i></i><div><a href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a>${ageBadge(i)}<div class="m">${esc(pl(i).join(" / "))}:${meta(i)}${bestChip(i)}</div>${lowChip(i)}</div>${cover(i)}${dtBlock(i)}</div>`).join("");
  $("msg").textContent=show.length?"":(D.updated?"這個分類目前沒有資料。":"還沒有資料,請先在 GitHub 的 Actions 頁手動執行一次 update-data。");
 }
 const shotPick={};
