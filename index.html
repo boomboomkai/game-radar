@@ -73,7 +73,7 @@ function dtBlock(i){const h=i.appid?detail(i):"";return h?`<div class="dt">${h}<
 function cover(i){
  if(!i.appid&&!i.image)return"";const g=G.apps&&G.apps[i.appid];
  const src=i.image||(g&&g.header)||`https://cdn.cloudflare.steamstatic.com/steam/apps/${i.appid}/header.jpg`;
- return `<a class="cvl" href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img class="cv" loading="lazy" src="${esc(safe(src))}" alt=""></a>`}
+ return `<a class="cvl" href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img class="cv" loading="lazy" data-app="${esc(i.appid||"")}" src="${esc(safe(src))}" alt=""></a>`}
 const AGE={0:"普遍級",6:"保護級",12:"輔12級",15:"輔15級",18:"限制級"};
 function ageBadge(i){
  const g=G.apps&&G.apps[i.appid];let a=i.age;
@@ -108,7 +108,15 @@ function render(){
  $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(pl(i)[0])}"><i></i><div><a href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a>${ageBadge(i)}<div class="m">${esc(pl(i).join(" / "))}:${meta(i)}</div></div>${cover(i)}${dtBlock(i)}</div>`).join("");
  $("msg").textContent=show.length?"":(D.updated?"這個分類目前沒有資料。":"還沒有資料,請先在 GitHub 的 Actions 頁手動執行一次 update-data。");
 }
-document.addEventListener("error",e=>{if(e.target.classList&&e.target.classList.contains("cv"))e.target.closest(".cvl").remove()},true);
+const shotPick={};
+document.addEventListener("error",e=>{
+ const im=e.target;if(!(im.classList&&im.classList.contains("cv")))return;
+ const g=G.apps&&G.apps[im.dataset.app],c=[];
+ if(g&&g.header)c.push(g.header);
+ if(g&&g.shots&&g.shots.length){const k=im.dataset.app;if(!shotPick[k])shotPick[k]=g.shots[Math.floor(Math.random()*g.shots.length)];c.push(shotPick[k].t||shotPick[k].f)}
+ let st=+im.dataset.st||0;while(c[st]&&c[st]===im.getAttribute("src"))st++;
+ const n=c[st];
+ if(n&&/^https?:\/\//.test(n)){im.dataset.st=st+1;im.src=n}else{const a=im.closest(".cvl");if(a)a.remove()}},true);
 document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.t){tab=b.dataset.t;plat="全部"}if(b.dataset.p)plat=b.dataset.p;render();if(b.dataset.t){const a=document.querySelector("[role=tab][aria-selected=true]");if(a)a.scrollIntoView({inline:"center",block:"nearest"})}});
 const j=u=>fetch(u+"?_="+Date.now()).then(r=>r.json()).catch(()=>null);
 j("games.json").then(g=>{if(g)G=g;render()});j("history.json").then(h=>{if(h)H=h;render()});
