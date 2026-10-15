@@ -14,6 +14,8 @@ jobs:
         with:
           python-version: "3.12"
       - run: python fetch_data.py
+        env:
+          RAWG_API_KEY: ${{ secrets.RAWG_API_KEY }}   # 選用,沒設定會自動略過
       - run: |
           git config user.name "game-radar-bot"
           git config user.email "bot@users.noreply.github.com"
