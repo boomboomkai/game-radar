@@ -3,8 +3,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>遊戲情報雷達</title>
 <style>
-:root{--bg:#eef2f6;--row:#fff;--tx:#14233b;--mu:#5b6b82;--ac:#2457c5;--ln:#d5dce6;--free:#0f766e;color-scheme:light dark}
-@media(prefers-color-scheme:dark){:root{--bg:#101722;--row:#182234;--tx:#e6edf7;--mu:#93a3ba;--ac:#7aa2ff;--ln:#2a3850;--free:#5eead4}}
+:root{--bg:#eef2f6;--row:#fff;--tx:#14233b;--mu:#5b6b82;--ac:#2457c5;--ln:#d5dce6;--free:#0f766e;--og:#17803d;--np:#d92d20;--pl:36%;color-scheme:light dark}
+@media(prefers-color-scheme:dark){:root{--bg:#101722;--row:#182234;--tx:#e6edf7;--mu:#93a3ba;--ac:#7aa2ff;--ln:#2a3850;--free:#5eead4;--og:#4ade80;--np:#ff7a70;--pl:62%}}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.65 "Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
 main{max-width:1240px;margin:0 auto;padding:clamp(16px,3vw,28px) clamp(12px,3vw,24px) calc(48px + env(safe-area-inset-bottom,0px))}
 @supports(padding:max(0px)){main{padding-left:max(clamp(12px,3vw,24px),env(safe-area-inset-left));padding-right:max(clamp(12px,3vw,24px),env(safe-area-inset-right))}}
@@ -29,6 +29,9 @@ video{width:100%;max-width:480px;border-radius:6px;margin:6px 0;background:#000}
 .rv{border-left:3px solid var(--ln);padding-left:10px;margin:8px 0;font-size:14px}.rv b{font-weight:600}.rv .m{margin-top:2px}
 .ok{color:var(--free)}svg.ch{width:100%;max-width:360px;height:auto;display:block;margin:6px 0}svg.ch path{fill:none;stroke:var(--ac);stroke-width:2}
 h4{margin:12px 0 2px;font-size:14px}
+.pct{font-weight:700;font-size:1.08em;margin:0 6px 0 4px}
+.orig{color:var(--og);text-decoration:line-through;text-decoration-thickness:2px;margin-right:6px}
+.now{color:var(--np);font-weight:700;font-size:1.12em}
 .age{display:inline-block;vertical-align:middle;margin-left:8px;width:38px;border:2px solid var(--c,#8a94a6);border-radius:4px;overflow:hidden;background:#fff;text-align:center;line-height:1;font-weight:400}
 .age b{display:block;background:var(--c,#8a94a6);color:#fff;font-size:15px;font-weight:700;padding:3px 0 2px}.age sup{font-size:9px;vertical-align:top;margin-left:1px}
 .age u{display:block;text-decoration:none;color:#111;font-size:9px;padding:2px 0}
@@ -79,11 +82,19 @@ function ageBadge(i){
  return `<span class="age" data-a="${a}" title="${AGE[a]} ${a}+(依 PEGI/ESRB 資料換算,非台灣官方分級)"><b>${a}<sup>+</sup></b><u>${AGE[a]}</u></span>`}
 const pl=i=>i.platforms||[i.platform];
 const dt=i=>((G.apps&&G.apps[i.appid])||{}).release_iso||i.release||"";
+function pctColor(p){const t=Math.min(1,Math.max(0,(p-10)/80));return `hsl(${Math.round(125*(1-t))},78%,var(--pl))`}
+const money=(c,n)=>c+(/[A-Za-z]$/.test(c)?" ":"")+n;
+function priceHtml(d){
+ d=d||"";let m=/^-(\d+)%\s+(\D*?)\s*([\d,.]+)\(原價\s+([\d,.]+)\)$/.exec(d);
+ if(m){const p=+m[1],c=m[2].trim();return `<span class="pct" style="color:${pctColor(p)}">-${p}%</span><s class="orig">${esc(money(c,m[4]))}</s><b class="now">${esc(money(c,m[3]))}</b>`}
+ m=/^原價\s+(.+)$/.exec(d);if(m)return `<s class="orig">${esc(m[1])}</s><b class="now">免費</b>`;
+ if(d==="限時免費")return `<span class="pct" style="color:${pctColor(100)}">-100%</span><b class="now">免費</b>`;
+ return esc(d)}
 function meta(i){
  if(tab==="new"||tab==="soon"){const g=G.apps&&G.apps[i.appid];const r=(g&&g.release)||i.release||"";return (tab==="new"?"上架 ":"預計 ")+esc(r||"日期未定")+(i.desc?","+esc(i.desc):"")}
- if(tab==="free"){const n=i.status==="next";return `<span class="free">${n?"即將免費":"免費中"}</span> ${i.start&&n?tw(i.start)+" 起,":""}至 ${tw(i.end)}(台北時間)${i.desc?" ,"+esc(i.desc):""}`}
+ if(tab==="free"){const n=i.status==="next";return `<span class="free">${n?"即將免費":"免費中"}</span> ${i.start&&n?tw(i.start)+" 起,":""}至 ${tw(i.end)}(台北時間)${i.desc?" ,"+priceHtml(i.desc):""}`}
  if(tab==="news")return tw(i.date);
- return esc(i.desc)}
+ return priceHtml(i.desc)}
 function render(){
  $("tabs").innerHTML=TABS.map(([k,v])=>`<button role="tab" aria-selected="${k===tab}" data-t="${k}">${v}</button>`).join("");
  let items=[...(D[tab]||[])];
