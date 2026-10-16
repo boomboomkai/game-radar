@@ -46,7 +46,8 @@ def get(url, timeout=25, tries=3):
 
 
 # ---------- Epic 限免 ----------
-def parse_epic(d):
+def parse_epic(d, en=None):
+    """en:{商品 id: 英文名稱},用來和 GamerPower 的英文名稱比對、合併同一款遊戲"""
     items = []
     for e in d["data"]["Catalog"]["searchStore"]["elements"]:
         promos = e.get("promotions") or {}
@@ -59,7 +60,7 @@ def parse_epic(d):
             for grp in promos.get(key) or []:
                 for o in grp.get("promotionalOffers", []):
                     if (o.get("discountSetting") or {}).get("discountPercentage") == 0:
-                        items.append({"platform": "Epic", "title": e["title"], "status": status,
+                        items.append({"platform": "Epic", "title": e["title"], "title_en": (en or {}).get(e.get("id")), "status": status,
                                       "start": o.get("startDate"), "end": o.get("endDate"),
                                       "desc": f"原價 {price}" if price else "", "url": url})
     return items
@@ -68,7 +69,13 @@ def parse_epic(d):
 def fetch_epic():
     url = ("https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions"
            "?locale=zh-Hant&country=TW&allowCountries=TW")
-    return parse_epic(json.loads(get(url)))
+    en = None
+    try:   # 另抓英文版取得英文名稱(失敗不影響主要資料)
+        d_en = json.loads(get(url.replace("zh-Hant", "en-US")))
+        en = {e.get("id"): e["title"] for e in d_en["data"]["Catalog"]["searchStore"]["elements"]}
+    except Exception:
+        pass
+    return parse_epic(json.loads(get(url)), en)
 
 
 # ---------- Steam 特價 ----------
@@ -230,7 +237,7 @@ def merge_dupes(items):
     """同名遊戲只留一筆,把另一筆的平台、封面、日期補進來"""
     out = {}
     for it in items:
-        k = norm(it["title"])
+        k = norm(it.get("title_en") or it["title"])
         if k not in out:
             out[k] = it
             continue
@@ -326,7 +333,7 @@ def find_android(title):
     try:
         from google_play_scraper import search
     except ImportError:
-        return None
+        raise                       # 沒安裝:讓呼叫端知道是「無法查詢」,而不是「查無此遊戲」
     for r in search(title, lang="zh_TW", country="tw", n_hits=5):
         if (norm(r.get("title", "")) == norm(title) and r.get("price") is not None
                 and r.get("currency") in (None, "", "TWD")):
@@ -679,6 +686,26 @@ def fetch_game(appid):
     return g
 
 
+def free_prices(new, games):
+    """替限免項目查 iOS / Android 的價格。找不到標記為 none(前端顯示『查無』);查詢本身失敗則不顯示,避免誤導。"""
+    for it in new["free"]:
+        if it["platform"] in ("iOS", "Android") or it.get("prices") is not None:
+            continue
+        g = games["apps"].get(str(it.get("appid") or "")) or {}
+        en = it.get("title_en") or (g.get("compare") or {}).get("en") or it["title"]
+        have = it.get("platforms") or [it["platform"]]
+        rows = []
+        for fn, label in ((find_ios, "iOS"), (find_android, "Android")):
+            if label in have:
+                continue
+            try:
+                r = fn(en)
+            except Exception:
+                continue
+            rows.append({"store": label, "twd": r["price"], "url": r["url"]} if r else {"store": label, "none": True})
+        it["prices"] = rows
+
+
 def enrich(new):
     """替限免/特價項目補上 appid,更新 games.json(詳情)與 history.json(每日價格)。回傳失敗數。"""
     games = load(GAMES, {"apps": {}, "map": {}})
@@ -691,10 +718,11 @@ def enrich(new):
     for sec in ("free", "deals", "new", "soon"):
         for it in new[sec]:
             if not it.get("appid") and sec == "free" and it["platform"] not in NO_STEAM:
-                key = norm(it["title"])
+                name = it.get("title_en") or it["title"]
+                key = norm(name)
                 if key not in games["map"]:
                     try:
-                        games["map"][key] = find_appid(it["title"])
+                        games["map"][key] = find_appid(name)
                     except Exception:
                         fails += 1
                         continue
@@ -726,6 +754,7 @@ def enrich(new):
               if (now.date() - datetime.fromisoformat(v["seen"]).date()).days > 90]:
         games["apps"].pop(k)
         hist.pop(k, None)
+    free_prices(new, games)
     GAMES.write_text(json.dumps(games, ensure_ascii=False), "utf-8")
     HISTORY.write_text(json.dumps(hist, ensure_ascii=False), "utf-8")
     return fails
