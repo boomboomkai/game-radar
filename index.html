@@ -30,6 +30,8 @@ video{width:100%;max-width:480px;border-radius:6px;margin:6px 0;background:#000}
 .ok{color:var(--free)}svg.ch{width:100%;max-width:360px;height:auto;display:block;margin:6px 0}svg.ch path{fill:none;stroke:var(--ac);stroke-width:2}
 h4{margin:12px 0 2px;font-size:14px}
 .cv.sq{object-fit:contain}
+.pg{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:16px 0 4px}.pg button{font:inherit;min-width:40px;border:1px solid var(--ln);background:var(--row);color:var(--tx);border-radius:6px;padding:6px 10px;cursor:pointer}
+.pg button[aria-current=true]{background:var(--ac);color:#fff;border-color:var(--ac)}.pg button:disabled{opacity:.4;cursor:default}.pgi{text-align:center}.dots{align-self:center;color:var(--mu)}
 .pcs{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .pc{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--ln);border-radius:6px;padding:2px 8px 2px 3px;font-size:13px;color:var(--mu);white-space:nowrap}
 .pc .pi{width:18px;height:18px;border-radius:4px}
@@ -52,10 +54,10 @@ h4{margin:12px 0 2px;font-size:14px}
 #msg{color:var(--mu);padding:24px 0}#err{font-size:13px;color:var(--mu);margin-top:28px;border-top:1px solid var(--ln);padding-top:10px}
 </style></head><body><main>
 <h1>遊戲情報雷達</h1><div id="upd">載入中…</div>
-<div role="tablist" id="tabs"></div><div id="chips"></div><div id="tabnote" class="m"></div><div id="list"></div><div id="msg"></div><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS、<a href="https://www.gamerpower.com" target="_blank" rel="noopener noreferrer">GamerPower</a>(限時免費)、Apple iTunes、Google Play(非官方)、匯率來自 <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a>。手機付費榜依評分與評論數綜合排序,iOS 取自 App Store 台灣區付費榜,Android 靠關鍵字搜尋找候選,可能漏掉部分遊戲。史低價是 CheapShark 的美元紀錄換算,僅供參考。分級圖示依 Steam / RAWG 提供的 PEGI、ESRB 資料換算,僅供參考,非台灣官方分級,請以遊戲包裝或文化部公告為準。</div>
+<div role="tablist" id="tabs"></div><div id="chips"></div><div id="tabnote" class="m"></div><div id="list"></div><div id="pager"></div><div id="msg"></div><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS、<a href="https://www.gamerpower.com" target="_blank" rel="noopener noreferrer">GamerPower</a>(限時免費)、Apple iTunes、Google Play(非官方)、匯率來自 <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a>。手機付費榜依評分與評論數綜合排序,iOS 取自 App Store 台灣區付費榜,Android 靠關鍵字搜尋找候選,可能漏掉部分遊戲。史低價是 CheapShark 的美元紀錄換算,僅供參考。分級圖示依 Steam / RAWG 提供的 PEGI、ESRB 資料換算,僅供參考,非台灣官方分級,請以遊戲包裝或文化部公告為準。</div>
 <script>
 const TABS=[["news","最新消息"],["free","限時免費"],["deals","特價消息"],["lows","歷史新低"],["new","新上架"],["soon","即將上架"],["mobile","手機付費榜"]];
-let D={free:[],deals:[],news:[]},G={apps:{}},H={},tab="free",plat="全部";
+let D={free:[],deals:[],news:[]},G={apps:{}},H={},tab="free",plat="全部",page=1;
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safe=u=>/^https?:\/\//.test(u)?u:"#";
@@ -122,12 +124,17 @@ function freeChips(i){
   else if((k==="iOS"||k==="Android")&&missing(re))chips.push([2,`<span class="pc none">${icon(k)}查無</span>`])});
  chips.sort((a,b)=>a[0]-b[0]);
  return chips.length?`<div class="pcs">${chips.map(c=>c[1]).join("")}</div>`:""}
+function pagerHtml(p,n,total){
+ const parts=[];let last=0;
+ for(let k=1;k<=n;k++)if(k===1||k===n||Math.abs(k-p)<=1){if(k-last>1)parts.push('<span class="dots">…</span>');parts.push(`<button data-g="${k}" aria-current="${k===p}">${k}</button>`);last=k}
+ return `<div class="pg"><button data-g="${Math.max(1,p-1)}" ${p===1?"disabled":""}>上一頁</button>${parts.join("")}<button data-g="${Math.min(n,p+1)}" ${p===n?"disabled":""}>下一頁</button></div><div class="m pgi">第 ${p} / ${n} 頁,共 ${total} 款</div>`}
+const revScore=i=>{const r=((G.apps&&G.apps[i.appid])||{}).reviews||{},t=r.total||0;return ((r.pct||0)*t/100+35)/(t+50)};
 function lowRatio(i){
  const g=G.apps&&G.apps[i.appid];if(!g||!g.low||!g.low.usd||!g.price||!(g.price.final>0)||!(g.price.pct>0))return null;
  const fx=G.fx||(g.compare&&g.compare.fx);if(!fx)return null;
  return g.price.final/(parseFloat(g.low.usd)*fx)}
 // 伺服器已算好就用 D.lows;舊資料沒有這一欄時,先用特價清單在頁面上自己篩
-const lowsList=()=>D.lows||(D.deals||[]).filter(i=>i.appid&&(lowRatio(i)||9)<=1.02);
+const lowsList=()=>D.lows||(D.deals||[]).filter(i=>i.appid&&(lowRatio(i)||9)<=1.02).sort((a,b)=>revScore(b)-revScore(a));
 function dtBlock(i){const h=i.appid?detail(i):"";return h?`<div class="dt">${h}</div>`:""}
 function cover(i){
  if(!i.appid&&!i.image)return"";const g=G.apps&&G.apps[i.appid];
@@ -163,6 +170,7 @@ function priceHtml(d){
  if(d==="限時免費")return `<span class="pct" style="color:${pctColor(100)}">-100%</span><b class="now">免費</b>`;
  return esc(d)}
 function meta(i){
+ if(tab==="lows"){const r=((G.apps&&G.apps[i.appid])||{}).reviews;return priceHtml(i.desc)+(r&&r.total?`<br><span class="nw">Steam 好評 ${r.pct}%(${Number(r.total).toLocaleString()} 篇評論)</span>`:"")}
  if(tab==="mobile")return `<b>#${i.rank}</b> ${esc(i.desc)} ・ <span class="nw">★ ${esc(i.rating)}(${Number(i.count).toLocaleString()} 則評論)</span>`;
  if(tab==="new"||tab==="soon"){const g=G.apps&&G.apps[i.appid];const r=(g&&g.release)||i.release||"";return (tab==="new"?"上架 ":"預計 ")+esc(r||"日期未定")+(i.desc?","+esc(i.desc):"")}
  if(tab==="free"){const n=i.status==="next";return `<span class="free">${n?"即將免費":"免費中"}</span> ${i.start&&n?tw(i.start)+" 起,":""}${i.end?"至 "+tw(i.end)+"(台北時間)":"(限時,結束時間不明)"}${i.desc?", "+priceHtml(i.desc):""}`}
@@ -171,14 +179,17 @@ function meta(i){
 function render(){
  $("tabs").innerHTML=TABS.map(([k,v])=>`<button role="tab" aria-selected="${k===tab}" data-t="${k}">${v}</button>`).join("");
  let items=tab==="lows"?[...lowsList()]:[...(D[tab]||[])];
- $("tabnote").textContent=tab==="lows"?"只列出目前有折扣、而且現價不高於歷史最低價的遊戲。判斷方式:現價 ≤ CheapShark 歷史最低價(美元)換算台幣的 102%,匯率和各國定價差異會造成誤差,僅供參考。":"";
+ $("tabnote").textContent=tab==="lows"?"只列出目前有折扣、而且現價不高於歷史最低價的遊戲,依 Steam 評價(好評率與評論數綜合)由高到低排序,每頁 10 款。判斷方式:現價 ≤ CheapShark 歷史最低價(美元)換算台幣的 102%,匯率和各國定價差異會造成誤差,僅供參考。":"";
  if(tab==="news")items.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
  if(tab==="free")items.sort((a,b)=>(a.status==="next")-(b.status==="next"));
  if(tab==="mobile")items.sort((a,b)=>a.platform===b.platform?a.rank-b.rank:(a.platform==="iOS"?-1:1));
  if(tab==="new"||tab==="soon"){const k=x=>dt(x)||(tab==="new"?"0000":"9999");items.sort((a,b)=>tab==="new"?k(b).localeCompare(k(a)):k(a).localeCompare(k(b)))}
  const ps=["全部",...new Set(items.flatMap(pl))];if(!ps.includes(plat))plat="全部";
  $("chips").innerHTML=ps.map(p=>`<button aria-pressed="${p===plat}" data-p="${esc(p)}">${esc(p)}</button>`).join("");
- const show=items.filter(i=>plat==="全部"||pl(i).includes(plat));
+ const all=items.filter(i=>plat==="全部"||pl(i).includes(plat));let show=all;
+ const PER=10,pages=Math.max(1,Math.ceil(all.length/PER));
+ if(tab==="lows"){if(page>pages)page=pages;show=all.slice((page-1)*PER,page*PER)}
+ $("pager").innerHTML=tab==="lows"&&pages>1?pagerHtml(page,pages,all.length):"";
  $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(pl(i)[0])}"><i></i><div><a href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a>${ageBadge(i)}<div class="m">${tab==="free"?"":platLabel(i)}${meta(i)}${tab==="free"?"":bestChip(i)}</div>${tab==="free"?freeChips(i):""}${lowChip(i)}</div>${cover(i)}${dtBlock(i)}</div>`).join("");
  $("msg").textContent=show.length?"":(D.updated?(tab==="lows"?"目前沒有確認處於歷史最低價的遊戲。":"這個分類目前沒有資料。"):"還沒有資料,請先在 GitHub 的 Actions 頁手動執行一次 update-data。");
 }
@@ -191,7 +202,7 @@ document.addEventListener("error",e=>{
  let st=+im.dataset.st||0;while(c[st]&&c[st]===im.getAttribute("src"))st++;
  const n=c[st];
  if(n&&/^https?:\/\//.test(n)){im.dataset.st=st+1;im.src=n}else{const a=im.closest(".cvl");if(a)a.remove()}},true);
-document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.t){tab=b.dataset.t;plat="全部"}if(b.dataset.p)plat=b.dataset.p;render();if(b.dataset.t){const a=document.querySelector("[role=tab][aria-selected=true]");if(a)a.scrollIntoView({inline:"center",block:"nearest"})}});
+document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.t){tab=b.dataset.t;plat="全部";page=1}if(b.dataset.p){plat=b.dataset.p;page=1}if(b.dataset.g)page=+b.dataset.g;render();if(b.dataset.g)window.scrollTo({top:window.scrollY+$("chips").getBoundingClientRect().top-70});if(b.dataset.t){const a=document.querySelector("[role=tab][aria-selected=true]");if(a)a.scrollIntoView({inline:"center",block:"nearest"})}});
 const j=u=>fetch(u+"?_="+Date.now()).then(r=>r.json()).catch(()=>null);
 j("games.json").then(g=>{if(g)G=g;render()});j("history.json").then(h=>{if(h)H=h;render()});
 fetch("data.json?_="+Date.now()).then(r=>r.json()).then(d=>{D=d;
