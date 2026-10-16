@@ -261,6 +261,8 @@ SOURCES = [
     ("ios_news", "news", rss("https://toucharcade.com/feed/", "iOS")),
     ("ios_news_tw", "news", gnews("App Store 遊戲 限免 OR 特價 OR 新作", "iOS")),
     ("android_news", "news", gnews("Google Play 遊戲 限免 OR 特價 OR 新作", "Android")),
+    ("gamerpower", "free", lambda: fetch_gamerpower()),
+    ("steam_free", "free", lambda: steam_free()),
     ("ios_top", "mobile", lambda: ios_top()),
     ("android_top", "mobile", lambda: android_top()),
 ]
@@ -274,7 +276,7 @@ _FX = {}
 _STORES = {}
 _IOS = {}
 MOBILE = Path(__file__).parent / "mobile_prices.json"
-ALLOW_EMPTY = {"ios_free", "ios_deals"}   # 這些來源沒有項目是正常的(要累積價格紀錄才看得出降價)
+ALLOW_EMPTY = {"ios_free", "ios_deals", "steam_free"}   # 這些來源沒有項目是正常的(要累積價格紀錄才看得出降價)
 
 
 def get_fx(prev):
@@ -490,6 +492,77 @@ def android_top(n=10):
     return items
 
 
+# ---------- 限時免費:GamerPower(各平台限免/贈送)與 Steam 特價中 100% 折扣 ----------
+NO_STEAM = {"iOS", "Android", "PlayStation", "Xbox", "Nintendo"}   # 這些平台的限免不用去 Steam 比對 appid
+
+
+def gp_labels(s):
+    out = []
+    for p in [x.strip() for x in (s or "").split(",")]:
+        l = p.lower()
+        lab = ("Steam" if "steam" in l else "Epic" if "epic" in l else "GOG" if "gog" in l else
+               "EA" if ("origin" in l or l.startswith("ea")) else "Ubisoft" if "ubisoft" in l else
+               "PlayStation" if ("playstation" in l or l.startswith("ps")) else "Xbox" if "xbox" in l else
+               "Nintendo" if ("nintendo" in l or "switch" in l) else "iOS" if l == "ios" else
+               "Android" if "android" in l else "PC" if l in ("pc", "windows") else None)
+        if lab and lab not in out:
+            out.append(lab)
+    return out
+
+
+def parse_gamerpower(rows):
+    items = []
+    for g in rows:
+        if str(g.get("status", "Active")).lower() != "active":
+            continue
+        labs = gp_labels(g.get("platforms"))
+        m = re.match(r"(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2}:\d{2})", str(g.get("end_date", "")))
+        title = re.sub(r"\s*\([^)]*\)\s*Giveaway\s*$", "", g.get("title", ""))
+        title = re.sub(r"\s+Giveaway\s*$", "", title).strip()
+        worth = str(g.get("worth", ""))
+        url = g.get("open_giveaway_url") or g.get("claim_url") or g.get("gamerpower_url") or g.get("open_giveaway") or ""
+        items.append({"platform": next((l for l in labs if l != "PC"), labs[0] if labs else "其他"),
+                      "platforms": labs or ["其他"], "title": title, "status": "now",
+                      "end": f"{m[1]}T{m[2]}Z" if m else None,      # GamerPower 的結束時間當作 UTC
+                      "desc": f"原價 US{worth}" if worth.startswith("$") else "",
+                      "url": url, "image": g.get("image") or g.get("thumbnail") or ""})
+    return items
+
+
+def fetch_gamerpower():
+    return parse_gamerpower(json.loads(get("https://www.gamerpower.com/api/giveaways?type=game&sort-by=date")))
+
+
+def steam_free():
+    """Steam 首頁特價清單中折扣 100% 的遊戲(限時免費領取)"""
+    if "d" not in _FC:
+        _FC["d"] = json.loads(get("https://store.steampowered.com/api/featuredcategories?cc=tw&l=tchinese"))
+    items = []
+    for g in _FC["d"]["specials"]["items"]:
+        if g.get("discount_percent") == 100 or (g.get("final_price") == 0 and g.get("discount_percent")):
+            orig = (g.get("original_price") or 0) / 100
+            items.append({"platform": "Steam", "title": g["name"], "status": "now",
+                          "desc": f"原價 {g.get('currency', '')} {orig:,.0f}" if orig else "",
+                          "url": f"https://store.steampowered.com/app/{g['id']}", "appid": g["id"]})
+    return items
+
+
+def dedupe_by_appid(items):
+    seen, out = {}, []
+    for it in items:
+        k = it.get("appid")
+        if k and k in seen:
+            a = seen[k]
+            for f in ("platforms", "image", "end"):
+                if it.get(f) and not a.get(f):
+                    a[f] = it[f]
+            continue
+        if k:
+            seen[k] = it
+        out.append(it)
+    return out
+
+
 # ---------- 遊戲詳情(畫面、影片、評論)與價格歷史 ----------
 GAMES = Path(__file__).parent / "games.json"
 HISTORY = Path(__file__).parent / "history.json"
@@ -617,7 +690,7 @@ def enrich(new):
     fails, ids = 0, []
     for sec in ("free", "deals", "new", "soon"):
         for it in new[sec]:
-            if not it.get("appid") and sec == "free" and it["platform"] not in ("iOS", "Android"):
+            if not it.get("appid") and sec == "free" and it["platform"] not in NO_STEAM:
                 key = norm(it["title"])
                 if key not in games["map"]:
                     try:
@@ -673,7 +746,7 @@ def main():
         for i in items:
             i["src"] = src
         new[section].extend(items)
-    for sec in ("new", "soon"):
+    for sec in ("new", "soon", "free"):
         new[sec] = merge_dupes(new[sec])
     try:
         fails = enrich(new)
@@ -683,6 +756,7 @@ def main():
             errors.append(f"cheapshark_details: {_CS_ERR[0]}(共 {len(_CS_ERR)} 筆)")
     except Exception as ex:
         errors.append(f"details: {type(ex).__name__}: {ex}")
+    new["free"] = dedupe_by_appid(new["free"])
     new["updated"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     new["errors"] = errors
     OUT.write_text(json.dumps(new, ensure_ascii=False, indent=1), "utf-8")
