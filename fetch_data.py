@@ -496,6 +496,7 @@ HISTORY = Path(__file__).parent / "history.json"
 MAX_APPS = 60          # 每次最多處理幾款遊戲,避免請求過多
 SCHEMA = 2            # 詳情資料格式版本;舊版資料(缺比價 / 史低)會自動重抓一次
 _CS_ERR = []
+_DETAIL_ERR = []
 REFRESH_HOURS = 20     # 詳情超過這個時數才重抓
 
 
@@ -635,8 +636,9 @@ def enrich(new):
             continue
         try:
             g = fetch_game(appid)
-        except Exception:
+        except Exception as ex:
             fails += 1
+            _DETAIL_ERR.append(f"app {appid}: {type(ex).__name__} {str(ex)[:80]}")
             continue
         g["fetched"], g["seen"], g["v"] = now.isoformat(timespec="seconds"), today, SCHEMA
         games["apps"][k] = g
@@ -676,7 +678,7 @@ def main():
     try:
         fails = enrich(new)
         if fails:
-            errors.append(f"details: {fails} 筆遊戲詳情抓取失敗")
+            errors.append(f"details: {fails} 筆遊戲詳情抓取失敗" + (f"(例:{_DETAIL_ERR[0]})" if _DETAIL_ERR else ""))
         if _CS_ERR:
             errors.append(f"cheapshark_details: {_CS_ERR[0]}(共 {len(_CS_ERR)} 筆)")
     except Exception as ex:
