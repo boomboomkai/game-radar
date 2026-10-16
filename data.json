@@ -55,6 +55,15 @@
   },
   {
    "platform": "Steam",
+   "title": "007 初露鋒芒",
+   "desc": "-40%  TWD 1,074(原價 1,790)",
+   "pct": 40,
+   "url": "https://store.steampowered.com/app/3768760",
+   "appid": 3768760,
+   "src": "steam"
+  },
+  {
+   "platform": "Steam",
    "title": "Chained Beasts",
    "desc": "-35%  TWD 245(原價 377)",
    "pct": 35,
@@ -69,15 +78,6 @@
    "pct": 30,
    "url": "https://store.steampowered.com/app/1374490",
    "appid": 1374490,
-   "src": "steam"
-  },
-  {
-   "platform": "Steam",
-   "title": "LEGO® 蝙蝠俠™：黑暗騎士傳奇",
-   "desc": "-30%  TWD 1,504(原價 2,149)",
-   "pct": 30,
-   "url": "https://store.steampowered.com/app/2215200",
-   "appid": 2215200,
    "src": "steam"
   },
   {
@@ -552,8 +552,8 @@
   },
   {
    "platform": "Epic",
-   "title": "瞬間破功？Epic吹客戶端載入速度比Steam快 不到一天又被反超車 - udn遊戲角落",
-   "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1wazhPdUFXVnJ6NUFEb0pxRGptVjE3V0JYaXZZWTAtbHZ2WjFsak9qQWpKQUFsZHFFY2xhalk5VE5iZkpvZDAtQ2s0RmVEbXF6TklycjJDdHpNLVZEb0ZB0gFfQVVfeXFMTXBrOE91QVdWcno1QURvSnFEam1WMTdXQlhpdllZMC1sdnZaMWxqT2pBakpBQWxkcUVjbGFqWTlUTmJmSm9kMC1DazRGZURtcXpOSXJyMkN0ek0tVkRvRkE?oc=5",
+   "title": "瞬間破功？Epic吹客戶端載入速度比Steam快 不到一天又被超車 - udn遊戲角落",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1Ha2I0RHR3dXpyYXhfd3hIcDNPdTRrUGM2eTU5dkpxaThaTE5LSWw4bmI1NGNlT3Y5dVFuc1FFdXJzQWhnQ1pxOVBXWElPVlV4X2Y2TUR2TVEwQdIBX0FVX3lxTE1wazhPdUFXVnJ6NUFEb0pxRGptVjE3V0JYaXZZWTAtbHZ2WjFsak9qQWpKQUFsZHFFY2xhalk5VE5iZkpvZDAtQ2s0RmVEbXF6TklycjJDdHpNLVZEb0ZB?oc=5",
    "date": "2026-10-15T06:59:19+00:00",
    "src": "epic_news"
   },
@@ -743,10 +743,18 @@
  "new": [
   {
    "platform": "Steam",
-   "title": "Gas Station Horror",
-   "desc": "",
-   "url": "https://store.steampowered.com/app/5109640",
-   "appid": 5109640,
+   "title": "SCRAPWAVE",
+   "desc": "TWD 76",
+   "url": "https://store.steampowered.com/app/5319290",
+   "appid": 5319290,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Thalia",
+   "desc": "TWD 187",
+   "url": "https://store.steampowered.com/app/3685410",
+   "appid": 3685410,
    "src": "steam_new"
   },
   {
@@ -755,6 +763,14 @@
    "desc": "TWD 228",
    "url": "https://store.steampowered.com/app/5116050",
    "appid": 5116050,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Gas Station Horror",
+   "desc": "",
+   "url": "https://store.steampowered.com/app/5109640",
+   "appid": 5109640,
    "src": "steam_new"
   },
   {
@@ -791,10 +807,26 @@
   },
   {
    "platform": "Steam",
+   "title": "Toys Co.",
+   "desc": "TWD 76",
+   "url": "https://store.steampowered.com/app/5088930",
+   "appid": 5088930,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
    "title": "Portal Pool",
    "desc": "TWD 64",
    "url": "https://store.steampowered.com/app/5106830",
    "appid": 5106830,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Cricket Club President",
+   "desc": "TWD 216",
+   "url": "https://store.steampowered.com/app/5298650",
+   "appid": 5298650,
    "src": "steam_new"
   },
   {
@@ -815,6 +847,14 @@
   },
   {
    "platform": "Steam",
+   "title": "Sutja",
+   "desc": "TWD 129",
+   "url": "https://store.steampowered.com/app/5120970",
+   "appid": 5120970,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
    "title": "Genesis - The Original LPMud",
    "desc": "",
    "url": "https://store.steampowered.com/app/4022530",
@@ -827,6 +867,14 @@
    "desc": "TWD 85",
    "url": "https://store.steampowered.com/app/4836150",
    "appid": 4836150,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Piworld - Permanent Premium Status",
+   "desc": "TWD 108",
+   "url": "https://store.steampowered.com/app/5430300",
+   "appid": 5430300,
    "src": "steam_new"
   },
   {
@@ -854,54 +902,6 @@
    "src": "steam_new"
   },
   {
-   "platform": "Steam",
-   "title": "Cheat With Me, Not On Me",
-   "desc": "TWD 95",
-   "url": "https://store.steampowered.com/app/5188980",
-   "appid": 5188980,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "DREGS",
-   "desc": "TWD 198",
-   "url": "https://store.steampowered.com/app/4660920",
-   "appid": 4660920,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "HENTAI CAVEMAN",
-   "desc": "TWD 111",
-   "url": "https://store.steampowered.com/app/5209500",
-   "appid": 5209500,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Streamstead",
-   "desc": "TWD 93",
-   "url": "https://store.steampowered.com/app/4884630",
-   "appid": 4884630,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Panchofobia",
-   "desc": "TWD 95",
-   "url": "https://store.steampowered.com/app/4568220",
-   "appid": 4568220,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Squad Weapon Skins - Recon Team Pack ",
-   "desc": "",
-   "url": "https://store.steampowered.com/app/4841320",
-   "appid": 4841320,
-   "src": "steam_new"
-  },
-  {
    "platform": "PC",
    "platforms": [
     "PC"
@@ -912,19 +912,6 @@
    "desc": "",
    "age": null,
    "url": "https://rawg.io/games/enshrouded-2",
-   "src": "rawg_new"
-  },
-  {
-   "platform": "PlayStation",
-   "platforms": [
-    "PlayStation"
-   ],
-   "title": "Marvel's Wolverine",
-   "release": "2026-09-15",
-   "image": "https://media.rawg.io/media/games/28d/28d61be51ec0411e24c28f71122dcaaf.jpeg",
-   "desc": "",
-   "age": 18,
-   "url": "https://rawg.io/games/wolverine-2022",
    "src": "rawg_new"
   },
   {
@@ -1172,23 +1159,28 @@
    "age": null,
    "url": "https://rawg.io/games/ghost-of-yotei-echoes-of-sekigahara",
    "src": "rawg_new"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC"
+   ],
+   "title": "Lily's World XD",
+   "release": "2026-09-17",
+   "image": "https://media.rawg.io/media/games/3ea/3ea3624524929c413552cf8ad49c5482.jpg",
+   "desc": "",
+   "age": null,
+   "url": "https://rawg.io/games/lilys-world-xd",
+   "src": "rawg_new"
   }
  ],
  "soon": [
   {
    "platform": "Steam",
-   "title": "AMPANIC",
-   "desc": "",
-   "url": "https://store.steampowered.com/app/4644170",
-   "appid": 4644170,
-   "src": "steam_soon"
-  },
-  {
-   "platform": "Steam",
-   "title": "Forty Depths Beneath Knossos: The Minotaur's Maze Demo",
-   "desc": "",
-   "url": "https://store.steampowered.com/app/5383390",
-   "appid": 5383390,
+   "title": "Vanisha",
+   "desc": "TWD 162",
+   "url": "https://store.steampowered.com/app/4555270",
+   "appid": 4555270,
    "src": "steam_soon"
   },
   {
@@ -1197,14 +1189,6 @@
    "desc": "",
    "url": "https://store.steampowered.com/app/5255210",
    "appid": 5255210,
-   "src": "steam_soon"
-  },
-  {
-   "platform": "Steam",
-   "title": "Vanisha",
-   "desc": "",
-   "url": "https://store.steampowered.com/app/4555270",
-   "appid": 4555270,
    "src": "steam_soon"
   },
   {
@@ -1237,6 +1221,22 @@
    "desc": "",
    "url": "https://store.steampowered.com/app/5245250",
    "appid": 5245250,
+   "src": "steam_soon"
+  },
+  {
+   "platform": "Steam",
+   "title": "Robot City: Delivery",
+   "desc": "",
+   "url": "https://store.steampowered.com/app/5077250",
+   "appid": 5077250,
+   "src": "steam_soon"
+  },
+  {
+   "platform": "Steam",
+   "title": "落仙泱 Demo",
+   "desc": "",
+   "url": "https://store.steampowered.com/app/4812070",
+   "appid": 4812070,
    "src": "steam_soon"
   },
   {
@@ -1510,12 +1510,12 @@
    "platforms": [
     "PC"
    ],
-   "title": "Tenebris Somnia",
-   "release": "2026-10-16",
-   "image": "https://media.rawg.io/media/games/97b/97b849dfc43f7634e65c0fccbf6c737d.jpg",
+   "title": "Remothered: Red Nun's Legacy",
+   "release": "2026-10-26",
+   "image": "https://media.rawg.io/media/screenshots/7ea/7ea439920ce17884b49e2e3988f8786a.jpg",
    "desc": "",
    "age": null,
-   "url": "https://rawg.io/games/tenebris-somnia-demo",
+   "url": "https://rawg.io/games/remothered-red-nuns-legacy",
    "src": "rawg_soon"
   },
   {
@@ -1523,12 +1523,12 @@
    "platforms": [
     "PC"
    ],
-   "title": "Remothered: Red Nun's Legacy",
+   "title": "EmberVille",
    "release": "2026-10-26",
-   "image": "https://media.rawg.io/media/screenshots/7ea/7ea439920ce17884b49e2e3988f8786a.jpg",
+   "image": "https://media.rawg.io/media/screenshots/a65/a65915e30efd086919dafcb7f79a6b79.jpg",
    "desc": "",
    "age": null,
-   "url": "https://rawg.io/games/remothered-red-nuns-legacy",
+   "url": "https://rawg.io/games/emberville",
    "src": "rawg_soon"
   }
  ],
@@ -1794,7 +1794,7 @@
    "src": "android_top"
   }
  ],
- "updated": "2026-10-15T23:41:58+00:00",
+ "updated": "2026-10-16T00:13:56+00:00",
  "errors": [
   "details: 1 筆遊戲詳情抓取失敗"
  ]
