@@ -29,7 +29,12 @@ video{width:100%;max-width:480px;border-radius:6px;margin:6px 0;background:#000}
 .rv{border-left:3px solid var(--ln);padding-left:10px;margin:8px 0;font-size:14px}.rv b{font-weight:600}.rv .m{margin-top:2px}
 .ok{color:var(--free)}svg.ch{width:100%;max-width:360px;height:auto;display:block;margin:6px 0}svg.ch path{fill:none;stroke:var(--ac);stroke-width:2}
 h4{margin:12px 0 2px;font-size:14px}
-.cv.sq{object-fit:contain}.pis{display:inline-flex;gap:4px;vertical-align:middle;margin-right:6px}.pi{display:inline-block;width:22px;height:22px;border-radius:5px;overflow:hidden;line-height:0}.pi svg,.pi img{width:100%;height:100%;display:block;object-fit:contain}.pi.ep{background:#fff;border:1px solid var(--ln);box-sizing:border-box}.pi.ep img{padding:2px;box-sizing:border-box}.low{color:var(--mu)}.nw{white-space:nowrap}
+.cv.sq{object-fit:contain}
+.pcs{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.pc{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--ln);border-radius:6px;padding:2px 8px 2px 3px;font-size:13px;color:var(--mu);white-space:nowrap}
+.pc .pi{width:18px;height:18px;border-radius:4px}
+.pc.free{border-color:var(--og);color:var(--og);font-weight:700;background:rgba(23,128,61,.1)}
+.pc.none{border-style:dashed;opacity:.85}.pis{display:inline-flex;gap:4px;vertical-align:middle;margin-right:6px}.pi{display:inline-block;width:22px;height:22px;border-radius:5px;overflow:hidden;line-height:0}.pi svg,.pi img{width:100%;height:100%;display:block;object-fit:contain}.pi.ep{background:#fff;border:1px solid var(--ln);box-sizing:border-box}.pi.ep img{padding:2px;box-sizing:border-box}.low{color:var(--mu)}.nw{white-space:nowrap}
 .lowtag{display:inline-block;background:var(--np);color:#fff;border-radius:4px;padding:0 6px;font-size:12px;font-weight:600;white-space:nowrap}.lowtag.near{background:none;color:var(--np);border:1px solid var(--np)}.m a,.cmp a{font-weight:400;color:var(--ac)}.cmp td:last-child{white-space:nowrap}
 .best{display:inline-block;font-size:12px;font-weight:600;color:var(--og);border:1px solid var(--og);border-radius:4px;padding:0 6px;margin-left:4px;max-width:100%}
 .tw{overflow-x:auto;max-width:100%}table.cmp{border-collapse:collapse;width:100%;font-size:14px}.cmp td{padding:5px 8px 5px 0;border-bottom:1px solid var(--ln);vertical-align:top}.cmp tr.bst td{background:rgba(23,128,61,.1)}
@@ -91,6 +96,29 @@ function cmpHtml(i,g){
  const nm=encodeURIComponent(c.en||i.title);
  const cons=[["PlayStation","PS5"],["Xbox","Xbox"],["Switch","Nintendo Switch"]].map(([n,q])=>`<a href="https://www.google.com/search?q=${nm}+${encodeURIComponent(q)}+價格" target="_blank" rel="noopener noreferrer">${n}</a>`).join("、");
  return `<h4>各平台價格比較</h4><div class="tw"><table class="cmp">${tr}</table></div><div class="m">美元價格以 1 美元約 ${c.fx?c.fx.toFixed(1):"?"} 台幣估算。第三方商店的金鑰可能有地區限制,手機版內容可能和電腦版不同,價格不含稅與手續費。主機版沒有公開價格資料,請自行搜尋:${cons}</div>`}
+const PRICE_RE={Epic:/Epic/,GOG:/^GOG/i,EA:/^(Origin|EA)\b/i,iOS:/iOS/,Android:/Android/};
+function freeChips(i){
+ const g=G.apps&&G.apps[i.appid],next=i.status==="next";
+ const free=new Set(pl(i).map(p=>PK[p]).filter(Boolean));
+ if(free.size>1)free.delete("PC");                       // 有具體商店時,不顯示泛用的 Windows 圖示
+ const rows=[...(i.prices||[]),...cmpRows(g)];
+ const found=re=>rows.find(r=>re.test(r.store)&&!r.none),missing=re=>rows.some(r=>re.test(r.store)&&r.none);
+ const money=r=>r.twd>0?(r.usd!=null?"約 ":"")+"NT$ "+Math.round(r.twd).toLocaleString():"";
+ const chips=[];
+ if(!free.size)chips.push([0,`<span class="pc free">${esc(pl(i).join(" / "))} ${next?"即將免費":"免費"}</span>`]);
+ PORD.forEach(k=>{
+  if(free.has(k)){chips.push([0,`<span class="pc free">${icon(k)}${next?"即將免費":"免費"}</span>`]);return}
+  if(k==="PC")return;
+  if(k==="Steam"){
+   if(i.appid===0)chips.push([2,`<span class="pc none">${icon(k)}查無</span>`]);
+   else{const f=g&&g.price&&g.price.final;if(f>0)chips.push([1,`<span class="pc">${icon(k)}NT$ ${Math.round(f).toLocaleString()}</span>`]);else if(f===0)chips.push([1,`<span class="pc">${icon(k)}免費遊玩</span>`])}
+   return}
+  const re=PRICE_RE[k];if(!re)return;
+  const r=found(re);
+  if(r){const m=money(r);if(m)chips.push([1,`<span class="pc">${icon(k)}${m}</span>`])}
+  else if((k==="iOS"||k==="Android")&&missing(re))chips.push([2,`<span class="pc none">${icon(k)}查無</span>`])});
+ chips.sort((a,b)=>a[0]-b[0]);
+ return chips.length?`<div class="pcs">${chips.map(c=>c[1]).join("")}</div>`:""}
 function dtBlock(i){const h=i.appid?detail(i):"";return h?`<div class="dt">${h}</div>`:""}
 function cover(i){
  if(!i.appid&&!i.image)return"";const g=G.apps&&G.apps[i.appid];
@@ -128,7 +156,7 @@ function priceHtml(d){
 function meta(i){
  if(tab==="mobile")return `<b>#${i.rank}</b> ${esc(i.desc)} ・ <span class="nw">★ ${esc(i.rating)}(${Number(i.count).toLocaleString()} 則評論)</span>`;
  if(tab==="new"||tab==="soon"){const g=G.apps&&G.apps[i.appid];const r=(g&&g.release)||i.release||"";return (tab==="new"?"上架 ":"預計 ")+esc(r||"日期未定")+(i.desc?","+esc(i.desc):"")}
- if(tab==="free"){const n=i.status==="next";return `<span class="free">${n?"即將免費":"免費中"}</span> ${i.start&&n?tw(i.start)+" 起,":""}${i.end?"至 "+tw(i.end)+"(台北時間)":"(限時,結束時間不明)"}${i.desc?" ,"+priceHtml(i.desc):""}`}
+ if(tab==="free"){const n=i.status==="next";return `<span class="free">${n?"即將免費":"免費中"}</span> ${i.start&&n?tw(i.start)+" 起,":""}${i.end?"至 "+tw(i.end)+"(台北時間)":"(限時,結束時間不明)"}${i.desc?", "+priceHtml(i.desc):""}`}
  if(tab==="news")return tw(i.date);
  return priceHtml(i.desc)}
 function render(){
@@ -141,7 +169,7 @@ function render(){
  const ps=["全部",...new Set(items.flatMap(pl))];if(!ps.includes(plat))plat="全部";
  $("chips").innerHTML=ps.map(p=>`<button aria-pressed="${p===plat}" data-p="${esc(p)}">${esc(p)}</button>`).join("");
  const show=items.filter(i=>plat==="全部"||pl(i).includes(plat));
- $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(pl(i)[0])}"><i></i><div><a href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a>${ageBadge(i)}<div class="m">${platLabel(i)}${meta(i)}${bestChip(i)}</div>${lowChip(i)}</div>${cover(i)}${dtBlock(i)}</div>`).join("");
+ $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(pl(i)[0])}"><i></i><div><a href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a>${ageBadge(i)}<div class="m">${tab==="free"?"":platLabel(i)}${meta(i)}${tab==="free"?"":bestChip(i)}</div>${tab==="free"?freeChips(i):""}${lowChip(i)}</div>${cover(i)}${dtBlock(i)}</div>`).join("");
  $("msg").textContent=show.length?"":(D.updated?"這個分類目前沒有資料。":"還沒有資料,請先在 GitHub 的 Actions 頁手動執行一次 update-data。");
 }
 const shotPick={};
