@@ -13,9 +13,9 @@ h1{margin:0;font-size:clamp(22px,2.4vw + 14px,32px);letter-spacing:.02em}
 [role=tablist]{display:flex;gap:clamp(14px,3vw,24px);border-bottom:1px solid var(--ln);position:sticky;top:0;z-index:5;background:var(--bg);overflow-x:auto;white-space:nowrap;scrollbar-width:none}[role=tablist]::-webkit-scrollbar{display:none}
 [role=tab]{font:inherit;background:none;border:0;border-bottom:3px solid transparent;color:var(--mu);padding:8px 0;cursor:pointer;margin-bottom:-1px;flex:none}
 [role=tab][aria-selected=true]{color:var(--tx);border-color:var(--ac);font-weight:700}
-#chips{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}
-#chips button{font:inherit;font-size:14px;background:none;border:1px solid var(--ln);color:var(--mu);border-radius:6px;padding:2px 12px;cursor:pointer}
-#chips button[aria-pressed=true]{background:var(--ac);border-color:var(--ac);color:#fff}
+#chips,#gchips{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}#gchips{margin-top:-4px;align-items:center}#gchips:empty{display:none}.gl{color:var(--mu);font-size:13px}.gline{font-size:13px}
+#chips button,#gchips button{font:inherit;font-size:14px;background:none;border:1px solid var(--ln);color:var(--mu);border-radius:6px;padding:2px 12px;cursor:pointer}
+#chips button[aria-pressed=true],#gchips button[aria-pressed=true]{background:var(--ac);border-color:var(--ac);color:#fff}
 button:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
 #list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,440px),1fr));gap:10px;align-items:stretch;margin-top:10px}
 .item{display:grid;grid-template-columns:minmax(0,1fr) auto;position:relative;padding-left:5px;align-content:start;background:var(--row);border-radius:6px;overflow:hidden;min-width:0;max-width:100%}
@@ -54,10 +54,10 @@ h4{margin:12px 0 2px;font-size:14px}
 #msg{color:var(--mu);padding:24px 0}#err{font-size:13px;color:var(--mu);margin-top:28px;border-top:1px solid var(--ln);padding-top:10px}
 </style></head><body><main>
 <h1>遊戲情報雷達</h1><div id="upd">載入中…</div>
-<div role="tablist" id="tabs"></div><div id="chips"></div><div id="tabnote" class="m"></div><div id="list"></div><div id="pager"></div><div id="msg"></div><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS、<a href="https://www.gamerpower.com" target="_blank" rel="noopener noreferrer">GamerPower</a>(限時免費)、Apple iTunes、Google Play(非官方)、匯率來自 <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a>。手機付費榜依評分與評論數綜合排序,iOS 取自 App Store 台灣區付費榜,Android 靠關鍵字搜尋找候選,可能漏掉部分遊戲。史低價是 CheapShark 的美元紀錄換算,僅供參考。分級圖示依 Steam / RAWG 提供的 PEGI、ESRB 資料換算,僅供參考,非台灣官方分級,請以遊戲包裝或文化部公告為準。</div>
+<div role="tablist" id="tabs"></div><div id="chips"></div><div id="gchips"></div><div id="tabnote" class="m"></div><div id="list"></div><div id="pager"></div><div id="msg"></div><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS、<a href="https://www.gamerpower.com" target="_blank" rel="noopener noreferrer">GamerPower</a>(限時免費)、Apple iTunes、Google Play(非官方)、匯率來自 <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a>。手機付費榜依評分與評論數綜合排序,iOS 取自 App Store 台灣區付費榜,Android 靠關鍵字搜尋找候選,可能漏掉部分遊戲。史低價是 CheapShark 的美元紀錄換算,僅供參考。分級圖示依 Steam / RAWG 提供的 PEGI、ESRB 資料換算,僅供參考,非台灣官方分級,請以遊戲包裝或文化部公告為準。</div>
 <script>
 const TABS=[["news","最新消息"],["free","限時免費"],["deals","特價消息"],["lows","歷史新低"],["new","新上架"],["soon","即將上架"],["mobile","手機付費榜"]];
-let D={free:[],deals:[],news:[]},G={apps:{}},H={},tab="free",plat="全部",page=1;
+let D={free:[],deals:[],news:[]},G={apps:{}},H={},tab="free",plat="全部",page=1,gen="全部";
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safe=u=>/^https?:\/\//.test(u)?u:"#";
@@ -124,6 +124,14 @@ function freeChips(i){
   else if((k==="iOS"||k==="Android")&&missing(re))chips.push([2,`<span class="pc none">${icon(k)}查無</span>`])});
  chips.sort((a,b)=>a[0]-b[0]);
  return chips.length?`<div class="pcs">${chips.map(c=>c[1]).join("")}</div>`:""}
+const GORD=["動作","冒險","角色扮演","策略","射擊","模擬","運動","競速","益智","休閒","格鬥","平台跳躍","恐怖","卡牌桌遊","音樂","多人線上","教育親子","獨立"];
+const GKW=[["角色扮演",/\brpg\b|jrpg|role-?playing|角色扮演/i],["射擊",/shooter|\bfps\b|射擊|battle royale|大逃殺/i],["動作",/\baction\b|動作|roguelike|souls-?like|hack and slash/i],["冒險",/adventure|冒險/i],["策略",/strateg|策略|\b4x\b|tower defen[cs]e|塔防|tactics|戰棋/i],["模擬",/simulat|模擬|farming|經營|tycoon/i],["運動",/\bsports?\b|運動|football|soccer|basketball|\bnba\b|\bfifa\b|足球|籃球|棒球|baseball/i],["競速",/racing|競速|賽車|\bdriving\b/i],["益智",/puzzle|益智|解謎|trivia/i],["格鬥",/fighting|格鬥|street fighter|tekken/i],["平台跳躍",/platformer|平台跳躍/i],["恐怖",/horror|恐怖/i],["卡牌桌遊",/card game|deck-?build|卡牌|桌遊|board game/i],["音樂",/rhythm|music game|音樂遊戲|節奏/i],["多人線上",/\bmmo\b|mmorpg|多人線上/i],["休閒",/casual|休閒/i]];
+// 類型:優先用各平台提供的分類;完全沒有資料時,才依標題關鍵字推測(新聞、部分限免)
+function genresOf(i){
+ const g=G.apps&&G.apps[i.appid],s=new Set([...(i.genres||[]),...((g&&g.genres)||[])]);
+ if(!s.size){const t=(i.title||"")+" "+(i.title_en||"");GKW.forEach(([k,re])=>{if(re.test(t))s.add(k)})}
+ return GORD.filter(k=>s.has(k))}
+const genreLine=i=>{const l=genresOf(i);return l.length?`<div class="m gline">類型:${l.map(esc).join("、")}</div>`:""};
 function pagerHtml(p,n,total){
  const parts=[];let last=0;
  for(let k=1;k<=n;k++)if(k===1||k===n||Math.abs(k-p)<=1){if(k-last>1)parts.push('<span class="dots">…</span>');parts.push(`<button data-g="${k}" aria-current="${k===p}">${k}</button>`);last=k}
@@ -186,11 +194,15 @@ function render(){
  if(tab==="new"||tab==="soon"){const k=x=>dt(x)||(tab==="new"?"0000":"9999");items.sort((a,b)=>tab==="new"?k(b).localeCompare(k(a)):k(a).localeCompare(k(b)))}
  const ps=["全部",...new Set(items.flatMap(pl))];if(!ps.includes(plat))plat="全部";
  $("chips").innerHTML=ps.map(p=>`<button aria-pressed="${p===plat}" data-p="${esc(p)}">${esc(p)}</button>`).join("");
- const all=items.filter(i=>plat==="全部"||pl(i).includes(plat));let show=all;
+ const byPlat=items.filter(i=>plat==="全部"||pl(i).includes(plat)),gc={};
+ byPlat.forEach(i=>genresOf(i).forEach(k=>gc[k]=(gc[k]||0)+1));
+ const gs=GORD.filter(k=>gc[k]);if(gen!=="全部"&&!gc[gen])gen="全部";
+ $("gchips").innerHTML=gs.length?`<span class="gl">類型</span><button aria-pressed="${gen==="全部"}" data-ge="全部">全部</button>`+gs.map(k=>`<button aria-pressed="${k===gen}" data-ge="${k}">${k} ${gc[k]}</button>`).join(""):"";
+ const all=byPlat.filter(i=>gen==="全部"||genresOf(i).includes(gen));let show=all;
  const PER=10,pages=Math.max(1,Math.ceil(all.length/PER));
  if(tab==="lows"){if(page>pages)page=pages;show=all.slice((page-1)*PER,page*PER)}
  $("pager").innerHTML=tab==="lows"&&pages>1?pagerHtml(page,pages,all.length):"";
- $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(pl(i)[0])}"><i></i><div><a href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a>${ageBadge(i)}<div class="m">${tab==="free"?"":platLabel(i)}${meta(i)}${tab==="free"?"":bestChip(i)}</div>${tab==="free"?freeChips(i):""}${lowChip(i)}</div>${cover(i)}${dtBlock(i)}</div>`).join("");
+ $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(pl(i)[0])}"><i></i><div><a href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a>${ageBadge(i)}<div class="m">${tab==="free"?"":platLabel(i)}${meta(i)}${tab==="free"?"":bestChip(i)}</div>${genreLine(i)}${tab==="free"?freeChips(i):""}${lowChip(i)}</div>${cover(i)}${dtBlock(i)}</div>`).join("");
  $("msg").textContent=show.length?"":(D.updated?(tab==="lows"?"目前沒有確認處於歷史最低價的遊戲。":"這個分類目前沒有資料。"):"還沒有資料,請先在 GitHub 的 Actions 頁手動執行一次 update-data。");
 }
 const shotPick={};
@@ -202,7 +214,7 @@ document.addEventListener("error",e=>{
  let st=+im.dataset.st||0;while(c[st]&&c[st]===im.getAttribute("src"))st++;
  const n=c[st];
  if(n&&/^https?:\/\//.test(n)){im.dataset.st=st+1;im.src=n}else{const a=im.closest(".cvl");if(a)a.remove()}},true);
-document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.t){tab=b.dataset.t;plat="全部";page=1}if(b.dataset.p){plat=b.dataset.p;page=1}if(b.dataset.g)page=+b.dataset.g;render();if(b.dataset.g)window.scrollTo({top:window.scrollY+$("chips").getBoundingClientRect().top-70});if(b.dataset.t){const a=document.querySelector("[role=tab][aria-selected=true]");if(a)a.scrollIntoView({inline:"center",block:"nearest"})}});
+document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.t){tab=b.dataset.t;plat="全部";page=1}if(b.dataset.p){plat=b.dataset.p;page=1}if(b.dataset.ge){gen=b.dataset.ge;page=1}if(b.dataset.g)page=+b.dataset.g;render();if(b.dataset.g)window.scrollTo({top:window.scrollY+$("chips").getBoundingClientRect().top-70});if(b.dataset.t){const a=document.querySelector("[role=tab][aria-selected=true]");if(a)a.scrollIntoView({inline:"center",block:"nearest"})}});
 const j=u=>fetch(u+"?_="+Date.now()).then(r=>r.json()).catch(()=>null);
 j("games.json").then(g=>{if(g)G=g;render()});j("history.json").then(h=>{if(h)H=h;render()});
 fetch("data.json?_="+Date.now()).then(r=>r.json()).then(d=>{D=d;
