@@ -55,11 +55,29 @@
   },
   {
    "platform": "Steam",
+   "title": "Grand Theft Auto V 強化版",
+   "desc": "-56%  TWD 589(原價 1,340)",
+   "pct": 56,
+   "url": "https://store.steampowered.com/app/3240220",
+   "appid": 3240220,
+   "src": "steam"
+  },
+  {
+   "platform": "Steam",
    "title": "007 初露鋒芒",
    "desc": "-40%  TWD 1,074(原價 1,790)",
    "pct": 40,
    "url": "https://store.steampowered.com/app/3768760",
    "appid": 3768760,
+   "src": "steam"
+  },
+  {
+   "platform": "Steam",
+   "title": "《電馭叛客 2077：自由幻局》",
+   "desc": "-40%  TWD 479(原價 799)",
+   "pct": 40,
+   "url": "https://store.steampowered.com/app/2138330",
+   "appid": 2138330,
    "src": "steam"
   },
   {
@@ -78,15 +96,6 @@
    "pct": 30,
    "url": "https://store.steampowered.com/app/1374490",
    "appid": 1374490,
-   "src": "steam"
-  },
-  {
-   "platform": "Steam",
-   "title": "魔骰遊戲 : Invokyr",
-   "desc": "-25%  TWD 186(原價 249)",
-   "pct": 25,
-   "url": "https://store.steampowered.com/app/3883570",
-   "appid": 3883570,
    "src": "steam"
   },
   {
@@ -114,15 +123,6 @@
    "pct": 10,
    "url": "https://store.steampowered.com/app/1203620",
    "appid": 1203620,
-   "src": "steam"
-  },
-  {
-   "platform": "Steam",
-   "title": "Trash Day",
-   "desc": "-10%  TWD 142(原價 158)",
-   "pct": 10,
-   "url": "https://store.steampowered.com/app/3314580",
-   "appid": 3314580,
    "src": "steam"
   },
   {
@@ -190,6 +190,15 @@
   },
   {
    "platform": "GOG",
+   "title": "Dropsy",
+   "pct": 90,
+   "desc": "-90%  US$0.99(原價 9.99)",
+   "url": "https://www.cheapshark.com/redirect?dealID=KyVVy%2BjxIufO83d8DD5x2xs1KIzEmrEbFQ2x%2BHT%2FXe4%3D",
+   "appid": 274350,
+   "src": "cheapshark"
+  },
+  {
+   "platform": "GOG",
    "title": "Lacuna  A Sci-Fi Noir Adventure",
    "pct": 90,
    "desc": "-90%  US$1.59(原價 15.99)",
@@ -223,18 +232,44 @@
    "url": "https://www.cheapshark.com/redirect?dealID=fWiWe66c%2BRD0iC3wIKwwX8yxZuxj4YaKKRyiA5AABxk%3D",
    "appid": 11200,
    "src": "cheapshark"
-  },
-  {
-   "platform": "GOG",
-   "title": "The Textorcist: The Story of Ray Bibbia",
-   "pct": 90,
-   "desc": "-90%  US$1.49(原價 14.99)",
-   "url": "https://www.cheapshark.com/redirect?dealID=ir3SKl0AKDCrjbvHlyIvc4Xi%2B8ljQte105BqAFqIZQ4%3D",
-   "appid": 940680,
-   "src": "cheapshark"
   }
  ],
  "news": [
+  {
+   "platform": "Nintendo",
+   "title": "Preview: 'Eternal Anima' Returns To The Past To Create A Modern JRPG",
+   "url": "https://www.nintendolife.com/previews/eternal-anima-returns-to-the-past-to-create-a-modern-jrpg",
+   "date": "2026-10-16T04:00:00+00:00",
+   "src": "nintendo"
+  },
+  {
+   "platform": "Nintendo",
+   "title": "Zelda: Ocarina Of Time Switch 2 \"Replica N64 Box\" Revealed",
+   "url": "https://www.nintendolife.com/news/2026/10/zelda-ocarina-of-time-switch-2-replica-n64-box-revealed",
+   "date": "2026-10-16T03:55:00+00:00",
+   "src": "nintendo"
+  },
+  {
+   "platform": "Nintendo",
+   "title": "Nintendo Announces Switch 2 Repair Price Hike For Japan",
+   "url": "https://www.nintendolife.com/news/2026/10/nintendo-announces-switch-2-repair-price-hike-for-japan",
+   "date": "2026-10-16T02:55:00+00:00",
+   "src": "nintendo"
+  },
+  {
+   "platform": "Nintendo",
+   "title": "Nintendo Music Expands Its Library With Another Game Boy Soundtrack This Week",
+   "url": "https://www.nintendolife.com/news/2026/10/nintendo-music-expands-its-library-with-another-game-boy-soundtrack-this-week",
+   "date": "2026-10-16T01:55:00+00:00",
+   "src": "nintendo"
+  },
+  {
+   "platform": "Nintendo",
+   "title": "Zelda: Tears Of The Kingdom \"Exclusive Edition\" Statue Officially Revealed, Here's A Look",
+   "url": "https://www.nintendolife.com/news/2026/10/zelda-tears-of-the-kingdom-exclusive-edition-statue-officially-revealed-heres-a-look",
+   "date": "2026-10-16T00:25:00+00:00",
+   "src": "nintendo"
+  },
   {
    "platform": "Nintendo",
    "title": "Hitman: Absolution Finally Sneaks Onto Switch 2 Next Week",
@@ -254,41 +289,6 @@
    "title": "Feature: \"I Lost My Mind\" - Abby Trott On Singing The Smash Bros. Theme & Playing A Belmont In Castlevania",
    "url": "https://www.nintendolife.com/features/i-lost-my-mind-abby-trott-on-singing-the-smash-bros-theme-and-playing-a-belmont-in-castlevania",
    "date": "2026-10-15T15:05:00+00:00",
-   "src": "nintendo"
-  },
-  {
-   "platform": "Nintendo",
-   "title": "Japanese Charts: Kingdom Hearts Collection Grabs The Top Spot, Despite A Slow Start",
-   "url": "https://www.nintendolife.com/news/2026/10/japanese-charts-kingdom-hearts-collection-grabs-the-top-spot-despite-a-slow-start",
-   "date": "2026-10-15T15:00:00+00:00",
-   "src": "nintendo"
-  },
-  {
-   "platform": "Nintendo",
-   "title": "Video: Digital Foundry Delivers Its Tech Review For Resident Evil 4 On Switch 2",
-   "url": "https://www.nintendolife.com/news/2026/10/video-digital-foundry-delivers-its-tech-review-for-resident-evil-4-on-switch-2",
-   "date": "2026-10-15T14:15:00+00:00",
-   "src": "nintendo"
-  },
-  {
-   "platform": "Nintendo",
-   "title": "Nintendo's London Comic-Con Booth Features Playable Layton, Metaphor, 007 & More",
-   "url": "https://www.nintendolife.com/news/2026/10/nintendos-london-comic-con-booth-features-playable-layton-metaphor-007-and-more",
-   "date": "2026-10-15T13:30:00+00:00",
-   "src": "nintendo"
-  },
-  {
-   "platform": "Nintendo",
-   "title": "This Gorgeous 'Stop-Motion' Adventure Swims Onto Switch 2 Next Month",
-   "url": "https://www.nintendolife.com/news/2026/10/this-gorgeous-stop-motion-adventure-swims-onto-switch-2-next-month",
-   "date": "2026-10-15T09:45:00+00:00",
-   "src": "nintendo"
-  },
-  {
-   "platform": "Nintendo",
-   "title": "Zelda Switch 2 Console Is Back In Stock At Smyths In The UK",
-   "url": "https://www.nintendolife.com/news/2026/10/zelda-switch-2-console-is-back-in-stock-at-smyths-in-the-uk",
-   "date": "2026-10-15T09:00:00+00:00",
    "src": "nintendo"
   },
   {
@@ -461,6 +461,20 @@
   },
   {
    "platform": "Steam",
+   "title": "二戰動作新遊戲《Nekome》公開！Steam免費試玩版限時登場 - 民視新聞網",
+   "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1Uak11RFUzNldEWkt1Z0hTLUxuak1KVFBzUndvSHU3a1cyZVRWQmdOWmI0OC1EbjlVRlRVS1U0SkxxU3FScDNJSTBzVlZIUlk3V3l3dzFmRTV4QnMtV1RNWA?oc=5",
+   "date": "2026-10-16T03:40:38+00:00",
+   "src": "steam_news"
+  },
+  {
+   "platform": "Steam",
+   "title": "Steam成就系統改版能3人比較進度 新增藍紫灰「成就組合」板塊 - 4Gamers",
+   "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNWjd5eVB1TjJ0UllNZ1QtZ000VW45WUV5OUVJTF9JUmNLaFk3STFZWmctaEItd3hXY0FFTUktTF9Lb3pJdGlFZlpFaDN3WXU3QWF3T3lIRjFibkE2V1M0eWxfQ21NWjdZaHkwS1FyWVo2M3RoRUNVYzhYYjVoM2FLT3g1NWdvZw?oc=5",
+   "date": "2026-10-16T02:48:46+00:00",
+   "src": "steam_news"
+  },
+  {
+   "platform": "Steam",
    "title": "音樂節奏遊戲《MR. RECORDS》公開關卡編輯器 Steam 新品節試玩版同步更新 - Paradaily",
    "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFB1VTY3OWRXT3VUMDhXYWlRU3ZqajlVWmZscHJISEdNcnJhZ0hpNXYtcVZMTkUyYUhvdk1IbkZaZE5QWnVseGtaUzlHdklhdExFaTNIYW83cm81cmdVdG9XYjlnTW5lODBKVkREcWZ0cVlYRDB1SkFjeg?oc=5",
    "date": "2026-10-15T20:00:00+00:00",
@@ -475,9 +489,9 @@
   },
   {
    "platform": "Steam",
-   "title": "開放世界生存建造遊戲《不朽之樹》Demo 於 Steam 新品節開放試玩，支援連線- 遊戲新聞 - PChome Online 新聞",
-   "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPOGtiNHhIRlZwMm04cV92clJWVzdkY0htRnA1OU44dlJ4dkotOGtQcjdON2tGTGtfenlTTGg2X3BocUNGZm50b2VjSGRMcmE4QkJzbl9ZREg0c0VZYkZMbU5XdEZUTEV5UVIxMmlyeWNzb09HRXQ4bGRjbFoyTmNOXy1jMWV2dWFj?oc=5",
-   "date": "2026-10-15T15:10:31+00:00",
+   "title": "開放世界生存建造遊戲《不朽之樹》Demo 於 Steam 新品節開放試玩，支援連線 - 蕃新聞",
+   "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1BOUVseWozaW1fZDlWUXNfQThhNmsyd1pzOEVyenBFbTdIeHktenl4U3cxVEdwSUtaOEMwQkQ1Y00xR3NhdzRBNGx0LXItb3lQOEE?oc=5",
+   "date": "2026-10-15T15:10:00+00:00",
    "src": "steam_news"
   },
   {
@@ -502,18 +516,25 @@
    "src": "steam_news"
   },
   {
-   "platform": "Steam",
-   "title": "敘事冒險遊戲《黑森林迷蹤》揭開古老秘密 – 現已於 STEAM 上架 - Paradaily",
-   "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxONnZ5ZWtXN0ZBQzJGR0lvOU9jRlNxWVp0NDNYblV3aWFFZUY0YnZqYWRYZmhUXzI4RC1FaHJRZGpYajFGcmZMYms4OUsyeWk3cUQzX2hEX24xTktuaTYxQTFVMDZWSzFPQ0NkUjFaMmUtdVBYcHpMbExrb1FGd2M4bA?oc=5",
-   "date": "2026-10-15T03:46:23+00:00",
-   "src": "steam_news"
+   "platform": "Epic",
+   "title": "Epic 限時免費送兩款遊戲 Steam 95% 好評解謎作永久入庫 - GameApps.hk",
+   "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE9ySHFoTXF4b3VjeFozT1hra3FJcE54OFJqZ1RsLTc1VGpfN04wNmZUSC1XS2hyMjNmZ0c5eWxQZmZxUDE4cTdQRjB3a1E5c1YxMWw5TU9rRDVZdVJ5c1E?oc=5",
+   "date": "2026-10-16T04:11:39+00:00",
+   "src": "epic_news"
   },
   {
-   "platform": "Steam",
-   "title": "《彈藥學.exe》Steam免費試玩版極度好評 爆改槍械體驗上千種配件與擬真彈道 - 4Gamers",
-   "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQS0Y4ZGNfcXlHMGRueWdJTnY1cXZDaHBaVDJrMEVSUDZ0ZjdRcmw5aWxLVDdrVjlVNlEtSWFkNGdQcm45MXBXc2tILXVqcl80LTFYemUyd2hCZFl6WWp1WHA5S2pySnluS2pqWG9ZQnQ2QW1kX3JBYjFWR2tzV3pqdjB6Z2hqYUttTTFRUDBoVQ?oc=5",
-   "date": "2026-10-15T03:39:11+00:00",
-   "src": "steam_news"
+   "platform": "Epic",
+   "title": "Epic 限免《Bad Cheese》與《Agent A – 偽裝遊戲》 10 月 22 日前領取 - Ludens Media",
+   "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE4tUnFBcXZ0bHU5MlpNQmd3TEMzd0dKRVZpUTBHRFpRRTFiYkl0N0dFVk83VmZ0MHl4NFJfQ0NTWW9yMDNCcHdKX3N2UGpTcExzbkMzRndpNTYwXzdVQ2laZXRKbDVaWDRTaFlHcDRTd3RheW5kblE?oc=5",
+   "date": "2026-10-16T01:10:00+00:00",
+   "src": "epic_news"
+  },
+  {
+   "platform": "Epic",
+   "title": "Epic Games推出全新極速啟動器、首登Linux 卻因大裁員後高調吹捧AI引爆公關災難| 遊戲/電競/手遊 - udn科技玩家",
+   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5mQXE5ZWg5alZoNy1zTWFvSUFWR2ItM0xXQzgwZV9PTTB0aTRBb29FYjRObjQ0eHhfLWtrRFFHdFJwQl9ESGVBXzRQRWtPTlRwc1J4RlBwNFhKdw?oc=5",
+   "date": "2026-10-16T00:19:39+00:00",
+   "src": "epic_news"
   },
   {
    "platform": "Epic",
@@ -548,27 +569,6 @@
    "title": "Epic 公告：我們用 AI 重寫了啟動器！開平台比 Steam 快 - 動區動趨",
    "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOVkJhYkZCSVFlb3RZRkx0MFZ3Q25wZXEyaDRHaGRKcklTbV9tcFpXMHBHTHpWWERZRUFvel9uTklzS1J2SEhFeUJ1ZWs5bFJIRXVmOXpLUlV4aGpHMVRPZWRoSTFxaGo4RnZyZ0RMTGhuTUxuV09YWlhtVi1tTXhVX1BnaUlWRDZqYURlR2MxcXdOQQ?oc=5",
    "date": "2026-10-15T08:31:47+00:00",
-   "src": "epic_news"
-  },
-  {
-   "platform": "Epic",
-   "title": "瞬間破功？Epic吹客戶端載入速度比Steam快 不到一天又被超車 - udn遊戲角落",
-   "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE1Ha2I0RHR3dXpyYXhfd3hIcDNPdTRrUGM2eTU5dkpxaThaTE5LSWw4bmI1NGNlT3Y5dVFuc1FFdXJzQWhnQ1pxOVBXWElPVlV4X2Y2TUR2TVEwQdIBX0FVX3lxTE1wazhPdUFXVnJ6NUFEb0pxRGptVjE3V0JYaXZZWTAtbHZ2WjFsak9qQWpKQUFsZHFFY2xhalk5VE5iZkpvZDAtQ2s0RmVEbXF6TklycjJDdHpNLVZEb0ZB?oc=5",
-   "date": "2026-10-15T06:59:19+00:00",
-   "src": "epic_news"
-  },
-  {
-   "platform": "Epic",
-   "title": "Epic Games Store 啟動器預覽版開放 2018 年上線以來最大改版 遊戲庫可自訂分類 - Ludens Media",
-   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE91dURRRVhZWU83UWVBYWZxcndZVTU2V1YtUXdFSHBqVkZYcDNySHk3aUpsWllFZHU2MVFOcGRJdVhGWVlURFpOWnh2ckxRbnFfdW52NV9IWVNpOXZCem1HNFluaXlPSE9zSGk4ZFFLMGwzQQ?oc=5",
-   "date": "2026-10-15T05:17:00+00:00",
-   "src": "epic_news"
-  },
-  {
-   "platform": "Epic",
-   "title": "Epic Games啟動器2.0重製開放預覽版 啟動時間約Steam一半 - 4Gamers",
-   "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPaUNGbmpWRXFPSjdVY2xac19PdXZ5VjE2Q0dtb1F0LUp5RVJUYmhfMVFhQWhKSDZtZkxzclVXLTJ2X3ZDRDB1aW95cHowaFJNem90d05CbDA5TzZjSEVmUUJVWG1kdnBYRjlPd2tNTlRaaWxyOTBPa2pVM2F2NHY5S0dqOTQ5N2tKMWY2NmM1b2ItdFZQc1d4RTNQOEJhaldo?oc=5",
-   "date": "2026-10-15T03:57:56+00:00",
    "src": "epic_news"
   },
   {
@@ -743,162 +743,162 @@
  "new": [
   {
    "platform": "Steam",
-   "title": "SCRAPWAVE",
-   "desc": "TWD 76",
-   "url": "https://store.steampowered.com/app/5319290",
-   "appid": 5319290,
+   "title": "Decisive Decks",
+   "desc": "TWD 194",
+   "url": "https://store.steampowered.com/app/5324490",
+   "appid": 5324490,
    "src": "steam_new"
   },
   {
    "platform": "Steam",
-   "title": "Thalia",
-   "desc": "TWD 187",
-   "url": "https://store.steampowered.com/app/3685410",
-   "appid": 3685410,
+   "title": "破滅的御宅族",
+   "desc": "TWD 308",
+   "url": "https://store.steampowered.com/app/3318210",
+   "appid": 3318210,
    "src": "steam_new"
   },
   {
    "platform": "Steam",
-   "title": "Bonsai Life",
-   "desc": "TWD 228",
-   "url": "https://store.steampowered.com/app/5116050",
-   "appid": 5116050,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Gas Station Horror",
+   "title": "Incredulity",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5109640",
-   "appid": 5109640,
+   "url": "https://store.steampowered.com/app/4355200",
+   "appid": 4355200,
    "src": "steam_new"
   },
   {
    "platform": "Steam",
-   "title": "After the Crash : Colony",
-   "desc": "TWD 91",
-   "url": "https://store.steampowered.com/app/4196740",
-   "appid": 4196740,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "永恆傳奇 Remastered",
-   "desc": "TWD 990",
-   "url": "https://store.steampowered.com/app/3470960",
-   "appid": 3470960,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Heartfall — A Tale in Three Lives",
-   "desc": "",
-   "url": "https://store.steampowered.com/app/5257930",
-   "appid": 5257930,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Hero Chains of Destiny",
-   "desc": "TWD 216",
-   "url": "https://store.steampowered.com/app/4019700",
-   "appid": 4019700,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Toys Co.",
-   "desc": "TWD 76",
-   "url": "https://store.steampowered.com/app/5088930",
-   "appid": 5088930,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Portal Pool",
-   "desc": "TWD 64",
-   "url": "https://store.steampowered.com/app/5106830",
-   "appid": 5106830,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Cricket Club President",
-   "desc": "TWD 216",
-   "url": "https://store.steampowered.com/app/5298650",
-   "appid": 5298650,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Lights On My Screen",
-   "desc": "TWD 175",
-   "url": "https://store.steampowered.com/app/5278930",
-   "appid": 5278930,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Chobots - Your Family Game",
-   "desc": "",
-   "url": "https://store.steampowered.com/app/5196510",
-   "appid": 5196510,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Sutja",
-   "desc": "TWD 129",
-   "url": "https://store.steampowered.com/app/5120970",
-   "appid": 5120970,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Genesis - The Original LPMud",
-   "desc": "",
-   "url": "https://store.steampowered.com/app/4022530",
-   "appid": 4022530,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Under Review",
-   "desc": "TWD 85",
-   "url": "https://store.steampowered.com/app/4836150",
-   "appid": 4836150,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Piworld - Permanent Premium Status",
-   "desc": "TWD 108",
-   "url": "https://store.steampowered.com/app/5430300",
-   "appid": 5430300,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Project RedTeam: Contract Offensive",
-   "desc": "TWD 166",
-   "url": "https://store.steampowered.com/app/4980910",
-   "appid": 4980910,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Market is Fine",
+   "title": "Todd The Technician",
    "desc": "TWD 99",
-   "url": "https://store.steampowered.com/app/4415380",
-   "appid": 4415380,
+   "url": "https://store.steampowered.com/app/5082370",
+   "appid": 5082370,
    "src": "steam_new"
   },
   {
    "platform": "Steam",
-   "title": "Alveron - Withering Roots",
-   "desc": "TWD 320",
-   "url": "https://store.steampowered.com/app/2358540",
-   "appid": 2358540,
+   "title": "AMPANIC",
+   "desc": "TWD 76",
+   "url": "https://store.steampowered.com/app/4644170",
+   "appid": 4644170,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Yellow Terminal",
+   "desc": "TWD 46",
+   "url": "https://store.steampowered.com/app/5286120",
+   "appid": 5286120,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "盯着你！桌面喵小西",
+   "desc": "",
+   "url": "https://store.steampowered.com/app/4930500",
+   "appid": 4930500,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Fossil Digger",
+   "desc": "TWD 135",
+   "url": "https://store.steampowered.com/app/5314050",
+   "appid": 5314050,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Succuquest",
+   "desc": "TWD 286",
+   "url": "https://store.steampowered.com/app/2100270",
+   "appid": 2100270,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Feed the Cups",
+   "desc": "TWD 208",
+   "url": "https://store.steampowered.com/app/2336220",
+   "appid": 2336220,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "愛麗絲與彼岸",
+   "desc": "TWD 157",
+   "url": "https://store.steampowered.com/app/3755350",
+   "appid": 3755350,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "零氪超变",
+   "desc": "",
+   "url": "https://store.steampowered.com/app/5075110",
+   "appid": 5075110,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Sleep Walk",
+   "desc": "TWD 159",
+   "url": "https://store.steampowered.com/app/4904470",
+   "appid": 4904470,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "KAEBON",
+   "desc": "TWD 140",
+   "url": "https://store.steampowered.com/app/5245250",
+   "appid": 5245250,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "囚笼之诗",
+   "desc": "TWD 117",
+   "url": "https://store.steampowered.com/app/3939020",
+   "appid": 3939020,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Lyfe of the Blade",
+   "desc": "TWD 105",
+   "url": "https://store.steampowered.com/app/5218930",
+   "appid": 5218930,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "天邪鬼ノ悪夢",
+   "desc": "TWD 175",
+   "url": "https://store.steampowered.com/app/5180330",
+   "appid": 5180330,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "ドタバタVRランド",
+   "desc": "",
+   "url": "https://store.steampowered.com/app/4855210",
+   "appid": 4855210,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Pocket Dinos",
+   "desc": "TWD 148",
+   "url": "https://store.steampowered.com/app/4715900",
+   "appid": 4715900,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Vanisha",
+   "desc": "TWD 162",
+   "url": "https://store.steampowered.com/app/4555270",
+   "appid": 4555270,
    "src": "steam_new"
   },
   {
@@ -1177,82 +1177,82 @@
  "soon": [
   {
    "platform": "Steam",
-   "title": "Vanisha",
-   "desc": "TWD 162",
-   "url": "https://store.steampowered.com/app/4555270",
-   "appid": 4555270,
+   "title": "Platformino",
+   "desc": "TWD 135",
+   "url": "https://store.steampowered.com/app/5281430",
+   "appid": 5281430,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "Tactics Arena",
+   "title": "Doomlander",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5255210",
-   "appid": 5255210,
+   "url": "https://store.steampowered.com/app/5352520",
+   "appid": 5352520,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "Lyfe of the Blade",
+   "title": "SUPERUSER Demo",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5218930",
-   "appid": 5218930,
+   "url": "https://store.steampowered.com/app/5438670",
+   "appid": 5438670,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "根据地 Demo",
+   "title": "Erotic Clicker dlc2",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5284610",
-   "appid": 5284610,
+   "url": "https://store.steampowered.com/app/5213090",
+   "appid": 5213090,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "Succuquest",
+   "title": "Ducking Grenades",
    "desc": "",
-   "url": "https://store.steampowered.com/app/2100270",
-   "appid": 2100270,
+   "url": "https://store.steampowered.com/app/2934660",
+   "appid": 2934660,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "KAEBON",
+   "title": "Coldline: Disconnect Demo",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5245250",
-   "appid": 5245250,
+   "url": "https://store.steampowered.com/app/5116930",
+   "appid": 5116930,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "Robot City: Delivery",
+   "title": "Chief? About That File... Demo",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5077250",
-   "appid": 5077250,
+   "url": "https://store.steampowered.com/app/5358480",
+   "appid": 5358480,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "落仙泱 Demo",
+   "title": "Desktop Bouncer - Zumball Spinners",
    "desc": "",
-   "url": "https://store.steampowered.com/app/4812070",
-   "appid": 4812070,
+   "url": "https://store.steampowered.com/app/5392460",
+   "appid": 5392460,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "Tiny Monster Village",
+   "title": "FOURSAVENT Demo",
    "desc": "",
-   "url": "https://store.steampowered.com/app/3450540",
-   "appid": 3450540,
+   "url": "https://store.steampowered.com/app/5410820",
+   "appid": 5410820,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "愛麗絲與彼岸",
+   "title": "Hentai Tales: Profane Arbitration",
    "desc": "",
-   "url": "https://store.steampowered.com/app/3755350",
-   "appid": 3755350,
+   "url": "https://store.steampowered.com/app/5044690",
+   "appid": 5044690,
    "src": "steam_soon"
   },
   {
@@ -1794,8 +1794,8 @@
    "src": "android_top"
   }
  ],
- "updated": "2026-10-16T00:13:56+00:00",
+ "updated": "2026-10-16T06:06:58+00:00",
  "errors": [
-  "details: 1 筆遊戲詳情抓取失敗"
+  "details: 1 筆遊戲詳情抓取失敗(例:app 518699: ValueError appdetails 回傳失敗)"
  ]
 }
