@@ -268,6 +268,7 @@ SOURCES = [
     ("ios_news", "news", rss("https://toucharcade.com/feed/", "iOS")),
     ("ios_news_tw", "news", gnews("App Store 遊戲 限免 OR 特價 OR 新作", "iOS")),
     ("android_news", "news", gnews("Google Play 遊戲 限免 OR 特價 OR 新作", "Android")),
+    ("cheapshark_pool", "pool", lambda: fetch_cheapshark_pool()),
     ("gamerpower", "free", lambda: fetch_gamerpower()),
     ("steam_free", "free", lambda: steam_free()),
     ("ios_top", "mobile", lambda: ios_top()),
@@ -500,18 +501,20 @@ def android_top(n=10):
 
 
 # ---------- 限時免費:GamerPower(各平台限免/贈送)與 Steam 特價中 100% 折扣 ----------
-NO_STEAM = {"iOS", "Android", "PlayStation", "Xbox", "Nintendo"}   # 這些平台的限免不用去 Steam 比對 appid
+NO_STEAM = {"iOS", "Android", "PlayStation", "Xbox", "Nintendo", "Meta"}   # 這些平台的限免不用去 Steam 比對 appid
 
 
 def gp_labels(s):
     out = []
     for p in [x.strip() for x in (s or "").split(",")]:
         l = p.lower()
-        lab = ("Steam" if "steam" in l else "Epic" if "epic" in l else "GOG" if "gog" in l else
+        lab = ("Meta" if ("meta" in l or "oculus" in l or "quest" in l or l == "vr") else
+               "Steam" if "steam" in l else "Epic" if "epic" in l else "GOG" if "gog" in l else
                "EA" if ("origin" in l or l.startswith("ea")) else "Ubisoft" if "ubisoft" in l else
                "PlayStation" if ("playstation" in l or l.startswith("ps")) else "Xbox" if "xbox" in l else
                "Nintendo" if ("nintendo" in l or "switch" in l) else "iOS" if l == "ios" else
                "Android" if "android" in l else "PC" if l in ("pc", "windows") else None)
+        lab = lab or p            # 對照不到的平台保留原本的名稱,不再統一寫「其他」
         if lab and lab not in out:
             out.append(lab)
     return out
@@ -570,10 +573,56 @@ def dedupe_by_appid(items):
     return out
 
 
+# ---------- 歷史新低:現價不高於歷史最低價的遊戲 ----------
+def fetch_cheapshark_pool():
+    """多抓一批 Steam 熱門特價當候選(不直接顯示),用來找出『目前就是史低』的遊戲"""
+    base = "https://www.cheapshark.com/api/1.0/deals?"
+    variants = [
+        ({"storeID": "1", "onSale": 1, "pageSize": 40, "sortBy": "Deal Rating"}, urllib.parse.quote_plus),
+        ({"storeID": "1", "onSale": 1, "pageSize": 40, "sortBy": "Deal Rating"}, urllib.parse.quote),
+        ({"storeID": "1", "onSale": 1, "pageSize": 40}, urllib.parse.quote),
+    ]
+    last = None
+    for params, via in variants:
+        try:
+            rows = json.loads(get(base + urllib.parse.urlencode(params, safe=",", quote_via=via)))
+            if rows:
+                return [{"platform": "Steam", "title": r["title"], "appid": int(r["steamAppID"])}
+                        for r in rows if r.get("steamAppID")]
+        except Exception as ex:
+            last = ex
+    raise last or ValueError("沒有資料")
+
+
+def build_lows(new, games):
+    """現價(台幣)≤ 歷史最低價(美元換算台幣)的 102% 就算史低;必須是目前有折扣的遊戲。"""
+    fx = games.get("fx")
+    out, seen = [], set()
+    for sec in ("free", "deals", "new", "soon", "pool"):
+        for it in new.get(sec, []):
+            k = it.get("appid")
+            if not k or k in seen:
+                continue
+            seen.add(k)
+            g = games["apps"].get(str(k)) or {}
+            pr, low = g.get("price"), g.get("low")
+            if not (fx and pr and low and low.get("usd") and pr.get("final", 0) > 0 and pr.get("pct", 0) > 0):
+                continue
+            ratio = pr["final"] / (float(low["usd"]) * fx) if float(low["usd"]) > 0 else None
+            if ratio is None or ratio > 1.02:
+                continue
+            out.append({"platform": "Steam", "title": g.get("name") or it.get("title", ""), "appid": k,
+                        "pct": pr["pct"], "ratio": round(ratio, 2),
+                        "desc": f"-{pr['pct']}%  {pr['cur']} {pr['final']:,.0f}(原價 {pr['orig']:,.0f})",
+                        "url": f"https://store.steampowered.com/app/{k}"})
+    out.sort(key=lambda i: (-i["pct"], i["ratio"]))
+    return out
+
+
 # ---------- 遊戲詳情(畫面、影片、評論)與價格歷史 ----------
 GAMES = Path(__file__).parent / "games.json"
 HISTORY = Path(__file__).parent / "history.json"
-MAX_APPS = 60          # 每次最多處理幾款遊戲,避免請求過多
+MAX_APPS = 90          # 每次最多處理幾款遊戲,避免請求過多
 SCHEMA = 2            # 詳情資料格式版本;舊版資料(缺比價 / 史低)會自動重抓一次
 _CS_ERR = []
 _DETAIL_ERR = []
@@ -689,7 +738,7 @@ def fetch_game(appid):
 def free_prices(new, games):
     """替限免項目查 iOS / Android 的價格。找不到標記為 none(前端顯示『查無』);查詢本身失敗則不顯示,避免誤導。"""
     for it in new["free"]:
-        if it["platform"] in ("iOS", "Android") or it.get("prices") is not None:
+        if it["platform"] in NO_STEAM or it.get("prices") is not None:   # 主機 / VR / 手機專屬的限免不需要查
             continue
         g = games["apps"].get(str(it.get("appid") or "")) or {}
         en = it.get("title_en") or (g.get("compare") or {}).get("en") or it["title"]
@@ -715,7 +764,7 @@ def enrich(new):
     now = datetime.now(timezone.utc)
     today = now.date().isoformat()
     fails, ids = 0, []
-    for sec in ("free", "deals", "new", "soon"):
+    for sec in ("free", "deals", "new", "soon", "pool"):
         for it in new[sec]:
             if not it.get("appid") and sec == "free" and it["platform"] not in NO_STEAM:
                 name = it.get("title_en") or it["title"]
@@ -755,6 +804,7 @@ def enrich(new):
         games["apps"].pop(k)
         hist.pop(k, None)
     free_prices(new, games)
+    new["lows"] = build_lows(new, games)
     GAMES.write_text(json.dumps(games, ensure_ascii=False), "utf-8")
     HISTORY.write_text(json.dumps(hist, ensure_ascii=False), "utf-8")
     return fails
@@ -762,7 +812,7 @@ def enrich(new):
 
 def main():
     old = json.loads(OUT.read_text("utf-8")) if OUT.exists() else {}
-    new = {"free": [], "deals": [], "news": [], "new": [], "soon": [], "mobile": []}
+    new = {"free": [], "deals": [], "news": [], "new": [], "soon": [], "mobile": [], "pool": []}
     errors = []
     for src, section, fn in SOURCES:
         try:
@@ -785,6 +835,7 @@ def main():
             errors.append(f"cheapshark_details: {_CS_ERR[0]}(共 {len(_CS_ERR)} 筆)")
     except Exception as ex:
         errors.append(f"details: {type(ex).__name__}: {ex}")
+    new.pop("pool", None)          # 候選池只用來找史低,不存進 data.json
     new["free"] = dedupe_by_appid(new["free"])
     new["updated"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     new["errors"] = errors
