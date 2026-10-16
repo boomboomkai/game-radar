@@ -26,7 +26,7 @@ def api_headers(url):
 def get(url, timeout=25, tries=3):
     """下載網址內容。遇到 429 / 5xx 或連線逾時會自動重試;失敗訊息會附上伺服器回應(不含網址參數,避免洩漏金鑰)。"""
     for attempt in range(tries):
-        time.sleep(0.25)  # 放慢一點,避免被限流
+        time.sleep(1.6 if "appdetails" in url else 0.25)  # 放慢一點;Steam 商店詳情約每 5 分鐘 200 次的上限
         req = urllib.request.Request(url, headers=api_headers(url))
         try:
             with urllib.request.urlopen(req, timeout=timeout) as r:
@@ -574,24 +574,32 @@ def dedupe_by_appid(items):
 
 
 # ---------- 歷史新低:現價不高於歷史最低價的遊戲 ----------
-def fetch_cheapshark_pool():
-    """多抓一批 Steam 熱門特價當候選(不直接顯示),用來找出『目前就是史低』的遊戲"""
+def fetch_cheapshark_pool(pages=2, size=60):
+    """多抓一批 Steam 特價當候選(不直接顯示),用來找出『目前就是史低』的遊戲。只收 Steam 好評率 70% 以上的。"""
     base = "https://www.cheapshark.com/api/1.0/deals?"
     variants = [
-        ({"storeID": "1", "onSale": 1, "pageSize": 40, "sortBy": "Deal Rating"}, urllib.parse.quote_plus),
-        ({"storeID": "1", "onSale": 1, "pageSize": 40, "sortBy": "Deal Rating"}, urllib.parse.quote),
-        ({"storeID": "1", "onSale": 1, "pageSize": 40}, urllib.parse.quote),
+        ({"storeID": "1", "onSale": 1, "pageSize": size, "sortBy": "Deal Rating", "steamRating": 70}, urllib.parse.quote_plus),
+        ({"storeID": "1", "onSale": 1, "pageSize": size, "sortBy": "Deal Rating", "steamRating": 70}, urllib.parse.quote),
+        ({"storeID": "1", "onSale": 1, "pageSize": size, "sortBy": "Deal Rating"}, urllib.parse.quote),
+        ({"storeID": "1", "onSale": 1, "pageSize": size}, urllib.parse.quote),
     ]
-    last = None
-    for params, via in variants:
-        try:
-            rows = json.loads(get(base + urllib.parse.urlencode(params, safe=",", quote_via=via)))
-            if rows:
-                return [{"platform": "Steam", "title": r["title"], "appid": int(r["steamAppID"])}
-                        for r in rows if r.get("steamAppID")]
-        except Exception as ex:
-            last = ex
-    raise last or ValueError("沒有資料")
+    out, working, last = [], None, None
+    for page in range(pages):
+        got = None
+        for params, via in ([working] if working else variants):
+            try:
+                rows = json.loads(get(base + urllib.parse.urlencode({**params, "pageNumber": page}, safe=",", quote_via=via)))
+                if rows:
+                    got, working = rows, (params, via)
+                    break
+            except Exception as ex:
+                last = ex
+        if not got:
+            break
+        out += [{"platform": "Steam", "title": r["title"], "appid": int(r["steamAppID"])} for r in got if r.get("steamAppID")]
+    if not out:
+        raise last or ValueError("沒有資料")
+    return out
 
 
 def build_lows(new, games):
@@ -611,20 +619,29 @@ def build_lows(new, games):
             ratio = pr["final"] / (float(low["usd"]) * fx) if float(low["usd"]) > 0 else None
             if ratio is None or ratio > 1.02:
                 continue
+            rv = g.get("reviews") or {}
+            tot, posr = rv.get("total") or 0, rv.get("pct") or 0
+            score = (posr * tot / 100 + 35) / (tot + 50)      # 貝氏平均:好評率高且評論多的分數高
             out.append({"platform": "Steam", "title": g.get("name") or it.get("title", ""), "appid": k,
-                        "pct": pr["pct"], "ratio": round(ratio, 2),
+                        "pct": pr["pct"], "ratio": round(ratio, 2), "score": round(score, 4), "reviews": tot,
                         "desc": f"-{pr['pct']}%  {pr['cur']} {pr['final']:,.0f}(原價 {pr['orig']:,.0f})",
                         "url": f"https://store.steampowered.com/app/{k}"})
-    out.sort(key=lambda i: (-i["pct"], i["ratio"]))
+    out.sort(key=lambda i: (-i["score"], -i["reviews"]))      # 依評價與評論數由高到低
     return out
 
 
 # ---------- 遊戲詳情(畫面、影片、評論)與價格歷史 ----------
 GAMES = Path(__file__).parent / "games.json"
 HISTORY = Path(__file__).parent / "history.json"
-MAX_APPS = 90          # 每次最多處理幾款遊戲,避免請求過多
+MAX_APPS = 200          # 每次最多處理幾款遊戲,避免請求過多
 SCHEMA = 2            # 詳情資料格式版本;舊版資料(缺比價 / 史低)會自動重抓一次
 _CS_ERR = []
+
+
+class Unavailable(Exception):
+    """Steam 回報這個 app 查不到(下架、台灣區不提供、或不是遊戲),不算錯誤"""
+
+
 _DETAIL_ERR = []
 REFRESH_HOURS = 20     # 詳情超過這個時數才重抓
 
@@ -714,7 +731,7 @@ def fetch_game(appid):
     raw = json.loads(get(f"https://store.steampowered.com/api/appdetails?appids={appid}&cc=tw&l=tchinese"))
     entry = raw[str(appid)]
     if not entry.get("success"):
-        raise ValueError("appdetails 回傳失敗")
+        raise Unavailable("appdetails 回傳失敗")
     g = parse_details(entry["data"])
     base = f"https://store.steampowered.com/appreviews/{appid}?json=1&filter=all&review_type=all&purchase_type=all"
     summ = json.loads(get(base + "&language=all&num_per_page=0"))
@@ -778,14 +795,20 @@ def enrich(new):
                 it["appid"] = games["map"][key]
             if it.get("appid") and it["appid"] not in ids:
                 ids.append(it["appid"])
+    bad = games.setdefault("bad", {})
     for appid in ids[:MAX_APPS]:
         k = str(appid)
+        if k in bad and (now.date() - datetime.fromisoformat(bad[k]).date()).days < 14:
+            continue                                  # 這個 app 最近確認查不到,14 天內不重試
         old = games["apps"].get(k)
         if old and old.get("v") == SCHEMA and (now - datetime.fromisoformat(old["fetched"])).total_seconds() < REFRESH_HOURS * 3600:
             old["seen"] = today
             continue
         try:
             g = fetch_game(appid)
+        except Unavailable:
+            bad[k] = today
+            continue
         except Exception as ex:
             fails += 1
             _DETAIL_ERR.append(f"app {appid}: {type(ex).__name__} {str(ex)[:80]}")
@@ -811,7 +834,7 @@ def enrich(new):
 
 
 def main():
-    old = json.loads(OUT.read_text("utf-8")) if OUT.exists() else {}
+    old = load(OUT, {})   # 檔案不存在、是空的或內容壞掉時,都當作沒有舊資料
     new = {"free": [], "deals": [], "news": [], "new": [], "soon": [], "mobile": [], "pool": []}
     errors = []
     for src, section, fn in SOURCES:
