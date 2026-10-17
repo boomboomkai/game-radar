@@ -60,7 +60,7 @@ def parse_epic(d, en=None):
             for grp in promos.get(key) or []:
                 for o in grp.get("promotionalOffers", []):
                     if (o.get("discountSetting") or {}).get("discountPercentage") == 0:
-                        items.append({"platform": "Epic", "title": e["title"], "title_en": (en or {}).get(e.get("id")), "status": status,
+                        items.append({"platform": "Epic", "title": e["title"], "title_en": (en or {}).get(e.get("id")), "blurb": re.sub(r"\s+", " ", e.get("description") or "")[:300], "status": status,
                                       "start": o.get("startDate"), "end": o.get("endDate"),
                                       "desc": f"原價 {price}" if price else "", "url": url})
     return items
@@ -243,7 +243,7 @@ def merge_dupes(items):
             out[k] = it
             continue
         a = out[k]
-        for f in ("platforms", "image", "release", "appid"):
+        for f in ("platforms", "image", "release", "appid", "blurb"):
             if it.get(f) and not a.get(f):
                 a[f] = it[f]
         if a.get("age") is None and it.get("age") is not None:
@@ -399,6 +399,7 @@ def parse_ios_lookup(d):
                      "img": r.get("artworkUrl512") or r.get("artworkUrl100", ""),
                      "genres": uniq([IOS_GENRE[str(i)] for i in r.get("genreIds", []) if str(i) in IOS_GENRE]),
                      "age": ios_age(r.get("contentAdvisoryRating") or r.get("trackContentRating")),
+                     "blurb": re.sub(r"\s+", " ", r.get("description") or "")[:300],
                      "rating": float(r["averageUserRating"]) if r.get("averageUserRating") else None,
                      "count": int(r.get("userRatingCount") or 0)})
     return apps
@@ -419,7 +420,7 @@ def ios_compute():
         if (today - datetime.fromisoformat(pd).date()).days > 60 or a["price"] >= peak:
             peak, pd = a["price"], today.isoformat()
         hist[a["id"]] = {"title": a["title"], "price": a["price"], "max": peak, "pd": pd, "seen": today.isoformat()}
-        base = {"platform": "iOS", "title": a["title"], "url": a["url"], "image": a["img"], "square": True, "age": a["age"], "genres": a["genres"]}
+        base = {"platform": "iOS", "title": a["title"], "url": a["url"], "image": a["img"], "square": True, "age": a["age"], "genres": a["genres"], "blurb": a["blurb"]}
         if a["price"] == 0 and peak > 0:
             free.append({**base, "status": "now", "desc": f"原價 {a['cur']} {peak:,.0f}"})
         elif 0 < a["price"] < peak:
@@ -465,7 +466,7 @@ def ios_top(n=10):
     pool.sort(key=lambda a: -bayes(a["rating"], a["count"]))
     return [{"platform": "iOS", "rank": i, "title": a["title"], "desc": f"{a['cur']} {a['price']:,.0f}",
              "url": a["url"], "image": a["img"], "square": True, "age": a["age"],
-             "rating": round(a["rating"], 1), "count": a["count"], "genres": a["genres"]} for i, a in enumerate(pool[:n], 1)]
+             "rating": round(a["rating"], 1), "count": a["count"], "genres": a["genres"], "blurb": a["blurb"]} for i, a in enumerate(pool[:n], 1)]
 
 
 def android_top(n=10):
@@ -495,6 +496,7 @@ def android_top(n=10):
               "desc": f"{d.get('currency') or 'TWD'} {d['price']:,.0f}",
               "url": d.get("url") or "https://play.google.com/store/apps/details?id=" + d["appId"],
               "image": d.get("icon", ""), "square": True, "age": android_age(d.get("contentRating")),
+              "blurb": re.sub(r"\s+", " ", d.get("summary") or d.get("description") or "")[:300],
               "genres": [ANDROID_GENRE[d["genreId"]]] if d.get("genreId") in ANDROID_GENRE else [],
               "rating": round(d["score"], 1), "count": d["ratings"]} for i, d in enumerate(detail[:n], 1)]
     if items:
@@ -538,7 +540,8 @@ def parse_gamerpower(rows):
                       "platforms": labs or ["其他"], "title": title, "status": "now",
                       "end": f"{m[1]}T{m[2]}Z" if m else None,      # GamerPower 的結束時間當作 UTC
                       "desc": f"原價 US{worth}" if worth.startswith("$") else "",
-                      "url": url, "image": g.get("image") or g.get("thumbnail") or ""})
+                      "url": url, "image": g.get("image") or g.get("thumbnail") or "",
+                      "blurb": re.sub(r"\s+", " ", g.get("description") or "")[:300]})
     return items
 
 
@@ -661,11 +664,12 @@ def norm(t):
 
 
 def find_appid(title):
-    """用遊戲名稱找 Steam appid,只接受名稱完全相符的結果,找不到回傳 0。"""
-    url = "https://store.steampowered.com/api/storesearch/?cc=tw&l=tchinese&term=" + urllib.parse.quote(title)
-    for it in json.loads(get(url)).get("items", []):
-        if norm(it.get("name", "")) == norm(title):
-            return it["id"]
+    """用遊戲名稱找 Steam appid,只接受名稱完全相符的結果,找不到回傳 0。先用英文名稱搜尋,再用繁中。"""
+    for lang in ("english", "tchinese"):
+        url = f"https://store.steampowered.com/api/storesearch/?cc=tw&l={lang}&term=" + urllib.parse.quote(title)
+        for it in json.loads(get(url)).get("items", []):
+            if norm(it.get("name", "")) == norm(title):
+                return it["id"]
     return 0
 
 
@@ -824,6 +828,9 @@ def enrich(new):
             if it.get("appid") and it["appid"] not in ids:
                 ids.append(it["appid"])
     bad = games.setdefault("bad", {})
+    if games.get("map_v") != 2:      # 配對方式改良了:過去記成「查無」的遊戲重試一次
+        games["map"] = {k: v for k, v in games["map"].items() if v}
+        games["map_v"] = 2
     for appid in ids[:MAX_APPS]:
         k = str(appid)
         if k in bad and (now.date() - datetime.fromisoformat(bad[k]).date()).days < 14:
