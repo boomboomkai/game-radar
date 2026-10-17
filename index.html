@@ -110,6 +110,8 @@ details summary{color:var(--ac)}
 <header class="hd"><svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#35e0ff"/><stop offset=".55" stop-color="#7c5cff"/><stop offset="1" stop-color="#ff4fa3"/></linearGradient></defs><polygon points="24,3 42,13.5 42,34.5 24,45 6,34.5 6,13.5" fill="rgba(53,224,255,.07)" stroke="url(#lg)" stroke-width="2.2" stroke-linejoin="round"/><g fill="none" stroke="url(#lg)" stroke-width="1.8" stroke-linecap="round"><path d="M16.5 15.5a10.5 10.5 0 0 1 15 0"/><path d="M19.8 18.6a6 6 0 0 1 8.4 0"/></g><path d="M15.5 22.5h17c2.2 0 4 1.4 4.6 3.5l1.4 5.3c.5 1.8-.8 3.5-2.6 3.5-1 0-1.8-.5-2.4-1.2l-2.3-3.3h-14.4l-2.3 3.3c-.6.7-1.4 1.2-2.4 1.2-1.8 0-3.1-1.7-2.6-3.5l1.4-5.3c.6-2.1 2.4-3.5 4.6-3.5z" fill="url(#lg)"/><path d="M17.4 25.2v4.4M15.2 27.4h4.4" stroke="#070a12" stroke-width="1.7" stroke-linecap="round"/><circle cx="30.3" cy="25.8" r="1.2" fill="#070a12"/><circle cx="33" cy="28" r="1.2" fill="#070a12"/></svg><div><h1>遊戲偵查隊</h1><div class="tag">GAME SCOUT SQUAD</div></div></header><div id="upd">載入中…</div>
 <div role="tablist" id="tabs"></div><div id="chips"></div><div id="gchips"></div><div id="tabnote" class="m"></div><div id="list"></div><div id="pager"></div><div id="msg"></div><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS、<a href="https://www.gamerpower.com" target="_blank" rel="noopener noreferrer">GamerPower</a>(限時免費)、Apple iTunes、Google Play(非官方)、匯率來自 <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a>。手機付費榜依評分與評論數綜合排序,iOS 取自 App Store 台灣區付費榜,Android 靠關鍵字搜尋找候選,可能漏掉部分遊戲。史低價是 CheapShark 的美元紀錄換算,僅供參考。分級圖示依 Steam / RAWG 提供的 PEGI、ESRB 資料換算,僅供參考,非台灣官方分級,請以遊戲包裝或文化部公告為準。</div>
 <script>
+// 自己累積的價格走勢:目前只在後台(history.json)收集,資料夠多再改成 true 就會顯示
+const SHOW_TREND=false;
 const TABS=[["news","最新消息"],["free","限時免費"],["deals","特價消息"],["lows","歷史新低"],["new","新上架"],["soon","即將上架"],["mobile","手機付費榜"]];
 let D={free:[],deals:[],news:[]},G={apps:{}},H={},tab="free",plat="全部",page=1,gen="全部";
 const $=id=>document.getElementById(id);
@@ -130,10 +132,10 @@ function detail(i){
  const shots=(g.shots||[]).map(x=>`<a href="${esc(safe(x.f))}" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="${esc(safe(x.t))}" alt=""></a>`).join("");
  const vid=(g.movies||[]).filter(m=>m.mp4).slice(0,1).map(m=>`<video controls preload="none" poster="${esc(safe(m.thumb))}" src="${esc(safe(m.mp4))}"></video>`).join("");
  const rv=(r.top||[]).map(x=>`<div class="rv">${esc(x.text)}${x.text.length>=220?"…":""}<div class="m"><b class="${x.up?"ok":""}">${x.up?"推薦":"不推薦"}</b>,遊玩 ${x.hours} 小時</div></div>`).join("");
- return `<details><summary>畫面、影片、評論與價格走勢</summary>
+ return `<details><summary>畫面、影片、評論與價格${SHOW_TREND?"走勢":"比較"}</summary>
  ${g.desc?`<p class="m">${esc(g.desc)}</p>`:""}${shots?`<div class="shots">${shots}</div>`:""}${vid}
  <h4>Steam 評價</h4><div class="m">${sum}${g.metacritic?`;Metacritic ${esc(g.metacritic)}`:""}</div>${rv}
- ${g.price?`<h4>價格走勢</h4>${chart(i.appid,g)}`:""}${cmpHtml(i,g)}</details>`}
+ ${SHOW_TREND&&g.price?`<h4>價格走勢</h4>${chart(i.appid,g)}`:""}${cmpHtml(i,g)}</details>`}
 function lowChip(i){
  const g=G.apps&&G.apps[i.appid];if(!g||!g.low||!g.low.usd)return"";
  const fx=G.fx||(g.compare&&g.compare.fx);if(!fx)return"";
@@ -270,7 +272,7 @@ document.addEventListener("error",e=>{
  if(n&&/^https?:\/\//.test(n)){im.dataset.st=st+1;im.src=n}else{const a=im.closest(".cvl");if(a)a.remove()}},true);
 document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.t){tab=b.dataset.t;plat="全部";page=1}if(b.dataset.p){plat=b.dataset.p;page=1}if(b.dataset.ge){gen=b.dataset.ge;page=1}if(b.dataset.g)page=+b.dataset.g;render();if(b.dataset.g)window.scrollTo({top:window.scrollY+$("chips").getBoundingClientRect().top-70});if(b.dataset.t){const a=document.querySelector("[role=tab][aria-selected=true]");if(a)a.scrollIntoView({inline:"center",block:"nearest"})}});
 const j=u=>fetch(u+"?_="+Date.now()).then(r=>r.json()).catch(()=>null);
-j("games.json").then(g=>{if(g)G=g;render()});j("history.json").then(h=>{if(h)H=h;render()});
+j("games.json").then(g=>{if(g)G=g;render()});if(SHOW_TREND)j("history.json").then(h=>{if(h)H=h;render()});
 fetch("data.json?_="+Date.now()).then(r=>r.json()).then(d=>{D=d;
  $("upd").textContent=d.updated?"最後更新 "+tw(d.updated)+"(台北時間)":"尚未更新";
  $("err").textContent=(d.errors||[]).length?"部分來源暫時抓不到,已顯示舊資料:"+d.errors.map(x=>x.split(":")[0]).join("、"):"";
