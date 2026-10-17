@@ -371,6 +371,15 @@
  "deals": [
   {
    "platform": "Steam",
+   "title": "霍格華茲的傳承",
+   "desc": "-90%  TWD 169(原價 1,690)",
+   "pct": 90,
+   "url": "https://store.steampowered.com/app/990080",
+   "appid": 990080,
+   "src": "steam"
+  },
+  {
+   "platform": "Steam",
    "title": "Warhammer 40,000: Space Marine 2",
    "desc": "-75%  TWD 397(原價 1,590)",
    "pct": 75,
@@ -421,15 +430,6 @@
    "pct": 30,
    "url": "https://store.steampowered.com/app/1374490",
    "appid": 1374490,
-   "src": "steam"
-  },
-  {
-   "platform": "Steam",
-   "title": "魔骰遊戲 : Invokyr",
-   "desc": "-25%  TWD 186(原價 249)",
-   "pct": 25,
-   "url": "https://store.steampowered.com/app/3883570",
-   "appid": 3883570,
    "src": "steam"
   },
   {
@@ -1244,6 +1244,11 @@
    "release": "2026-10-15",
    "image": "https://media.rawg.io/media/games/cb0/cb0e1afa3f0e8ffe853f33dd137ca7aa.jpg",
    "desc": "",
+   "genres": [
+    "冒險",
+    "動作",
+    "角色扮演"
+   ],
    "age": null,
    "url": "https://rawg.io/games/enshrouded-2",
    "src": "rawg_new"
@@ -1259,6 +1264,10 @@
    "release": "2026-09-24",
    "image": "https://media.rawg.io/media/games/bfc/bfc7b45c6e9d3e21bb1c613c16c088f2.jpeg",
    "desc": "",
+   "genres": [
+    "冒險",
+    "動作"
+   ],
    "age": 18,
    "url": "https://rawg.io/games/control-resonant",
    "src": "rawg_new"
@@ -1273,6 +1282,10 @@
    "release": "2026-10-06",
    "image": "https://media.rawg.io/media/games/c85/c85991ad8164824715377e603a2d7693.jpg",
    "desc": "",
+   "genres": [
+    "冒險",
+    "動作"
+   ],
    "age": null,
    "url": "https://rawg.io/games/gears-of-war-e-day",
    "src": "rawg_new"
@@ -1288,6 +1301,10 @@
    "release": "2026-10-13",
    "image": "https://media.rawg.io/media/games/61d/61d1431d20f9f6e19b27cb89aa4a4402.jpg",
    "desc": "",
+   "genres": [
+    "動作",
+    "角色扮演"
+   ],
    "age": null,
    "url": "https://rawg.io/games/valor-mortis",
    "src": "rawg_new"
@@ -1302,6 +1319,9 @@
    "release": "2026-09-23",
    "image": "https://media.rawg.io/media/games/8ff/8ff55788736c59fcb7b814d862c2ae6f.jpeg",
    "desc": "",
+   "genres": [
+    "冒險"
+   ],
    "age": 18,
    "url": "https://rawg.io/games/silent-hill-townfall-2",
    "src": "rawg_new"
@@ -1317,6 +1337,10 @@
    "release": "2026-10-01",
    "image": "https://media.rawg.io/media/games/9b7/9b755942f5c8006891c20e50095dae09.jpg",
    "desc": "",
+   "genres": [
+    "冒險",
+    "動作"
+   ],
    "age": null,
    "url": "https://rawg.io/games/end-of-abyss",
    "src": "rawg_new"
@@ -1332,6 +1356,10 @@
    "release": "2026-10-02",
    "image": "https://media.rawg.io/media/games/541/541d6c97a674635d68ea3d19737f090b.jpg",
    "desc": "",
+   "genres": [
+    "動作",
+    "模擬"
+   ],
    "age": 12,
    "url": "https://rawg.io/games/ace-combat-8-wings-of-theve",
    "src": "rawg_new"
@@ -1347,6 +1375,9 @@
    "release": "2026-10-06",
    "image": "https://media.rawg.io/media/games/553/5536c25da9711a39a5c4d752361de551.jpg",
    "desc": "",
+   "genres": [
+    "競速"
+   ],
    "age": 6,
    "url": "https://rawg.io/games/star-wars-galactic-racer",
    "src": "rawg_new"
@@ -1360,6 +1391,11 @@
    "release": "2026-09-30",
    "image": "https://media.rawg.io/media/screenshots/696/696638dca1d39d65168401c821f28519.jpg",
    "desc": "",
+   "genres": [
+    "冒險",
+    "角色扮演",
+    "模擬"
+   ],
    "age": 18,
    "url": "https://rawg.io/games/nivalis",
    "src": "rawg_new"
@@ -1376,6 +1412,10 @@
    "release": "2026-10-15",
    "image": "https://media.rawg.io/media/games/429/42928697eb80feb13e6087170a10565a.jpeg",
    "desc": "",
+   "genres": [
+    "動作",
+    "角色扮演"
+   ],
    "age": null,
    "url": "https://rawg.io/games/castlevania-belmonts-curse",
    "src": "rawg_new"
@@ -1392,6 +1432,9 @@
    "release": "2026-10-08",
    "image": "https://media.rawg.io/media/games/816/8167f331942bc2cb8a6711938cd17f5c.jpg",
    "desc": "",
+   "genres": [
+    "動作"
+   ],
    "age": 18,
    "url": "https://rawg.io/games/clive-barkers-hellraiser-revival",
    "src": "rawg_new"
@@ -1405,6 +1448,7 @@
    "release": "2026-09-21",
    "image": "https://media.rawg.io/media/screenshots/38d/38d60abc464f6ddee22f8f3bcb10d4c0.jpg",
    "desc": "",
+   "genres": [],
    "age": null,
    "url": "https://rawg.io/games/well-dweller",
    "src": "rawg_new"
@@ -1418,6 +1462,9 @@
    "release": "2026-10-08",
    "image": "https://media.rawg.io/media/games/a09/a095493defc44ec3ea6484d9c33209af.jpg",
    "desc": "",
+   "genres": [
+    "動作"
+   ],
    "age": null,
    "url": "https://rawg.io/games/silver-pines",
    "src": "rawg_new"
@@ -1433,23 +1480,13 @@
    "release": "2026-09-17",
    "image": "https://media.rawg.io/media/screenshots/2be/2be279f15824d0dfdb1c1499569e4e6f.jpg",
    "desc": "",
+   "genres": [
+    "冒險",
+    "動作",
+    "角色扮演"
+   ],
    "age": null,
    "url": "https://rawg.io/games/trails-in-the-sky-2nd-chapter",
-   "src": "rawg_new"
-  },
-  {
-   "platform": "PC",
-   "platforms": [
-    "PC",
-    "PlayStation",
-    "Xbox"
-   ],
-   "title": "Aniimo",
-   "release": "2026-09-16",
-   "image": "https://media.rawg.io/media/screenshots/21b/21b53e57144d6fc9b7c07d51b56e5da7.jpg",
-   "desc": "",
-   "age": null,
-   "url": "https://rawg.io/games/aniimo",
    "src": "rawg_new"
   },
   {
@@ -1461,6 +1498,7 @@
    "release": "2026-09-21",
    "image": "https://media.rawg.io/media/screenshots/83c/83c07c37053d0d4663a1ed9b6d75ac64.jpg",
    "desc": "",
+   "genres": [],
    "age": null,
    "url": "https://rawg.io/games/graveyard-keeper-2",
    "src": "rawg_new"
@@ -1477,6 +1515,9 @@
    "release": "2026-09-25",
    "image": "https://media.rawg.io/media/screenshots/d9b/d9b0ef34a249647310c5bc7577ce68e3.jpg",
    "desc": "",
+   "genres": [
+    "運動"
+   ],
    "age": 0,
    "url": "https://rawg.io/games/ea-sports-fc-27",
    "src": "rawg_new"
@@ -1490,6 +1531,10 @@
    "release": "2026-10-01",
    "image": "https://media.rawg.io/media/screenshots/c36/c369c40764cab0de8491d414289cbf6c.jpg",
    "desc": "",
+   "genres": [
+    "冒險",
+    "動作"
+   ],
    "age": null,
    "url": "https://rawg.io/games/ghost-of-yotei-echoes-of-sekigahara",
    "src": "rawg_new"
@@ -1503,8 +1548,28 @@
    "release": "2026-10-15",
    "image": "https://media.rawg.io/media/games/97b/97b849dfc43f7634e65c0fccbf6c737d.jpg",
    "desc": "",
+   "genres": [
+    "動作"
+   ],
    "age": null,
    "url": "https://rawg.io/games/tenebris-somnia-demo",
+   "src": "rawg_new"
+  },
+  {
+   "platform": "PC",
+   "platforms": [
+    "PC"
+   ],
+   "title": "Lily's World XD",
+   "release": "2026-09-17",
+   "image": "https://media.rawg.io/media/games/3ea/3ea3624524929c413552cf8ad49c5482.jpg",
+   "desc": "",
+   "genres": [
+    "休閒",
+    "獨立"
+   ],
+   "age": null,
+   "url": "https://rawg.io/games/lilys-world-xd",
    "src": "rawg_new"
   }
  ],
@@ -1528,7 +1593,7 @@
   {
    "platform": "Steam",
    "title": "Super Cuber",
-   "desc": "",
+   "desc": "TWD 121",
    "url": "https://store.steampowered.com/app/4398300",
    "appid": 4398300,
    "src": "steam_soon"
@@ -1600,6 +1665,9 @@
    "release": "2026-12-31",
    "image": "https://media.rawg.io/media/games/b92/b92b55aeab9ed1777104f71f4b22a613.jpg",
    "desc": "",
+   "genres": [
+    "動作"
+   ],
    "age": 12,
    "url": "https://rawg.io/games/prince-of-persia-the-sands-of-time-remake",
    "src": "rawg_soon"
@@ -1614,6 +1682,9 @@
    "release": "2026-11-19",
    "image": "https://media.rawg.io/media/games/734/7342a1cd82c8997ec620084ae4c2e7e4.jpg",
    "desc": "",
+   "genres": [
+    "動作"
+   ],
    "age": 18,
    "url": "https://rawg.io/games/grand-theft-aito-vi",
    "src": "rawg_soon"
@@ -1627,6 +1698,12 @@
    "release": "2026-12-11",
    "image": "https://media.rawg.io/media/games/401/4010e56adceb7db58ba42d1189796d5e.jpg",
    "desc": "",
+   "genres": [
+    "多人線上",
+    "冒險",
+    "動作",
+    "角色扮演"
+   ],
    "age": null,
    "url": "https://rawg.io/games/path-of-exile-2",
    "src": "rawg_soon"
@@ -1641,6 +1718,10 @@
    "release": "2026-10-29",
    "image": "https://media.rawg.io/media/games/25f/25f536a977488f12ef8a6d013e50fda1.jpg",
    "desc": "",
+   "genres": [
+    "冒險",
+    "動作"
+   ],
    "age": null,
    "url": "https://rawg.io/games/phantom-blade-zero",
    "src": "rawg_soon"
@@ -1656,6 +1737,9 @@
    "release": "2027-02-12",
    "image": "https://media.rawg.io/media/games/c2b/c2b8a3ef89b3edd35c1804dc0d68d7bb.jpg",
    "desc": "",
+   "genres": [
+    "動作"
+   ],
    "age": null,
    "url": "https://rawg.io/games/tomb-raider-legacy-of-atlantis",
    "src": "rawg_soon"
@@ -1671,6 +1755,10 @@
    "release": "2027-01-19",
    "image": "https://media.rawg.io/media/games/233/233b58ed99520a1e0b19109f7263f011.jpg",
    "desc": "",
+   "genres": [
+    "動作",
+    "角色扮演"
+   ],
    "age": null,
    "url": "https://rawg.io/games/titan-quest-2",
    "src": "rawg_soon"
@@ -1686,6 +1774,9 @@
    "release": "2027-02-04",
    "image": "https://media.rawg.io/media/games/4a5/4a5865eca8376e08a8e31ce278b5248f.jpg",
    "desc": "",
+   "genres": [
+    "射擊"
+   ],
    "age": null,
    "url": "https://rawg.io/games/metro-2039",
    "src": "rawg_soon"
@@ -1700,6 +1791,9 @@
    "release": "2027-01-15",
    "image": "https://media.rawg.io/media/screenshots/21f/21ffdb58671720697c5e7382b021755b.jpg",
    "desc": "",
+   "genres": [
+    "動作"
+   ],
    "age": null,
    "url": "https://rawg.io/games/ananta",
    "src": "rawg_soon"
@@ -1713,6 +1807,9 @@
    "release": "2026-10-23",
    "image": "https://media.rawg.io/media/games/a93/a9304d97c8f264da59566a0f5e0a2181.jpeg",
    "desc": "",
+   "genres": [
+    "射擊"
+   ],
    "age": null,
    "url": "https://rawg.io/games/call-of-duty-modern-warfare-4",
    "src": "rawg_soon"
@@ -1728,6 +1825,9 @@
    "release": "2026-12-03",
    "image": "https://media.rawg.io/media/games/ed9/ed92bdc98d563301e94ae3e9663e8107.jpg",
    "desc": "",
+   "genres": [
+    "平台跳躍"
+   ],
    "age": null,
    "url": "https://rawg.io/games/rayman-legends-retold",
    "src": "rawg_soon"
@@ -1741,6 +1841,9 @@
    "release": "2027-01-28",
    "image": "https://media.rawg.io/media/games/145/145c294309a243d11c95f176e29e62e0.jpg",
    "desc": "",
+   "genres": [
+    "冒險"
+   ],
    "age": null,
    "url": "https://rawg.io/games/until-dawn-2-2",
    "src": "rawg_soon"
@@ -1757,6 +1860,9 @@
    "release": "2026-10-22",
    "image": "https://media.rawg.io/media/games/e51/e51aab3845c598b52a2881c3f7155f76.jpg",
    "desc": "",
+   "genres": [
+    "角色扮演"
+   ],
    "age": null,
    "url": "https://rawg.io/games/final-fantasy-resonance",
    "src": "rawg_soon"
@@ -1770,6 +1876,9 @@
    "release": "2026-11-05",
    "image": "https://media.rawg.io/media/games/c3b/c3bc70310175785b0c9d7bfc93624d5f.jpg",
    "desc": "",
+   "genres": [
+    "動作"
+   ],
    "age": null,
    "url": "https://rawg.io/games/the-legend-of-zelda-ocarina-of-time-2",
    "src": "rawg_soon"
@@ -1783,6 +1892,11 @@
    "release": "2026-10-20",
    "image": "https://media.rawg.io/media/games/cbf/cbf5b06692e82e312a5dc9db32ed5b4c.jpg",
    "desc": "",
+   "genres": [
+    "射擊",
+    "獨立",
+    "動作"
+   ],
    "age": null,
    "url": "https://rawg.io/games/mycopunk",
    "src": "rawg_soon"
@@ -1796,6 +1910,9 @@
    "release": "2027-01-28",
    "image": "https://media.rawg.io/media/games/582/5821d65020c1ac624d985d20e966765f.jpg",
    "desc": "",
+   "genres": [
+    "動作"
+   ],
    "age": null,
    "url": "https://rawg.io/games/metroid-ravenous",
    "src": "rawg_soon"
@@ -1809,6 +1926,11 @@
    "release": "2026-12-01",
    "image": "https://media.rawg.io/media/screenshots/3c5/3c511506ba31902bbdcbf963219ef77c.jpg",
    "desc": "",
+   "genres": [
+    "獨立",
+    "射擊",
+    "策略"
+   ],
    "age": null,
    "url": "https://rawg.io/games/beautiful-light",
    "src": "rawg_soon"
@@ -1822,6 +1944,9 @@
    "release": "2027-01-15",
    "image": "https://media.rawg.io/media/games/d81/d813ab759628d14efa6754e7664ca317.jpg",
    "desc": "",
+   "genres": [
+    "動作"
+   ],
    "age": null,
    "url": "https://rawg.io/games/stranger-than-heaven",
    "src": "rawg_soon"
@@ -1835,6 +1960,9 @@
    "release": "2026-10-21",
    "image": "https://media.rawg.io/media/games/41c/41c5448f15d06825947791da15489f92.jpg",
    "desc": "",
+   "genres": [
+    "動作"
+   ],
    "age": null,
    "url": "https://rawg.io/games/stupid-never-dies",
    "src": "rawg_soon"
@@ -1848,6 +1976,7 @@
    "release": "2026-10-26",
    "image": "https://media.rawg.io/media/screenshots/7ea/7ea439920ce17884b49e2e3988f8786a.jpg",
    "desc": "",
+   "genres": [],
    "age": null,
    "url": "https://rawg.io/games/remothered-red-nuns-legacy",
    "src": "rawg_soon"
@@ -1861,6 +1990,12 @@
    "release": "2026-10-26",
    "image": "https://media.rawg.io/media/screenshots/a65/a65915e30efd086919dafcb7f79a6b79.jpg",
    "desc": "",
+   "genres": [
+    "獨立",
+    "冒險",
+    "動作",
+    "角色扮演"
+   ],
    "age": null,
    "url": "https://rawg.io/games/emberville",
    "src": "rawg_soon"
@@ -1877,7 +2012,11 @@
    "square": true,
    "age": 12,
    "rating": 5.0,
-   "count": 3678,
+   "count": 3680,
+   "genres": [
+    "策略",
+    "卡牌桌遊"
+   ],
    "src": "ios_top"
   },
   {
@@ -1891,6 +2030,9 @@
    "age": 0,
    "rating": 4.9,
    "count": 3089,
+   "genres": [
+    "益智"
+   ],
    "src": "ios_top"
   },
   {
@@ -1904,6 +2046,10 @@
    "age": 0,
    "rating": 4.9,
    "count": 5017,
+   "genres": [
+    "策略",
+    "模擬"
+   ],
    "src": "ios_top"
   },
   {
@@ -1916,7 +2062,11 @@
    "square": true,
    "age": 6,
    "rating": 4.9,
-   "count": 15637,
+   "count": 15638,
+   "genres": [
+    "策略",
+    "模擬"
+   ],
    "src": "ios_top"
   },
   {
@@ -1929,7 +2079,11 @@
    "square": true,
    "age": 12,
    "rating": 4.9,
-   "count": 3193,
+   "count": 3194,
+   "genres": [
+    "角色扮演",
+    "動作"
+   ],
    "src": "ios_top"
   },
   {
@@ -1943,6 +2097,10 @@
    "age": 12,
    "rating": 4.9,
    "count": 2685,
+   "genres": [
+    "策略",
+    "動作"
+   ],
    "src": "ios_top"
   },
   {
@@ -1955,7 +2113,11 @@
    "square": true,
    "age": 12,
    "rating": 4.9,
-   "count": 5359,
+   "count": 5360,
+   "genres": [
+    "模擬",
+    "策略"
+   ],
    "src": "ios_top"
   },
   {
@@ -1969,6 +2131,9 @@
    "age": 18,
    "rating": 4.9,
    "count": 5005,
+   "genres": [
+    "音樂"
+   ],
    "src": "ios_top"
   },
   {
@@ -1981,7 +2146,11 @@
    "square": true,
    "age": 12,
    "rating": 4.9,
-   "count": 2144,
+   "count": 2147,
+   "genres": [
+    "策略",
+    "動作"
+   ],
    "src": "ios_top"
   },
   {
@@ -1995,6 +2164,10 @@
    "age": 12,
    "rating": 5.0,
    "count": 792,
+   "genres": [
+    "益智",
+    "冒險"
+   ],
    "src": "ios_top"
   },
   {
@@ -2136,7 +2309,7 @@
    "pct": 80,
    "ratio": 0.96,
    "score": 0.9596,
-   "reviews": 31764,
+   "reviews": 31765,
    "desc": "-80%  TWD 93(原價 468)",
    "url": "https://store.steampowered.com/app/249130"
   },
@@ -2169,7 +2342,7 @@
    "pct": 10,
    "ratio": 0.77,
    "score": 0.9452,
-   "reviews": 2573,
+   "reviews": 2580,
    "desc": "-10%  TWD 467(原價 519)",
    "url": "https://store.steampowered.com/app/2333000"
   },
@@ -2224,7 +2397,7 @@
    "pct": 90,
    "ratio": 0.5,
    "score": 0.9295,
-   "reviews": 23023,
+   "reviews": 23024,
    "desc": "-90%  TWD 32(原價 328)",
    "url": "https://store.steampowered.com/app/894020"
   },
@@ -2257,7 +2430,7 @@
    "pct": 20,
    "ratio": 0.74,
    "score": 0.9231,
-   "reviews": 1605,
+   "reviews": 1628,
    "desc": "-20%  TWD 375(原價 469)",
    "url": "https://store.steampowered.com/app/2929250"
   },
@@ -2279,7 +2452,7 @@
    "pct": 40,
    "ratio": 0.79,
    "score": 0.9098,
-   "reviews": 48523,
+   "reviews": 48527,
    "desc": "-40%  TWD 1,074(原價 1,790)",
    "url": "https://store.steampowered.com/app/3768760"
   },
@@ -2290,7 +2463,7 @@
    "pct": 85,
    "ratio": 0.7,
    "score": 0.9091,
-   "reviews": 11595,
+   "reviews": 11596,
    "desc": "-85%  TWD 52(原價 350)",
    "url": "https://store.steampowered.com/app/578330"
   },
@@ -2422,7 +2595,7 @@
    "pct": 70,
    "ratio": 0.82,
    "score": 0.87,
-   "reviews": 987691,
+   "reviews": 987700,
    "desc": "-70%  TWD 479(原價 1,599)",
    "url": "https://store.steampowered.com/app/1091500"
   },
@@ -2433,7 +2606,7 @@
    "pct": 92,
    "ratio": 0.57,
    "score": 0.8674,
-   "reviews": 3274,
+   "reviews": 3275,
    "desc": "-92%  TWD 19(原價 238)",
    "url": "https://store.steampowered.com/app/612470"
   },
@@ -2444,7 +2617,7 @@
    "pct": 10,
    "ratio": 0.96,
    "score": 0.8599,
-   "reviews": 107931,
+   "reviews": 107975,
    "desc": "-10%  TWD 701(原價 779)",
    "url": "https://store.steampowered.com/app/1203620"
   },
@@ -2455,7 +2628,7 @@
    "pct": 85,
    "ratio": 0.96,
    "score": 0.8596,
-   "reviews": 20177,
+   "reviews": 20178,
    "desc": "-85%  TWD 70(原價 468)",
    "url": "https://store.steampowered.com/app/242700"
   },
@@ -2465,8 +2638,8 @@
    "appid": 3569420,
    "pct": 35,
    "ratio": 0.58,
-   "score": 0.8569,
-   "reviews": 237,
+   "score": 0.8571,
+   "reviews": 239,
    "desc": "-35%  TWD 245(原價 377)",
    "url": "https://store.steampowered.com/app/3569420"
   },
@@ -2532,7 +2705,7 @@
    "pct": 75,
    "ratio": 0.82,
    "score": 0.84,
-   "reviews": 230187,
+   "reviews": 230193,
    "desc": "-75%  TWD 397(原價 1,590)",
    "url": "https://store.steampowered.com/app/2183900"
   },
@@ -2598,7 +2771,7 @@
    "pct": 30,
    "ratio": 0.67,
    "score": 0.8098,
-   "reviews": 34347,
+   "reviews": 34352,
    "desc": "-30%  TWD 453(原價 648)",
    "url": "https://store.steampowered.com/app/1374490"
   },
@@ -2609,7 +2782,7 @@
    "pct": 90,
    "ratio": 0.48,
    "score": 0.8097,
-   "reviews": 18706,
+   "reviews": 18707,
    "desc": "-90%  TWD 39(原價 399)",
    "url": "https://store.steampowered.com/app/738520"
   },
@@ -2763,7 +2936,7 @@
    "pct": 90,
    "ratio": 0.78,
    "score": 0.7779,
-   "reviews": 1831,
+   "reviews": 1833,
    "desc": "-90%  TWD 50(原價 499)",
    "url": "https://store.steampowered.com/app/1234430"
   },
@@ -2835,6 +3008,17 @@
   },
   {
    "platform": "Steam",
+   "title": "基機受難記 (Flipping is Hard)",
+   "appid": 3826670,
+   "pct": 35,
+   "ratio": 0.5,
+   "score": 0.7616,
+   "reviews": 26,
+   "desc": "-35%  TWD 159(原價 246)",
+   "url": "https://store.steampowered.com/app/3826670"
+  },
+  {
+   "platform": "Steam",
    "title": "GreedFall",
    "appid": 606880,
    "pct": 90,
@@ -2865,6 +3049,17 @@
    "reviews": 12339,
    "desc": "-87%  TWD 50(原價 390)",
    "url": "https://store.steampowered.com/app/378540"
+  },
+  {
+   "platform": "Steam",
+   "title": "繁星之海 Beyond These Stars",
+   "appid": 2295060,
+   "pct": 20,
+   "ratio": 0.62,
+   "score": 0.7304,
+   "reviews": 17,
+   "desc": "-20%  TWD 479(原價 599)",
+   "url": "https://store.steampowered.com/app/2295060"
   },
   {
    "platform": "Steam",
@@ -2917,7 +3112,7 @@
    "pct": 88,
    "ratio": 0.9,
    "score": 0.7183,
-   "reviews": 527,
+   "reviews": 528,
    "desc": "-88%  TWD 16(原價 138)",
    "url": "https://store.steampowered.com/app/505330"
   },
@@ -2966,6 +3161,6 @@
    "url": "https://store.steampowered.com/app/505730"
   }
  ],
- "updated": "2026-10-16T23:36:57+00:00",
+ "updated": "2026-10-17T00:14:13+00:00",
  "errors": []
 }
