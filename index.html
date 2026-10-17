@@ -93,6 +93,7 @@ h1{background:linear-gradient(90deg,#35e0ff,#7c5cff 58%,#ff4fa3);-webkit-backgro
 .pg button{background:rgba(18,26,48,.72);border-color:rgba(110,150,255,.24)}
 .pg button[aria-current=true]{background:linear-gradient(135deg,#35e0ff,#7c5cff);color:#04101f;border-color:transparent;font-weight:700;box-shadow:0 0 12px rgba(53,224,255,.4)}
 details summary{color:var(--ac)}
+.more{margin-top:8px}.more summary{font-size:14px}.more>.m{margin-top:6px}
 </style></head><body>
 <div class="bgfx" aria-hidden="true">
 <svg class="art a1" viewBox="0 0 240 170"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M72 44h96c14 0 26 9 29 22l13 55c3 14-8 27-22 27-9 0-17-5-22-12l-15-24H89l-15 24c-5 7-13 12-22 12-14 0-25-13-22-27l13-55c3-13 15-22 29-22z"/><path d="M60 38c5-9 14-14 24-14h14M180 38c-5-9-14-14-24-14h-14"/><path d="M82 62v28M68 76h28"/><circle cx="164" cy="76" r="7"/><circle cx="182" cy="94" r="7"/><circle cx="164" cy="112" r="7"/><circle cx="146" cy="94" r="7"/><circle cx="104" cy="100" r="9"/><circle cx="136" cy="100" r="9"/><path d="M112 66h16"/></g></svg>
@@ -108,7 +109,7 @@ details summary{color:var(--ac)}
 </div>
 <main>
 <header class="hd"><svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#35e0ff"/><stop offset=".55" stop-color="#7c5cff"/><stop offset="1" stop-color="#ff4fa3"/></linearGradient></defs><polygon points="24,3 42,13.5 42,34.5 24,45 6,34.5 6,13.5" fill="rgba(53,224,255,.07)" stroke="url(#lg)" stroke-width="2.2" stroke-linejoin="round"/><g fill="none" stroke="url(#lg)" stroke-width="1.8" stroke-linecap="round"><path d="M16.5 15.5a10.5 10.5 0 0 1 15 0"/><path d="M19.8 18.6a6 6 0 0 1 8.4 0"/></g><path d="M15.5 22.5h17c2.2 0 4 1.4 4.6 3.5l1.4 5.3c.5 1.8-.8 3.5-2.6 3.5-1 0-1.8-.5-2.4-1.2l-2.3-3.3h-14.4l-2.3 3.3c-.6.7-1.4 1.2-2.4 1.2-1.8 0-3.1-1.7-2.6-3.5l1.4-5.3c.6-2.1 2.4-3.5 4.6-3.5z" fill="url(#lg)"/><path d="M17.4 25.2v4.4M15.2 27.4h4.4" stroke="#070a12" stroke-width="1.7" stroke-linecap="round"/><circle cx="30.3" cy="25.8" r="1.2" fill="#070a12"/><circle cx="33" cy="28" r="1.2" fill="#070a12"/></svg><div><h1>遊戲偵查隊</h1><div class="tag">GAME SCOUT SQUAD</div></div></header><div id="upd">載入中…</div>
-<div role="tablist" id="tabs"></div><div id="chips"></div><div id="gchips"></div><div id="tabnote" class="m"></div><div id="list"></div><div id="pager"></div><div id="msg"></div><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS、<a href="https://www.gamerpower.com" target="_blank" rel="noopener noreferrer">GamerPower</a>(限時免費)、Apple iTunes、Google Play(非官方)、匯率來自 <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a>。手機付費榜依評分與評論數綜合排序,iOS 取自 App Store 台灣區付費榜,Android 靠關鍵字搜尋找候選,可能漏掉部分遊戲。史低價是 CheapShark 的美元紀錄換算,僅供參考。分級圖示依 Steam / RAWG 提供的 PEGI、ESRB 資料換算,僅供參考,非台灣官方分級,請以遊戲包裝或文化部公告為準。</div>
+<div role="tablist" id="tabs"></div><div id="chips"></div><div id="gchips"></div><div id="tabnote" class="m"></div><div id="list"></div><div id="pager"></div><div id="msg"></div><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS、<a href="https://www.gamerpower.com" target="_blank" rel="noopener noreferrer">GamerPower</a>(限時免費)、Apple iTunes、Google Play(非官方)、匯率來自 <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a>。</div><details class="more"><summary>顯示更多說明</summary><div class="m">歷史新低分頁:只列出目前有折扣、而且現價不高於歷史最低價的遊戲,依 Steam 評價(好評率與評論數綜合)由高到低排序,每頁 10 款。判斷方式:現價 ≤ CheapShark 歷史最低價(美元)換算台幣的 102%,匯率和各國定價差異會造成誤差,僅供參考。<br>手機付費榜依評分與評論數綜合排序,iOS 取自 App Store 台灣區付費榜,Android 靠關鍵字搜尋找候選,可能漏掉部分遊戲。史低價是 CheapShark 的美元紀錄換算,僅供參考。分級圖示依 Steam / RAWG 提供的 PEGI、ESRB 資料換算,僅供參考,非台灣官方分級,請以遊戲包裝或文化部公告為準。</div></details>
 <script>
 // 自己累積的價格走勢:目前只在後台(history.json)收集,資料夠多再改成 true 就會顯示
 const SHOW_TREND=false;
@@ -243,7 +244,7 @@ function meta(i){
 function render(){
  $("tabs").innerHTML=TABS.map(([k,v])=>`<button role="tab" aria-selected="${k===tab}" data-t="${k}">${v}</button>`).join("");
  let items=tab==="lows"?[...lowsList()]:[...(D[tab]||[])];
- $("tabnote").textContent=tab==="lows"?"只列出目前有折扣、而且現價不高於歷史最低價的遊戲,依 Steam 評價(好評率與評論數綜合)由高到低排序,每頁 10 款。判斷方式:現價 ≤ CheapShark 歷史最低價(美元)換算台幣的 102%,匯率和各國定價差異會造成誤差,僅供參考。":"";
+ $("tabnote").textContent="";
  if(tab==="news")items.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
  if(tab==="free")items.sort((a,b)=>(a.status==="next")-(b.status==="next"));
  if(tab==="mobile")items.sort((a,b)=>a.platform===b.platform?a.rank-b.rank:(a.platform==="iOS"?-1:1));
