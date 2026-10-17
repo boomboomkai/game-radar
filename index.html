@@ -93,6 +93,16 @@ h1{background:linear-gradient(90deg,#35e0ff,#7c5cff 58%,#ff4fa3);-webkit-backgro
 .pg button{background:rgba(18,26,48,.72);border-color:rgba(110,150,255,.24)}
 .pg button[aria-current=true]{background:linear-gradient(135deg,#35e0ff,#7c5cff);color:#04101f;border-color:transparent;font-weight:700;box-shadow:0 0 12px rgba(53,224,255,.4)}
 details summary{color:var(--ac)}
+[hidden]{display:none!important}
+.fab{position:fixed;right:max(14px,env(safe-area-inset-right));z-index:30;font:inherit;display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(110,150,255,.35);background:rgba(12,18,34,.9);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--tx);border-radius:999px;padding:11px 16px;cursor:pointer;box-shadow:0 6px 22px rgba(0,0,0,.5),0 0 16px rgba(53,224,255,.22)}
+.fab svg{width:20px;height:20px;flex:none}
+#gfab{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+#gfab.on{background:linear-gradient(135deg,#35e0ff,#7c5cff);color:#04101f;border-color:transparent;font-weight:700}
+#totop{bottom:calc(22px + env(safe-area-inset-bottom,0px));width:48px;height:48px;padding:0;justify-content:center}
+#gpanel{position:fixed;right:max(14px,env(safe-area-inset-right));bottom:calc(140px + env(safe-area-inset-bottom,0px));z-index:31;width:min(88vw,340px);max-height:min(60vh,480px);overflow:auto;background:rgba(10,15,30,.96);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(110,150,255,.3);border-radius:14px;padding:12px 14px 14px;box-shadow:0 14px 40px rgba(0,0,0,.6),0 0 24px rgba(124,92,255,.2)}
+#gpanel .gh{display:flex;justify-content:space-between;align-items:center;font-weight:700;margin-bottom:10px}
+#gclose{font:inherit;background:none;border:0;color:var(--mu);font-size:24px;line-height:1;cursor:pointer;padding:0 4px}
+#gpanel #gchips{margin:0}
 .more{margin-top:8px}.more summary{font-size:14px}.more>.m{margin-top:6px}
 </style></head><body>
 <div class="bgfx" aria-hidden="true">
@@ -109,13 +119,25 @@ details summary{color:var(--ac)}
 </div>
 <main>
 <header class="hd"><svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#35e0ff"/><stop offset=".55" stop-color="#7c5cff"/><stop offset="1" stop-color="#ff4fa3"/></linearGradient></defs><polygon points="24,3 42,13.5 42,34.5 24,45 6,34.5 6,13.5" fill="rgba(53,224,255,.07)" stroke="url(#lg)" stroke-width="2.2" stroke-linejoin="round"/><g fill="none" stroke="url(#lg)" stroke-width="1.8" stroke-linecap="round"><path d="M16.5 15.5a10.5 10.5 0 0 1 15 0"/><path d="M19.8 18.6a6 6 0 0 1 8.4 0"/></g><path d="M15.5 22.5h17c2.2 0 4 1.4 4.6 3.5l1.4 5.3c.5 1.8-.8 3.5-2.6 3.5-1 0-1.8-.5-2.4-1.2l-2.3-3.3h-14.4l-2.3 3.3c-.6.7-1.4 1.2-2.4 1.2-1.8 0-3.1-1.7-2.6-3.5l1.4-5.3c.6-2.1 2.4-3.5 4.6-3.5z" fill="url(#lg)"/><path d="M17.4 25.2v4.4M15.2 27.4h4.4" stroke="#070a12" stroke-width="1.7" stroke-linecap="round"/><circle cx="30.3" cy="25.8" r="1.2" fill="#070a12"/><circle cx="33" cy="28" r="1.2" fill="#070a12"/></svg><div><h1>遊戲偵查隊</h1><div class="tag">GAME SCOUT SQUAD</div></div></header><div id="upd">載入中…</div>
-<div role="tablist" id="tabs"></div><div id="chips"></div><div id="gchips"></div><div id="tabnote" class="m"></div><div id="list"></div><div id="pager"></div><div id="msg"></div><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS、<a href="https://www.gamerpower.com" target="_blank" rel="noopener noreferrer">GamerPower</a>(限時免費)、Apple iTunes、Google Play(非官方)、匯率來自 <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a>。</div><details class="more"><summary>顯示更多說明</summary><div class="m">歷史新低分頁:只列出目前有折扣、而且現價不高於歷史最低價的遊戲,依 Steam 評價(好評率與評論數綜合)由高到低排序,每頁 10 款。判斷方式:現價 ≤ CheapShark 歷史最低價(美元)換算台幣的 102%,匯率和各國定價差異會造成誤差,僅供參考。<br>手機付費榜依評分與評論數綜合排序,iOS 取自 App Store 台灣區付費榜,Android 靠關鍵字搜尋找候選,可能漏掉部分遊戲。史低價是 CheapShark 的美元紀錄換算,僅供參考。分級圖示依 Steam / RAWG 提供的 PEGI、ESRB 資料換算,僅供參考,非台灣官方分級,請以遊戲包裝或文化部公告為準。</div></details>
+<div role="tablist" id="tabs"></div><div id="chips"></div><div id="tabnote" class="m"></div><div id="list"></div><div id="pager"></div><div id="msg"></div><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS、<a href="https://www.gamerpower.com" target="_blank" rel="noopener noreferrer">GamerPower</a>(限時免費)、Apple iTunes、Google Play(非官方)、匯率來自 <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a>。</div><details class="more"><summary>顯示更多說明</summary><div class="m">歷史新低分頁:只列出目前有折扣、而且現價不高於歷史最低價的遊戲,依 Steam 評價(好評率與評論數綜合)由高到低排序,每頁 10 款。判斷方式:現價 ≤ CheapShark 歷史最低價(美元)換算台幣的 102%,匯率和各國定價差異會造成誤差,僅供參考。<br>手機付費榜依評分與評論數綜合排序,iOS 取自 App Store 台灣區付費榜,Android 靠關鍵字搜尋找候選,可能漏掉部分遊戲。史低價是 CheapShark 的美元紀錄換算,僅供參考。分級圖示依 Steam / RAWG 提供的 PEGI、ESRB 資料換算,僅供參考,非台灣官方分級,請以遊戲包裝或文化部公告為準。</div></details>
+<button id="gfab" class="fab" aria-expanded="false" aria-controls="gpanel" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg><span id="gfabt">類型</span></button>
+<div id="gpanel" role="dialog" aria-label="選擇遊戲類型" hidden><div class="gh"><span>遊戲類型</span><button id="gclose" aria-label="關閉">×</button></div><div id="gchips"></div></div>
+<button id="totop" class="fab" aria-label="回到最上方" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 <script>
 // 自己累積的價格走勢:目前只在後台(history.json)收集,資料夠多再改成 true 就會顯示
 const SHOW_TREND=false;
 const TABS=[["news","最新消息"],["free","限時免費"],["deals","特價消息"],["lows","歷史新低"],["new","新上架"],["soon","即將上架"],["mobile","手機付費榜"]];
 let D={free:[],deals:[],news:[]},G={apps:{}},H={},tab="free",plat="全部",page=1,gen="全部";
 const $=id=>document.getElementById(id);
+const gfab=$("gfab"),gpanel=$("gpanel"),totop=$("totop");
+function setG(open){gpanel.hidden=!open;gfab.setAttribute("aria-expanded",String(open))}
+gfab.addEventListener("click",()=>setG(gpanel.hidden));
+$("gclose").addEventListener("click",()=>setG(false));
+document.addEventListener("click",e=>{if(!gpanel.hidden&&!gpanel.contains(e.target)&&!gfab.contains(e.target))setG(false)});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")setG(false)});
+const syncTop=()=>{totop.hidden=window.scrollY<500};
+window.addEventListener("scroll",syncTop,{passive:true});
+totop.addEventListener("click",()=>window.scrollTo({top:0,behavior:window.matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"}));
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safe=u=>/^https?:\/\//.test(u)?u:"#";
 const tw=s=>s?new Date(s).toLocaleString("zh-TW",{timeZone:"Asia/Taipei",month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit",hour12:false}):"";
@@ -254,7 +276,9 @@ function render(){
  const byPlat=items.filter(i=>plat==="全部"||pl(i).includes(plat)),gc={};
  byPlat.forEach(i=>genresOf(i).forEach(k=>gc[k]=(gc[k]||0)+1));
  const gs=GORD.filter(k=>gc[k]);if(gen!=="全部"&&!gc[gen])gen="全部";
- $("gchips").innerHTML=gs.length?`<span class="gl">類型</span><button aria-pressed="${gen==="全部"}" data-ge="全部">全部</button>`+gs.map(k=>`<button aria-pressed="${k===gen}" data-ge="${k}">${k} ${gc[k]}</button>`).join(""):"";
+ $("gchips").innerHTML=gs.length?`<button aria-pressed="${gen==="全部"}" data-ge="全部">全部</button>`+gs.map(k=>`<button aria-pressed="${k===gen}" data-ge="${k}">${k} ${gc[k]}</button>`).join(""):"";
+ gfab.hidden=!gs.length;if(!gs.length)setG(false);
+ $("gfabt").textContent=gen==="全部"?"類型":gen;gfab.classList.toggle("on",gen!=="全部");
  const all=byPlat.filter(i=>gen==="全部"||genresOf(i).includes(gen));let show=all;
  const PER=10,pages=Math.max(1,Math.ceil(all.length/PER));
  if(tab==="lows"){if(page>pages)page=pages;show=all.slice((page-1)*PER,page*PER)}
@@ -271,12 +295,12 @@ document.addEventListener("error",e=>{
  let st=+im.dataset.st||0;while(c[st]&&c[st]===im.getAttribute("src"))st++;
  const n=c[st];
  if(n&&/^https?:\/\//.test(n)){im.dataset.st=st+1;im.src=n}else{const a=im.closest(".cvl");if(a)a.remove()}},true);
-document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.t){tab=b.dataset.t;plat="全部";page=1}if(b.dataset.p){plat=b.dataset.p;page=1}if(b.dataset.ge){gen=b.dataset.ge;page=1}if(b.dataset.g)page=+b.dataset.g;render();if(b.dataset.g)window.scrollTo({top:window.scrollY+$("chips").getBoundingClientRect().top-70});if(b.dataset.t){const a=document.querySelector("[role=tab][aria-selected=true]");if(a)a.scrollIntoView({inline:"center",block:"nearest"})}});
+document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.t){tab=b.dataset.t;plat="全部";page=1}if(b.dataset.p){plat=b.dataset.p;page=1}if(b.dataset.ge){gen=b.dataset.ge;page=1;setG(false)}if(b.dataset.g)page=+b.dataset.g;render();if(b.dataset.g)window.scrollTo({top:window.scrollY+$("chips").getBoundingClientRect().top-70});if(b.dataset.t){const a=document.querySelector("[role=tab][aria-selected=true]");if(a)a.scrollIntoView({inline:"center",block:"nearest"})}});
 const j=u=>fetch(u+"?_="+Date.now()).then(r=>r.json()).catch(()=>null);
 j("games.json").then(g=>{if(g)G=g;render()});if(SHOW_TREND)j("history.json").then(h=>{if(h)H=h;render()});
 fetch("data.json?_="+Date.now()).then(r=>r.json()).then(d=>{D=d;
  $("upd").textContent=d.updated?"最後更新 "+tw(d.updated)+"(台北時間)":"尚未更新";
  $("err").textContent=(d.errors||[]).length?"部分來源暫時抓不到,已顯示舊資料:"+d.errors.map(x=>x.split(":")[0]).join("、"):"";
  render()}).catch(()=>{$("upd").textContent="讀不到 data.json";render()});
-render();
+render();syncTop();
 </script></main></body></html>
