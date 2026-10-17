@@ -219,7 +219,8 @@ def parse_rawg(d):
                 labels.append(lab)
         items.append({"platform": labels[0] if labels else "其他", "platforms": labels or ["其他"],
                       "title": g["name"], "release": g.get("released") or "", "image": g.get("background_image") or "",
-                      "desc": "", "age": RAWG_AGE.get((g.get("esrb_rating") or {}).get("slug") or ""),
+                      "desc": "", "genres": uniq([RAWG_GENRE[x["name"]] for x in g.get("genres") or [] if x.get("name") in RAWG_GENRE]),
+                      "age": RAWG_AGE.get((g.get("esrb_rating") or {}).get("slug") or ""),
                       "url": f"https://rawg.io/games/{g['slug']}"})
     return items
 
@@ -396,6 +397,7 @@ def parse_ios_lookup(d):
         apps.append({"id": str(r["trackId"]), "title": r["trackName"], "price": float(r.get("price") or 0),
                      "cur": r.get("currency", "TWD"), "url": r.get("trackViewUrl", ""),
                      "img": r.get("artworkUrl512") or r.get("artworkUrl100", ""),
+                     "genres": uniq([IOS_GENRE[str(i)] for i in r.get("genreIds", []) if str(i) in IOS_GENRE]),
                      "age": ios_age(r.get("contentAdvisoryRating") or r.get("trackContentRating")),
                      "rating": float(r["averageUserRating"]) if r.get("averageUserRating") else None,
                      "count": int(r.get("userRatingCount") or 0)})
@@ -417,7 +419,7 @@ def ios_compute():
         if (today - datetime.fromisoformat(pd).date()).days > 60 or a["price"] >= peak:
             peak, pd = a["price"], today.isoformat()
         hist[a["id"]] = {"title": a["title"], "price": a["price"], "max": peak, "pd": pd, "seen": today.isoformat()}
-        base = {"platform": "iOS", "title": a["title"], "url": a["url"], "image": a["img"], "square": True, "age": a["age"]}
+        base = {"platform": "iOS", "title": a["title"], "url": a["url"], "image": a["img"], "square": True, "age": a["age"], "genres": a["genres"]}
         if a["price"] == 0 and peak > 0:
             free.append({**base, "status": "now", "desc": f"原價 {a['cur']} {peak:,.0f}"})
         elif 0 < a["price"] < peak:
@@ -463,7 +465,7 @@ def ios_top(n=10):
     pool.sort(key=lambda a: -bayes(a["rating"], a["count"]))
     return [{"platform": "iOS", "rank": i, "title": a["title"], "desc": f"{a['cur']} {a['price']:,.0f}",
              "url": a["url"], "image": a["img"], "square": True, "age": a["age"],
-             "rating": round(a["rating"], 1), "count": a["count"]} for i, a in enumerate(pool[:n], 1)]
+             "rating": round(a["rating"], 1), "count": a["count"], "genres": a["genres"]} for i, a in enumerate(pool[:n], 1)]
 
 
 def android_top(n=10):
@@ -493,6 +495,7 @@ def android_top(n=10):
               "desc": f"{d.get('currency') or 'TWD'} {d['price']:,.0f}",
               "url": d.get("url") or "https://play.google.com/store/apps/details?id=" + d["appId"],
               "image": d.get("icon", ""), "square": True, "age": android_age(d.get("contentRating")),
+              "genres": [ANDROID_GENRE[d["genreId"]]] if d.get("genreId") in ANDROID_GENRE else [],
               "rating": round(d["score"], 1), "count": d["ratings"]} for i, d in enumerate(detail[:n], 1)]
     if items:
         ANDROID_CACHE.write_text(json.dumps({"t": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -634,7 +637,7 @@ def build_lows(new, games):
 GAMES = Path(__file__).parent / "games.json"
 HISTORY = Path(__file__).parent / "history.json"
 MAX_APPS = 200          # 每次最多處理幾款遊戲,避免請求過多
-SCHEMA = 2            # 詳情資料格式版本;舊版資料(缺比價 / 史低)會自動重抓一次
+SCHEMA = 3            # 詳情資料格式版本;舊版資料(缺比價 / 史低)會自動重抓一次
 _CS_ERR = []
 
 
@@ -686,6 +689,31 @@ def tw_age(ratings, required_age=0):
     return None
 
 
+# ---------- 遊戲類型(統一成同一組中文分類) ----------
+STEAM_GENRE = {"1": "動作", "2": "策略", "3": "角色扮演", "4": "休閒", "9": "競速", "18": "運動",
+               "23": "獨立", "25": "冒險", "28": "模擬", "29": "多人線上"}      # 用 Steam 的分類編號,不受語言影響
+IOS_GENRE = {"7001": "動作", "7002": "冒險", "7003": "休閒", "7004": "卡牌桌遊", "7005": "卡牌桌遊", "7006": "休閒",
+             "7007": "卡牌桌遊", "7008": "教育親子", "7009": "教育親子", "7011": "音樂", "7012": "益智",
+             "7013": "競速", "7014": "角色扮演", "7015": "模擬", "7016": "運動", "7017": "策略", "7018": "益智", "7019": "益智"}
+ANDROID_GENRE = {"GAME_ACTION": "動作", "GAME_ADVENTURE": "冒險", "GAME_ARCADE": "休閒", "GAME_BOARD": "卡牌桌遊",
+                 "GAME_CARD": "卡牌桌遊", "GAME_CASINO": "休閒", "GAME_CASUAL": "休閒", "GAME_EDUCATIONAL": "教育親子",
+                 "GAME_MUSIC": "音樂", "GAME_PUZZLE": "益智", "GAME_RACING": "競速", "GAME_ROLE_PLAYING": "角色扮演",
+                 "GAME_SIMULATION": "模擬", "GAME_SPORTS": "運動", "GAME_STRATEGY": "策略", "GAME_TRIVIA": "益智",
+                 "GAME_WORD": "益智"}
+RAWG_GENRE = {"Action": "動作", "Indie": "獨立", "Adventure": "冒險", "RPG": "角色扮演", "Strategy": "策略",
+              "Shooter": "射擊", "Casual": "休閒", "Simulation": "模擬", "Puzzle": "益智", "Arcade": "休閒",
+              "Platformer": "平台跳躍", "Racing": "競速", "Massively Multiplayer": "多人線上", "Sports": "運動",
+              "Fighting": "格鬥", "Family": "教育親子", "Board Games": "卡牌桌遊", "Educational": "教育親子", "Card": "卡牌桌遊"}
+
+
+def uniq(xs):
+    return list(dict.fromkeys(xs))
+
+
+def steam_genres(gs):
+    return uniq([STEAM_GENRE[str(g.get("id"))] for g in gs or [] if str(g.get("id")) in STEAM_GENRE])
+
+
 def parse_details(d):
     po = d.get("price_overview") or {}
     movies = []
@@ -694,7 +722,7 @@ def parse_details(d):
         movies.append({"name": m.get("name", ""), "thumb": m.get("thumbnail", ""),
                        "mp4": mp4.get("480") or mp4.get("max") or ""})
     rel = (d.get("release_date") or {}).get("date", "")
-    return {"age": tw_age(d.get("ratings"), d.get("required_age")), "release": rel, "release_iso": parse_release(rel), "name": d.get("name", ""), "header": d.get("header_image", ""), "desc": d.get("short_description", ""),
+    return {"age": tw_age(d.get("ratings"), d.get("required_age")), "genres": steam_genres(d.get("genres")), "release": rel, "release_iso": parse_release(rel), "name": d.get("name", ""), "header": d.get("header_image", ""), "desc": d.get("short_description", ""),
             "metacritic": (d.get("metacritic") or {}).get("score"),
             "shots": [{"t": s.get("path_thumbnail", ""), "f": s.get("path_full", "")}
                       for s in (d.get("screenshots") or [])[:6]],
