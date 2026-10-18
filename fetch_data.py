@@ -532,6 +532,9 @@ NO_STEAM = {"iOS", "Android", "PlayStation", "Xbox", "Nintendo", "Meta"}   # 這
 BANNED_PLATFORM = re.compile(r"itch|drm|stove|meta|rift|oculus|quest|^vr$", re.I)   # itch.io、DRM-Free 領取流程不直覺;Stove、Meta / Rift(VR)不是台灣常用的平台 → 不收錄(想排除別的平台就加在這個正規表示式裡)
 
 
+EXCLUDE_TEXT = re.compile(r"alienware", re.I)   # 要先到 Alienware Arena 註冊、累積點數才能換 key 的贈送 → 不收錄(想排除別的來源,把關鍵字加進這個正規表示式)
+
+
 def gp_labels(s):
     out = []
     for p in [x.strip() for x in (s or "").split(",")]:
@@ -555,6 +558,8 @@ def parse_gamerpower(rows):
     for g in rows:
         if str(g.get("status", "Active")).lower() != "active":
             continue
+        if EXCLUDE_TEXT.search(" ".join(str(g.get(k, "")) for k in ("title", "description", "instructions", "platforms"))):
+            continue                                      # 標題、說明或領取步驟提到 Alienware → 整筆略過
         raw = [x.strip() for x in str(g.get("platforms") or "").split(",") if x.strip()]
         sm = re.search(r"\(([^)]*)\)\s*(?:Key\s*)?Giveaway\s*$", g.get("title", ""))
         title_store = sm.group(1) if sm else ""            # 標題括號裡的商店,例如「(Stove)」
