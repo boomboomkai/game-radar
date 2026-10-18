@@ -385,8 +385,6 @@ function platPanels(i,g){
  const find=re=>rows.find(r=>re.test(r.store)&&!r.none),miss=re=>rows.some(r=>re.test(r.store)&&r.none&&r.similar);
  const own=new Set(pl(i).map(p=>PK[p]).filter(Boolean)),isPC=pl(i).some(p=>["PC","Steam","Epic","GOG","EA","Ubisoft"].includes(p));
  const keys=new Set(platKeys(i));free.forEach(k=>keys.add(k));
- if(i.appid===0&&isPC&&i.steam==="similar")keys.add("Steam");
- rows.forEach(r=>{if(r.none&&r.similar){if(/iOS/.test(r.store))keys.add("iOS");if(/Android/.test(r.store))keys.add("Android")}});
  const unkFree=i.status?pl(i).filter(p=>!PK[p]&&p!=="其他"):[];
  if(keys.size>1||unkFree.length)keys.delete("PC");
  const mny=r=>r.twd>0?(r.usd!=null?"約 ":"")+"NT$ "+Math.round(r.twd).toLocaleString():"";
@@ -396,11 +394,9 @@ function platPanels(i,g){
   if(free.has(k)){const mob=k==="iOS"||k==="Android";o={html:`<b class="ok">限時免費</b>${i.end?` 至 ${tw(i.end)}(台北時間)`:"(結束時間不明)"}${i.desc?`<br>${priceHtml(i.desc)}`:""}`,url:mob?searchUrl(k,i):i.url,btn:mob?"到商店查看":"前往領取"}}
   else if(k==="Steam"){const p=g&&g.price;
    if(p)o={html:p.final>0?`<b class="now">NT$ ${Math.round(p.final).toLocaleString()}</b>${p.pct>0?` <span class="m">(-${p.pct}%,原價 ${Math.round(p.orig).toLocaleString()})</span>`:""}`:`<b class="ok">免費遊玩</b>`,url:`https://store.steampowered.com/app/${i.appid}`,btn:"前往 Steam 商店"};
-   else if(i.appid===0)o={html:"沒有找到這款遊戲的 Steam 頁面",url:searchUrl(k,i),btn:"到 Steam 搜尋"};
    else if(i.appid)o={html:"價格資料更新中",url:`https://store.steampowered.com/app/${i.appid}`,btn:"前往 Steam 商店"}}
   else{const re=PRICE_RE[k],r=re&&find(re);
    if(r){const m=mny(r);o=r.twd===0?{html:`<b class="ok">免費</b>`,url:r.url,btn:"前往商店"}:(m?{html:`<b class="now">${m}</b>${r.usd!=null?` <span class="m">(US$${esc(r.usd)} 換算)</span>`:""}`,url:r.url,btn:"前往商店"}:null)}
-   else if(re&&miss(re))o={html:"沒有找到這款遊戲在此平台的資料",url:searchUrl(k,i),btn:"到商店搜尋"};
    else if(own.has(k))o={html:i.desc?priceHtml(i.desc):"請到商店查看價格",url:i.url,btn:"前往商店"}}
   if(o)out.push({k,...o})});
  unkFree.forEach(p=>out.push({k:p,html:`<b class="ok">限時免費</b>${i.end?` 至 ${tw(i.end)}(台北時間)`:"(結束時間不明)"}${i.desc?`<br>${priceHtml(i.desc)}`:""}`,url:i.url,btn:"前往領取"}));
@@ -455,13 +451,11 @@ function freeChips(i){
   if(free.has(k)){chips.push([0,`<span class="pc free">${icon(k)}${next?"即將免費":"免費"}</span>`]);return}
   if(k==="PC")return;
   if(k==="Steam"){
-   if(i.appid===0&&isPC&&i.steam==="similar")chips.push([2,`<span class="pc none">${icon(k)}查無</span>`]);
-   else{const f=g&&g.price&&g.price.final;if(f>0)chips.push([1,`<span class="pc">${icon(k)}NT$ ${Math.round(f).toLocaleString()}</span>`]);else if(f===0)chips.push([1,`<span class="pc">${icon(k)}免費遊玩</span>`])}
+   {const f=g&&g.price&&g.price.final;if(f>0)chips.push([1,`<span class="pc">${icon(k)}NT$ ${Math.round(f).toLocaleString()}</span>`]);else if(f===0)chips.push([1,`<span class="pc">${icon(k)}免費遊玩</span>`])}
    return}
   const re=PRICE_RE[k];if(!re)return;
   const r=found(re);
-  if(r){const m=money(r);if(m)chips.push([1,`<span class="pc">${icon(k)}${m}</span>`])}
-  else if((k==="iOS"||k==="Android")&&missing(re))chips.push([2,`<span class="pc none">${icon(k)}查無</span>`])});
+  if(r){const m=money(r);if(m)chips.push([1,`<span class="pc">${icon(k)}${m}</span>`])}});
  chips.sort((a,b)=>a[0]-b[0]);
  return chips.length?`<div class="pcs">${chips.map(c=>c[1]).join("")}</div>`:""}
 const GORD=["動作","冒險","角色扮演","策略","射擊","模擬","運動","競速","益智","休閒","格鬥","平台跳躍","恐怖","卡牌桌遊","音樂","多人線上","教育親子","獨立"];
@@ -497,7 +491,8 @@ function ageBadge(i){
 const pl=i=>i.platforms||[i.platform];
 // itch.io、DRM-Free、Stove、Meta / Rift(VR)的限免不顯示(領取不直覺 / 不是台灣常用平台;舊資料也一併過濾)
 const BAN=/itch|drm|stove|meta|rift|oculus|quest|^vr$/i;
-function cleanFree(list){return(list||[]).map(i=>{const ps=i.platforms||[i.platform];if(!ps.some(p=>BAN.test(p)))return i;
+const TITLE_TAIL=/\s*\((?:[^)]*(?:steam|epic|gog|ubisoft|origin|\bea\b|xbox|playstation|switch|battle\.net)[^)]*)\)\s*(?:key|code)?\s*$/i;
+function cleanFree(list){return(list||[]).map(i=>{const ti=String(i.title||"").replace(TITLE_TAIL,"").trim();if(ti&&ti!==i.title)i={...i,title:ti};const ps=i.platforms||[i.platform];if(!ps.some(p=>BAN.test(p)))return i;
  const kept=ps.filter(p=>!BAN.test(p));if(!kept.some(p=>p!=="PC"))return null;
  return{...i,platforms:kept,platform:BAN.test(i.platform)?(kept.find(p=>p!=="PC")||kept[0]):i.platform}}).filter(Boolean)}
 const SVG={"PC": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"24\" height=\"24\" fill=\"#0078d4\"/><path fill=\"#fff\" d=\"M5 6.4l6-.9v5.7H5zM12 5.4l7-1v6.8h-7zM5 12.2h6v5.7l-6-.9zM12 12.2h7v6.8l-7-1z\"/></svg>", "Nintendo": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"24\" height=\"24\" fill=\"#e60012\"/><rect x=\"5.2\" y=\"5\" width=\"5.2\" height=\"14\" rx=\"2.2\" fill=\"#fff\"/><rect x=\"13.6\" y=\"5\" width=\"5.2\" height=\"14\" rx=\"2.2\" fill=\"#fff\"/><circle cx=\"7.8\" cy=\"9\" r=\"1.2\" fill=\"#e60012\"/><circle cx=\"16.2\" cy=\"15\" r=\"1.2\" fill=\"#e60012\"/></svg>", "GOG": "<svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect width=\"24\" height=\"24\" fill=\"#86328a\"/><text x=\"12\" y=\"15.2\" font-family=\"Arial,Helvetica,sans-serif\" font-weight=\"900\" font-size=\"8.6\" fill=\"#fff\" text-anchor=\"middle\">GOG</text></svg>"};
