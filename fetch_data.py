@@ -269,6 +269,7 @@ SOURCES = [
     ("ios_news", "news", rss("https://toucharcade.com/feed/", "iOS")),
     ("ios_news_tw", "news", gnews("App Store 遊戲 限免 OR 特價 OR 新作", "iOS")),
     ("android_news", "news", gnews("Google Play 遊戲 限免 OR 特價 OR 新作", "Android")),
+    ("popular", "popular", lambda: fetch_popular()),
     ("cheapshark_pool", "pool", lambda: fetch_cheapshark_pool()),
     ("gamerpower", "free", lambda: fetch_gamerpower()),
     ("steam_free", "free", lambda: steam_free()),
@@ -621,7 +622,7 @@ def build_lows(new, games):
     """現價(台幣)≤ 歷史最低價(美元換算台幣)的 102% 就算史低;必須是目前有折扣的遊戲。"""
     fx = games.get("fx")
     out, seen = [], set()
-    for sec in ("free", "deals", "new", "soon", "pool"):
+    for sec in ("free", "deals", "popular", "new", "soon", "pool"):
         for it in new.get(sec, []):
             k = it.get("appid")
             if not k or k in seen:
@@ -645,10 +646,29 @@ def build_lows(new, games):
     return out
 
 
+# ---------- 大家都在玩:Steam 目前同時在線人數 ----------
+def fetch_popular(n=50, pool=100):
+    """Steam 官方公開資料(不需金鑰):先取『最多人玩』榜單前 100 名,再逐款查目前在線人數,依人數排序取前 n 名。"""
+    d = json.loads(get("https://api.steampowered.com/ISteamChartsService/GetMostPlayedGames/v1/"))
+    items = []
+    for r in d["response"]["ranks"][:pool]:
+        appid = r["appid"]
+        try:
+            cur = json.loads(get(f"https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid={appid}"))["response"]["player_count"]
+        except Exception:
+            continue                       # 少數 app 查不到人數
+        items.append({"platform": "Steam", "appid": appid, "title": "", "players": cur,
+                      "peak": r.get("peak_in_game", 0), "url": f"https://store.steampowered.com/app/{appid}"})
+    if not items:
+        raise ValueError("沒有取得任何在線人數")
+    items.sort(key=lambda i: -i["players"])
+    return items[:n]
+
+
 # ---------- 遊戲詳情(畫面、影片、評論)與價格歷史 ----------
 GAMES = Path(__file__).parent / "games.json"
 HISTORY = Path(__file__).parent / "history.json"
-MAX_APPS = 200          # 每次最多處理幾款遊戲,避免請求過多
+MAX_APPS = 240          # 每次最多處理幾款遊戲,避免請求過多
 SCHEMA = 3            # 詳情資料格式版本;舊版資料(缺比價 / 史低)會自動重抓一次
 _CS_ERR = []
 
@@ -822,7 +842,7 @@ def enrich(new):
     now = datetime.now(timezone.utc)
     today = now.date().isoformat()
     fails, ids = 0, []
-    for sec in ("free", "deals", "new", "soon", "pool"):
+    for sec in ("free", "deals", "popular", "new", "soon", "pool"):
         for it in new[sec]:
             if not it.get("appid") and sec == "free" and it["platform"] not in NO_STEAM:
                 name = it.get("title_en") or it["title"]
@@ -870,6 +890,13 @@ def enrich(new):
               if (now.date() - datetime.fromisoformat(v["seen"]).date()).days > 90]:
         games["apps"].pop(k)
         hist.pop(k, None)
+    for it in new.get("popular", []):               # 名稱來自 Steam 商店詳情
+        g = games["apps"].get(str(it["appid"]))
+        if g and g.get("name"):
+            it["title"] = g["name"]
+    new["popular"] = [it for it in new.get("popular", []) if it.get("title")]
+    for r, it in enumerate(new["popular"], 1):
+        it["rank"] = r
     free_prices(new, games)
     new["lows"] = build_lows(new, games)
     GAMES.write_text(json.dumps(games, ensure_ascii=False), "utf-8")
@@ -879,7 +906,7 @@ def enrich(new):
 
 def main():
     old = load(OUT, {})   # 檔案不存在、是空的或內容壞掉時,都當作沒有舊資料
-    new = {"free": [], "deals": [], "news": [], "new": [], "soon": [], "mobile": [], "pool": []}
+    new = {"free": [], "deals": [], "news": [], "new": [], "soon": [], "mobile": [], "pool": [], "popular": []}
     errors = []
     for src, section, fn in SOURCES:
         try:
