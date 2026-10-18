@@ -555,7 +555,7 @@ def parse_gamerpower(rows):
         if str(g.get("status", "Active")).lower() != "active":
             continue
         raw = [x.strip() for x in str(g.get("platforms") or "").split(",") if x.strip()]
-        sm = re.search(r"\(([^)]*)\)\s*Giveaway\s*$", g.get("title", ""))
+        sm = re.search(r"\(([^)]*)\)\s*(?:Key\s*)?Giveaway\s*$", g.get("title", ""))
         title_store = sm.group(1) if sm else ""            # 標題括號裡的商店,例如「(Stove)」
         rest = [x for x in raw if not BANNED_PLATFORM.search(x)]
         hit = len(rest) < len(raw) or BANNED_PLATFORM.search(title_store)
@@ -563,11 +563,12 @@ def parse_gamerpower(rows):
             continue                      # 被排除的平台(itch.io、DRM-Free、Stove)之外沒有其他具體商店(只剩泛用的 PC),整筆略過
         labs = gp_labels(g.get("platforms"))
         m = re.match(r"(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2}:\d{2})", str(g.get("end_date", "")))
-        for x in (gp_labels(sm.group(1)) if sm else []):          # 標題括號裡的商店(例如 Stove)若不在平台清單,補上去
-            if x not in labs:
+        for x in (gp_labels(sm.group(1)) if sm else []):          # 標題括號裡的商店若不在平台清單,補上去(只補認得的商店,避免把「(Remastered)」之類當成平台)
+            if x not in labs and x in ("Steam", "Epic", "GOG", "EA", "Ubisoft", "PlayStation", "Xbox", "Nintendo", "iOS", "Android"):
                 labs.append(x)
         title = re.sub(r"\s*\([^)]*\)\s*Giveaway\s*$", "", g.get("title", ""))
         title = re.sub(r"\s+Giveaway\s*$", "", title).strip()
+        title = re.sub(r"\s*\((?:[^)]*(?:steam|epic|gog|ubisoft|origin|\bea\b|xbox|playstation|switch|battle\.net)[^)]*)\)\s*(?:key|code)?\s*$", "", title, flags=re.I).strip()   # 「Dwarven Realms (Steam) Key」→「Dwarven Realms」
         worth = str(g.get("worth", ""))
         url = g.get("open_giveaway_url") or g.get("claim_url") or g.get("gamerpower_url") or g.get("open_giveaway") or ""
         items.append({"platform": next((l for l in labs if l != "PC"), labs[0] if labs else "其他"),
@@ -858,8 +859,6 @@ def free_prices(new, games):
                 continue
             if r and "price" in r:
                 rows.append({"store": label, "twd": r["price"], "url": r["url"]})
-            elif r and r.get("similar"):          # 有名稱很像的結果 → 才標「查無」並提供搜尋;完全沒有相關結果就不顯示
-                rows.append({"store": label, "none": True, "similar": True})
         it["prices"] = rows
 
 
