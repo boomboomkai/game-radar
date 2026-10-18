@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """抓取各平台限免、特價、新聞,輸出 data.json。只用標準函式庫,不需安裝套件。
 任何一個來源失敗時,保留該來源上一次的資料,並把錯誤記在 data.json 的 errors。"""
+import difflib
 import json
 import os
 import re
@@ -323,12 +324,27 @@ def fetch_cheapshark(appid):
     return {"low": low, "deals": deals, "en": (info.get("info") or {}).get("title") or rows[0].get("external", "")}
 
 
+def similar(a, b):
+    """名稱『很像』(包含關係或相似度 ≥ 0.75):用來分辨『名稱不同但可能是同一款』和『根本沒有這款遊戲』。"""
+    a, b = norm(a), norm(b)
+    if not a or not b:
+        return False
+    if len(a) >= 4 and len(b) >= 4 and (a in b or b in a):
+        return True
+    return difflib.SequenceMatcher(None, a, b).ratio() >= 0.75
+
+
 def find_ios(title):
+    """回傳:{"price","url"}=找到;{"similar":True}=有名稱很像的結果但不是同一個;None=完全沒有相關結果。"""
     url = "https://itunes.apple.com/search?entity=software&country=tw&limit=5&term=" + urllib.parse.quote(title)
+    seen = False
     for r in json.loads(get(url)).get("results", []):
-        if str(r.get("primaryGenreId", "")) == "6014" and norm(r.get("trackName", "")) == norm(title):
+        if str(r.get("primaryGenreId", "")) != "6014":
+            continue
+        if norm(r.get("trackName", "")) == norm(title):
             return {"price": float(r.get("price") or 0), "url": r.get("trackViewUrl", "")}
-    return None
+        seen = seen or similar(r.get("trackName", ""), title)
+    return {"similar": True} if seen else None
 
 
 def find_android(title):
@@ -337,11 +353,13 @@ def find_android(title):
         from google_play_scraper import search
     except ImportError:
         raise                       # 沒安裝:讓呼叫端知道是「無法查詢」,而不是「查無此遊戲」
+    seen = False
     for r in search(title, lang="zh_TW", country="tw", n_hits=5):
         if (norm(r.get("title", "")) == norm(title) and r.get("price") is not None
                 and r.get("currency") in (None, "", "TWD")):
             return {"price": float(r["price"]), "url": "https://play.google.com/store/apps/details?id=" + r["appId"]}
-    return None
+        seen = seen or similar(r.get("title", ""), title)
+    return {"similar": True} if seen else None
 
 
 def build_compare(g, cs, appid):
@@ -361,7 +379,7 @@ def build_compare(g, cs, appid):
                 r = fn(en)
             except Exception:
                 r = None
-            if r:
+            if r and "price" in r:
                 rows.append({"store": label, "twd": r["price"], "url": r["url"]})
     return {"fx": fx, "en": en, "rows": rows} if rows else None
 
@@ -542,6 +560,10 @@ def parse_gamerpower(rows):
             continue                      # 除了 itch.io / DRM-Free 之外沒有其他具體商店(只剩泛用的 PC),整筆略過
         labs = gp_labels(g.get("platforms"))
         m = re.match(r"(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2}:\d{2})", str(g.get("end_date", "")))
+        sm = re.search(r"\(([^)]*)\)\s*Giveaway\s*$", g.get("title", ""))
+        for x in (gp_labels(sm.group(1)) if sm else []):          # 標題括號裡的商店(例如 Stove)若不在平台清單,補上去
+            if x not in labs:
+                labs.append(x)
         title = re.sub(r"\s*\([^)]*\)\s*Giveaway\s*$", "", g.get("title", ""))
         title = re.sub(r"\s+Giveaway\s*$", "", title).strip()
         worth = str(g.get("worth", ""))
@@ -693,13 +715,16 @@ def norm(t):
 
 
 def find_appid(title):
-    """用遊戲名稱找 Steam appid,只接受名稱完全相符的結果,找不到回傳 0。先用英文名稱搜尋,再用繁中。"""
+    """用遊戲名稱找 Steam appid。回傳 (appid, 狀態):
+    exact=名稱完全相符;similar=有名稱很像的結果但不是同一個;none=完全沒有相關結果(這款遊戲大概不在 Steam 上)。先用英文名稱搜尋,再用繁中。"""
+    seen = False
     for lang in ("english", "tchinese"):
         url = f"https://store.steampowered.com/api/storesearch/?cc=tw&l={lang}&term=" + urllib.parse.quote(title)
         for it in json.loads(get(url)).get("items", []):
             if norm(it.get("name", "")) == norm(title):
-                return it["id"]
-    return 0
+                return it["id"], "exact"
+            seen = seen or similar(it.get("name", ""), title)
+    return 0, ("similar" if seen else "none")
 
 
 def tw_age(ratings, required_age=0):
@@ -829,7 +854,10 @@ def free_prices(new, games):
                 r = fn(en)
             except Exception:
                 continue
-            rows.append({"store": label, "twd": r["price"], "url": r["url"]} if r else {"store": label, "none": True})
+            if r and "price" in r:
+                rows.append({"store": label, "twd": r["price"], "url": r["url"]})
+            elif r and r.get("similar"):          # 有名稱很像的結果 → 才標「查無」並提供搜尋;完全沒有相關結果就不顯示
+                rows.append({"store": label, "none": True, "similar": True})
         it["prices"] = rows
 
 
@@ -842,6 +870,10 @@ def enrich(new):
     now = datetime.now(timezone.utc)
     today = now.date().isoformat()
     fails, ids = 0, []
+    if games.get("map_v") != 3:      # 配對方式改良了(多記錄「名稱很像 / 完全沒有」):過去記成「查無」的遊戲重試一次
+        games["map"] = {k: v for k, v in games["map"].items() if v}
+        games["hint"] = {}
+        games["map_v"] = 3
     for sec in ("free", "deals", "popular", "new", "soon", "pool"):
         for it in new[sec]:
             if not it.get("appid") and sec == "free" and it["platform"] not in NO_STEAM:
@@ -849,17 +881,17 @@ def enrich(new):
                 key = norm(name)
                 if key not in games["map"]:
                     try:
-                        games["map"][key] = find_appid(name)
+                        games["map"][key], hint = find_appid(name)
+                        games.setdefault("hint", {})[key] = hint
                     except Exception:
                         fails += 1
                         continue
                 it["appid"] = games["map"][key]
+                if not it["appid"]:
+                    it["steam"] = games.get("hint", {}).get(key, "none")      # similar=名稱很像但沒對上;none=Steam 上沒有
             if it.get("appid") and it["appid"] not in ids:
                 ids.append(it["appid"])
     bad = games.setdefault("bad", {})
-    if games.get("map_v") != 2:      # 配對方式改良了:過去記成「查無」的遊戲重試一次
-        games["map"] = {k: v for k, v in games["map"].items() if v}
-        games["map_v"] = 2
     for appid in ids[:MAX_APPS]:
         k = str(appid)
         if k in bad and (now.date() - datetime.fromisoformat(bad[k]).date()).days < 14:
