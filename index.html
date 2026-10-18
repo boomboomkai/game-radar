@@ -495,8 +495,8 @@ function ageBadge(i){
  if(a===undefined||a===null)return"";
  return `<span class="age" data-a="${a}" title="${AGE[a]} ${a}+(依 PEGI/ESRB 資料換算,非台灣官方分級)"><b>${a}<sup>+</sup></b><u>${AGE[a]}</u></span>`}
 const pl=i=>i.platforms||[i.platform];
-// itch.io、DRM-Free 的限免需要下載安裝,領取不直覺,不顯示(舊資料也一併過濾)
-const BAN=/itch|drm/i;
+// itch.io、DRM-Free、Stove 的限免不顯示(領取不直覺 / 不是台灣常用平台;舊資料也一併過濾)
+const BAN=/itch|drm|stove/i;
 function cleanFree(list){return(list||[]).map(i=>{const ps=i.platforms||[i.platform];if(!ps.some(p=>BAN.test(p)))return i;
  const kept=ps.filter(p=>!BAN.test(p));if(!kept.some(p=>p!=="PC"))return null;
  return{...i,platforms:kept,platform:BAN.test(i.platform)?(kept.find(p=>p!=="PC")||kept[0]):i.platform}}).filter(Boolean)}
