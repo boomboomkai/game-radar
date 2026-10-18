@@ -335,7 +335,7 @@ function render(){
  if(tab==="lows"||tab==="popular"){if(page>pages)page=pages;show=all.slice((page-1)*PER,page*PER)}
  $("pager").innerHTML=(tab==="lows"||tab==="popular")&&pages>1?pagerHtml(page,pages,all.length):"";
  $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(pl(i)[0])}"><i></i><div><a href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a>${ageBadge(i)}<div class="m">${tab==="free"?"":platLabel(i)}${meta(i)}${tab==="free"?"":bestChip(i)}</div>${genreLine(i)}${tab==="free"?freeChips(i):""}${lowChip(i)}</div>${cover(i)}${dtBlock(i)}</div>`).join("");
- $("msg").textContent=show.length?"":(D.updated?(tab==="lows"?"目前沒有確認處於歷史最低價的遊戲。":"這個分類目前沒有資料。"):"還沒有資料,請先在 GitHub 的 Actions 頁手動執行一次 update-data。");
+ $("msg").textContent=show.length?"":(D.updated?(tab==="lows"?"目前沒有確認處於歷史最低價的遊戲。":(tab==="popular"&&D.popular===undefined?"這個分頁的資料還在準備中,等下一次自動更新(或到 GitHub 的 Actions 手動執行一次)後就會出現。":"這個分類目前沒有資料。")):"還沒有資料,請先在 GitHub 的 Actions 頁手動執行一次 update-data。");
 }
 const shotPick={};
 document.addEventListener("error",e=>{
