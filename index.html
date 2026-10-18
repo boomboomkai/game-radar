@@ -94,6 +94,7 @@ h1{background:linear-gradient(90deg,var(--c1),var(--c2) 58%,var(--c3));-webkit-b
 .pg button[aria-current=true]{background:linear-gradient(135deg,var(--c1),var(--c2));color:#04101f;border-color:transparent;font-weight:700;box-shadow:0 0 12px rgb(var(--c1r) / .4)}
 details summary{color:var(--ac)}
 [hidden]{display:none!important}
+.dlcs{margin:4px 0 8px}.item .dlcs a.dlc{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:7px 0;border-bottom:1px solid rgb(var(--lnr) / .18);font-weight:400;font-size:14px;color:var(--tx);text-decoration:none}.item .dlcs a.dlc:hover .dn{color:var(--ac);text-decoration:underline}.dlc .dn{min-width:0}.dlc .dp{flex:none;text-align:right;white-space:nowrap}
 .blurb{font-size:14px;color:var(--mu);line-height:1.75;margin:8px 0}
 .pbar{height:6px;border-radius:3px;background:rgb(var(--lnr) / .18);overflow:hidden;margin-top:8px}.pbar span{display:block;height:100%;background:linear-gradient(90deg,var(--c1),var(--c3))}
 .psel{margin:6px 0 10px}.pbs{display:flex;gap:8px;flex-wrap:wrap}
@@ -150,14 +151,14 @@ html[data-deco=low] #fest b{box-shadow:none}
 <div class="fx" id="fx" aria-hidden="true"></div>
 <main>
 <header class="hd"><svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--c1)"/><stop offset=".55" style="stop-color:var(--c2)"/><stop offset="1" style="stop-color:var(--c3)"/></linearGradient></defs><polygon points="24,3 42,13.5 42,34.5 24,45 6,34.5 6,13.5" fill="rgba(53,224,255,.07)" stroke="url(#lg)" stroke-width="2.2" stroke-linejoin="round"/><g fill="none" stroke="url(#lg)" stroke-width="1.8" stroke-linecap="round"><path d="M16.5 15.5a10.5 10.5 0 0 1 15 0"/><path d="M19.8 18.6a6 6 0 0 1 8.4 0"/></g><path d="M15.5 22.5h17c2.2 0 4 1.4 4.6 3.5l1.4 5.3c.5 1.8-.8 3.5-2.6 3.5-1 0-1.8-.5-2.4-1.2l-2.3-3.3h-14.4l-2.3 3.3c-.6.7-1.4 1.2-2.4 1.2-1.8 0-3.1-1.7-2.6-3.5l1.4-5.3c.6-2.1 2.4-3.5 4.6-3.5z" fill="url(#lg)"/><path d="M17.4 25.2v4.4M15.2 27.4h4.4" stroke="#070a12" stroke-width="1.7" stroke-linecap="round"/><circle cx="30.3" cy="25.8" r="1.2" fill="#070a12"/><circle cx="33" cy="28" r="1.2" fill="#070a12"/></svg><div><h1>遊戲偵查隊</h1><div class="tag">GAME SCOUT SQUAD</div></div></header><div id="fest" hidden></div><div id="upd">載入中…</div>
-<div role="tablist" id="tabs"></div><div id="chips"></div><div id="tabnote" class="m"></div><div id="list"></div><div id="pager"></div><div id="msg"></div><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS、<a href="https://www.gamerpower.com" target="_blank" rel="noopener noreferrer">GamerPower</a>(限時免費)、Apple iTunes、Google Play(非官方)、匯率來自 <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a>。</div><details class="more"><summary>顯示更多說明</summary><div class="m">大家都在玩分頁:取自 Steam 官方公開的「本週最多人玩」榜單前 100 款,再查各款目前的同時在線人數並由多到少排序,每 6 小時更新。只有 Steam 公開這項資料,其他平台沒有。<br>歷史新低分頁:只列出目前有折扣、而且現價不高於歷史最低價的遊戲,依 Steam 評價(好評率與評論數綜合)由高到低排序,每頁 10 款。判斷方式:現價 ≤ CheapShark 歷史最低價(美元)換算台幣的 102%,匯率和各國定價差異會造成誤差,僅供參考。<br>手機付費榜依評分與評論數綜合排序,iOS 取自 App Store 台灣區付費榜,Android 靠關鍵字搜尋找候選,可能漏掉部分遊戲。史低價是 CheapShark 的美元紀錄換算,僅供參考。分級圖示依 Steam / RAWG 提供的 PEGI、ESRB 資料換算,僅供參考,非台灣官方分級,請以遊戲包裝或文化部公告為準。</div></details>
+<div role="tablist" id="tabs"></div><div id="chips"></div><div id="tabnote" class="m"></div><div id="list"></div><div id="pager"></div><div id="msg"></div><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS、<a href="https://www.gamerpower.com" target="_blank" rel="noopener noreferrer">GamerPower</a>(限時免費)、Apple iTunes、Google Play(非官方)、匯率來自 <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a>。</div><details class="more"><summary>顯示更多說明</summary><div class="m">DLC 特價分頁:列出 Steam 上目前有折扣的 DLC(依評論數由多到少);遊戲展開後的 DLC 清單最多列 12 個,特價中的排前面。<br>大家都在玩分頁:取自 Steam 官方公開的「本週最多人玩」榜單前 100 款,再查各款目前的同時在線人數並由多到少排序,每 6 小時更新。只有 Steam 公開這項資料,其他平台沒有。<br>歷史新低分頁:只列出目前有折扣、而且現價不高於歷史最低價的遊戲,依 Steam 評價(好評率與評論數綜合)由高到低排序,每頁 10 款。判斷方式:現價 ≤ CheapShark 歷史最低價(美元)換算台幣的 102%,匯率和各國定價差異會造成誤差,僅供參考。<br>手機付費榜依評分與評論數綜合排序,iOS 取自 App Store 台灣區付費榜,Android 靠關鍵字搜尋找候選,可能漏掉部分遊戲。史低價是 CheapShark 的美元紀錄換算,僅供參考。分級圖示依 Steam / RAWG 提供的 PEGI、ESRB 資料換算,僅供參考,非台灣官方分級,請以遊戲包裝或文化部公告為準。</div></details>
 <button id="gfab" class="fab" aria-expanded="false" aria-controls="gpanel" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg><span id="gfabt">類型</span></button>
 <div id="gpanel" role="dialog" aria-label="選擇遊戲類型" hidden><div class="gh"><span>遊戲類型</span><button id="gclose" aria-label="關閉">×</button></div><div id="gchips"></div></div>
 <button id="totop" class="fab" aria-label="回到最上方" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 <script>
 // 自己累積的價格走勢:目前只在後台(history.json)收集,資料夠多再改成 true 就會顯示
 const SHOW_TREND=false;
-const TABS=[["news","最新消息"],["free","限時免費"],["deals","特價消息"],["lows","歷史新低"],["popular","大家都在玩"],["new","新上架"],["soon","即將上架"],["mobile","手機付費榜"]];
+const TABS=[["news","最新消息"],["free","限時免費"],["deals","特價消息"],["lows","歷史新低"],["popular","大家都在玩"],["dlc","DLC 特價"],["new","新上架"],["soon","即將上架"],["mobile","手機付費榜"]];
 let D={free:[],deals:[],news:[]},G={apps:{}},H={},tab="free",plat="全部",page=1,gen="全部";
 const $=id=>document.getElementById(id);
 /* ===== 節日主題:節日當天自動切換(網址加 ?theme=名稱 可預覽,?theme=off 關閉) ===== */
@@ -402,6 +403,9 @@ function platPanels(i,g){
  unkFree.forEach(p=>out.push({k:p,html:`<b class="ok">限時免費</b>${i.end?` 至 ${tw(i.end)}(台北時間)`:"(結束時間不明)"}${i.desc?`<br>${priceHtml(i.desc)}`:""}`,url:i.url,btn:"前往領取"}));
  const fr=new Set([...free,...unkFree]);
  return out.sort((a,b)=>(fr.has(b.k)?1:0)-(fr.has(a.k)?1:0))}
+const dlcPrice=p=>!p?"":(p.final>0?(p.pct>0?`<span class="pct" style="color:${pctColor(p.pct)}">-${p.pct}%</span> <b class="now">NT$ ${Math.round(p.final).toLocaleString()}</b>`:`NT$ ${Math.round(p.final).toLocaleString()}`):`<b class="ok">免費</b>`);
+function dlcHtml(g){const l=(g&&g.dlc)||[];if(!l.length)return"";
+ return `<h4>DLC・資料包(共 ${g.dlc_n||l.length} 個${(g.dlc_n||l.length)>l.length?`,列出 ${l.length} 個`:""})</h4><div class="dlcs">${l.map(x=>`<a class="dlc" href="https://store.steampowered.com/app/${x.id}" target="_blank" rel="noopener noreferrer"><span class="dn">${esc(x.name)}</span><span class="dp">${dlcPrice(x.p)}</span></a>`).join("")}</div>`}
 function detail(i){
  const g=(G.apps&&G.apps[i.appid])||null;
  const blurb=String(i.blurb||(g&&g.desc)||"").replace(/\s+/g," ").trim(),panels=platPanels(i,g);
@@ -415,7 +419,7 @@ function detail(i){
   const vid=(g.movies||[]).filter(m=>m.mp4).slice(0,1).map(m=>`<video controls preload="none" poster="${esc(safe(m.thumb))}" src="${esc(safe(m.mp4))}"></video>`).join("");
   const rv=(r.top||[]).map(x=>`<div class="rv">${esc(x.text)}${x.text.length>=220?"…":""}<div class="m"><b class="${x.up?"ok":""}">${x.up?"推薦":"不推薦"}</b>,遊玩 ${x.hours} 小時</div></div>`).join("");
   more=`${shots?`<div class="shots">${shots}</div>`:""}${vid}<h4>Steam 評價</h4><div class="m">${sum}${g.metacritic?`;Metacritic ${esc(g.metacritic)}`:""}</div>${rv}${SHOW_TREND&&g.price?`<h4>價格走勢</h4>${chart(i.appid,g)}`:""}${cmpHtml(i,g)}`}
- return `<details><summary>${g?"展開:說明、平台、評論、比價":"展開:說明、平台"}</summary>${bl}${sel}${more}</details>`}
+ return `<details><summary>${g?"展開:說明、平台、評論、比價":"展開:說明、平台"}</summary>${bl}${sel}${dlcHtml(g)}${more}</details>`}
 function lowChip(i){
  const g=G.apps&&G.apps[i.appid];if(!g||!g.low||!g.low.usd)return"";
  const fx=G.fx||(g.compare&&g.compare.fx);if(!fx)return"";
@@ -462,7 +466,7 @@ const GORD=["動作","冒險","角色扮演","策略","射擊","模擬","運動"
 const GKW=[["角色扮演",/\brpg\b|jrpg|role-?playing|角色扮演/i],["射擊",/shooter|\bfps\b|射擊|battle royale|大逃殺/i],["動作",/\baction\b|動作|roguelike|souls-?like|hack and slash/i],["冒險",/adventure|冒險/i],["策略",/strateg|策略|\b4x\b|tower defen[cs]e|塔防|tactics|戰棋/i],["模擬",/simulat|模擬|farming|經營|tycoon/i],["運動",/\bsports?\b|運動|football|soccer|basketball|\bnba\b|\bfifa\b|足球|籃球|棒球|baseball/i],["競速",/racing|競速|賽車|\bdriving\b/i],["益智",/puzzle|益智|解謎|trivia/i],["格鬥",/fighting|格鬥|street fighter|tekken/i],["平台跳躍",/platformer|平台跳躍/i],["恐怖",/horror|恐怖/i],["卡牌桌遊",/card game|deck-?build|卡牌|桌遊|board game/i],["音樂",/rhythm|music game|音樂遊戲|節奏/i],["多人線上",/\bmmo\b|mmorpg|多人線上/i],["休閒",/casual|休閒/i]];
 // 類型:優先用各平台提供的分類;完全沒有資料時,才依標題關鍵字推測(新聞、部分限免)
 function genresOf(i){
- const g=G.apps&&G.apps[i.appid],s=new Set([...(i.genres||[]),...((g&&g.genres)||[])]);
+ const g=G.apps&&G.apps[i.appid],s=new Set([...(i.genres||[]),...((g&&g.genres)||[]),...(((G.apps&&G.apps[(i.base||{}).id])||{}).genres||[])]);
  if(!s.size){const t=(i.title||"")+" "+(i.title_en||"");GKW.forEach(([k,re])=>{if(re.test(t))s.add(k)})}
  return GORD.filter(k=>s.has(k))}
 const genreLine=i=>{const l=genresOf(i);return l.length?`<div class="m gline">類型:${l.map(esc).join("、")}</div>`:""};
@@ -518,6 +522,7 @@ function priceHtml(d){
  if(d==="限時免費")return `<span class="pct" style="color:${pctColor(100)}">-100%</span><b class="now">免費</b>`;
  return esc(d)}
 function meta(i){
+ if(tab==="dlc"){const b=i.base||{};return (b.name?`<span class="m">需要遊戲:${esc(b.name)}</span><br>`:"")+priceHtml(i.desc)}
  if(tab==="popular"){const g=(G.apps&&G.apps[i.appid])||{},pr=g.price,top=((D.popular||[])[0]||{}).players||1;
   let price="";if(pr){price=pr.final>0?(pr.pct>0?priceHtml(`-${pr.pct}%  ${pr.cur} ${Math.round(pr.final).toLocaleString()}(原價 ${Math.round(pr.orig).toLocaleString()})`):`<b>NT$ ${Math.round(pr.final).toLocaleString()}</b>`):`<b class="ok">免費遊玩</b>`}
   return `<b>#${i.rank}</b> <b class="now" style="font-size:1.05em">${Number(i.players).toLocaleString()}</b> 人正在玩<br><span class="nw">今日最高 ${Number(i.peak).toLocaleString()} 人</span>${price?`<br>${price}`:""}<div class="pbar"><span style="width:${Math.max(3,Math.round(i.players/top*100))}%"></span></div>`}
@@ -545,10 +550,10 @@ function render(){
  $("gfabt").textContent=gen==="全部"?"類型":gen;gfab.classList.toggle("on",gen!=="全部");
  const all=byPlat.filter(i=>gen==="全部"||genresOf(i).includes(gen));let show=all;
  const PER=10,pages=Math.max(1,Math.ceil(all.length/PER));
- if(tab==="lows"||tab==="popular"){if(page>pages)page=pages;show=all.slice((page-1)*PER,page*PER)}
- $("pager").innerHTML=(tab==="lows"||tab==="popular")&&pages>1?pagerHtml(page,pages,all.length):"";
+ if(tab==="lows"||tab==="popular"||tab==="dlc"){if(page>pages)page=pages;show=all.slice((page-1)*PER,page*PER)}
+ $("pager").innerHTML=(tab==="lows"||tab==="popular"||tab==="dlc")&&pages>1?pagerHtml(page,pages,all.length):"";
  $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(pl(i)[0])}"><i></i><div><a href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a>${ageBadge(i)}<div class="m">${tab==="free"?"":platLabel(i)}${meta(i)}${tab==="free"?"":bestChip(i)}</div>${genreLine(i)}${tab==="free"?freeChips(i):""}${lowChip(i)}</div>${cover(i)}${dtBlock(i)}</div>`).join("");
- $("msg").textContent=show.length?"":(D.updated?(tab==="lows"?"目前沒有確認處於歷史最低價的遊戲。":(tab==="popular"&&D.popular===undefined?"這個分頁的資料還在準備中,等下一次自動更新(或到 GitHub 的 Actions 手動執行一次)後就會出現。":"這個分類目前沒有資料。")):"還沒有資料,請先在 GitHub 的 Actions 頁手動執行一次 update-data。");
+ $("msg").textContent=show.length?"":(D.updated?(tab==="lows"?"目前沒有確認處於歷史最低價的遊戲。":((tab==="popular"||tab==="dlc")&&D[tab]===undefined?"這個分頁的資料還在準備中,等下一次自動更新(或到 GitHub 的 Actions 手動執行一次)後就會出現。":"這個分類目前沒有資料。")):"還沒有資料,請先在 GitHub 的 Actions 頁手動執行一次 update-data。");
 }
 const shotPick={};
 document.addEventListener("error",e=>{
