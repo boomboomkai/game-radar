@@ -271,6 +271,7 @@ SOURCES = [
     ("ios_news_tw", "news", gnews("App Store 遊戲 限免 OR 特價 OR 新作", "iOS")),
     ("android_news", "news", gnews("Google Play 遊戲 限免 OR 特價 OR 新作", "Android")),
     ("popular", "popular", lambda: fetch_popular()),
+    ("dlc", "dlc", lambda: fetch_dlc_sales()),
     ("cheapshark_pool", "pool", lambda: fetch_cheapshark_pool()),
     ("gamerpower", "free", lambda: fetch_gamerpower()),
     ("steam_free", "free", lambda: steam_free()),
@@ -690,11 +691,117 @@ def fetch_popular(n=50, pool=100):
     return items[:n]
 
 
+# ---------- DLC 特價分頁、遊戲詳情裡的 DLC 清單 ----------
+_APPLIST = {}
+_DLC_ERR = []
+
+
+def fetch_dlc_sales(n=40):
+    """Steam 商店搜尋:類型=DLC、特價中、依評論數排序。只取出 app 編號,名稱和價格之後用 appdetails 補。"""
+    ids = []
+    for start in (0, 50):
+        url = ("https://store.steampowered.com/search/results/?query&start=%d&count=50&dynamic_data=&sort_by=Reviews_DESC"
+               "&specials=1&category1=21&cc=tw&l=tchinese&infinite=1" % start)
+        html = json.loads(get(url)).get("results_html", "")
+        for x in re.findall(r'data-ds-appid="(\d+)"', html):          # 組合包是逗號分隔,不會被這個規則抓到
+            if int(x) not in ids:
+                ids.append(int(x))
+    if not ids:
+        raise ValueError("沒有取得任何特價 DLC")
+    return [{"platform": "Steam", "appid": i, "title": "", "url": f"https://store.steampowered.com/app/{i}"} for i in ids[:n]]
+
+
+def enrich_dlc(new, games, now, today):
+    """替 DLC 特價清單補上名稱、主遊戲、封面和價格;只留下目前真的有折扣的。"""
+    out = []
+    for it in new.get("dlc", []):
+        k = str(it["appid"])
+        old = games["apps"].get(k)
+        if not (old and old.get("v") == SCHEMA and old.get("type") == "dlc"
+                and (now - datetime.fromisoformat(old["fetched"])).total_seconds() < REFRESH_HOURS * 3600):
+            try:
+                raw = json.loads(get(f"https://store.steampowered.com/api/appdetails?appids={it['appid']}&cc=tw&l=tchinese"))
+                entry = raw[k]
+                if not entry.get("success") or entry["data"].get("type") != "dlc":
+                    continue
+                g = parse_details(entry["data"])
+                g["shots"], g["movies"] = [], []
+            except Exception as ex:
+                _DLC_ERR.append(f"dlc {k}: {type(ex).__name__} {str(ex)[:60]}")
+                continue
+            g["fetched"], g["seen"], g["v"] = now.isoformat(timespec="seconds"), today, SCHEMA
+            games["apps"][k] = g
+            old = g
+        else:
+            old["seen"] = today
+        pr = old.get("price")
+        if not pr or pr.get("pct", 0) <= 0 or pr.get("final", 0) <= 0:
+            continue
+        it.update({"title": old.get("name", ""), "image": old.get("header", ""), "base": old.get("fullgame") or {},
+                   "pct": pr["pct"], "desc": f"-{pr['pct']}%  {pr['cur']} {pr['final']:,.0f}(原價 {pr['orig']:,.0f})"})
+        if it["title"]:
+            out.append(it)
+    new["dlc"] = out
+
+
+def applist_names():
+    """Steam 全部 app 的 編號→名稱(官方公開、不需金鑰,檔案較大,每次執行只下載一次)"""
+    if not _APPLIST:
+        d = json.loads(get("https://api.steampowered.com/ISteamApps/GetAppList/v2/", timeout=180))
+        for a in d["applist"]["apps"]:
+            _APPLIST[a["appid"]] = a["name"]
+    return _APPLIST
+
+
+def batch_prices(ids):
+    out = {}
+    for i in range(0, len(ids), 40):
+        chunk = ids[i:i + 40]
+        raw = json.loads(get("https://store.steampowered.com/api/appdetails?filters=price_overview&cc=tw&appids=" + ",".join(map(str, chunk))))
+        for k, v in raw.items():
+            data = v.get("data") if isinstance(v, dict) else None
+            po = data.get("price_overview") if isinstance(data, dict) else None
+            out[int(k)] = ({"final": po["final"] / 100, "orig": po["initial"] / 100, "pct": po.get("discount_percent", 0),
+                            "cur": po.get("currency", "")} if po else None)
+    return out
+
+
+def attach_dlc_lists(new, games, now):
+    """替顯示中的遊戲補上 DLC 清單(最多 12 個:特價中的優先,其餘由新到舊)。每款遊戲約每 20 小時才更新一次。"""
+    shown = []
+    for sec in ("free", "deals", "popular", "new", "soon", "lows"):
+        for it in new.get(sec, []):
+            if it.get("appid") and it["appid"] not in shown:
+                shown.append(it["appid"])
+    todo = []
+    for aid in shown:
+        g = games["apps"].get(str(aid))
+        if not g or not g.get("dlc_ids"):
+            continue
+        if g.get("dlc_t") and (now - datetime.fromisoformat(g["dlc_t"])).total_seconds() < REFRESH_HOURS * 3600:
+            continue
+        todo.append(aid)
+    if not todo:
+        return
+    names = applist_names()
+    for aid in todo[:80]:
+        g = games["apps"][str(aid)]
+        ids = g["dlc_ids"][-30:]
+        try:
+            pr = batch_prices(ids)
+        except Exception as ex:
+            _DLC_ERR.append(f"dlc價格 {aid}: {type(ex).__name__} {str(ex)[:60]}")
+            continue
+        lst = [{"id": d, "name": names[d], "p": pr.get(d)} for d in ids if d in names]
+        lst.sort(key=lambda x: (-((x["p"] or {}).get("pct", 0)), -x["id"]))
+        g["dlc"], g["dlc_n"], g["dlc_t"] = lst[:12], len(g["dlc_ids"]), now.isoformat(timespec="seconds")
+
+
 # ---------- 遊戲詳情(畫面、影片、評論)與價格歷史 ----------
 GAMES = Path(__file__).parent / "games.json"
 HISTORY = Path(__file__).parent / "history.json"
 MAX_APPS = 240          # 每次最多處理幾款遊戲,避免請求過多
-SCHEMA = 3            # 詳情資料格式版本;舊版資料(缺比價 / 史低)會自動重抓一次
+SCHEMA = 4            # 詳情資料格式版本;舊版資料(缺比價 / 史低)會自動重抓一次
 _CS_ERR = []
 
 
@@ -783,7 +890,10 @@ def parse_details(d):
         movies.append({"name": m.get("name", ""), "thumb": m.get("thumbnail", ""),
                        "mp4": mp4.get("480") or mp4.get("max") or ""})
     rel = (d.get("release_date") or {}).get("date", "")
-    return {"age": tw_age(d.get("ratings"), d.get("required_age")), "genres": steam_genres(d.get("genres")), "release": rel, "release_iso": parse_release(rel), "name": d.get("name", ""), "header": d.get("header_image", ""), "desc": d.get("short_description", ""),
+    fg = d.get("fullgame") or {}
+    return {"type": d.get("type"), "dlc_ids": [int(x) for x in (d.get("dlc") or [])][-60:],
+            "fullgame": {"id": int(fg["appid"]), "name": fg.get("name", "")} if fg.get("appid") else None,
+            "age": tw_age(d.get("ratings"), d.get("required_age")), "genres": steam_genres(d.get("genres")), "release": rel, "release_iso": parse_release(rel), "name": d.get("name", ""), "header": d.get("header_image", ""), "desc": d.get("short_description", ""),
             "metacritic": (d.get("metacritic") or {}).get("score"),
             "shots": [{"t": s.get("path_thumbnail", ""), "f": s.get("path_full", "")}
                       for s in (d.get("screenshots") or [])[:6]],
@@ -932,6 +1042,11 @@ def enrich(new):
         it["rank"] = r
     free_prices(new, games)
     new["lows"] = build_lows(new, games)
+    try:
+        enrich_dlc(new, games, now, today)
+        attach_dlc_lists(new, games, now)
+    except Exception as ex:
+        _DLC_ERR.append(f"{type(ex).__name__}: {str(ex)[:80]}")
     GAMES.write_text(json.dumps(games, ensure_ascii=False), "utf-8")
     HISTORY.write_text(json.dumps(hist, ensure_ascii=False), "utf-8")
     return fails
@@ -939,7 +1054,7 @@ def enrich(new):
 
 def main():
     old = load(OUT, {})   # 檔案不存在、是空的或內容壞掉時,都當作沒有舊資料
-    new = {"free": [], "deals": [], "news": [], "new": [], "soon": [], "mobile": [], "pool": [], "popular": []}
+    new = {"free": [], "deals": [], "news": [], "new": [], "soon": [], "mobile": [], "pool": [], "popular": [], "dlc": []}
     errors = []
     for src, section, fn in SOURCES:
         try:
@@ -960,6 +1075,8 @@ def main():
             errors.append(f"details: {fails} 筆遊戲詳情抓取失敗" + (f"(例:{_DETAIL_ERR[0]})" if _DETAIL_ERR else ""))
         if _CS_ERR:
             errors.append(f"cheapshark_details: {_CS_ERR[0]}(共 {len(_CS_ERR)} 筆)")
+        if _DLC_ERR:
+            errors.append(f"dlc: {_DLC_ERR[0]}(共 {len(_DLC_ERR)} 筆)")
     except Exception as ex:
         errors.append(f"details: {type(ex).__name__}: {ex}")
     new.pop("pool", None)          # 候選池只用來找史低,不存進 data.json
