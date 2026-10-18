@@ -509,9 +509,14 @@ def android_top(n=10):
 NO_STEAM = {"iOS", "Android", "PlayStation", "Xbox", "Nintendo", "Meta"}   # 這些平台的限免不用去 Steam 比對 appid
 
 
+BANNED_PLATFORM = re.compile(r"itch|drm", re.I)   # itch.io、DRM-Free 需要下載安裝,領取流程不直覺,不收錄
+
+
 def gp_labels(s):
     out = []
     for p in [x.strip() for x in (s or "").split(",")]:
+        if BANNED_PLATFORM.search(p):
+            continue
         l = p.lower()
         lab = ("Meta" if ("meta" in l or "oculus" in l or "quest" in l or l == "vr") else
                "Steam" if "steam" in l else "Epic" if "epic" in l else "GOG" if "gog" in l else
@@ -530,6 +535,10 @@ def parse_gamerpower(rows):
     for g in rows:
         if str(g.get("status", "Active")).lower() != "active":
             continue
+        raw = [x.strip() for x in str(g.get("platforms") or "").split(",") if x.strip()]
+        rest = [x for x in raw if not BANNED_PLATFORM.search(x)]
+        if len(rest) < len(raw) and not any(x.lower() not in ("pc", "windows") for x in rest):
+            continue                      # 除了 itch.io / DRM-Free 之外沒有其他具體商店(只剩泛用的 PC),整筆略過
         labs = gp_labels(g.get("platforms"))
         m = re.match(r"(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2}:\d{2})", str(g.get("end_date", "")))
         title = re.sub(r"\s*\([^)]*\)\s*Giveaway\s*$", "", g.get("title", ""))
