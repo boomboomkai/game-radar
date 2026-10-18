@@ -528,7 +528,7 @@ def android_top(n=10):
 NO_STEAM = {"iOS", "Android", "PlayStation", "Xbox", "Nintendo", "Meta"}   # 這些平台的限免不用去 Steam 比對 appid
 
 
-BANNED_PLATFORM = re.compile(r"itch|drm", re.I)   # itch.io、DRM-Free 需要下載安裝,領取流程不直覺,不收錄
+BANNED_PLATFORM = re.compile(r"itch|drm|stove", re.I)   # itch.io、DRM-Free 領取流程不直覺;Stove 不是台灣常用的平台 → 不收錄(想排除別的平台就加在這個正規表示式裡)
 
 
 def gp_labels(s):
@@ -555,12 +555,14 @@ def parse_gamerpower(rows):
         if str(g.get("status", "Active")).lower() != "active":
             continue
         raw = [x.strip() for x in str(g.get("platforms") or "").split(",") if x.strip()]
+        sm = re.search(r"\(([^)]*)\)\s*Giveaway\s*$", g.get("title", ""))
+        title_store = sm.group(1) if sm else ""            # 標題括號裡的商店,例如「(Stove)」
         rest = [x for x in raw if not BANNED_PLATFORM.search(x)]
-        if len(rest) < len(raw) and not any(x.lower() not in ("pc", "windows") for x in rest):
-            continue                      # 除了 itch.io / DRM-Free 之外沒有其他具體商店(只剩泛用的 PC),整筆略過
+        hit = len(rest) < len(raw) or BANNED_PLATFORM.search(title_store)
+        if hit and not any(x.lower() not in ("pc", "windows") for x in rest):
+            continue                      # 被排除的平台(itch.io、DRM-Free、Stove)之外沒有其他具體商店(只剩泛用的 PC),整筆略過
         labs = gp_labels(g.get("platforms"))
         m = re.match(r"(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2}:\d{2})", str(g.get("end_date", "")))
-        sm = re.search(r"\(([^)]*)\)\s*Giveaway\s*$", g.get("title", ""))
         for x in (gp_labels(sm.group(1)) if sm else []):          # 標題括號裡的商店(例如 Stove)若不在平台清單,補上去
             if x not in labs:
                 labs.append(x)
