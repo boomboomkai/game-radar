@@ -98,7 +98,8 @@ details summary{color:var(--ac)}
 .pbar{height:6px;border-radius:3px;background:rgb(var(--lnr) / .18);overflow:hidden;margin-top:8px}.pbar span{display:block;height:100%;background:linear-gradient(90deg,var(--c1),var(--c3))}
 .psel{margin:6px 0 10px}.pbs{display:flex;gap:8px;flex-wrap:wrap}
 .pb{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:14px;color:var(--mu);background:var(--kc);border:1px solid rgb(var(--lnr) / .24);border-radius:999px;padding:3px 12px 3px 4px;cursor:pointer}
-.pb .pi{width:22px;height:22px;border-radius:5px}
+.pb .pi{width:22px;height:22px;border-radius:5px}.pi .pt{display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:11px;font-weight:800;line-height:1;background:linear-gradient(135deg,var(--c1),var(--c2));color:#04101f}
+.pb[aria-pressed=true] .pt{background:rgba(4,16,31,.3);color:#fff}
 .pb[aria-pressed=true]{background:linear-gradient(135deg,var(--c1),var(--c2));color:#04101f;border-color:transparent;font-weight:700;box-shadow:0 0 12px rgb(var(--c1r) / .4)}
 .pnl{margin-top:10px;padding:12px 14px;border:1px solid rgb(var(--lnr) / .25);border-radius:10px;background:rgb(var(--bgr) / .55);font-size:15px}
 .item a.go{display:inline-block;margin-top:10px;padding:7px 18px;border-radius:999px;background:linear-gradient(135deg,var(--c1),var(--c2));color:#04101f;font-weight:700;text-decoration:none}
@@ -381,12 +382,13 @@ function platPanels(i,g){
  const free=i.status?new Set(pl(i).map(p=>PK[p]).filter(Boolean)):new Set();
  if(free.size>1)free.delete("PC");
  const rows=[...(i.prices||[]),...cmpRows(g)];
- const find=re=>rows.find(r=>re.test(r.store)&&!r.none),miss=re=>rows.some(r=>re.test(r.store)&&r.none);
+ const find=re=>rows.find(r=>re.test(r.store)&&!r.none),miss=re=>rows.some(r=>re.test(r.store)&&r.none&&r.similar);
  const own=new Set(pl(i).map(p=>PK[p]).filter(Boolean)),isPC=pl(i).some(p=>["PC","Steam","Epic","GOG","EA","Ubisoft"].includes(p));
  const keys=new Set(platKeys(i));free.forEach(k=>keys.add(k));
- if(i.appid===0&&isPC)keys.add("Steam");
- rows.forEach(r=>{if(r.none){if(/iOS/.test(r.store))keys.add("iOS");if(/Android/.test(r.store))keys.add("Android")}});
- if(keys.size>1)keys.delete("PC");
+ if(i.appid===0&&isPC&&i.steam==="similar")keys.add("Steam");
+ rows.forEach(r=>{if(r.none&&r.similar){if(/iOS/.test(r.store))keys.add("iOS");if(/Android/.test(r.store))keys.add("Android")}});
+ const unkFree=i.status?pl(i).filter(p=>!PK[p]&&p!=="其他"):[];
+ if(keys.size>1||unkFree.length)keys.delete("PC");
  const mny=r=>r.twd>0?(r.usd!=null?"約 ":"")+"NT$ "+Math.round(r.twd).toLocaleString():"";
  const out=[];
  PORD.forEach(k=>{
@@ -401,13 +403,15 @@ function platPanels(i,g){
    else if(re&&miss(re))o={html:"沒有找到這款遊戲在此平台的資料",url:searchUrl(k,i),btn:"到商店搜尋"};
    else if(own.has(k))o={html:i.desc?priceHtml(i.desc):"請到商店查看價格",url:i.url,btn:"前往商店"}}
   if(o)out.push({k,...o})});
- return out.sort((a,b)=>(free.has(b.k)?1:0)-(free.has(a.k)?1:0))}
+ unkFree.forEach(p=>out.push({k:p,html:`<b class="ok">限時免費</b>${i.end?` 至 ${tw(i.end)}(台北時間)`:"(結束時間不明)"}${i.desc?`<br>${priceHtml(i.desc)}`:""}`,url:i.url,btn:"前往領取"}));
+ const fr=new Set([...free,...unkFree]);
+ return out.sort((a,b)=>(fr.has(b.k)?1:0)-(fr.has(a.k)?1:0))}
 function detail(i){
  const g=(G.apps&&G.apps[i.appid])||null;
  const blurb=String(i.blurb||(g&&g.desc)||"").replace(/\s+/g," ").trim(),panels=platPanels(i,g);
  if(!blurb&&!panels.length&&!g)return"";
  const bl=blurb?`<p class="blurb">${esc(blurb.length>300?blurb.slice(0,300)+"…":blurb)}</p>`:`<p class="blurb">這款遊戲目前沒有簡介資料。</p>`;
- const sel=panels.length?`<h4>選擇平台</h4><div class="psel"><div class="pbs">${panels.map((p,n)=>`<button class="pb" data-k="${p.k}" aria-pressed="${n===0}">${icon(p.k)}${SHORT[p.k]}</button>`).join("")}</div>${panels.map((p,n)=>`<div class="pnl" data-k="${p.k}"${n?" hidden":""}><div>${p.html}</div><a class="go" href="${esc(safe(p.url))}" target="_blank" rel="noopener noreferrer">${p.btn}</a></div>`).join("")}</div>`:"";
+ const sel=panels.length?`<h4>選擇平台</h4><div class="psel"><div class="pbs">${panels.map((p,n)=>`<button class="pb" data-k="${esc(p.k)}" aria-pressed="${n===0}">${icon(p.k)}${esc(SHORT[p.k]||p.k)}</button>`).join("")}</div>${panels.map((p,n)=>`<div class="pnl" data-k="${esc(p.k)}"${n?" hidden":""}><div>${p.html}</div><a class="go" href="${esc(safe(p.url))}" target="_blank" rel="noopener noreferrer">${p.btn}</a></div>`).join("")}</div>`:"";
  let more="";
  if(g){
   const r=g.reviews||{},sum=r.total?`${esc(r.label)},${r.pct}% 好評,共 ${r.total.toLocaleString()} 篇`:"尚無評論";
@@ -440,7 +444,7 @@ function freeChips(i){
  const free=new Set(pl(i).map(p=>PK[p]).filter(Boolean));
  if(free.size>1)free.delete("PC");                       // 有具體商店時,不顯示泛用的 Windows 圖示
  const rows=[...(i.prices||[]),...cmpRows(g)];
- const found=re=>rows.find(r=>re.test(r.store)&&!r.none),missing=re=>rows.some(r=>re.test(r.store)&&r.none);
+ const found=re=>rows.find(r=>re.test(r.store)&&!r.none),missing=re=>rows.some(r=>re.test(r.store)&&r.none&&r.similar);
  const money=r=>r.twd>0?(r.usd!=null?"約 ":"")+"NT$ "+Math.round(r.twd).toLocaleString():"";
  const chips=[];
  const unk=pl(i).filter(p=>!PK[p]&&p!=="其他"),isPC=pl(i).some(p=>["PC","Steam","Epic","GOG","EA","Ubisoft"].includes(p));
@@ -451,7 +455,7 @@ function freeChips(i){
   if(free.has(k)){chips.push([0,`<span class="pc free">${icon(k)}${next?"即將免費":"免費"}</span>`]);return}
   if(k==="PC")return;
   if(k==="Steam"){
-   if(i.appid===0&&isPC)chips.push([2,`<span class="pc none">${icon(k)}查無</span>`]);
+   if(i.appid===0&&isPC&&i.steam==="similar")chips.push([2,`<span class="pc none">${icon(k)}查無</span>`]);
    else{const f=g&&g.price&&g.price.final;if(f>0)chips.push([1,`<span class="pc">${icon(k)}NT$ ${Math.round(f).toLocaleString()}</span>`]);else if(f===0)chips.push([1,`<span class="pc">${icon(k)}免費遊玩</span>`])}
    return}
   const re=PRICE_RE[k];if(!re)return;
@@ -501,7 +505,7 @@ const IMG={"iOS": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAAD
 const PNAME={"Steam": "Steam", "Epic": "Epic Games Store", "GOG": "GOG", "PC": "Windows PC", "PlayStation": "PlayStation", "Xbox": "Xbox", "Nintendo": "Nintendo Switch", "iOS": "iOS(App Store)", "Android": "Android(Google Play)", "EA": "EA", "Meta": "Meta Quest(VR)"};
 const PK={Steam:"Steam",Epic:"Epic","Epic Games Store":"Epic",EA:"EA",Meta:"Meta",GOG:"GOG",PC:"PC",PlayStation:"PlayStation",Xbox:"Xbox",Nintendo:"Nintendo",iOS:"iOS",Android:"Android"};
 const PORD=["Steam","Epic","EA","GOG","PC","PlayStation","Xbox","Nintendo","Meta","iOS","Android"];
-const icon=k=>`<span class="pi${k==="Epic"?" ep":""}" title="${PNAME[k]}" role="img" aria-label="${PNAME[k]}">${IMG[k]?`<img src="${IMG[k]}" alt="">`:SVG[k]}</span>`;
+const icon=k=>`<span class="pi${k==="Epic"?" ep":""}" title="${esc(PNAME[k]||k)}" role="img" aria-label="${esc(PNAME[k]||k)}">${IMG[k]?`<img src="${IMG[k]}" alt="">`:(SVG[k]||`<span class="pt">${esc(String(k).slice(0,2))}</span>`)}</span>`;
 function platKeys(i){
  const s=new Set();pl(i).forEach(p=>{if(PK[p])s.add(PK[p])});
  if(i.appid)s.add("Steam");
