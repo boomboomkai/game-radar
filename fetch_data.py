@@ -692,7 +692,6 @@ def fetch_popular(n=50, pool=100):
 
 
 # ---------- DLC 特價分頁、遊戲詳情裡的 DLC 清單 ----------
-_APPLIST = {}
 _DLC_ERR = []
 
 
@@ -744,13 +743,8 @@ def enrich_dlc(new, games, now, today):
     new["dlc"] = out
 
 
-def applist_names():
-    """Steam 全部 app 的 編號→名稱(官方公開、不需金鑰,檔案較大,每次執行只下載一次)"""
-    if not _APPLIST:
-        d = json.loads(get("https://api.steampowered.com/ISteamApps/GetAppList/v2/", timeout=180))
-        for a in d["applist"]["apps"]:
-            _APPLIST[a["appid"]] = a["name"]
-    return _APPLIST
+MAX_DLC_NAMES = 120     # 每次執行最多查幾個 DLC 名稱(Steam 詳情介面一次只能查一個,所以分次慢慢補齊)
+DLC_PER_GAME = 8        # 每款遊戲最多列幾個 DLC
 
 
 def batch_prices(ids):
@@ -766,35 +760,62 @@ def batch_prices(ids):
     return out
 
 
+def fetch_dlc_name(d):
+    """查單一 DLC 的名稱。成功回傳名稱;Steam 回報查不到回傳 "";暫時性錯誤回傳 None(之後再試)。"""
+    try:
+        raw = json.loads(get(f"https://store.steampowered.com/api/appdetails?appids={d}&filters=basic&cc=tw&l=tchinese"))
+        e = raw[str(d)]
+        return (e.get("data") or {}).get("name", "") if e.get("success") else ""
+    except Exception as ex:
+        _DLC_ERR.append(f"dlc名稱 {d}: {type(ex).__name__} {str(ex)[:60]}")
+        return None
+
+
 def attach_dlc_lists(new, games, now):
-    """替顯示中的遊戲補上 DLC 清單(最多 12 個:特價中的優先,其餘由新到舊)。每款遊戲約每 20 小時才更新一次。"""
+    """替顯示中的遊戲補上 DLC 清單(特價中的優先,其餘由新到舊)。價格用批次查詢;名稱要一個一個查,
+    所以每次執行只補一部分並存在 games.json 的 dlcn 裡,還沒補齊的遊戲下次執行會繼續。"""
+    cache = games.setdefault("dlcn", {})
+    for k, g in games["apps"].items():                      # DLC 特價分頁已經查過的名稱直接沿用
+        if g.get("type") == "dlc" and g.get("name"):
+            cache.setdefault(k, g["name"])
     shown = []
     for sec in ("free", "deals", "popular", "new", "soon", "lows"):
         for it in new.get(sec, []):
             if it.get("appid") and it["appid"] not in shown:
                 shown.append(it["appid"])
-    todo = []
+    budget = MAX_DLC_NAMES
     for aid in shown:
         g = games["apps"].get(str(aid))
         if not g or not g.get("dlc_ids"):
             continue
         if g.get("dlc_t") and (now - datetime.fromisoformat(g["dlc_t"])).total_seconds() < REFRESH_HOURS * 3600:
             continue
-        todo.append(aid)
-    if not todo:
-        return
-    names = applist_names()
-    for aid in todo[:80]:
-        g = games["apps"][str(aid)]
         ids = g["dlc_ids"][-30:]
         try:
             pr = batch_prices(ids)
         except Exception as ex:
             _DLC_ERR.append(f"dlc價格 {aid}: {type(ex).__name__} {str(ex)[:60]}")
             continue
-        lst = [{"id": d, "name": names[d], "p": pr.get(d)} for d in ids if d in names]
-        lst.sort(key=lambda x: (-((x["p"] or {}).get("pct", 0)), -x["id"]))
-        g["dlc"], g["dlc_n"], g["dlc_t"] = lst[:12], len(g["dlc_ids"]), now.isoformat(timespec="seconds")
+        lst, incomplete = [], False
+        for d in sorted(ids, key=lambda x: (-((pr.get(x) or {}).get("pct", 0)), -x)):
+            if len(lst) >= DLC_PER_GAME:
+                break
+            nm = cache.get(str(d))
+            if nm is None:
+                if budget <= 0:
+                    incomplete = True
+                    continue
+                budget -= 1
+                nm = fetch_dlc_name(d)
+                if nm is None:
+                    incomplete = True
+                    continue
+                cache[str(d)] = nm
+            if nm:
+                lst.append({"id": d, "name": nm, "p": pr.get(d)})
+        g["dlc"], g["dlc_n"] = lst, len(g["dlc_ids"])
+        if not incomplete:
+            g["dlc_t"] = now.isoformat(timespec="seconds")
 
 
 # ---------- 遊戲詳情(畫面、影片、評論)與價格歷史 ----------
