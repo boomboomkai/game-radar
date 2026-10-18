@@ -528,7 +528,7 @@ def android_top(n=10):
 NO_STEAM = {"iOS", "Android", "PlayStation", "Xbox", "Nintendo", "Meta"}   # 這些平台的限免不用去 Steam 比對 appid
 
 
-BANNED_PLATFORM = re.compile(r"itch|drm|stove", re.I)   # itch.io、DRM-Free 領取流程不直覺;Stove 不是台灣常用的平台 → 不收錄(想排除別的平台就加在這個正規表示式裡)
+BANNED_PLATFORM = re.compile(r"itch|drm|stove|meta|rift|oculus|quest|^vr$", re.I)   # itch.io、DRM-Free 領取流程不直覺;Stove、Meta / Rift(VR)不是台灣常用的平台 → 不收錄(想排除別的平台就加在這個正規表示式裡)
 
 
 def gp_labels(s):
