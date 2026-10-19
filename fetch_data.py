@@ -1002,8 +1002,10 @@ def enrich(new):
     """替限免/特價項目補上 appid,更新 games.json(詳情)與 history.json(每日價格)。回傳失敗數。"""
     games = load(GAMES, {"apps": {}, "map": {}})
     hist = load(HISTORY, {})
-    games["fx"] = get_fx(games.get("fx"))
-    _FX["rate"] = games["fx"]
+    rate = get_fx(None)                    # 抓到新匯率才更新數字和時間,抓不到就沿用上次的
+    if rate:
+        games["fx"], games["fx_t"] = rate, datetime.now(timezone.utc).isoformat(timespec="seconds")
+    _FX["rate"] = games.get("fx")
     now = datetime.now(timezone.utc)
     today = now.date().isoformat()
     fails, ids = 0, []
