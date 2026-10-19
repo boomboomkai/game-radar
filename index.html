@@ -63,7 +63,7 @@ h3{margin:12px 0 2px;font-size:14px}
 .item>.cvw{align-self:start;margin:10px 10px 10px 0;width:clamp(96px,22vw,150px);padding:0;overflow-wrap:normal}.cvl{display:block}.cvw .ctrl{display:flex;justify-content:center;margin:6px 0 0;width:100%;box-sizing:border-box;white-space:normal;text-align:center;line-height:1.25;padding:2px 0}.cvw .ctrl svg{color:var(--ac)}.cv{width:clamp(96px,22vw,150px);height:auto;aspect-ratio:460/215;object-fit:cover;border-radius:4px;display:block;background:var(--ln)}
 @media(min-width:1800px){main{max-width:1560px}}
 @media(max-width:380px){.item>.cvw{margin-right:8px;padding:0}.item>div{padding:8px 10px}.m{font-size:13px}}
-@media(pointer:coarse){[role=tab]{padding:12px 0}#chips button,#gchips button{padding:8px 14px}summary{padding:8px 0}.pb{padding:8px 14px 8px 6px}}
+@media(pointer:coarse){[role=tab]{padding:12px 0}summary{padding:8px 0}}
 #msg{color:var(--mu);padding:24px 0}#err{font-size:13px;color:var(--mu);margin-top:28px;border-top:1px solid var(--ln);padding-top:10px}
 
 /* ===== 電競暗黑風 ===== */
@@ -113,6 +113,8 @@ details summary{color:var(--ac)}
 .pb:hover{border-color:var(--ac)}.pb .pi{width:22px;height:22px;border-radius:5px}.pi .pt{display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:11px;font-weight:800;line-height:1;background:linear-gradient(135deg,var(--c1),var(--c2));color:#04101f}
 .pb[aria-pressed=true] .pt{background:rgba(4,16,31,.3);color:#fff}
 .pb[aria-pressed=true]{background:linear-gradient(135deg,var(--c1),var(--c2));color:#04101f;border-color:transparent;font-weight:700;box-shadow:0 0 12px rgb(var(--c1r) / .4)}
+/* 觸控裝置放大按鈕(要放在上面的按鈕樣式之後才不會被蓋掉) */
+@media(pointer:coarse){#chips button,#gchips button{padding:8px 14px}.pb{padding:8px 14px 8px 6px}}
 .pnl{margin-top:10px;padding:12px 14px;border:1px solid rgb(var(--lnr) / .25);border-radius:10px;background:rgb(var(--bgr) / .55);font-size:15px}
 .item a.go{display:inline-block;margin-top:10px;padding:7px 18px;border-radius:999px;background:linear-gradient(135deg,var(--c1),var(--c2));color:#04101f;font-weight:700;text-decoration:none}
 .fab{position:fixed;right:max(14px,env(safe-area-inset-right));z-index:30;font:inherit;display:inline-flex;align-items:center;gap:6px;border:1px solid rgb(var(--lnr) / .35);background:var(--kc);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--tx);border-radius:999px;padding:11px 16px;cursor:pointer;box-shadow:0 6px 22px rgba(0,0,0,.5),0 0 16px rgb(var(--c1r) / .22)}
