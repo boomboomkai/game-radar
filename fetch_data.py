@@ -218,7 +218,9 @@ def parse_rawg(d):
             lab = plat_label(p["platform"]["name"])
             if lab and lab not in labels:
                 labels.append(lab)
-        items.append({"platform": labels[0] if labels else "其他", "platforms": labels or ["其他"],
+        if not labels:
+            continue                      # 沒有任何可辨識的平台(只有網頁版、macOS 等),整筆略過
+        items.append({"platform": labels[0], "platforms": labels,
                       "title": g["name"], "release": g.get("released") or "", "image": g.get("background_image") or "",
                       "desc": "", "genres": uniq([RAWG_GENRE[x["name"]] for x in g.get("genres") or [] if x.get("name") in RAWG_GENRE]),
                       "age": RAWG_AGE.get((g.get("esrb_rating") or {}).get("slug") or ""),
@@ -233,6 +235,11 @@ def fetch_rawg(days_from, days_to):
     url = ("https://api.rawg.io/api/games?key=" + os.environ["RAWG_API_KEY"] +
            f"&dates={rng}&ordering=-added&page_size=20")
     return parse_rawg(json.loads(get(url)))
+
+
+def has_platform(it):
+    """有至少一個具體平台(不是空白或「其他」)才保留"""
+    return any(p and p != "其他" for p in (it.get("platforms") or [it.get("platform")]))
 
 
 def merge_dupes(items):
@@ -1097,6 +1104,8 @@ def main():
         new[section].extend(items)
     for sec in ("new", "soon", "free"):
         new[sec] = merge_dupes(new[sec])
+    for sec in ("free", "deals", "new", "soon", "mobile"):
+        new[sec] = [i for i in new[sec] if has_platform(i)]      # 沒有平台的項目一律移除
     try:
         fails = enrich(new)
         if fails:
