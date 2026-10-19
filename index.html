@@ -493,6 +493,7 @@ function ageBadge(i){
  if(a===undefined||a===null)return"";
  return `<span class="age" data-a="${a}" title="${AGE[a]} ${a}+(依 PEGI/ESRB 資料換算,非台灣官方分級)"><b>${a}<sup>+</sup></b><u>${AGE[a]}</u></span>`}
 const pl=i=>i.platforms||[i.platform];
+const hasPlat=i=>pl(i).some(p=>p&&p!=="其他");   // 沒有平台(或只有「其他」)的項目不顯示
 // itch.io、DRM-Free、Stove、Meta / Rift(VR)的限免不顯示(領取不直覺 / 不是台灣常用平台;舊資料也一併過濾)
 const BAN=/itch|drm|stove|meta|rift|oculus|quest|^vr$/i;
 const TITLE_TAIL=/\s*\((?:[^)]*(?:steam|epic|gog|ubisoft|origin|\bea\b|xbox|playstation|switch|battle\.net)[^)]*)\)\s*(?:key|code)?\s*$/i;
@@ -537,7 +538,7 @@ function meta(i){
  return priceHtml(i.desc)}
 function render(){
  $("tabs").innerHTML=TABS.map(([k,v])=>`<button role="tab" aria-selected="${k===tab}" data-t="${k}">${v}</button>`).join("");
- let items=tab==="lows"?[...lowsList()]:[...(D[tab]||[])];
+ let items=tab==="lows"?[...lowsList()]:[...(D[tab]||[])].filter(i=>tab==="news"||hasPlat(i));
  $("tabnote").textContent="";
  if(tab==="news")items.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
  if(tab==="free")items.sort((a,b)=>(a.status==="next")-(b.status==="next"));
