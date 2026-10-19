@@ -993,12 +993,12 @@ def fetch_game(appid):
     return g
 
 
-PC_STORES = {"Steam", "Epic", "GOG", "EA"}
+PC_STORES = {"Steam", "Epic", "GOG", "EA", "Ubisoft"}
 NON_PC = {"PlayStation", "Xbox", "Nintendo", "iOS", "Android", "Meta"}
 
 
 def pc_rule(it, games):
-    """PC 類型的遊戲,必須確實在 Steam / Epic / GOG / EA 找得到才保留。
+    """PC 類型的遊戲,必須確實在 Steam / Epic / GOG / EA 找得到才保留(Steam / Epic / GOG / EA / Ubisoft)。
     主機、手機、VR 專屬的不受影響;同時有主機版、但 PC 商店找不到的,只拿掉 PC 標示。回傳 None 代表整筆移除。"""
     plats = [p for p in (it.get("platforms") or [it.get("platform")]) if p and p != "其他"]
     other = [p for p in plats if p not in NON_PC and p not in PC_STORES]       # PC、Ubisoft、Battle.net…
@@ -1007,7 +1007,7 @@ def pc_rule(it, games):
     g = games["apps"].get(str(it.get("appid") or "")) or {}
     rows = (g.get("compare") or {}).get("rows") or []
     ok = (bool(set(plats) & PC_STORES) or bool(it.get("appid"))
-          or any(re.search(r"Epic|^GOG|^(Origin|EA)\b", r["store"], re.I) for r in rows))
+          or any(re.search(r"Epic|^GOG|^(Origin|EA)\b|Ubisoft|Uplay", r["store"], re.I) for r in rows))
     if ok:
         return it
     rest = [p for p in plats if p in NON_PC]
@@ -1096,6 +1096,7 @@ def enrich(new):
             continue
         g["fetched"], g["seen"], g["v"] = now.isoformat(timespec="seconds"), today, SCHEMA
         games["apps"][k] = g
+        bad.pop(k, None)                              # 之前查不到、現在查得到了
         if g.get("price"):
             pts = hist.setdefault(k, [])
             if pts and pts[-1][0] == today:
