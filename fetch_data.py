@@ -984,6 +984,35 @@ def fetch_game(appid):
     return g
 
 
+PC_STORES = {"Steam", "Epic", "GOG", "EA"}
+NON_PC = {"PlayStation", "Xbox", "Nintendo", "iOS", "Android", "Meta"}
+
+
+def pc_rule(it, games):
+    """PC 類型的遊戲,必須確實在 Steam / Epic / GOG / EA 找得到才保留。
+    主機、手機、VR 專屬的不受影響;同時有主機版、但 PC 商店找不到的,只拿掉 PC 標示。回傳 None 代表整筆移除。"""
+    plats = [p for p in (it.get("platforms") or [it.get("platform")]) if p and p != "其他"]
+    other = [p for p in plats if p not in NON_PC and p not in PC_STORES]       # PC、Ubisoft、Battle.net…
+    if not other and not (set(plats) & PC_STORES):
+        return it
+    g = games["apps"].get(str(it.get("appid") or "")) or {}
+    rows = (g.get("compare") or {}).get("rows") or []
+    ok = (bool(set(plats) & PC_STORES) or bool(it.get("appid"))
+          or any(re.search(r"Epic|^GOG|^(Origin|EA)\b", r["store"], re.I) for r in rows))
+    if ok:
+        return it
+    rest = [p for p in plats if p in NON_PC]
+    if not rest:
+        return None
+    it["platforms"], it["platform"] = rest, rest[0]
+    return it
+
+
+def apply_pc_rule(new, games):
+    for sec in ("free", "deals", "new", "soon"):
+        new[sec] = [r for r in (pc_rule(i, games) for i in new[sec]) if r]
+
+
 def free_prices(new, games):
     """替限免項目查 iOS / Android 的價格。找不到標記為 none(前端顯示『查無』);查詢本身失敗則不顯示,避免誤導。"""
     for it in new["free"]:
@@ -1022,7 +1051,8 @@ def enrich(new):
         games["map_v"] = 3
     for sec in ("free", "deals", "popular", "new", "soon", "pool"):
         for it in new[sec]:
-            if not it.get("appid") and sec == "free" and it["platform"] not in NO_STEAM:
+            if not it.get("appid") and ((sec == "free" and it["platform"] not in NO_STEAM)
+                                        or (sec in ("new", "soon") and "PC" in (it.get("platforms") or []))):
                 name = it.get("title_en") or it["title"]
                 key = norm(name)
                 if key not in games["map"]:
@@ -1075,6 +1105,7 @@ def enrich(new):
     new["popular"] = [it for it in new.get("popular", []) if it.get("title")]
     for r, it in enumerate(new["popular"], 1):
         it["rank"] = r
+    apply_pc_rule(new, games)
     free_prices(new, games)
     new["lows"] = build_lows(new, games)
     try:
