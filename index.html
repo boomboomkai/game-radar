@@ -34,6 +34,7 @@ h4{margin:12px 0 2px;font-size:14px}
 .cv.sq{object-fit:contain}
 .pg{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:16px 0 4px}.pg button{font:inherit;min-width:40px;border:1px solid var(--ln);background:var(--row);color:var(--tx);border-radius:6px;padding:6px 10px;cursor:pointer}
 .pg button[aria-current=true]{background:var(--ac);color:#fff;border-color:var(--ac)}.pg button:disabled{opacity:.4;cursor:default}.pgi{text-align:center}.dots{align-self:center;color:var(--mu)}
+.ctrl{display:inline-flex;align-items:center;gap:4px;vertical-align:middle;margin-left:8px;font-size:12px;font-weight:600;color:var(--ac);border:1px solid var(--ac);border-radius:6px;padding:1px 7px 1px 5px;white-space:nowrap}.ctrl svg{width:16px;height:16px}
 .pcs{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .pc{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--ln);border-radius:6px;padding:2px 8px 2px 3px;font-size:13px;color:var(--mu);white-space:nowrap}
 .pc .pi{width:18px;height:18px;border-radius:4px}
@@ -495,6 +496,8 @@ function ageBadge(i){
 const pl=i=>i.platforms||[i.platform];
 const hasPlat=i=>pl(i).some(p=>p&&p!=="其他");   // 沒有平台(或只有「其他」)的項目不顯示
 // itch.io、DRM-Free、Stove、Meta / Rift(VR)的限免不顯示(領取不直覺 / 不是台灣常用平台;舊資料也一併過濾)
+const CTRL_SVG='<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 7.5h10a5 5 0 0 1 4.9 4l.9 4.4a2.6 2.6 0 0 1-4.5 2.2L16 15.5H8l-2.3 2.6a2.6 2.6 0 0 1-4.5-2.2l.9-4.4A5 5 0 0 1 7 7.5z"/><path d="M8 10v4M6 12h4" stroke="#fff" stroke-width="1.4" stroke-linecap="round" fill="none"/><circle cx="15.5" cy="11" r="1" fill="#fff"/><circle cx="18" cy="13" r="1" fill="#fff"/></svg>';
+function ctrlBadge(i){const g=G.apps&&G.apps[i.appid];return g&&g.ctrl==="full"?`<span class="ctrl" title="Steam 商店標示:完整控制器支援">${CTRL_SVG}完整控制器支援</span>`:""}
 const PC_STORES=["Steam","Epic","GOG","EA"],NON_PC=["PlayStation","Xbox","Nintendo","iOS","Android","Meta"];
 // PC 類型的遊戲必須確實在 Steam / Epic / GOG / EA 找得到才顯示;主機、手機、VR 專屬的不受影響;有主機版的只拿掉 PC 標示
 function pcRule(i){
@@ -565,7 +568,7 @@ function render(){
  const PER=10,pages=Math.max(1,Math.ceil(all.length/PER));
  if(tab==="lows"||tab==="popular"||tab==="dlc"){if(page>pages)page=pages;show=all.slice((page-1)*PER,page*PER)}
  $("pager").innerHTML=(tab==="lows"||tab==="popular"||tab==="dlc")&&pages>1?pagerHtml(page,pages,all.length):"";
- $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(pl(i)[0])}"><i></i><div><a href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a>${ageBadge(i)}<div class="m">${tab==="free"?"":platLabel(i)}${meta(i)}${tab==="free"?"":bestChip(i)}</div>${genreLine(i)}${tab==="free"?freeChips(i):""}${lowChip(i)}</div>${cover(i)}${dtBlock(i)}</div>`).join("");
+ $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(pl(i)[0])}"><i></i><div><a href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a>${ageBadge(i)}${ctrlBadge(i)}<div class="m">${tab==="free"?"":platLabel(i)}${meta(i)}${tab==="free"?"":bestChip(i)}</div>${genreLine(i)}${tab==="free"?freeChips(i):""}${lowChip(i)}</div>${cover(i)}${dtBlock(i)}</div>`).join("");
  $("msg").textContent=show.length?"":(D.updated?(tab==="lows"?"目前沒有確認處於歷史最低價的遊戲。":((tab==="popular"||tab==="dlc")&&D[tab]===undefined?"這個分頁的資料還在準備中,等下一次自動更新(或到 GitHub 的 Actions 手動執行一次)後就會出現。":"這個分類目前沒有資料。")):"還沒有資料,請先在 GitHub 的 Actions 頁手動執行一次 update-data。");
 }
 const shotPick={};
