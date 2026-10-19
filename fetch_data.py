@@ -834,7 +834,7 @@ def attach_dlc_lists(new, games, now):
 GAMES = Path(__file__).parent / "games.json"
 HISTORY = Path(__file__).parent / "history.json"
 MAX_APPS = 240          # 每次最多處理幾款遊戲,避免請求過多
-SCHEMA = 4            # 詳情資料格式版本;舊版資料(缺比價 / 史低)會自動重抓一次
+SCHEMA = 5            # 詳情資料格式版本;舊版資料(缺比價 / 史低)會自動重抓一次
 _CS_ERR = []
 
 
@@ -915,6 +915,15 @@ def steam_genres(gs):
     return uniq([STEAM_GENRE[str(g.get("id"))] for g in gs or [] if str(g.get("id")) in STEAM_GENRE])
 
 
+def steam_controller(d):
+    """Steam 商店的控制器支援標示:full=完整控制器支援、partial=部分控制器支援、None=沒標示"""
+    c = d.get("controller_support")
+    if c in ("full", "partial"):
+        return c
+    ids = {x.get("id") for x in (d.get("categories") or [])}
+    return "full" if 28 in ids else "partial" if 18 in ids else None
+
+
 def parse_details(d):
     po = d.get("price_overview") or {}
     movies = []
@@ -930,7 +939,7 @@ def parse_details(d):
             "metacritic": (d.get("metacritic") or {}).get("score"),
             "shots": [{"t": s.get("path_thumbnail", ""), "f": s.get("path_full", "")}
                       for s in (d.get("screenshots") or [])[:6]],
-            "movies": movies,
+            "movies": movies, "ctrl": steam_controller(d),
             "price": ({"final": po["final"] / 100, "orig": po["initial"] / 100,
                        "cur": po.get("currency", ""), "pct": po.get("discount_percent", 0)} if po else None)}
 
