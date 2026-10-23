@@ -33,7 +33,10 @@ APPDETAILS_BUDGET = 150     # 每次執行最多呼叫幾次 Steam 詳情介面(
 _THROTTLE = {"bad": 0, "cooled": False, "blocked": False, "calls": 0, "skipped": 0}
 
 
-def get(url, timeout=25, tries=3):
+_LAST = {}
+
+
+def get(url, timeout=25, tries=3, headers=None):
     """下載網址內容。遇到 429 / 5xx 或連線逾時會自動重試;失敗訊息會附上伺服器回應(不含網址參數,避免洩漏金鑰)。"""
     is_ad = "appdetails" in url
     if is_ad:
@@ -41,11 +44,12 @@ def get(url, timeout=25, tries=3):
             raise Throttled("Steam 限流中或本次額度已用完")
         _THROTTLE["calls"] += 1
     for attempt in range(tries):
-        time.sleep(1.6 if "appdetails" in url else 0.6 if "appreviews" in url else 0.25)  # 放慢一點;Steam 商店詳情約每 5 分鐘 200 次的上限
-        req = urllib.request.Request(url, headers=api_headers(url))
+        time.sleep(1.6 if "appdetails" in url else 1.0 if "appreviews" in url else 0.25)  # 放慢一點;Steam 商店詳情約每 5 分鐘 200 次的上限
+        req = urllib.request.Request(url, headers={**api_headers(url), **(headers or {})})
         try:
             with urllib.request.urlopen(req, timeout=timeout) as r:
                 body = r.read().decode("utf-8", "replace")
+                _LAST["url"] = r.geturl()
             if is_ad:
                 if body.lstrip()[:1] in ("{", "["):
                     _THROTTLE["bad"] = 0
@@ -1030,12 +1034,25 @@ def fetch_lowest(appid):
 _REV = {"bad": 0, "off": False, "err": "", "skipped": 0}
 
 
-def review_json(url):
-    body = get(url)
+def review_json(url, appid):
+    """取得 Steam 評論 JSON。第一次拿到網頁(不是 JSON)時,換成瀏覽器 AJAX 風格的標頭再試一次。"""
+    hdr = {"Accept": "application/json, text/javascript, */*; q=0.01", "X-Requested-With": "XMLHttpRequest",
+           "Referer": f"https://store.steampowered.com/app/{appid}/"}
+    body = get(url, headers=hdr if _REV.get("hdr") else None)
     try:
         return json.loads(body)
     except ValueError:
-        raise ValueError(f"appreviews 回傳非 JSON:{body[:60]!r}")
+        pass
+    if not _REV.get("hdr"):
+        body = get(url, headers=hdr)
+        try:
+            d = json.loads(body)
+            _REV["hdr"] = True                       # 之後都直接用這組標頭
+            return d
+        except ValueError:
+            pass
+    m = re.search(r"<title>(.*?)</title>", body, re.S | re.I)
+    raise ValueError(f"appreviews 回傳非 JSON(網頁標題:{unescape(m.group(1)).strip()[:40] if m else '無'};最後網址:{_LAST.get('url', '')[:70]})")
 
 
 def fetch_reviews(appid):
@@ -1046,10 +1063,10 @@ def fetch_reviews(appid):
         return None
     base = f"https://store.steampowered.com/appreviews/{appid}?json=1&filter=all&review_type=all&purchase_type=all"
     try:
-        allr = review_json(base + "&language=all&num_per_page=3")
+        allr = review_json(base + "&language=all&num_per_page=3", appid)
         txt = allr
         try:
-            zh = review_json(base + "&language=tchinese&num_per_page=3")
+            zh = review_json(base + "&language=tchinese&num_per_page=3", appid)
             if zh.get("reviews"):
                 txt = zh
         except Exception:
