@@ -1101,6 +1101,38 @@ def fetch_game(appid):
     return g
 
 
+BLOCKLIST = Path(__file__).parent / "blocklist.json"     # 手動排除清單:{"titles": ["遊戲名稱"], "appids": [12345]}
+
+
+def region_rule(new, games):
+    """排除在台灣連出去會有問題的項目:
+    1. Epic 手機版的限免:iOS 版的 Epic 商店只開放歐盟與日本,台灣打不開,所以拿掉 iOS;
+       只剩手機版(沒有 PC 版)的整筆排除(商店頁在台灣會顯示『未在你所在的地區開放』)。
+    2. Steam 查不到台灣區商店頁的遊戲(下架、地區限制)。
+    3. 你自己放在 blocklist.json 的名稱或 Steam 編號。"""
+    block = load(BLOCKLIST, {})
+    bt = {norm(t) for t in block.get("titles", [])}
+    ba = {str(a) for a in block.get("appids", [])}
+    bad = games.get("bad", {})
+    for sec in ("free", "deals", "new", "soon"):
+        out = []
+        for it in new[sec]:
+            aid = str(it.get("appid") or "")
+            if norm(it.get("title_en") or it["title"]) in bt or norm(it["title"]) in bt or (aid and aid in ba):
+                continue
+            if aid and aid in bad and aid not in games["apps"]:
+                continue                                              # Steam 沒有可用的商店頁
+            plats = [p for p in (it.get("platforms") or [it.get("platform")]) if p]
+            if sec == "free" and "Epic" in plats and ({"iOS", "Android"} & set(plats)):
+                rest = [p for p in plats if p != "iOS"]
+                if it.get("src") != "epic" and "PC" not in rest:
+                    continue                                          # Epic 手機版限免(沒有 PC 版)
+                it["platforms"] = rest
+                it["platform"] = next((p for p in rest if p != "PC"), rest[0])
+            out.append(it)
+        new[sec] = out
+
+
 PC_STORES = {"Steam", "Epic", "GOG", "EA", "Ubisoft"}
 NON_PC = {"PlayStation", "Xbox", "Nintendo", "iOS", "Android", "Meta"}
 
@@ -1227,6 +1259,7 @@ def enrich(new):
     for r, it in enumerate(new["popular"], 1):
         it["rank"] = r
     mark_dlc(new, games)
+    region_rule(new, games)
     apply_pc_rule(new, games)
     free_prices(new, games)
     new["lows"] = build_lows(new, games)
