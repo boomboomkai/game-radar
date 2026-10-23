@@ -6,6 +6,7 @@ import json
 import os
 import re
 import time
+from html import unescape
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -24,14 +25,40 @@ def api_headers(url):
     return {"User-Agent": API_UA} if ("cheapshark.com" in url or "rawg.io" in url) else HEADERS
 
 
+class Throttled(Exception):
+    """Steam 商店詳情介面被限流(回傳空白)、或本次額度已用完:不是這款遊戲的問題,下次執行再補"""
+
+
+APPDETAILS_BUDGET = 150     # 每次執行最多呼叫幾次 Steam 詳情介面(上限約每 5 分鐘 200 次,超過會被限流)
+_THROTTLE = {"bad": 0, "cooled": False, "blocked": False, "calls": 0, "skipped": 0}
+
+
 def get(url, timeout=25, tries=3):
     """下載網址內容。遇到 429 / 5xx 或連線逾時會自動重試;失敗訊息會附上伺服器回應(不含網址參數,避免洩漏金鑰)。"""
+    is_ad = "appdetails" in url
+    if is_ad:
+        if _THROTTLE["blocked"] or _THROTTLE["calls"] >= APPDETAILS_BUDGET:
+            raise Throttled("Steam 限流中或本次額度已用完")
+        _THROTTLE["calls"] += 1
     for attempt in range(tries):
         time.sleep(1.6 if "appdetails" in url else 0.25)  # 放慢一點;Steam 商店詳情約每 5 分鐘 200 次的上限
         req = urllib.request.Request(url, headers=api_headers(url))
         try:
             with urllib.request.urlopen(req, timeout=timeout) as r:
-                return r.read().decode("utf-8", "replace")
+                body = r.read().decode("utf-8", "replace")
+            if is_ad:
+                if body.lstrip()[:1] in ("{", "["):
+                    _THROTTLE["bad"] = 0
+                else:                                  # 空白或不是 JSON = 被限流:連續 3 次先冷卻 2 分鐘,再失敗就整次放棄
+                    _THROTTLE["bad"] += 1
+                    if _THROTTLE["bad"] >= 3:
+                        if not _THROTTLE["cooled"]:
+                            time.sleep(120)
+                            _THROTTLE["cooled"], _THROTTLE["bad"] = True, 0
+                        else:
+                            _THROTTLE["blocked"] = True
+                    raise Throttled("Steam 回傳空白(可能被限流)")
+            return body
         except urllib.error.HTTPError as e:
             if e.code in (429, 500, 502, 503, 504) and attempt < tries - 1:
                 time.sleep(2 * (attempt + 1))
@@ -282,6 +309,7 @@ SOURCES = [
     ("cheapshark_pool", "pool", lambda: fetch_cheapshark_pool()),
     ("gamerpower", "free", lambda: fetch_gamerpower()),
     ("steam_free", "free", lambda: steam_free()),
+    ("steam_ftk", "free", lambda: steam_ftk()),
     ("ios_top", "mobile", lambda: ios_top()),
     ("android_top", "mobile", lambda: android_top()),
 ]
@@ -295,7 +323,7 @@ _FX = {}
 _STORES = {}
 _IOS = {}
 MOBILE = Path(__file__).parent / "mobile_prices.json"
-ALLOW_EMPTY = {"ios_free", "ios_deals", "steam_free"}   # 這些來源沒有項目是正常的(要累積價格紀錄才看得出降價)
+ALLOW_EMPTY = {"ios_free", "ios_deals", "steam_free", "steam_ftk"}   # 這些來源沒有項目是正常的(要累積價格紀錄才看得出降價)
 
 
 def get_fx(prev):
@@ -611,6 +639,37 @@ def steam_free():
     return items
 
 
+def parse_steam_ftk(page_html):
+    """解析 Steam 商店搜尋結果:只收折扣 100% 的遊戲 / DLC(Free to Keep)"""
+    items = []
+    for href, appid, row in re.findall(r'<a href="([^"]+)"[^>]*?data-ds-appid="(\d+)"(.*?)</a>', page_html, re.S):
+        disc = re.search(r'data-discount="(\d+)"', row)
+        name = re.search(r'<span class="title">(.*?)</span>', row, re.S)
+        if not disc or int(disc.group(1)) != 100 or not name:
+            continue
+        orig = re.search(r'discount_original_price">(.*?)</div>', row, re.S)
+        items.append({"platform": "Steam", "appid": int(appid), "title": unescape(name.group(1)).strip(), "status": "now",
+                      "desc": f"原價 {unescape(orig.group(1)).strip()}" if orig else "",
+                      "url": f"https://store.steampowered.com/app/{appid}"})
+    return items
+
+
+def steam_ftk():
+    """Steam 商店搜尋「特價中 + 價格上限免費」= 限時免費領取(Free to Keep),包含遊戲與 DLC。結束時間 Steam 沒有提供。"""
+    url = ("https://store.steampowered.com/search/results/?query&start=0&count=50&dynamic_data=&sort_by=Price_ASC"
+           "&maxprice=free&specials=1&cc=tw&l=tchinese&infinite=1")
+    return parse_steam_ftk(json.loads(get(url)).get("results_html", ""))
+
+
+def mark_dlc(new, games):
+    """限免項目如果其實是 DLC(要有主遊戲才能用),在名稱後面標註"""
+    for it in new["free"]:
+        g = games["apps"].get(str(it.get("appid") or "")) or {}
+        if g.get("type") == "dlc" and not str(it.get("title", "")).endswith("(DLC)"):
+            it["title"] = f"{it['title']} (DLC)"
+            it["dlc"] = True
+
+
 def dedupe_by_appid(items):
     seen, out = {}, []
     for it in items:
@@ -755,7 +814,7 @@ def enrich_dlc(new, games, now, today):
     new["dlc"] = out
 
 
-MAX_DLC_NAMES = 120     # 每次執行最多查幾個 DLC 名稱(Steam 詳情介面一次只能查一個,所以分次慢慢補齊)
+MAX_DLC_NAMES = 40     # 每次執行最多查幾個 DLC 名稱(Steam 詳情介面一次只能查一個,所以分次慢慢補齊)
 DLC_PER_GAME = 8        # 每款遊戲最多列幾個 DLC
 
 
@@ -1090,6 +1149,9 @@ def enrich(new):
         except Unavailable:
             bad[k] = today
             continue
+        except Throttled:
+            _THROTTLE["skipped"] += 1               # 不算失敗,下次執行再補
+            continue
         except Exception as ex:
             fails += 1
             _DETAIL_ERR.append(f"app {appid}: {type(ex).__name__} {str(ex)[:80]}")
@@ -1115,6 +1177,7 @@ def enrich(new):
     new["popular"] = [it for it in new.get("popular", []) if it.get("title")]
     for r, it in enumerate(new["popular"], 1):
         it["rank"] = r
+    mark_dlc(new, games)
     apply_pc_rule(new, games)
     free_prices(new, games)
     new["lows"] = build_lows(new, games)
@@ -1153,6 +1216,9 @@ def main():
             errors.append(f"details: {fails} 筆遊戲詳情抓取失敗" + (f"(例:{_DETAIL_ERR[0]})" if _DETAIL_ERR else ""))
         if _CS_ERR:
             errors.append(f"cheapshark_details: {_CS_ERR[0]}(共 {len(_CS_ERR)} 筆)")
+        if _THROTTLE["skipped"]:
+            why = "Steam 限流" if (_THROTTLE["blocked"] or _THROTTLE["cooled"]) else "本次額度用完"
+            errors.append(f"steam_throttle: {why},{_THROTTLE['skipped']} 筆詳情本次略過,之後執行會陸續補上")
         if _DLC_ERR:
             errors.append(f"dlc: {_DLC_ERR[0]}(共 {len(_DLC_ERR)} 筆)")
     except Exception as ex:
