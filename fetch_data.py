@@ -41,7 +41,7 @@ def get(url, timeout=25, tries=3):
             raise Throttled("Steam 限流中或本次額度已用完")
         _THROTTLE["calls"] += 1
     for attempt in range(tries):
-        time.sleep(1.6 if "appdetails" in url else 0.25)  # 放慢一點;Steam 商店詳情約每 5 分鐘 200 次的上限
+        time.sleep(1.6 if "appdetails" in url else 0.6 if "appreviews" in url else 0.25)  # 放慢一點;Steam 商店詳情約每 5 分鐘 200 次的上限
         req = urllib.request.Request(url, headers=api_headers(url))
         try:
             with urllib.request.urlopen(req, timeout=timeout) as r:
@@ -1027,18 +1027,50 @@ def fetch_lowest(appid):
     return {"usd": c.get("price"), "date": datetime.fromtimestamp(c["date"], timezone.utc).date().isoformat()}
 
 
+_REV = {"bad": 0, "off": False, "err": "", "skipped": 0}
+
+
+def review_json(url):
+    body = get(url)
+    try:
+        return json.loads(body)
+    except ValueError:
+        raise ValueError(f"appreviews 回傳非 JSON:{body[:60]!r}")
+
+
+def fetch_reviews(appid):
+    """Steam 評價:先用『所有語言』一次取得總評價與熱門評論,再嘗試取繁中評論(失敗就用前者)。
+    連續 3 款都失敗(多半是被限流)時,這次執行不再查評論。"""
+    if _REV["off"]:
+        _REV["skipped"] += 1
+        return None
+    base = f"https://store.steampowered.com/appreviews/{appid}?json=1&filter=all&review_type=all&purchase_type=all"
+    try:
+        allr = review_json(base + "&language=all&num_per_page=3")
+        txt = allr
+        try:
+            zh = review_json(base + "&language=tchinese&num_per_page=3")
+            if zh.get("reviews"):
+                txt = zh
+        except Exception:
+            pass
+        _REV["bad"] = 0
+        return parse_reviews(allr, txt)
+    except Exception as ex:
+        _REV["bad"] += 1
+        _REV["err"] = _REV["err"] or str(ex)[:120]
+        if _REV["bad"] >= 3:
+            _REV["off"] = True
+        return None
+
+
 def fetch_game(appid):
     raw = json.loads(get(f"https://store.steampowered.com/api/appdetails?appids={appid}&cc=tw&l=tchinese"))
     entry = raw[str(appid)]
     if not entry.get("success"):
         raise Unavailable("appdetails 回傳失敗")
     g = parse_details(entry["data"])
-    base = f"https://store.steampowered.com/appreviews/{appid}?json=1&filter=all&review_type=all&purchase_type=all"
-    summ = json.loads(get(base + "&language=all&num_per_page=0"))
-    txt = json.loads(get(base + "&language=tchinese&num_per_page=3"))
-    if not txt.get("reviews"):
-        txt = json.loads(get(base + "&language=english&num_per_page=3"))
-    g["reviews"] = parse_reviews(summ, txt)
+    g["reviews"] = fetch_reviews(appid)          # 評論失敗不會讓整款遊戲的詳情作廢,只是暫時沒有評論
     try:
         cs = fetch_cheapshark(appid)
     except Exception as ex:
@@ -1216,6 +1248,8 @@ def main():
             errors.append(f"details: {fails} 筆遊戲詳情抓取失敗" + (f"(例:{_DETAIL_ERR[0]})" if _DETAIL_ERR else ""))
         if _CS_ERR:
             errors.append(f"cheapshark_details: {_CS_ERR[0]}(共 {len(_CS_ERR)} 筆)")
+        if _REV["err"]:
+            errors.append(f"steam_reviews: {_REV['err']}(這次略過 {_REV['skipped']} 款的評論,詳情其他部分正常)")
         if _THROTTLE["skipped"]:
             why = "Steam 限流" if (_THROTTLE["blocked"] or _THROTTLE["cooled"]) else "本次額度用完"
             errors.append(f"steam_throttle: {why},{_THROTTLE['skipped']} 筆詳情本次略過,之後執行會陸續補上")
