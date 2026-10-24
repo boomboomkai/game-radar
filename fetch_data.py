@@ -1034,17 +1034,41 @@ def fetch_lowest(appid):
 _REV = {"bad": 0, "off": False, "err": "", "skipped": 0}
 
 
+class NoReviews(Exception):
+    """評論網址被導回 Steam 首頁:這個編號沒有商店頁(不是被限流),不計入連續失敗"""
+
+
+STORE_ROOT = "https://store.steampowered.com"
+
+
+def at_store_root():
+    return _LAST.get("url", "").split("?")[0].rstrip("/") == STORE_ROOT
+
+
+def store_page_missing(appid):
+    """再確認一次:商店頁本身是不是也被導回首頁(年齡限制頁不算)"""
+    try:
+        get(f"{STORE_ROOT}/app/{appid}/?cc=tw&l=tchinese")
+    except Exception:
+        return False
+    return at_store_root()
+
+
 def review_json(url, appid):
     """取得 Steam 評論 JSON。第一次拿到網頁(不是 JSON)時,換成瀏覽器 AJAX 風格的標頭再試一次。"""
     hdr = {"Accept": "application/json, text/javascript, */*; q=0.01", "X-Requested-With": "XMLHttpRequest",
            "Referer": f"https://store.steampowered.com/app/{appid}/"}
     body = get(url, headers=hdr if _REV.get("hdr") else None)
+    if at_store_root():
+        raise NoReviews()
     try:
         return json.loads(body)
     except ValueError:
         pass
     if not _REV.get("hdr"):
         body = get(url, headers=hdr)
+        if at_store_root():
+            raise NoReviews()
         try:
             d = json.loads(body)
             _REV["hdr"] = True                       # 之後都直接用這組標頭
@@ -1060,7 +1084,7 @@ def fetch_reviews(appid):
     連續 3 款都失敗(多半是被限流)時,這次執行不再查評論。"""
     if _REV["off"]:
         _REV["skipped"] += 1
-        return None
+        return None, False
     base = f"https://store.steampowered.com/appreviews/{appid}?json=1&filter=all&review_type=all&purchase_type=all"
     try:
         allr = review_json(base + "&language=all&num_per_page=3", appid)
@@ -1072,13 +1096,15 @@ def fetch_reviews(appid):
         except Exception:
             pass
         _REV["bad"] = 0
-        return parse_reviews(allr, txt)
+        return parse_reviews(allr, txt), False
+    except NoReviews:
+        return None, store_page_missing(appid)          # 沒有商店頁:標記起來,頁面會改連 SteamDB
     except Exception as ex:
         _REV["bad"] += 1
         _REV["err"] = _REV["err"] or str(ex)[:120]
         if _REV["bad"] >= 3:
             _REV["off"] = True
-        return None
+        return None, False
 
 
 def fetch_game(appid):
@@ -1087,7 +1113,9 @@ def fetch_game(appid):
     if not entry.get("success"):
         raise Unavailable("appdetails 回傳失敗")
     g = parse_details(entry["data"])
-    g["reviews"] = fetch_reviews(appid)          # 評論失敗不會讓整款遊戲的詳情作廢,只是暫時沒有評論
+    g["reviews"], nostore = fetch_reviews(appid)   # 評論失敗不會讓整款遊戲的詳情作廢,只是暫時沒有評論
+    if nostore:
+        g["nostore"] = True
     try:
         cs = fetch_cheapshark(appid)
     except Exception as ex:
@@ -1120,7 +1148,7 @@ def region_rule(new, games):
             aid = str(it.get("appid") or "")
             if norm(it.get("title_en") or it["title"]) in bt or norm(it["title"]) in bt or (aid and aid in ba):
                 continue
-            if aid and aid in bad and aid not in games["apps"]:
+            if aid and ((aid in bad and aid not in games["apps"]) or (games["apps"].get(aid) or {}).get("nostore")):
                 continue                                              # Steam 沒有可用的商店頁
             plats = [p for p in (it.get("platforms") or [it.get("platform")]) if p]
             if sec == "free" and "Epic" in plats and ({"iOS", "Android"} & set(plats)):
