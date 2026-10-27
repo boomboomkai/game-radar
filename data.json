@@ -139,11 +139,11 @@
   },
   {
    "platform": "Steam",
-   "title": "Resident Evil 4",
-   "desc": "-75%  TWD 297(原價 1,190)",
-   "pct": 75,
-   "url": "https://store.steampowered.com/app/2050650",
-   "appid": 2050650,
+   "title": "No Man's Sky 無人深空",
+   "desc": "-60%  TWD 359(原價 898)",
+   "pct": 60,
+   "url": "https://store.steampowered.com/app/275850",
+   "appid": 275850,
    "src": "steam"
   },
   {
@@ -153,6 +153,15 @@
    "pct": 50,
    "url": "https://store.steampowered.com/app/3240220",
    "appid": 3240220,
+   "src": "steam"
+  },
+  {
+   "platform": "Steam",
+   "title": "7 Days to Die",
+   "desc": "-45%  TWD 368(原價 670)",
+   "pct": 45,
+   "url": "https://store.steampowered.com/app/251570",
+   "appid": 251570,
    "src": "steam"
   },
   {
@@ -171,15 +180,6 @@
    "pct": 40,
    "url": "https://store.steampowered.com/app/1943730",
    "appid": 1943730,
-   "src": "steam"
-  },
-  {
-   "platform": "Steam",
-   "title": "Chained Beasts",
-   "desc": "-35%  TWD 245(原價 377)",
-   "pct": 35,
-   "url": "https://store.steampowered.com/app/3569420",
-   "appid": 3569420,
    "src": "steam"
   },
   {
@@ -220,6 +220,33 @@
   },
   {
    "platform": "Steam",
+   "title": "LIMBO",
+   "pct": 90,
+   "desc": "-90%  US$1.24(原價 12.49)",
+   "url": "https://www.cheapshark.com/redirect?dealID=X9XEB%2Fw3H%2BmI80UYR458fzGB9zWEHde%2Bz2e8vPvNWl4%3D",
+   "appid": 48000,
+   "src": "cheapshark"
+  },
+  {
+   "platform": "Steam",
+   "title": "INSIDE",
+   "pct": 90,
+   "desc": "-90%  US$2.49(原價 24.99)",
+   "url": "https://www.cheapshark.com/redirect?dealID=MNeCPwsOA2Ep3wim%2FLwY4C0rcPZGEkwjwOSlzBwXs8c%3D",
+   "appid": 304430,
+   "src": "cheapshark"
+  },
+  {
+   "platform": "Steam",
+   "title": "Bulb Boy",
+   "pct": 90,
+   "desc": "-90%  US$0.89(原價 8.99)",
+   "url": "https://www.cheapshark.com/redirect?dealID=LPczpAHwTLjRLu1Ra1OOPHZXhyZwArQtkODNCvrt4Q8%3D",
+   "appid": 390290,
+   "src": "cheapshark"
+  },
+  {
+   "platform": "Steam",
    "title": "Metro 2033 Redux",
    "pct": 90,
    "desc": "-90%  US$1.99(原價 19.99)",
@@ -229,101 +256,74 @@
   },
   {
    "platform": "Steam",
+   "title": "Outlast",
+   "pct": 90,
+   "desc": "-90%  US$1.49(原價 14.99)",
+   "url": "https://www.cheapshark.com/redirect?dealID=XU5v9Dm9E%2B2UM4UtgeQArX%2BUP%2BKmmgBXhqN81c2O9JU%3D",
+   "appid": 238320,
+   "src": "cheapshark"
+  },
+  {
+   "platform": "Steam",
+   "title": "The Last Campfire",
+   "pct": 90,
+   "desc": "-90%  US$1.49(原價 14.99)",
+   "url": "https://www.cheapshark.com/redirect?dealID=zuntj1DasObDdfuFNldS4TeW0RAR%2BpeRN94RorhGLdg%3D",
+   "appid": 990630,
+   "src": "cheapshark"
+  },
+  {
+   "platform": "Steam",
+   "title": "Monster Energy Supercross - The Official Videogame 2",
+   "pct": 90,
+   "desc": "-90%  US$1.99(原價 19.99)",
+   "url": "https://www.cheapshark.com/redirect?dealID=cdJntIN84g4dRo3rqt8izoxL1Xg%2FL2uOcACwHEmAjfI%3D",
+   "appid": 882020,
+   "src": "cheapshark"
+  },
+  {
+   "platform": "Steam",
+   "title": "Cursed to Golf",
+   "pct": 90,
+   "desc": "-90%  US$1.99(原價 19.99)",
+   "url": "https://www.cheapshark.com/redirect?dealID=QQJrXHufPXLRMgk5FTOzkyIvHbqQz%2BRpsmgCHv6%2FR3o%3D",
+   "appid": 1726120,
+   "src": "cheapshark"
+  },
+  {
+   "platform": "Steam",
+   "title": "A Plague Tale: Innocence",
+   "pct": 90,
+   "desc": "-90%  US$3.99(原價 39.99)",
+   "url": "https://www.cheapshark.com/redirect?dealID=t1lqDapKKHV6EtRdJhAg1Z8KdKx1dZfykebFM5MWgfA%3D",
+   "appid": 752590,
+   "src": "cheapshark"
+  },
+  {
+   "platform": "Steam",
+   "title": "Goetia",
+   "pct": 90,
+   "desc": "-90%  US$1.49(原價 14.99)",
+   "url": "https://www.cheapshark.com/redirect?dealID=pwBfc7ANBMDSvhpNi3bkvCpBuG2negkJLfD3RwIo9G4%3D",
+   "appid": 421740,
+   "src": "cheapshark"
+  },
+  {
+   "platform": "Steam",
+   "title": "Saturnalia",
+   "pct": 90,
+   "desc": "-90%  US$2.99(原價 29.99)",
+   "url": "https://www.cheapshark.com/redirect?dealID=izlHHRbJDApQZbARPh2p9JIAk0szsy2xOtcjZK%2FGtUM%3D",
+   "appid": 916350,
+   "src": "cheapshark"
+  },
+  {
+   "platform": "Steam",
    "title": "Rise of the Tomb Raider",
    "pct": 90,
    "desc": "-90%  US$2.99(原價 29.99)",
    "url": "https://www.cheapshark.com/redirect?dealID=JLFqGNvtew3enSlgxRtAZBJ3GeU4Rd0XYhGePiQcaI8%3D",
    "appid": 391220,
-   "src": "cheapshark"
-  },
-  {
-   "platform": "Epic",
-   "title": "Bears in Space",
-   "pct": 90,
-   "desc": "-90%  US$1.99(原價 19.99)",
-   "url": "https://www.cheapshark.com/redirect?dealID=HzCb2W3vnnKKiXNJwUWSP0VsDViNihnDK41fw3YOQts%3D",
-   "appid": 1309620,
-   "src": "cheapshark"
-  },
-  {
-   "platform": "Steam",
-   "title": "Super Meat Boy",
-   "pct": 92,
-   "desc": "-92%  US$1.19(原價 14.99)",
-   "url": "https://www.cheapshark.com/redirect?dealID=Fs%2BQgmFZf9VVUIOJkAyGLakgSUq%2BFTHMuSGkS6qrs34%3D",
-   "appid": 40800,
-   "src": "cheapshark"
-  },
-  {
-   "platform": "Steam",
-   "title": "Grim Fandango Remastered",
-   "pct": 85,
-   "desc": "-85%  US$2.24(原價 14.99)",
-   "url": "https://www.cheapshark.com/redirect?dealID=pXGLBMg%2Bmau1lB00D8I2Ev6d0D26s9x8tRqklgE%2BoNI%3D",
-   "appid": 316790,
-   "src": "cheapshark"
-  },
-  {
-   "platform": "Steam",
-   "title": "Tomb Raider: Anniversary",
-   "pct": 89,
-   "desc": "-89%  US$0.98(原價 8.99)",
-   "url": "https://www.cheapshark.com/redirect?dealID=ryaV37fbWkAIG6ZLy%2FtViuEGOIShgUVV7kpgbYlDqQk%3D",
-   "appid": 8000,
-   "src": "cheapshark"
-  },
-  {
-   "platform": "GOG",
-   "title": "Grim Fandango Remastered",
-   "pct": 85,
-   "desc": "-85%  US$2.25(原價 14.99)",
-   "url": "https://www.cheapshark.com/redirect?dealID=gAyNMJsz69CzNR25Dv7hn0yxw2DHDFCtTUarnL%2Brqb8%3D",
-   "appid": 316790,
-   "src": "cheapshark"
-  },
-  {
-   "platform": "Epic",
-   "title": "Nobody Wants to Die",
-   "pct": 90,
-   "desc": "-90%  US$2.49(原價 24.99)",
-   "url": "https://www.cheapshark.com/redirect?dealID=CTQer0USEV1JFXCMz7FeJCizyaHq7Pf0%2BZTfIdLTvQo%3D",
-   "appid": 1939970,
-   "src": "cheapshark"
-  },
-  {
-   "platform": "GOG",
-   "title": "Rogue Legacy",
-   "pct": 90,
-   "desc": "-90%  US$1.49(原價 14.99)",
-   "url": "https://www.cheapshark.com/redirect?dealID=wNjuHxmHnC40ibZzD%2BZ8DGxniOylfO3jy9rXt3Y8Rt8%3D",
-   "appid": 241600,
-   "src": "cheapshark"
-  },
-  {
-   "platform": "GOG",
-   "title": "Deus Ex: Human Revolution - Director's Cut",
-   "pct": 85,
-   "desc": "-85%  US$2.99(原價 19.99)",
-   "url": "https://www.cheapshark.com/redirect?dealID=CHSUkUA5Qsd%2Fz%2BBJ6a95p7hGCN0oyXK83Mg9G5yhnyY%3D",
-   "appid": 238010,
-   "src": "cheapshark"
-  },
-  {
-   "platform": "Steam",
-   "title": "Hitman 2: Silent Assassin",
-   "pct": 90,
-   "desc": "-90%  US$0.89(原價 8.99)",
-   "url": "https://www.cheapshark.com/redirect?dealID=9LFlfPPXEpdvcFz68YG4VUutBRsMNuc2at1lcODyQYk%3D",
-   "appid": 6850,
-   "src": "cheapshark"
-  },
-  {
-   "platform": "GOG",
-   "title": "Hitman 2: Silent Assassin",
-   "pct": 90,
-   "desc": "-90%  US$0.89(原價 8.99)",
-   "url": "https://www.cheapshark.com/redirect?dealID=02BngC2eerCKDu6td3LDoognymPLwY5pWbigLzanh5I%3D",
-   "appid": 6850,
    "src": "cheapshark"
   },
   {
@@ -344,22 +344,6 @@
   },
   {
    "platform": "iOS",
-   "title": "百死一生",
-   "url": "https://apps.apple.com/tw/app/%E7%99%BE%E6%AD%BB%E4%B8%80%E7%94%9F/id6819103516?uo=4",
-   "image": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/df/a9/c3/dfa9c301-536b-7ebe-c134-7c9dcb132b16/AppIcon-0-0-1x_U007ephone-0-11-0-85-220.png/512x512bb.jpg",
-   "square": true,
-   "age": 12,
-   "genres": [
-    "動作",
-    "角色扮演"
-   ],
-   "blurb": "你是一個連名字都沒有的小兵。 黃巾之亂那年被徵召入伍，第一次上戰場，就倒在山坡上的箭雨之下。 然後你醒了過來。回到出征前的那個早晨，帶著死去時的記憶。 【死亡是情報】 每一次死亡都會記進「冥簿」。下一世，你記得哪條路有埋伏、誰會告密、哪一夜會起火。記憶會打開新的選擇，讓你避開同樣的死法。 【水墨戰場的動作戰鬥】 觸控操作的即時戰鬥。閃避、突刺，以吶喊號令同伍弟兄。看懂敵人出招的預兆，就能活下來。 【從小兵到將軍】 伍長、屯長、司馬、將軍。你親眼見證虎牢關、官渡、赤壁，從歷史的邊緣一步步走到中心。 【改寫歷史】 救下本該戰死的人，讓本該燃起的火熄滅。在魏、蜀、吳三條不同的「行」裡，以無名小兵之手",
-   "pct": 53,
-   "desc": "-53%  TWD 90(原價 190)",
-   "src": "ios_deals"
-  },
-  {
-   "platform": "iOS",
    "title": "DRAGON QUEST IV",
    "url": "https://apps.apple.com/tw/app/dragon-quest-iv/id847381935?uo=4",
    "image": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/54/cb/42/54cb42e2-e4eb-32ae-e836-a541fd5f3f82/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
@@ -371,6 +355,22 @@
    "blurb": "******************** 勇者鬥惡龍天空系列的第一作，《勇者鬥惡龍IV》隆重登場！ 其令人感動的故事是以總共五章＋α的選集形式展開的，在iPhone／iPod touch／iPad體驗它的樂趣吧。 本作是一次性買斷的！ 在下載後，不需要再支付任何費用。 ******************** ◆ 序言 遊戲以同一個世界作為舞台，在各個章節中由不同的主人公在不同的城鎮中展開各自的故事。 ・第１章～王宮的戰士們～ 講述充滿正義感的心地善良的王宮戰士“萊昂”的故事。 ・第２章～頑皮公主的冒險～ 講述癡迷於武術，憧憬外出冒險的公主殿下“阿莉娜”和宣誓效忠公主的神官“克裡弗特”，以及看",
    "pct": 41,
    "desc": "-41%  TWD 290(原價 490)",
+   "src": "ios_deals"
+  },
+  {
+   "platform": "iOS",
+   "title": "Control Ultimate Edition",
+   "url": "https://apps.apple.com/tw/app/control-ultimate-edition/id6502953520?uo=4",
+   "image": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/1d/a0/6e/1da06e14-c461-a191-9ef3-ce82fd5ec0d9/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg",
+   "square": true,
+   "age": 18,
+   "genres": [
+    "冒險",
+    "動作"
+   ],
+   "blurb": "A corruptive presence has invaded the Federal Bureau of Control… Only you have the power to stop it. The world is now your weapon in an epic fight to annihilate an ominous enemy through deep and unpredictable environments. Containment has failed, humanity is at stake. Will you regain control? Winner",
+   "pct": 40,
+   "desc": "-40%  TWD 90(原價 150)",
    "src": "ios_deals"
   },
   {
@@ -391,6 +391,27 @@
   }
  ],
  "news": [
+  {
+   "platform": "Nintendo",
+   "title": "Nintendo Expands Switch Online's Game Boy Library With Three More Titles",
+   "url": "https://www.nintendolife.com/news/2026/10/nintendo-expands-switch-onlines-game-boy-library-with-three-more-titles",
+   "date": "2026-10-27T01:55:00+00:00",
+   "src": "nintendo"
+  },
+  {
+   "platform": "Nintendo",
+   "title": "Zelda: Ocarina Of Time Midnight Launches Announced For Nintendo New York And San Francisco Stores",
+   "url": "https://www.nintendolife.com/news/2026/10/zelda-ocarina-of-time-midnight-launches-announced-for-nintendo-new-york-and-san-francisco-stores",
+   "date": "2026-10-27T00:55:00+00:00",
+   "src": "nintendo"
+  },
+  {
+   "platform": "Nintendo",
+   "title": "Nintendo's New Switch 2 Ad Is As Wholesome As They Come",
+   "url": "https://www.nintendolife.com/news/2026/10/nintendos-new-switch-2-ad-is-as-wholesome-as-they-come",
+   "date": "2026-10-26T18:30:00+00:00",
+   "src": "nintendo"
+  },
   {
    "platform": "Nintendo",
    "title": "Guide: Modern Warfare 4's Best Guns In Multiplayer",
@@ -427,25 +448,39 @@
    "src": "nintendo"
   },
   {
-   "platform": "Nintendo",
-   "title": "\"I Can't Create A Battle Like This\" - Miyamoto On The Origins Of NES Mario's Non-Violent Bowser 'Fights'",
-   "url": "https://www.nintendolife.com/news/2026/10/i-cant-create-a-battle-like-this-miyamoto-on-the-origins-of-nes-marios-non-violent-bowser-fights",
-   "date": "2026-10-26T15:30:00+00:00",
-   "src": "nintendo"
+   "platform": "PlayStation",
+   "title": "Rare Insight into PS5 Sales Pattern Reveals Significant Wolverine Bump",
+   "url": "https://www.pushsquare.com/news/2026/10/rare-insight-into-ps5-sales-pattern-reveals-significant-wolverine-bump",
+   "date": "2026-10-26T21:30:00+00:00",
+   "src": "playstation"
   },
   {
-   "platform": "Nintendo",
-   "title": "Mini Review: Minecraft (Switch 2) - A Satisfying Upgrade Overall, But Where's Mouse Mode?",
-   "url": "https://www.nintendolife.com/reviews/nintendo-switch-2/minecraft",
-   "date": "2026-10-26T15:00:00+00:00",
-   "src": "nintendo"
+   "platform": "PlayStation",
+   "title": "Sony's Been Quietly Introducing the Cast of Until Dawn 2 Ahead of Its PS5 Release Next Year",
+   "url": "https://www.pushsquare.com/news/2026/10/sonys-been-quietly-introducing-the-cast-of-until-dawn-2-ahead-of-its-ps5-release-next-year",
+   "date": "2026-10-26T21:00:00+00:00",
+   "src": "playstation"
   },
   {
-   "platform": "Nintendo",
-   "title": "Guide: Best Pikmin Games",
-   "url": "https://www.nintendolife.com/guides/best-pikmin-games",
-   "date": "2026-10-26T13:00:00+00:00",
-   "src": "nintendo"
+   "platform": "PlayStation",
+   "title": "Rumour: Silent Hill 1 Remake Aiming for 2027 PS5 Release",
+   "url": "https://www.pushsquare.com/news/2026/10/rumour-silent-hill-1-remake-aiming-for-2027-ps5-release",
+   "date": "2026-10-26T20:30:00+00:00",
+   "src": "playstation"
+  },
+  {
+   "platform": "PlayStation",
+   "title": "Round Up: Phantom Blade Zero PS5 Reviews Are In, and It's Another Game of the Year Contender",
+   "url": "https://www.pushsquare.com/features/round-up-phantom-blade-zero-ps5-reviews-are-in-and-its-another-game-of-the-year-contender",
+   "date": "2026-10-26T20:00:00+00:00",
+   "src": "playstation"
+  },
+  {
+   "platform": "PlayStation",
+   "title": "Marvel Cosmic Invasion's New DLC Adds Roguelike Mode Next Month on PS5",
+   "url": "https://www.pushsquare.com/news/2026/10/marvel-cosmic-invasions-new-dlc-adds-roguelike-mode-next-month-on-ps5",
+   "date": "2026-10-26T19:00:00+00:00",
+   "src": "playstation"
   },
   {
    "platform": "PlayStation",
@@ -469,39 +504,11 @@
    "src": "playstation"
   },
   {
-   "platform": "PlayStation",
-   "title": "SEGA's Glitzy Virtua Fighter PS5 Revival Teases New Info for This Week",
-   "url": "https://www.pushsquare.com/news/2026/10/segas-glitzy-virtua-fighter-ps5-revival-teases-new-info-for-this-week",
-   "date": "2026-10-26T16:30:00+00:00",
-   "src": "playstation"
-  },
-  {
-   "platform": "PlayStation",
-   "title": "The Cutest Little Sonic Game Is Coming Soon to PS5, But It Won't Have a Platinum Trophy",
-   "url": "https://www.pushsquare.com/news/2026/10/the-cutest-little-sonic-game-is-coming-soon-to-ps5-but-it-wont-have-a-platinum-trophy",
-   "date": "2026-10-26T16:00:00+00:00",
-   "src": "playstation"
-  },
-  {
-   "platform": "PlayStation",
-   "title": "Save Mass Effect Petition Rockets Past 200,000 Signatures as Fans Ask EA to Continue the Series",
-   "url": "https://www.pushsquare.com/news/2026/10/save-mass-effect-petition-rockets-past-200000-signatures-as-fans-ask-ea-to-continue-the-series",
-   "date": "2026-10-26T15:30:00+00:00",
-   "src": "playstation"
-  },
-  {
-   "platform": "PlayStation",
-   "title": "Phantom Blade Zero PS5 Trophy List Revealed, Plot Your Way to Platinum Trophy Now",
-   "url": "https://www.pushsquare.com/news/2026/10/phantom-blade-zero-ps5-trophy-list-revealed-plot-your-way-to-platinum-trophy-now",
-   "date": "2026-10-26T15:00:00+00:00",
-   "src": "playstation"
-  },
-  {
-   "platform": "PlayStation",
-   "title": "Final Fantasy's 40th Anniversary Album Picks Just One Track from Each Main Game, and It'll Split Fan Opinion",
-   "url": "https://www.pushsquare.com/news/2026/10/final-fantasys-40th-anniversary-album-picks-just-one-track-from-each-main-game-and-itll-split-fan-opinion",
-   "date": "2026-10-26T14:30:00+00:00",
-   "src": "playstation"
+   "platform": "Xbox",
+   "title": "Active Matter Surpasses 500,000 Copies Sold, With Xbox Representing The 'Largest Share Of Players'",
+   "url": "https://www.purexbox.com/news/2026/10/active-matter-surpasses-500000-copies-sold-with-xbox-representing-the-largest-share-of-players",
+   "date": "2026-10-26T19:30:00+00:00",
+   "src": "xbox"
   },
   {
    "platform": "Xbox",
@@ -553,17 +560,17 @@
    "src": "xbox"
   },
   {
-   "platform": "Xbox",
-   "title": "Feature: Don't Sleep On 'End Of Abyss', You'll Regret It",
-   "url": "https://www.purexbox.com/features/dont-sleep-on-end-of-abyss-youll-regret-it",
-   "date": "2026-10-25T16:00:00+00:00",
-   "src": "xbox"
+   "platform": "EA",
+   "title": "EA FC 27 Archetypes 重置：AP 成本變動詳解 - games.gg",
+   "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxOV3hBQzN5S21oUXlWbVc0a3E1eEhtQU5CYjFiMm5reFlZZ0xNaE4tUWhaVzFoNVNrNVZvdFdzRU5sR3N5VFh4aXdDbXdFR0VwdUpvb0hucThvQmJoMnF5RnBuQjE2MjV6UnVocWFSRGttXzBsczJOM2NxWXBMWk9kT2lsNmhReFlZMkplbHlQOHU1ZEhmUV9EWkxvVU41SXFnWjRYWEt2OFk1NkM5bUwyeld0NEJGZmprbGhueWU4T1g5M29LYVVsdkoyYmRyUW5ldFd2b0lPaV8wRVJE?oc=5",
+   "date": "2026-10-26T12:32:24+00:00",
+   "src": "ea"
   },
   {
    "platform": "EA",
-   "title": "EA裁撤全球400個職位！關閉BioWare工作室　《質量效應》新作沒了 - NOWnews今日新聞",
-   "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBtUDB1WjVEek5Dal9uVHpzUXNaYWxacDJGajdtNW1WS2tiT1VBdjZRVFVlMmk5OTRUSHFzdVZwajlHZnBRS2Vjc0lERlUxNHJ3cVHSAVJBVV95cUxQbVAwdVo1RHpOQ2pfblR6c1FzWmFsWnAyRmo3bTVtVktrYk9VQXY2UVRVZTJpOTk0VEhxc3VWcGo5R2ZwUUtlY3NJREZVMTRyd3FR?oc=5",
-   "date": "2026-10-25T05:50:28+00:00",
+   "title": "美商藝電裁員 400 人並關閉 BioWare 《質量效應》新作告吹引產業震盪 - Life 生活網",
+   "url": "https://news.google.com/rss/articles/CBMijwJBVV95cUxQZ3IzaXlwWGpnLVY0bWZkOW1BSFNkNWQtZWsyU0ZvR21IR1BpSS16UVRqN0xxU1Z3U0FYSEp4bkpHUWdySnpBRUNQUXVsd2ZFVFlKWEdvWlpTUnJNSEM4UjZiWWJfeGY4RkRHaHdQRE10azdUWWFhUFpfZ2lLUEgwZFg3VlFaU3kzYzR0VWdwbVg1Z1NfUjhQcEVsNUd4Q2txUkVuRHJjT3NFOWQ1eGVncFFWUEhFOXRaaU11aXRkTGthUmtJczNtWkxwSGFjRWRYakNPb2hCNXp3N2tWdm1RTXMxNmZscXV4NDI1cUptX2RlM0IyYWFweFFvaXdSLUYyWmZGY3QxU3dzcy1FUnJv?oc=5",
+   "date": "2026-10-24T03:19:20+00:00",
    "src": "ea"
   },
   {
@@ -575,30 +582,9 @@
   },
   {
    "platform": "EA",
-   "title": "《Apex英雄》反作弊軟體9月底揮別EAC 換成EA自研標槍系統「Javelin」 - 4Gamers",
-   "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxOTFlreHF0Sk1HaDBXb2xoM1VHQUh2TjNDSzJoamdBa2NqTmgxTE9vRlZxbUhPZVJiYnNBaDJSZF9aUXVtNTFKRXlqaWZLTnJZTFZhaEFPUFJ0anIxRDMxVlh4cXZtWlVKdWloRExwVmY5cF9NcEFOTlpUcmV0T0lMczhzLV9LWkl2Tm5NRUw0Tkk1NGgxSWRGaGxGREFwZmExeElUMFdqUGc?oc=5",
-   "date": "2026-09-26T07:00:00+00:00",
-   "src": "ea"
-  },
-  {
-   "platform": "EA",
-   "title": "EA Sports FC 27 更新 1.0.1 版本說明 - games.gg",
-   "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNeDNXMzE3dGhXQkRyS05RVGpCZXhvWHA1MHkwenVaM2VBSmVvV1V6X05adGV1cUVFbTlNRFZfZk5sWTczREk1cEJ0NHZWRG1qM05sLWVIc3B6cFhVdUo3a3VwWlFaMVRTRVpBUDlvQTVtOU1vVDZIZGlwRmo4QzVFTUJxTXBGYmdCLWJHTUYwUGxPc2M2WlNobld0aDFiNFhfRWFMVXhlWGdodw?oc=5",
-   "date": "2026-09-23T07:00:00+00:00",
-   "src": "ea"
-  },
-  {
-   "platform": "EA",
-   "title": "EA FC 27 最佳陣型與自訂戰術指南 - games.gg",
-   "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxQdDc2QTZSQUZhYXM4dmtKY2JyNDB4SW0wYk9YcGFEVHBoYkdfVWRZeVlYTzB5N0ZzeDJZa0ttYTQ0VnUwbnBVcmdGT0MwUi02dld0WHp1b2Y3b2JMMGdHTE9LYks5TzJRRVVpUWY3QVd2MTl3M1FvMHplbndLbTI5M2tBMTZCN0VoOHhVRXo1a3BTaWt4Wmc2Y3BhRDE1SEtyOWZIejRXQk1pcjBXOW9NX0tCZ0doTGNXVzI1c0RNcXN6RlNFeG9YbDRmMjh5TlU3Ql8yYmpMejhNXzFuZVVKWENkbHFKQlF6b2ZzTVZ3?oc=5",
-   "date": "2026-09-19T07:00:00+00:00",
-   "src": "ea"
-  },
-  {
-   "platform": "EA",
-   "title": "沙特 PIF 傳計劃將 EA 與 Savvy Games 合併 或牽動 ESL 及 FACEIT 未來版圖 - csgo.com.hk",
-   "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE05eTdUUVk5cDJFZTNVd2hDdnNvVU9oNkpiWXZQbHJvUU9MMnZwUHlHaDRObHprZ1Y2dHdERDJVQXpRQU9oVndEUnhHeWFkZTNYN29kM3lISHh6dWt1R2tHUXdVTjhFWmxtRWFhMTZReWdVUTRmZ2E4UWRjZw?oc=5",
-   "date": "2026-09-12T07:00:00+00:00",
+   "title": "美商藝電大重組 關閉生軟工作室、取消《質量效應》新作 - Life 生活網",
+   "url": "https://news.google.com/rss/articles/CBMi1AJBVV95cUxOenRQZkJoMFZUNGtoWGwteFFhUDhFRVhUakJ2cU9iWkJtcXFRZ240VmloOV9zTGlzTGs3TXpKbTV1LXRMZVNQa3FKWl9iNWNTWWFtZVc1eDJWelhpYy1nQmFabVRPcl9sRWdzdWYwZ2REdWR5SXRLUUpRQU9aOEowT0ZwTS1EY3NNTEpLZjVFajR0UUhvVmE4UFN6RENOZTBNb3ZrYWFKRE0zMVE1SlB4M3paREJhWFZLMFFvLU80WUp3dXc2V0pIZHBjbjd6Q2R6eW1zUDlJZjNfN19QLXJYT3BydEk0T29JamVIeDd6VjV0OUtJb0NQbU9RMlFnRV85SmhPOGpLX2lTTTRzTGQ3R2JTWnBxblhJdHExQS1sZkRmMzZkOGRyYlhncFJhbi13NVhPeG9ialBMbU9fRFpYN2JLUFQxdkxGVEF2OFBGLWVmLXM5?oc=5",
+   "date": "2026-10-22T01:10:43+00:00",
    "src": "ea"
   },
   {
@@ -616,10 +602,38 @@
    "src": "ea"
   },
   {
+   "platform": "EA",
+   "title": "【Business】「全美最爛公司」EA 美商藝電收購案：這筆550 億美元的交易，背後暗藏多少黑暗政治？ - GQ Taiwan",
+   "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxORkxCOTdsbmFrVkViZGZJd1pIRkg2dFk0T0s5NTlQQ0gyZWhHMTZ6dzFEZm1nSU1XWUYxWnBUS3QxZW1wRHB6T3V0TEFYSnhEajBpd3M0WFFsdmFxQUtoQWRXS3YxYzRWUXV3d25BV2lZd2Z3dVp0WHFOYnFhRzcyRFV2Vm56RXFDemtRa1JwbTRtTVZqUlF4Zw?oc=5",
+   "date": "2026-08-07T07:00:00+00:00",
+   "src": "ea"
+  },
+  {
+   "platform": "EA",
+   "title": "EA 美商藝電以每股 210 美元現金將公司下市轉為財團私有化 - XFastest News",
+   "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE0yUUwtOE5DQzREU3JiVVZBREZPTkZPV25DTTVIZGp5LVpBQUN0Vk5tR0hFcGlQWm80eFZaRlFRRHhiS2wzYm03LVlPd0dNQmZsX0VyR29uOGR6TGpWalRpWmtYTFd1TjV4SUtzcVVickJpQQ?oc=5",
+   "date": "2026-08-06T07:00:00+00:00",
+   "src": "ea"
+  },
+  {
    "platform": "Steam",
    "title": "Steam 突發連線故障用戶端卡死 無法登入、無法存取遊戲 官方未說明原因 - 電腦領域HKEPC Hardware",
    "url": "https://news.google.com/rss/articles/CBMingNBVV95cUxNeTJkWUROSFBGNWFDTVZHdWtScHhGeG9vMjJ6cDNjRm51R3I5aUI1MjBGbFh2SGdnY0tkbEREM3hyNkhQZDA2ZDVvYmxmM280Z1hVQmszVWxtQ2tRSGxld1FLb1JyaThwcUJOejVlWWp1VlBfUURxbGRscXpSMzFrRk1ZNGVGS3J0NFM0ai1DVkE3bHZkTlc2N0lPUGw2MFJIa0Y2WVdSQXNsVS1iRzB1a3VLbGl4aWRpMVlhdjJPUzhqZ0ZPY29BZXNuWEFpeVhkTXNZQVhsU0xOZ2hzSDZjYndsdkplQkNwLXZ5aVhiMnNLdmtwcTVpNnd3M3pBRzI3NnRyZUpwdVprNDBuMUdiZHUwOTNreTBEM2xOcldoc0RqRGFhLWxiT0pnR2hUN1RXTC1uRDYxRG9WUzNkTWYza25zSklxRGpfS3dZWktnRXNXXzYyUnlTT081ZVpJVEtuLTI1Nmx4UkxOa3NVMDVVdWZnclFuSktTaFhyNmxQNUg1Wk10Qm54dG1faFVKdW90dm1BTEdGTk5ON18wdVE?oc=5",
    "date": "2026-10-26T13:38:14+00:00",
+   "src": "steam_news"
+  },
+  {
+   "platform": "Steam",
+   "title": "《泡泡鎮餐廳物語》Steam 搶先體驗上線 最多 4 人連線分工經營 首兩週 6 折 - Ludens Media",
+   "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQVFVwT25ua0RqQTM2SE0wd2JNMVJZa2x1UnJjRG5LakgwbWZ5RDlNVFlmYjRnSWdlRkZOTVNhZEc1VldsSEN1ZXc1WDU3cHBVWjZ3S2lrU1hESzhZYzVWWlhmTXhpVzRraHh1QVY1dHVtT1FXdFJsZFF3cUp5UWQ0REhwYVczdVE2NU93?oc=5",
+   "date": "2026-10-26T11:39:00+00:00",
+   "src": "steam_news"
+  },
+  {
+   "platform": "Steam",
+   "title": "台北飛東京空難推理《UNKNOWN PASSENGER 47》Steam亮相 47人罹難卻有48具遺體 - 4Gamers",
+   "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBENzc4Q2ZhS1IwVGZpd3ZDQkxJRzFLT3J3MHctcXRmdFFXeEJYSXJVYmhuSWVCdF9OSnFiN0Q5U2pRWUZlWjQxdFBJZHFQSGVQeVF1T3NCVU1tampxQ2ZmRkZEMUlZbUR4XzljTWJrOGJrakk?oc=5",
+   "date": "2026-10-26T07:10:33+00:00",
    "src": "steam_news"
   },
   {
@@ -658,24 +672,17 @@
    "src": "steam_news"
   },
   {
-   "platform": "Steam",
-   "title": "iPhone 變身 Steam Deck！iDeck 把 Steam 搬上 iOS，PC 遊戲本機跑不用串流 - 電腦王阿達",
-   "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9KSkh3bFBFaUVodEFpdnBoenk1R2F6Nnhuc25tTi11Zlo4OGdGVWNQVjJEb1U0eXB3ZnNSX01zVi1Zdlc3MTFYZWUxTVhTVjd5TWc?oc=5",
-   "date": "2026-10-25T07:59:55+00:00",
-   "src": "steam_news"
-  },
-  {
-   "platform": "Steam",
-   "title": "日本個人開發《Front Line》（小小CS）Steam 版銷量破 1 萬套 95% 玩家來自台灣 - Ludens Media",
-   "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTFBWekRzNlJ3QjBhei1wZ0hhUmFPNzdMZkM4SUNsbnBJbERqSEJLaVRpdFZGYUNWNjE5SkZpNlNHMFlYNmg4azdCU3hBbHd0SURteGhVRzRxTDFDYzVjWVdONVZfNlk2QQ?oc=5",
-   "date": "2026-10-25T00:50:00+00:00",
-   "src": "steam_news"
+   "platform": "Epic",
+   "title": "《足球經理 27》免費玩足五日 所有模式開放存檔可繼承 - GameApps.hk",
+   "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNMldTM19WZDNzazNqLUdTR1FPR3pvVXNlakVNMWwxY0JCT3I1UUtKaWZabGc0VFFkYUZfcWlvcFdyS0NuY0trODdpek9jNl9kdTR1a3dqVXNUSDh6NFM4RmFrRl9DanVJbkw2ZGYwM1lROE5ibFE3cXJDU0pYZkQydkZfVmxycjEwcE0yNnJn?oc=5",
+   "date": "2026-10-27T02:41:17+00:00",
+   "src": "epic_news"
   },
   {
    "platform": "Epic",
    "title": "Epic Games 創辦人 Tim Sweeney 26 年前舊帖被翻出 曾稱倒閉工作室「咎由自取」 - GANK 電玩誌",
    "url": "https://news.google.com/rss/articles/CBMigANBVV95cUxOUE82THlnWmhiR29KY0xOZWN6azVJQUJ4azMyV3liM19IT3dud0taV3d3WWhlVW9rdzNzRHhfRVhNZHgwcHBYR3prOTdhUmFhVWk3bVZKV2gzbkpCVTRQWE1wR0NBbzJ3d1V3SDRIX29udTVXOHhGRjlYOFJRSjVqbGhYMkY1Z0NMNXRuWXhVNklvSXd1T2RXOEc0UDU5WWJjdmJLVDFDci1LZWVpT1JZSFpYMEkxLXFQSENsSmt3Q2RQV1RxNTNqNEFOa3NYYmJuYUVhemYtUndEbER4STh6alZBUXRyOG51Sm05VGJKT0FPOGx6QzNHU3o0OVEtREswQm9ub25ZT1VSNVRZODFGZHN1ZDh0TjlHeTFtZVpRcXROU0k1TUxBVE9saWxJdGxObWhQTWNhZjNDRlUyakgxcFVIUzEwUERBYThQb3JLbWR0elJhd1VhV1RGVFEwUy01Z3ZSU0ozZl92QlRmNjJ4NDJFRGdvR2dtR1M1cDB4dDQ?oc=5",
-   "date": "2026-10-26T14:48:30+00:00",
+   "date": "2026-10-26T14:58:30+00:00",
    "src": "epic_news"
   },
   {
@@ -718,13 +725,6 @@
    "title": "Epic 每週限免！祭出4 人合作殭屍FPS《Sker Ritual》、科幻策略生成《Terraspace》，至 10 / 29 領取截止 - XFastest News",
    "url": "https://news.google.com/rss/articles/CBMiwwJBVV95cUxNeVB2b0hOMDhLOFdnLWFYdkpyLWFfelBpYUhvemp2a0toMXdFMGRYUUlsWEloZWhuLUlsMGYtcTVmMEpVSFNBa09ZZWlSMFktMnRNTnhOQThzYXZMMTRLV0RkV2Y3Qmx0aGZOZ0c5R2lCVTl4WURTV1lBTFpmZlJlejhMalJVTGtTNFd0ZV9lZ1R1N1E4UDY3WEt5MUpRUm9DOFdxekRaMFNfWjN2OVJZN3N1WjFQZzRvRG5McDNkYUl2dUpXRVN0UnRHMlJmRTdobC1qWVRaVDZzWGg0d2lneHR2WFVzX0pfd0dtLUpJZlk0STRLRWRwSXFlQkpNUHI3X1Rza0p5XzNRZjZjNHlJTXVsajEtT3dsc25lMEFteG5PaGZIazg4bm9RT0ZOdzZ0SnpwaVFRelBMandFREMyRk9JNA?oc=5",
    "date": "2026-10-23T00:26:33+00:00",
-   "src": "epic_news"
-  },
-  {
-   "platform": "Epic",
-   "title": "Epic Games 勝訴，澳大利亞法院裁定蘋果必須開放iPhone 側載與第三方支付-手機版 - XFastest",
-   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE1maE1FUkRPbEJlUEdheEVQUTNyWmNqcUhuam5PRzVQcXNNZmszb2c3TlJUNmZGakotY21KdU1uWWJRVjMteW9LUW8wYTZJWTczcmxZalQ2RjR2YU0?oc=5",
-   "date": "2026-10-22T16:37:53+00:00",
    "src": "epic_news"
   },
   {
@@ -820,15 +820,15 @@
   },
   {
    "platform": "iOS",
-   "title": "ZETA遊戲模擬器限免0元快收！iPhone可玩3DS、NDS和PSP經典遊戲 - 瘋先生",
-   "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE0yMEt0YUVkZ2liVEtEbFJyTVR0MXFlTkxSa2hxem8tbTBxNms0Ri1qRzlVUTlFZG1IWHl4MDJEc0ZUd3lPQUNBYWxEM3lXVkItY0pudkIwdld0Q0Q2V3g4eHV2V3I2bFF1S3llUQ?oc=5",
+   "title": "iPhone 瞬間變身掌機！全能遊戲模擬器限免0元領取 一次玩晒3DS、NDS、PSP 經典大作 - ezone.hk",
+   "url": "https://news.google.com/rss/articles/CBMinwNBVV95cUxQcTVCcWxkX28xbDBKNkR3bTljSS1ibGwwNEdhbzBxNUNCME9KZ0RnUU9qR2xvdVdsT3UwaG9vdE5mc2JSME1OOUpicWhjSVhtTENyVkUtcEh4V3d0ZnRKZUFmYmxxbGZwMUxhYkNrR2gxSjVyeW52VmNBa2c1eEQ2WlNQX3FiY190N04wRXphTzlRN0lyY1hvckwzb0wwTU1kNGhxNnZnOU9nN0FVZFNBcUxlLWpIUGJCbi0tNHVGRnVOZk5PTnlUSHlmakZpNTh3ZFdaeEZkX2oxSmZ1ajF6MXBrZzVZYVZpczNLamFPM1k4NU5jZWlISmdLbFpxVkxHbVZGVFRpVkZrcnV5N0dZeWpsbzdBRU96MnQzb1Rva21QcXB5cXVqYS03YUpmNGpZcmFmZzd4bHlHLTZpR1ZDX24zWGVDWEFib19zT1Q0WWVXeHlUR0pqUjVXSUJNUWdZRW41ZFZPZFpwMzN1dDFQQUpIcGltTEdfMng4OUVrTFJfYlFhMUdjaWNLYUUyX1B5SXFtZDBIVHpmZmd5ZmVz?oc=5",
    "date": "2026-09-01T07:00:00+00:00",
    "src": "ios_news_tw"
   },
   {
    "platform": "iOS",
-   "title": "iPhone 瞬間變身掌機！全能遊戲模擬器限免0元領取 一次玩晒3DS、NDS、PSP 經典大作 - ezone.hk",
-   "url": "https://news.google.com/rss/articles/CBMinwNBVV95cUxQcTVCcWxkX28xbDBKNkR3bTljSS1ibGwwNEdhbzBxNUNCME9KZ0RnUU9qR2xvdVdsT3UwaG9vdE5mc2JSME1OOUpicWhjSVhtTENyVkUtcEh4V3d0ZnRKZUFmYmxxbGZwMUxhYkNrR2gxSjVyeW52VmNBa2c1eEQ2WlNQX3FiY190N04wRXphTzlRN0lyY1hvckwzb0wwTU1kNGhxNnZnOU9nN0FVZFNBcUxlLWpIUGJCbi0tNHVGRnVOZk5PTnlUSHlmakZpNTh3ZFdaeEZkX2oxSmZ1ajF6MXBrZzVZYVZpczNLamFPM1k4NU5jZWlISmdLbFpxVkxHbVZGVFRpVkZrcnV5N0dZeWpsbzdBRU96MnQzb1Rva21QcXB5cXVqYS03YUpmNGpZcmFmZzd4bHlHLTZpR1ZDX24zWGVDWEFib19zT1Q0WWVXeHlUR0pqUjVXSUJNUWdZRW41ZFZPZFpwMzN1dDFQQUpIcGltTEdfMng4OUVrTFJfYlFhMUdjaWNLYUUyX1B5SXFtZDBIVHpmZmd5ZmVz?oc=5",
+   "title": "ZETA遊戲模擬器限免0元快收！iPhone可玩3DS、NDS和PSP經典遊戲 - 瘋先生",
+   "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE0yMEt0YUVkZ2liVEtEbFJyTVR0MXFlTkxSa2hxem8tbTBxNms0Ri1qRzlVUTlFZG1IWHl4MDJEc0ZUd3lPQUNBYWxEM3lXVkItY0pudkIwdld0Q0Q2V3g4eHV2V3I2bFF1S3llUQ?oc=5",
    "date": "2026-09-01T07:00:00+00:00",
    "src": "ios_news_tw"
   },
@@ -841,43 +841,8 @@
   },
   {
    "platform": "Android",
-   "title": "《轉職者 The Changers》韓國 Google Play 上線！活用五階段轉職抵擋敵人大軍來襲 - 蕃新聞",
-   "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE44aXktNDAzNXBMbHRERm1qOVVGNFpEa3ZySnpkc3FhVWx6QVR5LUp1NHdJWWVfLWRGdGVZZnZaelZ1Y3J4THhkeTM1M2tUN3pPRkE?oc=5",
-   "date": "2026-10-23T17:24:28+00:00",
-   "src": "android_news"
-  },
-  {
-   "platform": "Android",
-   "title": "收集型 RPG《陰屍路：全員出擊》於 Google Play 商店開放預先註冊 躲避喪屍的追擊！ - PChome Online 新聞",
-   "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPcmF4cFgyLW5aX2VQcHBPUUh0Qm9teGxrT29VYmlFUFh1aVBvWTNPbTZIcklDWWtqVk1XVkNwTXc3enVfZTRYOTd1X2NhblF2blQ3ekZjUjE0TEUyZVlhSHNWZFBlX0x5Z1JlSTBWc2FocXpYVU5XSzZKaVFPd3ZSdU13T3ZmMVVO?oc=5",
-   "date": "2026-10-23T14:39:01+00:00",
-   "src": "android_news"
-  },
-  {
-   "platform": "Android",
-   "title": "收集型 RPG《陰屍路：全員出擊》於 Google Play 商店開放預先註冊 躲避喪屍的追擊！ - 蕃新聞",
-   "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE1FZXpBWDYtS0FpMzg1NW5nT3hFdXJUMGF5b2x5VzFrQUpiUzRsdjlubHpjQVNaMkI0WnplN1pub2x2SEQ0R254VlItNVlJSWI0UkE?oc=5",
-   "date": "2026-10-23T14:39:01+00:00",
-   "src": "android_news"
-  },
-  {
-   "platform": "Android",
-   "title": "Netflix 新作《遺跡獵人：叛軍崛起》於行動裝置推出 走進美麗又混亂的世界展開冒險 - PChome Online 新聞",
-   "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNd296b0gyNlJDMXBqMWhJOGJIMHFJQ0R3eDMzMmJhS3BTVEZGZVNvMlVIOXBVZjhzaTdnVWwzMnNVUkZUT2kwUGVTN1VPdXJCY2xmQmFyYlpkTmlvemJfc2ZjRnk5aWNFUUVGdGRXMjZCRG1XR3RWaU1MZmJXcjZPNXJqUUlueWEy?oc=5",
-   "date": "2026-10-23T13:43:13+00:00",
-   "src": "android_news"
-  },
-  {
-   "platform": "Android",
-   "title": "休閒療癒新作 像素射擊手遊《探險射射射》開放Android版本正式下載 - PChome Online 新聞",
-   "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQMDk2RjBIYlJsYUJDRWk1YWdnNDBSQXJyMUFtdC1Ybmx2UDNMcW85NEZOYUY1R3BrVmZyUjhET1BIVDE5UjQ4UmJuQ0dhbEV1MWhRdlhXb09mLW9xa3ZVQnk1QVU3dFhMOGZxRW9vWTVsNXpzamt0NUhkTm1tcDcyVldnTFlwWHU4?oc=5",
-   "date": "2026-10-23T12:44:44+00:00",
-   "src": "android_news"
-  },
-  {
-   "platform": "Android",
-   "title": "「拉拉熊」益智遊戲新作《拉拉熊輕鬆益智遊戲》預定 2027 年初於日本上線事前登錄今日開跑- 遊戲新聞 - PChome Online 新聞",
-   "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxORFJPbktCRlBkVjY1LTdyUGJHdU5mLWVyQkZuZEdrZWozOXEtSFRaX1pJWVQ5LXJIODlQU0dfRlRmUzdwZUtsZ0JQenFIMWtQcllNeFlMMkNoUDA0aFdPZ3ZSVTJjNDZ5TUVGaTFFRlF3SDdadGhsNGJNLWh6SVI4SG5kUWg?oc=5",
+   "title": "「拉拉熊」益智遊戲新作《拉拉熊 輕鬆益智遊戲》預定 2027 年初於日本上線 事前登錄今日開跑 - GNN 新聞網",
+   "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFB1cXVyV3FGNklUeEJ2cDVJYjJFVG1UclNnNVhfSmE1aVBFZEZyd2VlSG9jdDNNRnh1eVhYM3ZEOXBtNUk5em9kYnJ2a1hpZzhXVzFscG5UOU8?oc=5",
    "date": "2026-10-20T04:02:36+00:00",
    "src": "android_news"
   },
@@ -894,167 +859,202 @@
    "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNd0F4U3kyc1VyenRMeHBWY0Y2YkYyTnJxMGp0VWMybHBKaElfd2FncWtfU3N3Ylp5Y0VsQWpQMjlKYzV1VUxIRjZJSjREX2JWRWg1Y3ZQdkcxWnpubWQxbzJoZVVNUnhwaFhiUktTU0VnRk9KQVRLNlhSSTdFRFk0dVZqUFNEZVVfZTVBVnFjS3hHU2sxc1RxLWJhSWdhN00?oc=5",
    "date": "2026-10-15T07:00:00+00:00",
    "src": "android_news"
+  },
+  {
+   "platform": "Android",
+   "title": "經典遊戲《惡魔城》40週年大放送！手機iOS、Android限時免費下載 - NOWnews今日新聞",
+   "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE5sTDBuODNub2RmOWotUEVYVno5cE9sbHJOMUNNOE5XTDNON3JsNEtaT3Q5RDB0dXFPaFdIbG9sTHhrcUtRLXNFWjJvZjbSAVJBVV95cUxPVmlRYUVwNUNfZmI3SW5KLUpkM2ZrVjJWbFlscjV0d2toRFNXem82dGZQUk1GT0t2bjNTTjZzbTJqaDR2V3NrSGtoYmR6SnZyYTVn?oc=5",
+   "date": "2026-09-28T07:00:00+00:00",
+   "src": "android_news"
+  },
+  {
+   "platform": "Android",
+   "title": "【iOS/Android】 Konami 大放送 《惡魔城》40 周年限時免費領取 - 流動日報",
+   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQZzY2U2RDUzFtNXZnWm9GTjNvd25VYUNVX292WlBHcFBqUFB5WHZrUDltN2w3V0ZpOHEzV09nVGhLb011eUdya0tPdTJMMkhTNTVHd29adHZHRjBfYWtXeHVnWjU4Q21mNnlXNU1XOWJ4eHpsem9lRC1HeHRSWU9YOGZDZW5WQXBQZmt6U3JCTjMtd1FkV1d1RXk5QnlmYklBRjgxRFBvUzFDVTA?oc=5",
+   "date": "2026-09-25T07:00:00+00:00",
+   "src": "android_news"
+  },
+  {
+   "platform": "Android",
+   "title": "《BLEACH Mirrors High》宣布將在 2026 年推出 現已於 Google Play 商店開放預先註冊 - GNN 新聞網",
+   "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5uYVhjMV94bjBraTBhcWlLaWwxZlJXZWxYNV9nMFJkZFV0Wko1TnJ3ZkhFa0VWUFpKZ2h6UFM3T0pfRnMxa01GUFJCU3hEQ0xZUm90OVhaSU0?oc=5",
+   "date": "2026-08-28T07:00:00+00:00",
+   "src": "android_news"
+  },
+  {
+   "platform": "Android",
+   "title": "彈珠寵物養成塔防新作《塔塔冒險隊》台港澳上市日確定 同步於雙平台開放事前預約 - GNN 新聞網",
+   "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE55bzctT3N4M01ldk5JU0RXOTdlOTNqYjZVcjFMdzZvR0dPQUZCMlBSY3cybmF5aTJHb3pMTC1uS2kxeVhHM1FuNHNmY1h5Nl9ULURRVmRFVGk?oc=5",
+   "date": "2026-08-14T07:00:00+00:00",
+   "src": "android_news"
+  },
+  {
+   "platform": "Android",
+   "title": "解謎調查新作《Castle Bravo》於 Google Play 推出 透過訊息講述的懸疑陰謀遊戲 - GNN 新聞網",
+   "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1XcnBXZHVaVGtQbUpFV1hMbzhyaTh3SzlNclNhQ1RLY0NPMEJlX19CRVpVZ24yUE91M294emhCUlh3VVZ3eFdtNzdpWXZaSzcwTW1mc2NEZnc?oc=5",
+   "date": "2026-07-29T07:00:00+00:00",
+   "src": "android_news"
   }
  ],
  "new": [
   {
    "platform": "Steam",
-   "title": "Space Savory",
-   "desc": "TWD 162",
-   "url": "https://store.steampowered.com/app/3760770",
-   "appid": 3760770,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "SORT THEM ALPACAS: OVERLOAD!",
-   "desc": "TWD 115",
-   "url": "https://store.steampowered.com/app/5355200",
-   "appid": 5355200,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Spooky Market",
+   "title": "GemCremental",
    "desc": "TWD 93",
-   "url": "https://store.steampowered.com/app/4326130",
-   "appid": 4326130,
+   "url": "https://store.steampowered.com/app/5317700",
+   "appid": 5317700,
    "src": "steam_new"
   },
   {
    "platform": "Steam",
-   "title": "Hack And Slash Fury 2: Lancelot Betrayal",
-   "desc": "",
-   "url": "https://store.steampowered.com/app/4895300",
-   "appid": 4895300,
+   "title": "雲端巡邏隊",
+   "desc": "TWD 43",
+   "url": "https://store.steampowered.com/app/5306660",
+   "appid": 5306660,
    "src": "steam_new"
   },
   {
    "platform": "Steam",
-   "title": "Night Plane",
-   "desc": "TWD 194",
-   "url": "https://store.steampowered.com/app/3310570",
-   "appid": 3310570,
+   "title": "Emoji : Tidy Up",
+   "desc": "TWD 97",
+   "url": "https://store.steampowered.com/app/5237400",
+   "appid": 5237400,
    "src": "steam_new"
   },
   {
    "platform": "Steam",
-   "title": "HEX: You Are It",
-   "desc": "TWD 128",
-   "url": "https://store.steampowered.com/app/5084840",
-   "appid": 5084840,
+   "title": "Chill Gyaru",
+   "desc": "TWD 76",
+   "url": "https://store.steampowered.com/app/5087840",
+   "appid": 5087840,
    "src": "steam_new"
   },
   {
    "platform": "Steam",
-   "title": "The Spectacular Evermore",
-   "desc": "TWD 115",
-   "url": "https://store.steampowered.com/app/4677860",
-   "appid": 4677860,
+   "title": "挂机传奇",
+   "desc": "TWD 93",
+   "url": "https://store.steampowered.com/app/5370160",
+   "appid": 5370160,
    "src": "steam_new"
   },
   {
    "platform": "Steam",
-   "title": "Cardtographer",
-   "desc": "TWD 148",
-   "url": "https://store.steampowered.com/app/3460540",
-   "appid": 3460540,
+   "title": "Role Player：山掛姊妹的扮裝糖水照　咕啾咕啾LIVE！",
+   "desc": "TWD 262",
+   "url": "https://store.steampowered.com/app/3891200",
+   "appid": 3891200,
    "src": "steam_new"
   },
   {
    "platform": "Steam",
-   "title": "Ecstatica II",
-   "desc": "TWD 268",
-   "url": "https://store.steampowered.com/app/4834850",
-   "appid": 4834850,
+   "title": "变废为宝 Trash to Cash",
+   "desc": "TWD 76",
+   "url": "https://store.steampowered.com/app/5130520",
+   "appid": 5130520,
    "src": "steam_new"
   },
   {
    "platform": "Steam",
-   "title": "Ecstatica",
-   "desc": "TWD 268",
-   "url": "https://store.steampowered.com/app/4834840",
-   "appid": 4834840,
+   "title": "掛機魔王 II",
+   "desc": "TWD 93",
+   "url": "https://store.steampowered.com/app/5245310",
+   "appid": 5245310,
    "src": "steam_new"
   },
   {
    "platform": "Steam",
-   "title": "Tidy Farm",
-   "desc": "TWD 115",
-   "url": "https://store.steampowered.com/app/5226940",
-   "appid": 5226940,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Toey Weedz Smoke Dead Halloween",
+   "title": "Sakura Shiren",
    "desc": "TWD 117",
-   "url": "https://store.steampowered.com/app/4831830",
-   "appid": 4831830,
+   "url": "https://store.steampowered.com/app/5039580",
+   "appid": 5039580,
    "src": "steam_new"
   },
   {
    "platform": "Steam",
-   "title": "Block By Block Tycoon",
-   "desc": "TWD 157",
-   "url": "https://store.steampowered.com/app/4525060",
-   "appid": 4525060,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Dédale - A Cave Diving Experience",
-   "desc": "TWD 99",
-   "url": "https://store.steampowered.com/app/4174240",
-   "appid": 4174240,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Maja Island",
-   "desc": "TWD 133",
-   "url": "https://store.steampowered.com/app/3758440",
-   "appid": 3758440,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Fully Funded",
-   "desc": "TWD 115",
-   "url": "https://store.steampowered.com/app/5316360",
-   "appid": 5316360,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Fragments",
-   "desc": "",
-   "url": "https://store.steampowered.com/app/4949930",
-   "appid": 4949930,
-   "src": "steam_new"
-  },
-  {
-   "platform": "Steam",
-   "title": "Retro Districts: In-Between Eras",
+   "title": "Send Them to Hell",
    "desc": "TWD 194",
-   "url": "https://store.steampowered.com/app/4567060",
-   "appid": 4567060,
+   "url": "https://store.steampowered.com/app/4922730",
+   "appid": 4922730,
    "src": "steam_new"
   },
   {
    "platform": "Steam",
-   "title": "ShredDead",
+   "title": "RESIDUUM",
+   "desc": "TWD 194",
+   "url": "https://store.steampowered.com/app/4088450",
+   "appid": 4088450,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "DRENCHED",
+   "desc": "",
+   "url": "https://store.steampowered.com/app/4597820",
+   "appid": 4597820,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Room Zero",
+   "desc": "TWD 133",
+   "url": "https://store.steampowered.com/app/4630260",
+   "appid": 4630260,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Remain Seated",
    "desc": "TWD 108",
-   "url": "https://store.steampowered.com/app/4704520",
-   "appid": 4704520,
+   "url": "https://store.steampowered.com/app/4578740",
+   "appid": 4578740,
    "src": "steam_new"
   },
   {
    "platform": "Steam",
-   "title": "Shopska Salad",
-   "desc": "TWD 102",
-   "url": "https://store.steampowered.com/app/3768800",
-   "appid": 3768800,
+   "title": "ELbab",
+   "desc": "TWD 82",
+   "url": "https://store.steampowered.com/app/4209630",
+   "appid": 4209630,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Idle Hoops",
+   "desc": "TWD 122",
+   "url": "https://store.steampowered.com/app/5399870",
+   "appid": 5399870,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Life Is a Dungeon: Lean into It.",
+   "desc": "TWD 251",
+   "url": "https://store.steampowered.com/app/5062910",
+   "appid": 5062910,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Evoruption",
+   "desc": "TWD 194",
+   "url": "https://store.steampowered.com/app/5044970",
+   "appid": 5044970,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "ESCAPE FROM TOUHOU",
+   "desc": "TWD 80",
+   "url": "https://store.steampowered.com/app/5000310",
+   "appid": 5000310,
+   "src": "steam_new"
+  },
+  {
+   "platform": "Steam",
+   "title": "Cleanup on Aisle 3",
+   "desc": "TWD 250",
+   "url": "https://store.steampowered.com/app/4971070",
+   "appid": 4971070,
    "src": "steam_new"
   },
   {
@@ -1379,82 +1379,82 @@
  "soon": [
   {
    "platform": "Steam",
-   "title": "Skullf!",
-   "desc": "TWD 193",
-   "url": "https://store.steampowered.com/app/2765990",
-   "appid": 2765990,
-   "src": "steam_soon"
-  },
-  {
-   "platform": "Steam",
-   "title": "Halloween Shop Simulator",
-   "desc": "TWD 91",
-   "url": "https://store.steampowered.com/app/5394900",
-   "appid": 5394900,
-   "src": "steam_soon"
-  },
-  {
-   "platform": "Steam",
-   "title": "Drop That Pen Demo",
+   "title": "Tower of Sequence Demo",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5469020",
-   "appid": 5469020,
+   "url": "https://store.steampowered.com/app/5289470",
+   "appid": 5289470,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "STILLTRACE Demo",
+   "title": "The Utsuro Hotel",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5469330",
-   "appid": 5469330,
+   "url": "https://store.steampowered.com/app/5188650",
+   "appid": 5188650,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "White Mask Mansion",
+   "title": "江湖大镖客",
    "desc": "",
-   "url": "https://store.steampowered.com/app/4490850",
-   "appid": 4490850,
+   "url": "https://store.steampowered.com/app/4605840",
+   "appid": 4605840,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "3 Switch Problem Soundtrack",
+   "title": "塞莉婭傳說",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5132610",
-   "appid": 5132610,
+   "url": "https://store.steampowered.com/app/2894950",
+   "appid": 2894950,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "Kleromancy",
+   "title": "Exhibition of the Heart",
    "desc": "",
-   "url": "https://store.steampowered.com/app/4968160",
-   "appid": 4968160,
+   "url": "https://store.steampowered.com/app/4724580",
+   "appid": 4724580,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "Silver Valley Screams",
+   "title": "Fragments of Ember",
    "desc": "",
-   "url": "https://store.steampowered.com/app/4831660",
-   "appid": 4831660,
+   "url": "https://store.steampowered.com/app/5117700",
+   "appid": 5117700,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "SplitOut",
+   "title": "Situation Succ: Inn Elysium",
    "desc": "",
-   "url": "https://store.steampowered.com/app/5176280",
-   "appid": 5176280,
+   "url": "https://store.steampowered.com/app/2696110",
+   "appid": 2696110,
    "src": "steam_soon"
   },
   {
    "platform": "Steam",
-   "title": "三個開關問題",
+   "title": "Follow Suit",
    "desc": "",
-   "url": "https://store.steampowered.com/app/4840960",
-   "appid": 4840960,
+   "url": "https://store.steampowered.com/app/5322620",
+   "appid": 5322620,
+   "src": "steam_soon"
+  },
+  {
+   "platform": "Steam",
+   "title": "A cointoss roguelike",
+   "desc": "",
+   "url": "https://store.steampowered.com/app/5095680",
+   "appid": 5095680,
+   "src": "steam_soon"
+  },
+  {
+   "platform": "Steam",
+   "title": "Re:Draw",
+   "desc": "",
+   "url": "https://store.steampowered.com/app/5062690",
+   "appid": 5062690,
    "src": "steam_soon"
   },
   {
@@ -1797,7 +1797,7 @@
    "square": true,
    "age": 12,
    "rating": 5.0,
-   "count": 3698,
+   "count": 3699,
    "genres": [
     "策略",
     "卡牌桌遊"
@@ -1844,24 +1844,6 @@
   {
    "platform": "iOS",
    "rank": 4,
-   "title": "王國保衛戰：復仇",
-   "desc": "TWD 150",
-   "url": "https://apps.apple.com/tw/app/%E7%8E%8B%E5%9C%8B%E4%BF%9D%E8%A1%9B%E6%88%B0-%E5%BE%A9%E4%BB%87/id1248033433?uo=4",
-   "image": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/fa/31/be/fa31be34-f67f-2709-d6e4-4f09f8cc757f/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
-   "square": true,
-   "age": 6,
-   "rating": 4.9,
-   "count": 3418,
-   "genres": [
-    "動作",
-    "策略"
-   ],
-   "blurb": "威猛全能的巫師威之難回來了！開啟一趟史詩之旅，召集他的軍隊，完成他的陰謀計劃…木哈哈哈。讓整個王國知道誰才是真正的頭目！奮力向前，征服新的領地，還有那些不錯的舊領地。在這款幽默史詩的經典塔防遊戲中，直面強大敵人的帝國，對抗超威的頭目！ 遊戲特色 - 22種具有特殊技能與力量的新防禦塔。 - 選擇防禦塔武器，組合成超強破壞力的裝備，阻止敵人進攻！ - 三個大陸上的42個挑戰關卡，已準備好等你來！ - 17個強大的英雄，毫不猶豫聽候你的調遣。 - 超過60種死敵來測驗你的智慧與戰術技巧。 - 在最傳奇的頭目戰鬥中，打敗17位威武的魔王，包圍你的王國！ - 新的能力與援軍，助你殲滅敵人。 - 10多",
-   "src": "ios_top"
-  },
-  {
-   "platform": "iOS",
-   "rank": 5,
    "title": "Kingdom Rush Frontiers 塔防生存戰爭",
    "desc": "TWD 60",
    "url": "https://apps.apple.com/tw/app/kingdom-rush-frontiers-%E5%A1%94%E9%98%B2%E7%94%9F%E5%AD%98%E6%88%B0%E7%88%AD/id598581396?uo=4",
@@ -1879,7 +1861,7 @@
   },
   {
    "platform": "iOS",
-   "rank": 6,
+   "rank": 5,
    "title": "便利商店開業日記",
    "desc": "TWD 220",
    "url": "https://apps.apple.com/tw/app/%E4%BE%BF%E5%88%A9%E5%95%86%E5%BA%97%E9%96%8B%E6%A5%AD%E6%97%A5%E8%A8%98/id1601177112?uo=4",
@@ -1897,7 +1879,7 @@
   },
   {
    "platform": "iOS",
-   "rank": 7,
+   "rank": 6,
    "title": "MuseDash",
    "desc": "TWD 100",
    "url": "https://apps.apple.com/tw/app/musedash/id1361473095?uo=4",
@@ -1914,7 +1896,7 @@
   },
   {
    "platform": "iOS",
-   "rank": 8,
+   "rank": 7,
    "title": "王國保衛戰：起源 Kingdom Rush Origins",
    "desc": "TWD 90",
    "url": "https://apps.apple.com/tw/app/%E7%8E%8B%E5%9C%8B%E4%BF%9D%E8%A1%9B%E6%88%B0-%E8%B5%B7%E6%BA%90-kingdom-rush-origins/id904737816?uo=4",
@@ -1932,7 +1914,7 @@
   },
   {
    "platform": "iOS",
-   "rank": 9,
+   "rank": 8,
    "title": "The Past Within",
    "desc": "TWD 90",
    "url": "https://apps.apple.com/tw/app/the-past-within/id1642601792?uo=4",
@@ -1940,7 +1922,7 @@
    "square": true,
    "age": 12,
    "rating": 5.0,
-   "count": 793,
+   "count": 794,
    "genres": [
     "益智",
     "冒險"
@@ -1950,7 +1932,7 @@
   },
   {
    "platform": "iOS",
-   "rank": 10,
+   "rank": 9,
    "title": "Bloons TD 6",
    "desc": "TWD 220",
    "url": "https://apps.apple.com/tw/app/bloons-td-6/id1118115766?uo=4",
@@ -1964,6 +1946,24 @@
     "動作"
    ],
    "blurb": "組合強大的猴子塔和令人敬畏的英雄，打造完美防綫，擊破所有入侵的氣球！ 超過十年的塔防遊戲開發經驗和定期的大規模更新讓《Bloons TD 6》成為數百萬玩家最喜愛的遊戲。現在就玩《Bloons TD 6》，享受無盡的策略遊戲樂趣！ 海量內容更新！ *定期更新！ 我們每年都會發佈幾個更新，推出新的角色、功能和玩法。 *頭目活動！ 可怕的頭目氣球將挑戰最強大的防線。 *征程模式！完成由一系列地圖組成的戰鬥，通常按主題、規則和獎勵劃分。 *爭議領土！和其他玩家組成戰隊，攜手對抗五支其他戰隊，爭奪領土。奪取共同地圖上的地塊，在排行榜上展開競爭。 *任務！ 透過任務深入瞭解猴子的特點，體驗精彩劇情並分享",
+   "src": "ios_top"
+  },
+  {
+   "platform": "iOS",
+   "rank": 10,
+   "title": "女王的遊戲-盛世天下",
+   "desc": "TWD 30",
+   "url": "https://apps.apple.com/tw/app/%E5%A5%B3%E7%8E%8B%E7%9A%84%E9%81%8A%E6%88%B2-%E7%9B%9B%E4%B8%96%E5%A4%A9%E4%B8%8B/id6749132733?uo=4",
+   "image": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/22/46/66/224666f9-916b-0807-ef05-ae755d3adab7/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/512x512bb.jpg",
+   "square": true,
+   "age": 12,
+   "rating": 4.8,
+   "count": 2397,
+   "genres": [
+    "模擬",
+    "休閒"
+   ],
+   "blurb": "本作品需全程連線。媚娘篇內容共十六集，女帝篇內容共三十二集，均含免費體驗章節。 您可能從沒體驗過這樣的作品——您當主角，真人互動的宮廷冒險！ 《女王的遊戲：盛世天下》女帝篇全新推出！誠摯邀請您踏上驚險刺激的東方宮廷權謀之旅。 ● 承襲《媚娘篇》佳績，再續宮廷傳奇 《女王的遊戲：盛世天下》媚娘篇贏得了廣大用戶的喜愛。 新篇《女王的遊戲：盛世天下》女帝篇，邀您提前鎖定這場驚心動魄的朝堂博弈，共同期待東方女帝傳奇的登頂新巔峰！ ● 4K電影級質感，重塑東方宮廷美學 全程真人演繹、實景打造，結合4K電影級光影調度，匠心重現東方宮闕的恢弘氣象。從華服錦緞、金釵搖曳的細膩質感，到震撼人心的中國風配樂，全方",
    "src": "ios_top"
   },
   {
@@ -2142,8 +2142,8 @@
    "platform": "Steam",
    "appid": 570,
    "title": "Dota 2",
-   "players": 1017868,
-   "peak": 1097854,
+   "players": 618542,
+   "peak": 1046553,
    "url": "https://store.steampowered.com/app/570",
    "src": "popular",
    "rank": 1
@@ -2152,8 +2152,8 @@
    "platform": "Steam",
    "appid": 730,
    "title": "Counter-Strike 2",
-   "players": 1002350,
-   "peak": 1338829,
+   "players": 434066,
+   "peak": 1064089,
    "url": "https://store.steampowered.com/app/730",
    "src": "popular",
    "rank": 2
@@ -2162,49 +2162,49 @@
    "platform": "Steam",
    "appid": 578080,
    "title": "PUBG: BATTLEGROUNDS",
-   "players": 255344,
-   "peak": 812708,
+   "players": 168210,
+   "peak": 718899,
    "url": "https://store.steampowered.com/app/578080",
    "src": "popular",
    "rank": 3
   },
   {
    "platform": "Steam",
-   "appid": 2676230,
-   "title": "FiveM",
-   "players": 173469,
-   "peak": 201263,
-   "url": "https://store.steampowered.com/app/2676230",
+   "appid": 1938090,
+   "title": "《決勝時刻®》",
+   "players": 146724,
+   "peak": 180256,
+   "url": "https://store.steampowered.com/app/1938090",
    "src": "popular",
    "rank": 4
   },
   {
    "platform": "Steam",
-   "appid": 1938090,
-   "title": "《決勝時刻®》",
-   "players": 155591,
-   "peak": 227434,
-   "url": "https://store.steampowered.com/app/1938090",
+   "appid": 3419430,
+   "title": "Bongo Cat",
+   "players": 140321,
+   "peak": 164010,
+   "url": "https://store.steampowered.com/app/3419430",
    "src": "popular",
    "rank": 5
   },
   {
    "platform": "Steam",
-   "appid": 3419430,
-   "title": "Bongo Cat",
-   "players": 153071,
-   "peak": 170675,
-   "url": "https://store.steampowered.com/app/3419430",
+   "appid": 1091500,
+   "title": "Cyberpunk 2077",
+   "players": 112463,
+   "peak": 149474,
+   "url": "https://store.steampowered.com/app/1091500",
    "src": "popular",
    "rank": 6
   },
   {
    "platform": "Steam",
-   "appid": 1091500,
-   "title": "Cyberpunk 2077",
-   "players": 145495,
-   "peak": 187215,
-   "url": "https://store.steampowered.com/app/1091500",
+   "appid": 2676230,
+   "title": "FiveM",
+   "players": 104805,
+   "peak": 178505,
+   "url": "https://store.steampowered.com/app/2676230",
    "src": "popular",
    "rank": 7
   },
@@ -2212,19 +2212,19 @@
    "platform": "Steam",
    "appid": 1867240,
    "title": "WARDOGS",
-   "players": 140512,
-   "peak": 199595,
+   "players": 98070,
+   "peak": 152709,
    "url": "https://store.steampowered.com/app/1867240",
    "src": "popular",
    "rank": 8
   },
   {
    "platform": "Steam",
-   "appid": 252490,
-   "title": "Rust",
-   "players": 112969,
-   "peak": 126600,
-   "url": "https://store.steampowered.com/app/252490",
+   "appid": 440,
+   "title": "Team Fortress 2",
+   "players": 69596,
+   "peak": 92241,
+   "url": "https://store.steampowered.com/app/440",
    "src": "popular",
    "rank": 9
   },
@@ -2232,29 +2232,29 @@
    "platform": "Steam",
    "appid": 892970,
    "title": "Valheim",
-   "players": 83523,
-   "peak": 129594,
+   "players": 58372,
+   "peak": 93643,
    "url": "https://store.steampowered.com/app/892970",
    "src": "popular",
    "rank": 10
   },
   {
    "platform": "Steam",
-   "appid": 440,
-   "title": "Team Fortress 2",
-   "players": 83214,
-   "peak": 88771,
-   "url": "https://store.steampowered.com/app/440",
+   "appid": 359550,
+   "title": "《虹彩六號：圍攻行動》",
+   "players": 57655,
+   "peak": 77181,
+   "url": "https://store.steampowered.com/app/359550",
    "src": "popular",
    "rank": 11
   },
   {
    "platform": "Steam",
-   "appid": 1203620,
-   "title": "霧鎖王國 (Enshrouded)",
-   "players": 82530,
-   "peak": 116840,
-   "url": "https://store.steampowered.com/app/1203620",
+   "appid": 431960,
+   "title": "Wallpaper Engine：桌布引擎",
+   "players": 57402,
+   "peak": 110819,
+   "url": "https://store.steampowered.com/app/431960",
    "src": "popular",
    "rank": 12
   },
@@ -2262,8 +2262,8 @@
    "platform": "Steam",
    "appid": 1808500,
    "title": "ARC Raiders",
-   "players": 76428,
-   "peak": 104277,
+   "players": 56463,
+   "peak": 81903,
    "url": "https://store.steampowered.com/app/1808500",
    "src": "popular",
    "rank": 13
@@ -2272,269 +2272,269 @@
    "platform": "Steam",
    "appid": 1172470,
    "title": "《Apex 英雄》",
-   "players": 68412,
-   "peak": 219343,
+   "players": 55993,
+   "peak": 195480,
    "url": "https://store.steampowered.com/app/1172470",
    "src": "popular",
    "rank": 14
   },
   {
    "platform": "Steam",
-   "appid": 236390,
-   "title": "War Thunder",
-   "players": 67226,
-   "peak": 95219,
-   "url": "https://store.steampowered.com/app/236390",
+   "appid": 2868840,
+   "title": "Slay the Spire 2",
+   "players": 54580,
+   "peak": 88852,
+   "url": "https://store.steampowered.com/app/2868840",
    "src": "popular",
    "rank": 15
   },
   {
    "platform": "Steam",
-   "appid": 271590,
-   "title": "Grand Theft Auto V 傳承版",
-   "players": 65613,
-   "peak": 78666,
-   "url": "https://store.steampowered.com/app/271590",
+   "appid": 230410,
+   "title": "Warframe",
+   "players": 54086,
+   "peak": 79806,
+   "url": "https://store.steampowered.com/app/230410",
    "src": "popular",
    "rank": 16
   },
   {
    "platform": "Steam",
-   "appid": 4080220,
-   "title": "EA SPORTS FC™ 27",
-   "players": 64016,
-   "peak": 78354,
-   "url": "https://store.steampowered.com/app/4080220",
+   "appid": 2357570,
+   "title": "《鬥陣特攻®》",
+   "players": 53607,
+   "peak": 62305,
+   "url": "https://store.steampowered.com/app/2357570",
    "src": "popular",
    "rank": 17
   },
   {
    "platform": "Steam",
-   "appid": 230410,
-   "title": "Warframe",
-   "players": 63264,
-   "peak": 89441,
-   "url": "https://store.steampowered.com/app/230410",
+   "appid": 2767030,
+   "title": "漫威爭鋒",
+   "players": 53553,
+   "peak": 62930,
+   "url": "https://store.steampowered.com/app/2767030",
    "src": "popular",
    "rank": 18
   },
   {
    "platform": "Steam",
-   "appid": 3678970,
-   "title": "TBH: 塔斯克巴·英雄",
-   "players": 61589,
-   "peak": 77901,
-   "url": "https://store.steampowered.com/app/3678970",
+   "appid": 252490,
+   "title": "Rust",
+   "players": 53082,
+   "peak": 113830,
+   "url": "https://store.steampowered.com/app/252490",
    "src": "popular",
    "rank": 19
   },
   {
    "platform": "Steam",
-   "appid": 359550,
-   "title": "《虹彩六號：圍攻行動》",
-   "players": 59128,
-   "peak": 90722,
-   "url": "https://store.steampowered.com/app/359550",
+   "appid": 553850,
+   "title": "HELLDIVERS™ 2",
+   "players": 51832,
+   "peak": 62517,
+   "url": "https://store.steampowered.com/app/553850",
    "src": "popular",
    "rank": 20
   },
   {
    "platform": "Steam",
-   "appid": 381210,
-   "title": "Dead by Daylight",
-   "players": 58329,
-   "peak": 71612,
-   "url": "https://store.steampowered.com/app/381210",
+   "appid": 1203620,
+   "title": "霧鎖王國 (Enshrouded)",
+   "players": 48455,
+   "peak": 88034,
+   "url": "https://store.steampowered.com/app/1203620",
    "src": "popular",
    "rank": 21
   },
   {
    "platform": "Steam",
-   "appid": 431960,
-   "title": "Wallpaper Engine：桌布引擎",
-   "players": 57737,
-   "peak": 121010,
-   "url": "https://store.steampowered.com/app/431960",
+   "appid": 438100,
+   "title": "VRChat",
+   "players": 44622,
+   "peak": 55095,
+   "url": "https://store.steampowered.com/app/438100",
    "src": "popular",
    "rank": 22
   },
   {
    "platform": "Steam",
-   "appid": 322170,
-   "title": "Geometry Dash",
-   "players": 56267,
-   "peak": 75858,
-   "url": "https://store.steampowered.com/app/322170",
+   "appid": 5335510,
+   "title": "Moon Sweepers",
+   "players": 42532,
+   "peak": 51686,
+   "url": "https://store.steampowered.com/app/5335510",
    "src": "popular",
    "rank": 23
   },
   {
    "platform": "Steam",
-   "appid": 221100,
-   "title": "DayZ",
-   "players": 55732,
-   "peak": 68051,
-   "url": "https://store.steampowered.com/app/221100",
+   "appid": 381210,
+   "title": "Dead by Daylight",
+   "players": 41037,
+   "peak": 60119,
+   "url": "https://store.steampowered.com/app/381210",
    "src": "popular",
    "rank": 24
   },
   {
    "platform": "Steam",
-   "appid": 292030,
-   "title": "巫師3：狂獵 — 重製版",
-   "players": 51738,
-   "peak": 80701,
-   "url": "https://store.steampowered.com/app/292030",
+   "appid": 413150,
+   "title": "Stardew Valley",
+   "players": 39986,
+   "peak": 81673,
+   "url": "https://store.steampowered.com/app/413150",
    "src": "popular",
    "rank": 25
   },
   {
    "platform": "Steam",
-   "appid": 553850,
-   "title": "HELLDIVERS™ 2",
-   "players": 51530,
-   "peak": 67862,
-   "url": "https://store.steampowered.com/app/553850",
+   "appid": 108600,
+   "title": "Project Zomboid",
+   "players": 39178,
+   "peak": 50383,
+   "url": "https://store.steampowered.com/app/108600",
    "src": "popular",
    "rank": 26
   },
   {
    "platform": "Steam",
-   "appid": 2357570,
-   "title": "《鬥陣特攻®》",
-   "players": 51080,
-   "peak": 70474,
-   "url": "https://store.steampowered.com/app/2357570",
+   "appid": 322170,
+   "title": "Geometry Dash",
+   "players": 35975,
+   "peak": 57495,
+   "url": "https://store.steampowered.com/app/322170",
    "src": "popular",
    "rank": 27
   },
   {
    "platform": "Steam",
-   "appid": 108600,
-   "title": "Project Zomboid",
-   "players": 49142,
-   "peak": 70499,
-   "url": "https://store.steampowered.com/app/108600",
+   "appid": 1086940,
+   "title": "柏德之門3",
+   "players": 34830,
+   "peak": 45872,
+   "url": "https://store.steampowered.com/app/1086940",
    "src": "popular",
    "rank": 28
   },
   {
    "platform": "Steam",
-   "appid": 2300320,
-   "title": "Farming Simulator 25",
-   "players": 47150,
-   "peak": 61057,
-   "url": "https://store.steampowered.com/app/2300320",
+   "appid": 236390,
+   "title": "War Thunder",
+   "players": 32217,
+   "peak": 78743,
+   "url": "https://store.steampowered.com/app/236390",
    "src": "popular",
    "rank": 29
   },
   {
    "platform": "Steam",
-   "appid": 2868840,
-   "title": "Slay the Spire 2",
-   "players": 44580,
-   "peak": 99116,
-   "url": "https://store.steampowered.com/app/2868840",
+   "appid": 550,
+   "title": "Left 4 Dead 2",
+   "players": 31637,
+   "peak": 36571,
+   "url": "https://store.steampowered.com/app/550",
    "src": "popular",
    "rank": 30
   },
   {
    "platform": "Steam",
-   "appid": 227300,
-   "title": "Euro Truck Simulator 2",
-   "players": 43699,
-   "peak": 56081,
-   "url": "https://store.steampowered.com/app/227300",
+   "appid": 250900,
+   "title": "The Binding of Isaac: Rebirth",
+   "players": 30358,
+   "peak": 55530,
+   "url": "https://store.steampowered.com/app/250900",
    "src": "popular",
    "rank": 31
   },
   {
    "platform": "Steam",
-   "appid": 438100,
-   "title": "VRChat",
-   "players": 42604,
-   "peak": 65833,
-   "url": "https://store.steampowered.com/app/438100",
+   "appid": 3240220,
+   "title": "Grand Theft Auto V 強化版",
+   "players": 28287,
+   "peak": 61359,
+   "url": "https://store.steampowered.com/app/3240220",
    "src": "popular",
    "rank": 32
   },
   {
    "platform": "Steam",
-   "appid": 2767030,
-   "title": "漫威爭鋒",
-   "players": 42526,
-   "peak": 63667,
-   "url": "https://store.steampowered.com/app/2767030",
+   "appid": 1085660,
+   "title": "天命2",
+   "players": 27855,
+   "peak": 33299,
+   "url": "https://store.steampowered.com/app/1085660",
    "src": "popular",
    "rank": 33
   },
   {
    "platform": "Steam",
-   "appid": 413150,
-   "title": "Stardew Valley",
-   "players": 42110,
-   "peak": 97797,
-   "url": "https://store.steampowered.com/app/413150",
+   "appid": 4126040,
+   "title": "伊莫",
+   "players": 27256,
+   "peak": 41167,
+   "url": "https://store.steampowered.com/app/4126040",
    "src": "popular",
    "rank": 34
   },
   {
    "platform": "Steam",
-   "appid": 3240220,
-   "title": "Grand Theft Auto V 強化版",
-   "players": 41690,
-   "peak": 75599,
-   "url": "https://store.steampowered.com/app/3240220",
+   "appid": 1623730,
+   "title": "Palworld / 幻獸帕魯",
+   "players": 27064,
+   "peak": 50288,
+   "url": "https://store.steampowered.com/app/1623730",
    "src": "popular",
    "rank": 35
   },
   {
    "platform": "Steam",
-   "appid": 1142710,
-   "title": "全軍破敵：戰鎚3",
-   "players": 41296,
-   "peak": 59438,
-   "url": "https://store.steampowered.com/app/1142710",
+   "appid": 221100,
+   "title": "DayZ",
+   "players": 26320,
+   "peak": 56098,
+   "url": "https://store.steampowered.com/app/221100",
    "src": "popular",
    "rank": 36
   },
   {
    "platform": "Steam",
-   "appid": 250900,
-   "title": "The Binding of Isaac: Rebirth",
-   "players": 41194,
-   "peak": 63349,
-   "url": "https://store.steampowered.com/app/250900",
+   "appid": 4080220,
+   "title": "EA SPORTS FC™ 27",
+   "players": 26094,
+   "peak": 64140,
+   "url": "https://store.steampowered.com/app/4080220",
    "src": "popular",
    "rank": 37
   },
   {
    "platform": "Steam",
-   "appid": 4126040,
-   "title": "伊莫",
-   "players": 40535,
-   "peak": 50712,
-   "url": "https://store.steampowered.com/app/4126040",
+   "appid": 1366800,
+   "title": "Crosshair X",
+   "players": 25974,
+   "peak": 37220,
+   "url": "https://store.steampowered.com/app/1366800",
    "src": "popular",
    "rank": 38
   },
   {
    "platform": "Steam",
-   "appid": 1086940,
-   "title": "柏德之門3",
-   "players": 40303,
-   "peak": 61912,
-   "url": "https://store.steampowered.com/app/1086940",
+   "appid": 294100,
+   "title": "RimWorld",
+   "players": 25295,
+   "peak": 38046,
+   "url": "https://store.steampowered.com/app/294100",
    "src": "popular",
    "rank": 39
   },
   {
    "platform": "Steam",
-   "appid": 394360,
-   "title": "Hearts of Iron IV",
-   "players": 38648,
-   "peak": 57049,
-   "url": "https://store.steampowered.com/app/394360",
+   "appid": 271590,
+   "title": "Grand Theft Auto V 傳承版",
+   "players": 25040,
+   "peak": 67829,
+   "url": "https://store.steampowered.com/app/271590",
    "src": "popular",
    "rank": 40
   },
@@ -2542,71 +2542,81 @@
    "platform": "Steam",
    "appid": 2807960,
    "title": "戰地風雲™ 6",
-   "players": 36667,
-   "peak": 55226,
+   "players": 24765,
+   "peak": 39554,
    "url": "https://store.steampowered.com/app/2807960",
    "src": "popular",
    "rank": 41
   },
   {
    "platform": "Steam",
-   "appid": 1366800,
-   "title": "Crosshair X",
-   "players": 36604,
-   "peak": 43932,
-   "url": "https://store.steampowered.com/app/1366800",
+   "appid": 489830,
+   "title": "The Elder Scrolls V: Skyrim Special Edition",
+   "players": 24572,
+   "peak": 32973,
+   "url": "https://store.steampowered.com/app/489830",
    "src": "popular",
    "rank": 42
   },
   {
    "platform": "Steam",
-   "appid": 284160,
-   "title": "BeamNG.drive",
-   "players": 36285,
-   "peak": 46108,
-   "url": "https://store.steampowered.com/app/284160",
+   "appid": 1142710,
+   "title": "全軍破敵：戰鎚3",
+   "players": 24251,
+   "peak": 42809,
+   "url": "https://store.steampowered.com/app/1142710",
    "src": "popular",
    "rank": 43
   },
   {
    "platform": "Steam",
-   "appid": 2139460,
-   "title": "Once Human",
-   "players": 31460,
-   "peak": 44474,
-   "url": "https://store.steampowered.com/app/2139460",
+   "appid": 3259780,
+   "title": "FINAL FANTASY RESONANCE",
+   "players": 23364,
+   "peak": 33036,
+   "url": "https://store.steampowered.com/app/3259780",
    "src": "popular",
    "rank": 44
   },
   {
    "platform": "Steam",
-   "appid": 1623730,
-   "title": "Palworld / 幻獸帕魯",
-   "players": 31457,
-   "peak": 64509,
-   "url": "https://store.steampowered.com/app/1623730",
+   "appid": 292030,
+   "title": "巫師3：狂獵 — 重製版",
+   "players": 23254,
+   "peak": 53240,
+   "url": "https://store.steampowered.com/app/292030",
    "src": "popular",
    "rank": 45
   },
   {
    "platform": "Steam",
-   "appid": 294100,
-   "title": "RimWorld",
-   "players": 30884,
-   "peak": 46764,
-   "url": "https://store.steampowered.com/app/294100",
+   "appid": 2139460,
+   "title": "Once Human",
+   "players": 23090,
+   "peak": 36337,
+   "url": "https://store.steampowered.com/app/2139460",
    "src": "popular",
    "rank": 46
   },
   {
    "platform": "Steam",
-   "appid": 489830,
-   "title": "The Elder Scrolls V: Skyrim Special Edition",
-   "players": 30693,
-   "peak": 42107,
-   "url": "https://store.steampowered.com/app/489830",
+   "appid": 1973530,
+   "title": "Limbus Company",
+   "players": 22359,
+   "peak": 37503,
+   "url": "https://store.steampowered.com/app/1973530",
    "src": "popular",
    "rank": 47
+  },
+  {
+   "platform": "Steam",
+   "appid": 3678970,
+   "title": "TBH: 塔斯克巴·英雄",
+   "players": 21374,
+   "peak": 77248,
+   "url": "https://store.steampowered.com/app/3678970",
+   "src": "popular",
+   "rank": 48
   }
  ],
  "dlc": [
@@ -3174,6 +3184,28 @@
  "lows": [
   {
    "platform": "Steam",
+   "title": "Ad Infinitum",
+   "appid": 1234430,
+   "pct": 90,
+   "ratio": 0.77,
+   "score": 0.7779,
+   "reviews": 1833,
+   "desc": "-90%  TWD 50(原價 499)",
+   "url": "https://store.steampowered.com/app/1234430"
+  },
+  {
+   "platform": "Steam",
+   "title": "賞金列車 - Bounty Train",
+   "appid": 371520,
+   "pct": 90,
+   "ratio": 0.84,
+   "score": 0.7,
+   "reviews": 1741,
+   "desc": "-90%  TWD 18(原價 188)",
+   "url": "https://store.steampowered.com/app/371520"
+  },
+  {
+   "platform": "Steam",
    "title": "Sker Ritual",
    "appid": 1492070,
    "pct": 66,
@@ -3196,6 +3228,17 @@
   },
   {
    "platform": "Steam",
+   "title": "No Man's Sky 無人深空",
+   "appid": 275850,
+   "pct": 60,
+   "ratio": 0.71,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-60%  TWD 359(原價 898)",
+   "url": "https://store.steampowered.com/app/275850"
+  },
+  {
+   "platform": "Steam",
    "title": "泡泡鎮餐廳物語",
    "appid": 3024130,
    "pct": 40,
@@ -3204,17 +3247,6 @@
    "reviews": 0,
    "desc": "-40%  TWD 166(原價 278)",
    "url": "https://store.steampowered.com/app/3024130"
-  },
-  {
-   "platform": "Steam",
-   "title": "Chained Beasts",
-   "appid": 3569420,
-   "pct": 35,
-   "ratio": 0.58,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-35%  TWD 245(原價 377)",
-   "url": "https://store.steampowered.com/app/3569420"
   },
   {
    "platform": "Steam",
@@ -3262,6 +3294,94 @@
   },
   {
    "platform": "Steam",
+   "title": "LIMBO",
+   "appid": 48000,
+   "pct": 90,
+   "ratio": 0.65,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 21(原價 215)",
+   "url": "https://store.steampowered.com/app/48000"
+  },
+  {
+   "platform": "Steam",
+   "title": "INSIDE",
+   "appid": 304430,
+   "pct": 90,
+   "ratio": 0.66,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 43(原價 430)",
+   "url": "https://store.steampowered.com/app/304430"
+  },
+  {
+   "platform": "Steam",
+   "title": "Outlast",
+   "appid": 238320,
+   "pct": 90,
+   "ratio": 0.54,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 26(原價 268)",
+   "url": "https://store.steampowered.com/app/238320"
+  },
+  {
+   "platform": "Steam",
+   "title": "The Last Campfire",
+   "appid": 990630,
+   "pct": 90,
+   "ratio": 0.75,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 26(原價 268)",
+   "url": "https://store.steampowered.com/app/990630"
+  },
+  {
+   "platform": "Steam",
+   "title": "Monster Energy Supercross - The Official Videogame 2",
+   "appid": 882020,
+   "pct": 90,
+   "ratio": 0.91,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 59(原價 590)",
+   "url": "https://store.steampowered.com/app/882020"
+  },
+  {
+   "platform": "Steam",
+   "title": "A Plague Tale: Innocence",
+   "appid": 752590,
+   "pct": 90,
+   "ratio": 0.84,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 109(原價 1,099)",
+   "url": "https://store.steampowered.com/app/752590"
+  },
+  {
+   "platform": "Steam",
+   "title": "Goetia",
+   "appid": 421740,
+   "pct": 90,
+   "ratio": 0.91,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 44(原價 440)",
+   "url": "https://store.steampowered.com/app/421740"
+  },
+  {
+   "platform": "Steam",
+   "title": "Saturnalia",
+   "appid": 916350,
+   "pct": 90,
+   "ratio": 0.5,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 49(原價 499)",
+   "url": "https://store.steampowered.com/app/916350"
+  },
+  {
+   "platform": "Steam",
    "title": "Rise of the Tomb Raider™",
    "appid": 391220,
    "pct": 90,
@@ -3270,50 +3390,6 @@
    "reviews": 0,
    "desc": "-90%  TWD 74(原價 740)",
    "url": "https://store.steampowered.com/app/391220"
-  },
-  {
-   "platform": "Steam",
-   "title": "Grim Fandango Remastered",
-   "appid": 316790,
-   "pct": 85,
-   "ratio": 0.81,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-85%  TWD 59(原價 398)",
-   "url": "https://store.steampowered.com/app/316790"
-  },
-  {
-   "platform": "Steam",
-   "title": "Tomb Raider: Anniversary",
-   "appid": 8000,
-   "pct": 89,
-   "ratio": 0.92,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-89%  TWD 24(原價 220)",
-   "url": "https://store.steampowered.com/app/8000"
-  },
-  {
-   "platform": "Steam",
-   "title": "Hitman 2: Silent Assassin",
-   "appid": 6850,
-   "pct": 90,
-   "ratio": 0.69,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-90%  TWD 20(原價 208)",
-   "url": "https://store.steampowered.com/app/6850"
-  },
-  {
-   "platform": "Steam",
-   "title": "Cyberpunk 2077",
-   "appid": 1091500,
-   "pct": 70,
-   "ratio": 0.82,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-70%  TWD 479(原價 1,599)",
-   "url": "https://store.steampowered.com/app/1091500"
   },
   {
    "platform": "Steam",
@@ -3339,25 +3415,25 @@
   },
   {
    "platform": "Steam",
-   "title": "Ecstatica II",
-   "appid": 4834850,
-   "pct": 10,
-   "ratio": 0.61,
+   "title": "Role Player：山掛姊妹的扮裝糖水照　咕啾咕啾LIVE！",
+   "appid": 3891200,
+   "pct": 20,
+   "ratio": 0.5,
    "score": 0.7,
    "reviews": 0,
-   "desc": "-10%  TWD 268(原價 298)",
-   "url": "https://store.steampowered.com/app/4834850"
+   "desc": "-20%  TWD 262(原價 328)",
+   "url": "https://store.steampowered.com/app/3891200"
   },
   {
    "platform": "Steam",
-   "title": "Ecstatica",
-   "appid": 4834840,
-   "pct": 10,
-   "ratio": 0.61,
+   "title": "ELbab",
+   "appid": 4209630,
+   "pct": 41,
+   "ratio": 0.6,
    "score": 0.7,
    "reviews": 0,
-   "desc": "-10%  TWD 268(原價 298)",
-   "url": "https://store.steampowered.com/app/4834840"
+   "desc": "-41%  TWD 82(原價 138)",
+   "url": "https://store.steampowered.com/app/4209630"
   },
   {
    "platform": "Steam",
@@ -3394,6 +3470,226 @@
   },
   {
    "platform": "Steam",
+   "title": "Mediterranea Inferno",
+   "appid": 2103680,
+   "pct": 85,
+   "ratio": 0.69,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-85%  TWD 40(原價 268)",
+   "url": "https://store.steampowered.com/app/2103680"
+  },
+  {
+   "platform": "Steam",
+   "title": "Helheim Hassle",
+   "appid": 1095120,
+   "pct": 94,
+   "ratio": 0.74,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-94%  TWD 19(原價 328)",
+   "url": "https://store.steampowered.com/app/1095120"
+  },
+  {
+   "platform": "Steam",
+   "title": "Othercide",
+   "appid": 798490,
+   "pct": 90,
+   "ratio": 0.86,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 84(原價 849)",
+   "url": "https://store.steampowered.com/app/798490"
+  },
+  {
+   "platform": "Steam",
+   "title": "Pathologic Classic HD",
+   "appid": 384110,
+   "pct": 90,
+   "ratio": 0.73,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 23(原價 238)",
+   "url": "https://store.steampowered.com/app/384110"
+  },
+  {
+   "platform": "Steam",
+   "title": "Grim Fandango Remastered",
+   "appid": 316790,
+   "pct": 85,
+   "ratio": 0.81,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-85%  TWD 59(原價 398)",
+   "url": "https://store.steampowered.com/app/316790"
+  },
+  {
+   "platform": "Steam",
+   "title": "Tomb Raider: Anniversary",
+   "appid": 8000,
+   "pct": 89,
+   "ratio": 0.92,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-89%  TWD 24(原價 220)",
+   "url": "https://store.steampowered.com/app/8000"
+  },
+  {
+   "platform": "Steam",
+   "title": "Hitman: Contracts",
+   "appid": 247430,
+   "pct": 90,
+   "ratio": 0.69,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 20(原價 208)",
+   "url": "https://store.steampowered.com/app/247430"
+  },
+  {
+   "platform": "Steam",
+   "title": "Outlast 2",
+   "appid": 414700,
+   "pct": 90,
+   "ratio": 0.49,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 32(原價 328)",
+   "url": "https://store.steampowered.com/app/414700"
+  },
+  {
+   "platform": "Steam",
+   "title": "Flipping Death",
+   "appid": 626660,
+   "pct": 90,
+   "ratio": 0.96,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 31(原價 318)",
+   "url": "https://store.steampowered.com/app/626660"
+  },
+  {
+   "platform": "Steam",
+   "title": "Dying Light",
+   "appid": 239140,
+   "pct": 90,
+   "ratio": 0.83,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 67(原價 670)",
+   "url": "https://store.steampowered.com/app/239140"
+  },
+  {
+   "platform": "Steam",
+   "title": "Gibbous -  A Cthulhu Adventure",
+   "appid": 914020,
+   "pct": 90,
+   "ratio": 0.49,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 32(原價 328)",
+   "url": "https://store.steampowered.com/app/914020"
+  },
+  {
+   "platform": "Steam",
+   "title": "The Beast Inside",
+   "appid": 792300,
+   "pct": 90,
+   "ratio": 0.49,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 40(原價 408)",
+   "url": "https://store.steampowered.com/app/792300"
+  },
+  {
+   "platform": "Steam",
+   "title": "神的超級大寶貝",
+   "appid": 1466230,
+   "pct": 80,
+   "ratio": 0.68,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-80%  TWD 65(原價 328)",
+   "url": "https://store.steampowered.com/app/1466230"
+  },
+  {
+   "platform": "Steam",
+   "title": "Dead Island 2",
+   "appid": 934700,
+   "pct": 90,
+   "ratio": 0.9,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 146(原價 1,463)",
+   "url": "https://store.steampowered.com/app/934700"
+  },
+  {
+   "platform": "Steam",
+   "title": "Planet of Lana",
+   "appid": 1608230,
+   "pct": 85,
+   "ratio": 0.76,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-85%  TWD 49(原價 328)",
+   "url": "https://store.steampowered.com/app/1608230"
+  },
+  {
+   "platform": "Steam",
+   "title": "Aporia: Beyond The Valley",
+   "appid": 573130,
+   "pct": 90,
+   "ratio": 0.85,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 28(原價 288)",
+   "url": "https://store.steampowered.com/app/573130"
+  },
+  {
+   "platform": "Steam",
+   "title": "Lakeview Cabin Collection",
+   "appid": 361990,
+   "pct": 90,
+   "ratio": 0.84,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 27(原價 278)",
+   "url": "https://store.steampowered.com/app/361990"
+  },
+  {
+   "platform": "Steam",
+   "title": "Gray Dawn",
+   "appid": 747360,
+   "pct": 90,
+   "ratio": 0.95,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 31(原價 318)",
+   "url": "https://store.steampowered.com/app/747360"
+  },
+  {
+   "platform": "Steam",
+   "title": "White Shadows",
+   "appid": 1158890,
+   "pct": 90,
+   "ratio": 0.96,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 31(原價 318)",
+   "url": "https://store.steampowered.com/app/1158890"
+  },
+  {
+   "platform": "Steam",
+   "title": "Zombie Army 4: Dead War",
+   "appid": 694280,
+   "pct": 90,
+   "ratio": 0.91,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 74(原價 746)",
+   "url": "https://store.steampowered.com/app/694280"
+  },
+  {
+   "platform": "Steam",
    "title": "Tomb Raider: Underworld",
    "appid": 8140,
    "pct": 89,
@@ -3402,6 +3698,50 @@
    "reviews": 0,
    "desc": "-89%  TWD 24(原價 220)",
    "url": "https://store.steampowered.com/app/8140"
+  },
+  {
+   "platform": "Steam",
+   "title": "Whateverland",
+   "appid": 1175840,
+   "pct": 90,
+   "ratio": 0.54,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 26(原價 268)",
+   "url": "https://store.steampowered.com/app/1175840"
+  },
+  {
+   "platform": "Steam",
+   "title": "The Chant",
+   "appid": 1577250,
+   "pct": 90,
+   "ratio": 0.81,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 66(原價 669)",
+   "url": "https://store.steampowered.com/app/1577250"
+  },
+  {
+   "platform": "Steam",
+   "title": "Shady Part of Me",
+   "appid": 1116580,
+   "pct": 85,
+   "ratio": 0.79,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-85%  TWD 58(原價 390)",
+   "url": "https://store.steampowered.com/app/1116580"
+  },
+  {
+   "platform": "Steam",
+   "title": "Vampyr",
+   "appid": 427290,
+   "pct": 90,
+   "ratio": 0.84,
+   "score": 0.7,
+   "reviews": 0,
+   "desc": "-90%  TWD 109(原價 1,099)",
+   "url": "https://store.steampowered.com/app/427290"
   },
   {
    "platform": "Steam",
@@ -3669,17 +4009,6 @@
   },
   {
    "platform": "Steam",
-   "title": "Space Colony: Steam Edition",
-   "appid": 297920,
-   "pct": 90,
-   "ratio": 0.8,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-90%  TWD 39(原價 398)",
-   "url": "https://store.steampowered.com/app/297920"
-  },
-  {
-   "platform": "Steam",
    "title": "房產達人",
    "appid": 613100,
    "pct": 92,
@@ -3705,422 +4034,16 @@
    "title": "知只大冒险",
    "appid": 1071870,
    "pct": 88,
-   "ratio": 0.82,
+   "ratio": 0.83,
    "score": 0.7,
    "reviews": 0,
    "desc": "-88%  TWD 32(原價 268)",
    "url": "https://store.steampowered.com/app/1071870"
-  },
-  {
-   "platform": "Steam",
-   "title": "Ni no Kuni Wrath of the White Witch™ Remastered",
-   "appid": 798460,
-   "pct": 85,
-   "ratio": 0.93,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-85%  TWD 178(原價 1,190)",
-   "url": "https://store.steampowered.com/app/798460"
-  },
-  {
-   "platform": "Steam",
-   "title": "GOD EATER 2 Rage Burst",
-   "appid": 438490,
-   "pct": 90,
-   "ratio": 1.01,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-90%  TWD 129(原價 1,290)",
-   "url": "https://store.steampowered.com/app/438490"
-  },
-  {
-   "platform": "Steam",
-   "title": "故障星系 Galactic Glitch",
-   "appid": 1536620,
-   "pct": 90,
-   "ratio": 0.55,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-90%  TWD 23(原價 238)",
-   "url": "https://store.steampowered.com/app/1536620"
-  },
-  {
-   "platform": "Steam",
-   "title": "Outcast - Second Contact",
-   "appid": 618970,
-   "pct": 90,
-   "ratio": 0.8,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-90%  TWD 26(原價 268)",
-   "url": "https://store.steampowered.com/app/618970"
-  },
-  {
-   "platform": "Steam",
-   "title": "SUPER DRAGON BALL HEROES WORLD MISSION",
-   "appid": 798510,
-   "pct": 90,
-   "ratio": 0.98,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-90%  TWD 139(原價 1,390)",
-   "url": "https://store.steampowered.com/app/798510"
-  },
-  {
-   "platform": "Steam",
-   "title": "GOD EATER 3",
-   "appid": 899440,
-   "pct": 90,
-   "ratio": 0.83,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-90%  TWD 129(原價 1,290)",
-   "url": "https://store.steampowered.com/app/899440"
-  },
-  {
-   "platform": "Steam",
-   "title": "The Inner World",
-   "appid": 251430,
-   "pct": 92,
-   "ratio": 0.66,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-92%  TWD 21(原價 268)",
-   "url": "https://store.steampowered.com/app/251430"
-  },
-  {
-   "platform": "Steam",
-   "title": "南瓜杰克",
-   "appid": 1186640,
-   "pct": 93,
-   "ratio": 0.5,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-93%  TWD 34(原價 488)",
-   "url": "https://store.steampowered.com/app/1186640"
-  },
-  {
-   "platform": "Steam",
-   "title": "Phantom Spark",
-   "appid": 1924180,
-   "pct": 75,
-   "ratio": 0.5,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-75%  TWD 82(原價 328)",
-   "url": "https://store.steampowered.com/app/1924180"
-  },
-  {
-   "platform": "Steam",
-   "title": "爆鑽小英雄 鑽頭樂園",
-   "appid": 1126750,
-   "pct": 85,
-   "ratio": 0.56,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-85%  TWD 73(原價 490)",
-   "url": "https://store.steampowered.com/app/1126750"
-  },
-  {
-   "platform": "Steam",
-   "title": "To the Moon",
-   "appid": 206440,
-   "pct": 85,
-   "ratio": 0.58,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-85%  TWD 28(原價 188)",
-   "url": "https://store.steampowered.com/app/206440"
-  },
-  {
-   "platform": "Steam",
-   "title": "SiN Episodes: Emergence",
-   "appid": 1300,
-   "pct": 80,
-   "ratio": 0.76,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-80%  TWD 37(原價 186)",
-   "url": "https://store.steampowered.com/app/1300"
-  },
-  {
-   "platform": "Steam",
-   "title": "廖添丁 - 稀代兇賊の最期",
-   "appid": 1406850,
-   "pct": 75,
-   "ratio": 0.53,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-75%  TWD 87(原價 349)",
-   "url": "https://store.steampowered.com/app/1406850"
-  },
-  {
-   "platform": "Steam",
-   "title": "Phoenotopia: Awakening",
-   "appid": 1436590,
-   "pct": 75,
-   "ratio": 0.5,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-75%  TWD 82(原價 330)",
-   "url": "https://store.steampowered.com/app/1436590"
-  },
-  {
-   "platform": "Steam",
-   "title": "Turok",
-   "appid": 405820,
-   "pct": 85,
-   "ratio": 0.84,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-85%  TWD 70(原價 468)",
-   "url": "https://store.steampowered.com/app/405820"
-  },
-  {
-   "platform": "Steam",
-   "title": "Airborne Kingdom",
-   "appid": 982290,
-   "pct": 80,
-   "ratio": 0.5,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-80%  TWD 81(原價 408)",
-   "url": "https://store.steampowered.com/app/982290"
-  },
-  {
-   "platform": "Steam",
-   "title": "Bendy and the Dark Revival",
-   "appid": 1063660,
-   "pct": 90,
-   "ratio": 0.52,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-90%  TWD 34(原價 349)",
-   "url": "https://store.steampowered.com/app/1063660"
-  },
-  {
-   "platform": "Steam",
-   "title": "Monster Energy Supercross - The Official Videogame 3",
-   "appid": 1089830,
-   "pct": 90,
-   "ratio": 0.97,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-90%  TWD 79(原價 790)",
-   "url": "https://store.steampowered.com/app/1089830"
-  },
-  {
-   "platform": "Steam",
-   "title": "Before Your Eyes",
-   "appid": 1082430,
-   "pct": 80,
-   "ratio": 0.63,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-80%  TWD 37(原價 188)",
-   "url": "https://store.steampowered.com/app/1082430"
-  },
-  {
-   "platform": "Steam",
-   "title": "City of Brass",
-   "appid": 301840,
-   "pct": 90,
-   "ratio": 0.49,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-90%  TWD 32(原價 328)",
-   "url": "https://store.steampowered.com/app/301840"
-  },
-  {
-   "platform": "Steam",
-   "title": "Resident Evil 5",
-   "appid": 21690,
-   "pct": 75,
-   "ratio": 0.94,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-75%  TWD 142(原價 570)",
-   "url": "https://store.steampowered.com/app/21690"
-  },
-  {
-   "platform": "Steam",
-   "title": "RIDE",
-   "appid": 345660,
-   "pct": 90,
-   "ratio": 0.91,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-90%  TWD 59(原價 590)",
-   "url": "https://store.steampowered.com/app/345660"
-  },
-  {
-   "platform": "Steam",
-   "title": "Sengoku Jidai: Shadow of the Shogun",
-   "appid": 397190,
-   "pct": 80,
-   "ratio": 0.64,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-80%  TWD 97(原價 488)",
-   "url": "https://store.steampowered.com/app/397190"
-  },
-  {
-   "platform": "Steam",
-   "title": "Draugen",
-   "appid": 770390,
-   "pct": 80,
-   "ratio": 0.5,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-80%  TWD 65(原價 328)",
-   "url": "https://store.steampowered.com/app/770390"
-  },
-  {
-   "platform": "Steam",
-   "title": "Soulstice",
-   "appid": 1602080,
-   "pct": 90,
-   "ratio": 0.54,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-90%  TWD 56(原價 568)",
-   "url": "https://store.steampowered.com/app/1602080"
-  },
-  {
-   "platform": "Steam",
-   "title": "Finding Paradise",
-   "appid": 337340,
-   "pct": 80,
-   "ratio": 0.57,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-80%  TWD 37(原價 188)",
-   "url": "https://store.steampowered.com/app/337340"
-  },
-  {
-   "platform": "Steam",
-   "title": "Submerged: Hidden Depths",
-   "appid": 1614270,
-   "pct": 90,
-   "ratio": 0.49,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-90%  TWD 48(原價 488)",
-   "url": "https://store.steampowered.com/app/1614270"
-  },
-  {
-   "platform": "Steam",
-   "title": "Sherlock Holmes - Nemesis",
-   "appid": 11040,
-   "pct": 90,
-   "ratio": 1.01,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-90%  TWD 29(原價 299)",
-   "url": "https://store.steampowered.com/app/11040"
-  },
-  {
-   "platform": "Steam",
-   "title": "Resident Evil",
-   "appid": 304240,
-   "pct": 75,
-   "ratio": 0.93,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-75%  TWD 142(原價 570)",
-   "url": "https://store.steampowered.com/app/304240"
-  },
-  {
-   "platform": "Steam",
-   "title": "Monster Prom",
-   "appid": 743450,
-   "pct": 80,
-   "ratio": 0.74,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-80%  TWD 45(原價 226)",
-   "url": "https://store.steampowered.com/app/743450"
-  },
-  {
-   "platform": "Steam",
-   "title": "Tomb Raider I-III Remastered Starring Lara Croft",
-   "appid": 2478970,
-   "pct": 80,
-   "ratio": 0.5,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-80%  TWD 97(原價 488)",
-   "url": "https://store.steampowered.com/app/2478970"
-  },
-  {
-   "platform": "Steam",
-   "title": "Stars in Shadow",
-   "appid": 464880,
-   "pct": 85,
-   "ratio": 0.5,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-85%  TWD 61(原價 408)",
-   "url": "https://store.steampowered.com/app/464880"
-  },
-  {
-   "platform": "Steam",
-   "title": "Silver Chains",
-   "appid": 975470,
-   "pct": 94,
-   "ratio": 0.78,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-94%  TWD 24(原價 408)",
-   "url": "https://store.steampowered.com/app/975470"
-  },
-  {
-   "platform": "Steam",
-   "title": "Monster Prom 2: Monster Camp",
-   "appid": 1140270,
-   "pct": 75,
-   "ratio": 0.57,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-75%  TWD 56(原價 226)",
-   "url": "https://store.steampowered.com/app/1140270"
-  },
-  {
-   "platform": "Steam",
-   "title": "Dracula: Origin",
-   "appid": 11050,
-   "pct": 90,
-   "ratio": 1.01,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-90%  TWD 29(原價 299)",
-   "url": "https://store.steampowered.com/app/11050"
-  },
-  {
-   "platform": "Steam",
-   "title": "饑荒",
-   "appid": 219740,
-   "pct": 75,
-   "ratio": 0.57,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-75%  TWD 46(原價 186)",
-   "url": "https://store.steampowered.com/app/219740"
-  },
-  {
-   "platform": "Steam",
-   "title": "ONE PIECE World Seeker",
-   "appid": 755500,
-   "pct": 90,
-   "ratio": 0.83,
-   "score": 0.7,
-   "reviews": 0,
-   "desc": "-90%  TWD 129(原價 1,290)",
-   "url": "https://store.steampowered.com/app/755500"
   }
  ],
- "updated": "2026-10-26T18:39:39+00:00",
+ "updated": "2026-10-27T03:23:58+00:00",
  "errors": [
-  "dlc: dlc價格 1252240: Throttled Steam 限流中或本次額度已用完(共 33 筆)"
+  "steam_throttle: 本次額度用完,66 筆詳情本次略過,之後執行會陸續補上",
+  "dlc: dlc價格 1492070: Throttled Steam 限流中或本次額度已用完(共 85 筆)"
  ]
 }
