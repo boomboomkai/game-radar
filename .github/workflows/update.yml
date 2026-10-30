@@ -3,22 +3,60 @@ on:
   schedule:
     - cron: "0 */6 * * *"   # 每 6 小時(UTC)
   workflow_dispatch:         # 可在 Actions 頁手動執行
+
 permissions:
-  contents: write
+  contents: read             # 預設唯讀;只有 commit 那個工作才有寫入權限
+
+concurrency:
+  group: update-data         # 同時只跑一個,避免兩次執行互相覆蓋
+  cancel-in-progress: false
+
 jobs:
-  update:
+  fetch:                     # 第一段:抓資料。會執行第三方套件,所以沒有寫入權限、也不保留登入憑證
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-      - run: pip install google-play-scraper
+      - run: pip install -r requirements.txt
       - run: python fetch_data.py
         env:
           RAWG_API_KEY: ${{ secrets.RAWG_API_KEY }}   # 選用,沒設定會自動略過
-      - run: |
+      - uses: actions/upload-artifact@v4
+        with:
+          name: data
+          path: |
+            data.json
+            games.json
+            history.json
+            mobile_prices.json
+            android_top.json
+          if-no-files-found: warn
+
+  commit:                    # 第二段:只把幾個資料檔存回專案,不執行任何第三方程式
+    needs: fetch
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/download-artifact@v4
+        with:
+          name: data
+          path: new-data
+      - name: 檢查並更新資料檔
+        run: |
+          for f in data.json games.json history.json mobile_prices.json android_top.json; do
+            if [ -f "new-data/$f" ]; then
+              python3 -c "import json,sys; json.load(open(sys.argv[1], encoding='utf-8'))" "new-data/$f" && cp "new-data/$f" "$f"
+            fi
+          done
           git config user.name "game-radar-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add -A -- '*.json'
+          git add data.json games.json history.json mobile_prices.json android_top.json 2>/dev/null || true
           git diff --cached --quiet || (git commit -m "update data" && git push)
