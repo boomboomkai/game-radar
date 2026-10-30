@@ -25,6 +25,9 @@ def api_headers(url):
     return {"User-Agent": API_UA} if ("cheapshark.com" in url or "rawg.io" in url) else HEADERS
 
 
+MAX_BYTES = 10_000_000   # 單一回應大小上限,避免被超大回應拖垮
+
+
 class Throttled(Exception):
     """Steam 商店詳情介面被限流(回傳空白)、或本次額度已用完:不是這款遊戲的問題,下次執行再補"""
 
@@ -48,7 +51,10 @@ def get(url, timeout=25, tries=3, headers=None):
         req = urllib.request.Request(url, headers={**api_headers(url), **(headers or {})})
         try:
             with urllib.request.urlopen(req, timeout=timeout) as r:
-                body = r.read().decode("utf-8", "replace")
+                raw = r.read(MAX_BYTES + 1)
+                if len(raw) > MAX_BYTES:
+                    raise RuntimeError(f"回應超過 {MAX_BYTES // 1_000_000} MB,已拒絕 @ {url.split('?')[0]}")
+                body = raw.decode("utf-8", "replace")
                 _LAST["url"] = r.geturl()
             if is_ad:
                 if body.lstrip()[:1] in ("{", "["):
@@ -168,7 +174,37 @@ def fetch_cheapshark_deals():
 
 
 # ---------- 新聞 RSS ----------
+NUM_KEYS = {"appid", "rank", "pct", "count", "rating", "players", "peak", "age", "hours", "total", "twd", "usd", "final", "orig", "score"}
+
+
+def sanitize_numbers(o):
+    """數字欄位一律轉成數字(轉不了就設 None),避免上游資料夾帶文字後被當成 HTML 顯示。"""
+    if isinstance(o, list):
+        for x in o:
+            sanitize_numbers(x)
+    elif isinstance(o, dict):
+        for k, v in list(o.items()):
+            if k in NUM_KEYS:
+                if v is None or (isinstance(v, (int, float)) and not isinstance(v, bool)):
+                    continue
+                if isinstance(v, str) and re.fullmatch(r"-?\d+(\.\d+)?", v.strip()):
+                    o[k] = float(v) if "." in v else int(v)
+                else:
+                    o[k] = None
+            else:
+                sanitize_numbers(v)
+
+
+def redact(text):
+    """錯誤訊息會寫進公開的 data.json,所以先把金鑰遮掉"""
+    t = re.sub(r"([?&](?:key|api_key|apikey|token)=)[^&\s\"']+", r"\1***", str(text), flags=re.I)
+    secret = os.environ.get("RAWG_API_KEY")
+    return t.replace(secret, "***") if secret else t
+
+
 def parse_rss(text, platform, limit=8):
+    if "<!ENTITY" in text:        # 擋掉 XML 實體展開攻擊(billion laughs)
+        raise ValueError("RSS 含有實體宣告,已拒絕")
     root = ET.fromstring(text)
     atom = "{http://www.w3.org/2005/Atom}"
     out = []
@@ -299,6 +335,7 @@ SOURCES = [
     ("playstation", "news", rss("https://www.pushsquare.com/feeds/latest", "PlayStation")),
     ("xbox", "news", rss("https://www.purexbox.com/feeds/latest", "Xbox")),
     ("ea", "news", gnews("EA Games OR 美商藝電", "EA")),
+    ("steam_free_news", "news", gnews("Steam 限免 OR 限時免費 OR 免費領取 OR 永久保留", "Steam")),
     ("steam_news", "news", gnews("Steam 遊戲 新聞", "Steam")),
     ("epic_news", "news", gnews("Epic Games Store", "Epic")),
     ("steam_new", "new", lambda: steam_section("new_releases")),
@@ -314,6 +351,8 @@ SOURCES = [
     ("gamerpower", "free", lambda: fetch_gamerpower()),
     ("steam_free", "free", lambda: steam_free()),
     ("steam_ftk", "free", lambda: steam_ftk()),
+    ("cheapshark_free", "free", lambda: cheapshark_free()),
+    ("manual_free", "free", lambda: manual_free()),
     ("ios_top", "mobile", lambda: ios_top()),
     ("android_top", "mobile", lambda: android_top()),
 ]
@@ -327,7 +366,7 @@ _FX = {}
 _STORES = {}
 _IOS = {}
 MOBILE = Path(__file__).parent / "mobile_prices.json"
-ALLOW_EMPTY = {"ios_free", "ios_deals", "steam_free", "steam_ftk"}   # 這些來源沒有項目是正常的(要累積價格紀錄才看得出降價)
+ALLOW_EMPTY = {"ios_free", "ios_deals", "steam_free", "steam_ftk", "cheapshark_free", "manual_free"}   # 這些來源沒有項目是正常的(要累積價格紀錄才看得出降價)
 
 
 def get_fx(prev):
@@ -662,7 +701,25 @@ def steam_ftk():
     """Steam 商店搜尋「特價中 + 價格上限免費」= 限時免費領取(Free to Keep),包含遊戲與 DLC。結束時間 Steam 沒有提供。"""
     url = ("https://store.steampowered.com/search/results/?query&start=0&count=50&dynamic_data=&sort_by=Price_ASC"
            "&maxprice=free&specials=1&cc=tw&l=tchinese&infinite=1")
-    return parse_steam_ftk(json.loads(get(url)).get("results_html", ""))
+    d = json.loads(get(url))
+    page = d.get("results_html") or ""
+    if "data-ds-appid" not in page and d.get("total_count"):          # 搜尋有結果、卻解析不到遊戲列:網頁格式可能改了
+        raise RuntimeError(f"Steam 搜尋有 {d.get('total_count')} 筆,但解析不到遊戲列(格式可能改了):{page[:80]!r}")
+    return parse_steam_ftk(page)
+
+
+def cheapshark_free():
+    """CheapShark:Steam 上價格 0 的特價(= 限時免費領取)。有 Steam 編號才收;第二個來源,補 Steam 搜尋漏掉的。"""
+    q = urllib.parse.urlencode({"storeID": "1", "upperPrice": 0, "onSale": 1, "pageSize": 60})
+    items = []
+    for r in json.loads(get("https://www.cheapshark.com/api/1.0/deals?" + q)):
+        if float(r.get("salePrice", 1)) != 0 or not r.get("steamAppID"):
+            continue
+        aid = int(r["steamAppID"])
+        items.append({"platform": "Steam", "title": r["title"], "title_en": r["title"], "appid": aid, "status": "now",
+                      "desc": f"原價 US${r['normalPrice']}" if r.get("normalPrice") else "",
+                      "url": f"https://store.steampowered.com/app/{aid}"})
+    return items
 
 
 def mark_dlc(new, games):
@@ -672,6 +729,39 @@ def mark_dlc(new, games):
         if g.get("type") == "dlc" and not str(it.get("title", "")).endswith("(DLC)"):
             it["title"] = f"{it['title']} (DLC)"
             it["dlc"] = True
+
+
+EXTRA_FREE = Path(__file__).parent / "extra_free.json"
+
+
+def manual_free():
+    """手動補充的限免(extra_free.json)。用在價格資料偵測不到的情況,例如『免費遊玩一段時間後恢復收費』,
+    或各網站報導的預告。到結束時間會自動消失;還沒開始的會顯示『即將免費』。"""
+    from datetime import timedelta
+    tpe = timezone(timedelta(hours=8))
+    now = datetime.now(timezone.utc)
+
+    def dt(x):
+        if not x:
+            return None
+        d = datetime.fromisoformat(str(x).replace("Z", "+00:00"))
+        return d.replace(tzinfo=tpe) if d.tzinfo is None else d          # 沒寫時區就當作台北時間
+
+    iso = lambda d: d.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ") if d else None
+    items = []
+    for e in load(EXTRA_FREE, []):
+        start, end = dt(e.get("start")), dt(e.get("end"))
+        if end and now > end:
+            continue
+        aid = e.get("appid")
+        it = {"platform": e.get("platform") or ("Steam" if aid else "其他"), "title": e["title"],
+              "status": "next" if (start and now < start) else "now", "start": iso(start), "end": iso(end),
+              "desc": e.get("desc", ""), "note": e.get("note", ""),
+              "url": e.get("url") or (f"https://store.steampowered.com/app/{aid}" if aid else "")}
+        if aid:
+            it["appid"] = int(aid)
+        items.append(it)
+    return items
 
 
 def dedupe_by_appid(items):
@@ -1296,6 +1386,7 @@ def enrich(new):
         attach_dlc_lists(new, games, now)
     except Exception as ex:
         _DLC_ERR.append(f"{type(ex).__name__}: {str(ex)[:80]}")
+    sanitize_numbers(games["apps"])
     GAMES.write_text(json.dumps(games, ensure_ascii=False), "utf-8")
     HISTORY.write_text(json.dumps(hist, ensure_ascii=False), "utf-8")
     return fails
@@ -1305,6 +1396,7 @@ def main():
     old = load(OUT, {})   # 檔案不存在、是空的或內容壞掉時,都當作沒有舊資料
     new = {"free": [], "deals": [], "news": [], "new": [], "soon": [], "mobile": [], "pool": [], "popular": [], "dlc": []}
     errors = []
+    counts = {}
     for src, section, fn in SOURCES:
         try:
             items = fn()
@@ -1315,7 +1407,9 @@ def main():
             items = [i for i in old.get(section, []) if i.get("src") == src]  # 保留舊資料
         for i in items:
             i["src"] = src
+        counts[src] = len(items)
         new[section].extend(items)
+    free_raw = [(i["title"], i.get("title_en"), i.get("platforms") or [i.get("platform")], i.get("src")) for i in new["free"]]
     for sec in ("new", "soon", "free"):
         new[sec] = merge_dupes(new[sec])
     for sec in ("free", "deals", "new", "soon", "mobile"):
@@ -1337,8 +1431,17 @@ def main():
         errors.append(f"details: {type(ex).__name__}: {ex}")
     new.pop("pool", None)          # 候選池只用來找史低,不存進 data.json
     new["free"] = dedupe_by_appid(new["free"])
+    kept = set()                                   # 診斷用:哪些限免來源抓到了、後來又被規則拿掉(合併重複的不算)
+    for i in new["free"]:
+        for t in (i["title"], re.sub(r"\s*\(DLC\)$", "", i["title"]), i.get("title_en") or ""):
+            kept.add(norm(t))
+    new["src_counts"] = counts
+    new["dropped_free"] = [{"title": t, "platforms": p, "src": sr} for (t, te, p, sr) in free_raw
+                           if norm(t) not in kept and not (te and norm(te) in kept)][:40]
     new["updated"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     new["errors"] = errors
+    sanitize_numbers(new)
+    new["errors"] = [redact(e) for e in new.get("errors", [])]
     OUT.write_text(json.dumps(new, ensure_ascii=False, indent=1), "utf-8")
     print(f"new={len(new['new'])} soon={len(new['soon'])}", end=" ")
     print(f"free={len(new['free'])} deals={len(new['deals'])} news={len(new['news'])} errors={len(errors)}")
