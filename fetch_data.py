@@ -100,7 +100,7 @@ def parse_epic(d, en=None):
                     if (o.get("discountSetting") or {}).get("discountPercentage") == 0:
                         items.append({"platform": "Epic", "title": e["title"], "title_en": (en or {}).get(e.get("id")), "blurb": re.sub(r"\s+", " ", e.get("description") or "")[:300], "status": status,
                                       "start": o.get("startDate"), "end": o.get("endDate"),
-                                      "desc": f"原價 {price}" if price else "", "url": url})
+                                      "desc": f"原價 {price}" if price and re.search(r"[1-9]", price) else "", "url": url})
     return items
 
 
