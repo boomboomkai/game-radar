@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hant"><head><meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src https: data:; media-src https:; font-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>遊戲偵查隊|限免・特價・史低情報</title>
 <meta name="theme-color" content="#070a12">
@@ -396,8 +398,8 @@ function platPanels(i,g){
   if(free.has(k)){const mob=k==="iOS"||k==="Android";o={html:`<b class="ok">限時免費</b>${i.end?` 至 ${tw(i.end)}(台北時間)`:"(結束時間不明)"}${i.desc?`<br>${priceHtml(i.desc)}`:""}`,url:mob?searchUrl(k,i):i.url,btn:mob?"到商店查看":"前往領取"}}
   else if(k==="Steam"){const p=g&&g.price;
    if(noStore(i))o={html:"這款遊戲沒有 Steam 商店頁面(或在台灣區看不到),點商店連結會被導回 Steam 首頁。",url:sdb(i),btn:"在 SteamDB 查看"};
-   else if(p)o={html:p.final>0?`<b class="now">NT$ ${Math.round(p.final).toLocaleString()}</b>${p.pct>0?` <span class="m">(-${p.pct}%,原價 ${Math.round(p.orig).toLocaleString()})</span>`:""}`:`<b class="ok">免費遊玩</b>`,url:`https://store.steampowered.com/app/${i.appid}`,btn:"前往 Steam 商店"};
-   else if(i.appid)o={html:"價格資料更新中",url:`https://store.steampowered.com/app/${i.appid}`,btn:"前往 Steam 商店"}}
+   else if(p)o={html:p.final>0?`<b class="now">NT$ ${Math.round(p.final).toLocaleString()}</b>${p.pct>0?` <span class="m">(-${Number(p.pct)}%,原價 ${Math.round(p.orig).toLocaleString()})</span>`:""}`:`<b class="ok">免費遊玩</b>`,url:`https://store.steampowered.com/app/${encodeURIComponent(i.appid)}`,btn:"前往 Steam 商店"};
+   else if(i.appid)o={html:"價格資料更新中",url:`https://store.steampowered.com/app/${encodeURIComponent(i.appid)}`,btn:"前往 Steam 商店"}}
   else{const re=PRICE_RE[k],r=re&&find(re);
    if(r){const m=mny(r);o=r.twd===0?{html:`<b class="ok">免費</b>`,url:r.url,btn:"前往商店"}:(m?{html:`<b class="now">${m}</b>${r.usd!=null?` <span class="m">(US$${esc(r.usd)} 換算)</span>`:""}`,url:r.url,btn:"前往商店"}:null)}
    else if(own.has(k))o={html:i.desc?priceHtml(i.desc):"請到商店查看價格",url:i.url,btn:"前往商店"}}
@@ -405,7 +407,7 @@ function platPanels(i,g){
  unkFree.forEach(p=>out.push({k:p,html:`<b class="ok">限時免費</b>${i.end?` 至 ${tw(i.end)}(台北時間)`:"(結束時間不明)"}${i.desc?`<br>${priceHtml(i.desc)}`:""}`,url:i.url,btn:"前往領取"}));
  const fr=new Set([...free,...unkFree]);
  return out.sort((a,b)=>(fr.has(b.k)?1:0)-(fr.has(a.k)?1:0))}
-const dlcPrice=p=>!p?"":(p.final>0?(p.pct>0?`<span class="pct" style="color:${pctColor(p.pct)}">-${p.pct}%</span> <b class="now">NT$ ${Math.round(p.final).toLocaleString()}</b>`:`NT$ ${Math.round(p.final).toLocaleString()}`):`<b class="ok">免費</b>`);
+const dlcPrice=p=>!p?"":(p.final>0?(p.pct>0?`<span class="pct" style="color:${pctColor(p.pct)}">-${Number(p.pct)}%</span> <b class="now">NT$ ${Math.round(p.final).toLocaleString()}</b>`:`NT$ ${Math.round(p.final).toLocaleString()}`):`<b class="ok">免費</b>`);
 function dlcHtml(g){const l=(g&&g.dlc)||[];if(!l.length)return"";
  return `<h4>DLC・資料包(共 ${g.dlc_n||l.length} 個${(g.dlc_n||l.length)>l.length?`,列出 ${l.length} 個`:""})</h4><div class="dlcs">${l.map(x=>`<a class="dlc" href="https://store.steampowered.com/app/${x.id}" target="_blank" rel="noopener noreferrer"><span class="dn">${esc(x.name)}</span><span class="dp">${dlcPrice(x.p)}</span></a>`).join("")}</div>`}
 function detail(i){
@@ -416,10 +418,10 @@ function detail(i){
  const sel=panels.length?`<h4>選擇平台</h4><div class="psel"><div class="pbs">${panels.map((p,n)=>`<button class="pb" data-k="${esc(p.k)}" aria-pressed="${n===0}">${icon(p.k)}${esc(SHORT[p.k]||p.k)}</button>`).join("")}</div>${panels.map((p,n)=>`<div class="pnl" data-k="${esc(p.k)}"${n?" hidden":""}><div>${p.html}</div><a class="go" href="${esc(safe(p.url))}" target="_blank" rel="noopener noreferrer">${p.btn}</a></div>`).join("")}</div>`:"";
  let more="";
  if(g){
-  const r=g.reviews||{},sum=r.total?`${esc(r.label)},${r.pct}% 好評,共 ${r.total.toLocaleString()} 篇`:"尚無評論";
+  const r=g.reviews||{},sum=r.total?`${esc(r.label)},${Number(r.pct)}% 好評,共 ${r.total.toLocaleString()} 篇`:"尚無評論";
   const shots=(g.shots||[]).map(x=>`<a href="${esc(safe(x.f))}" target="_blank" rel="noopener noreferrer"><img loading="lazy" src="${esc(safe(x.t))}" alt=""></a>`).join("");
   const vid=(g.movies||[]).filter(m=>m.mp4).slice(0,1).map(m=>`<video controls preload="none" poster="${esc(safe(m.thumb))}" src="${esc(safe(m.mp4))}"></video>`).join("");
-  const rv=(r.top||[]).map(x=>`<div class="rv">${esc(x.text)}${x.text.length>=220?"…":""}<div class="m"><b class="${x.up?"ok":""}">${x.up?"推薦":"不推薦"}</b>,遊玩 ${x.hours} 小時</div></div>`).join("");
+  const rv=(r.top||[]).map(x=>`<div class="rv">${esc(x.text)}${x.text.length>=220?"…":""}<div class="m"><b class="${x.up?"ok":""}">${x.up?"推薦":"不推薦"}</b>,遊玩 ${Number(x.hours)} 小時</div></div>`).join("");
   more=`${shots?`<div class="shots">${shots}</div>`:""}${vid}<h4>Steam 評價</h4><div class="m">${sum}${g.metacritic?`;Metacritic ${esc(g.metacritic)}`:""}</div>${rv}${SHOW_TREND&&g.price?`<h4>價格走勢</h4>${chart(i.appid,g)}`:""}${cmpHtml(i,g)}`}
  return `<details><summary>${g?"展開:說明、平台、評論、比價":"展開:說明、平台"}</summary>${bl}${sel}${dlcHtml(g)}${more}</details>`}
 function lowChip(i){
@@ -486,7 +488,7 @@ const lowsList=()=>D.lows||(D.deals||[]).filter(i=>i.appid&&(lowRatio(i)||9)<=1.
 function dtBlock(i){const h=tab==="news"?"":detail(i);return h?`<div class="dt">${h}</div>`:""}
 function cover(i){
  if(!i.appid&&!i.image)return"";const g=G.apps&&G.apps[i.appid];
- const src=i.image||(g&&g.header)||`https://cdn.cloudflare.steamstatic.com/steam/apps/${i.appid}/header.jpg`;
+ const src=i.image||(g&&g.header)||`https://cdn.cloudflare.steamstatic.com/steam/apps/${encodeURIComponent(i.appid)}/header.jpg`;
  return `<div class="cvw"><a class="cvl" href="${esc(safe(i.url))}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img class="cv${i.square?" sq":""}" loading="lazy" data-app="${esc(i.appid||"")}" src="${esc(safe(src))}" alt=""></a>${ctrlBadge(i)}</div>`}
 const AGE={0:"普遍級",6:"保護級",12:"輔12級",15:"輔15級",18:"限制級"};
 function ageBadge(i){
@@ -501,7 +503,7 @@ const CTRL_SVG='<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentC
 function ctrlBadge(i){const g=G.apps&&G.apps[i.appid];return g&&g.ctrl==="full"?`<span class="ctrl" title="Steam 商店標示:完整控制器支援">${CTRL_SVG}完整控制器支援</span>`:""}
 // Steam 查不到商店頁的遊戲(下架、不是遊戲、台灣區看不到):商店連結會被導回 Steam 首頁,改連 SteamDB
 const noStore=i=>!!(i.appid&&((G.bad&&G.bad[i.appid]&&!(G.apps&&G.apps[i.appid]))||(G.apps&&G.apps[i.appid]&&G.apps[i.appid].nostore)));
-const sdb=i=>`https://steamdb.info/app/${i.appid}/`;
+const sdb=i=>`https://steamdb.info/app/${encodeURIComponent(i.appid)}/`;
 const itemUrl=i=>noStore(i)&&/store\.steampowered\.com\/app\//.test(i.url||"")?sdb(i):i.url;
 const PC_STORES=["Steam","Epic","GOG","EA","Ubisoft"],NON_PC=["PlayStation","Xbox","Nintendo","iOS","Android","Meta"];
 // PC 類型的遊戲必須確實在 Steam / Epic / GOG / EA / Ubisoft 找得到才顯示;主機、手機、VR 專屬的不受影響;有主機版的只拿掉 PC 標示
@@ -553,10 +555,10 @@ function priceHtml(d){
 function meta(i){
  if(tab==="dlc"){const b=i.base||{};return (b.name?`<span class="m">需要遊戲:${esc(b.name)}</span><br>`:"")+priceHtml(i.desc)}
  if(tab==="popular"){const g=(G.apps&&G.apps[i.appid])||{},pr=g.price,top=((D.popular||[])[0]||{}).players||1;
-  let price="";if(pr){price=pr.final>0?(pr.pct>0?priceHtml(`-${pr.pct}%  ${pr.cur} ${Math.round(pr.final).toLocaleString()}(原價 ${Math.round(pr.orig).toLocaleString()})`):`<b class="nw">NT$\u00a0${Math.round(pr.final).toLocaleString()}</b>`):`<b class="ok">免費遊玩</b>`}
-  return `<b>#${i.rank}</b> <b class="now" style="font-size:1.05em">${Number(i.players).toLocaleString()}</b> 人正在玩<br><span class="nw">今日最高 ${Number(i.peak).toLocaleString()} 人</span>${price?`<br>${price}`:""}<div class="pbar"><span style="width:${Math.max(3,Math.round(i.players/top*100))}%"></span></div>`}
- if(tab==="lows"){const r=((G.apps&&G.apps[i.appid])||{}).reviews;return priceHtml(i.desc)+(r&&r.total?`<br><span class="nw">Steam 好評 ${r.pct}%(${Number(r.total).toLocaleString()} 篇評論)</span>`:"")}
- if(tab==="mobile")return `<b>#${i.rank}</b> <span class="nw">${esc(nb(i.desc))}</span> ・ <span class="nw">★ ${esc(i.rating)}(${Number(i.count).toLocaleString()} 則評論)</span>`;
+  let price="";if(pr){price=pr.final>0?(pr.pct>0?priceHtml(`-${Number(pr.pct)}%  ${pr.cur} ${Math.round(pr.final).toLocaleString()}(原價 ${Math.round(pr.orig).toLocaleString()})`):`<b class="nw">NT$\u00a0${Math.round(pr.final).toLocaleString()}</b>`):`<b class="ok">免費遊玩</b>`}
+  return `<b>#${Number(i.rank)}</b> <b class="now" style="font-size:1.05em">${Number(i.players).toLocaleString()}</b> 人正在玩<br><span class="nw">今日最高 ${Number(i.peak).toLocaleString()} 人</span>${price?`<br>${price}`:""}<div class="pbar"><span style="width:${Math.max(3,Math.round(i.players/top*100))}%"></span></div>`}
+ if(tab==="lows"){const r=((G.apps&&G.apps[i.appid])||{}).reviews;return priceHtml(i.desc)+(r&&r.total?`<br><span class="nw">Steam 好評 ${Number(r.pct)}%(${Number(r.total).toLocaleString()} 篇評論)</span>`:"")}
+ if(tab==="mobile")return `<b>#${Number(i.rank)}</b> <span class="nw">${esc(nb(i.desc))}</span> ・ <span class="nw">★ ${esc(i.rating)}(${Number(i.count).toLocaleString()} 則評論)</span>`;
  if(tab==="new"||tab==="soon"){const g=G.apps&&G.apps[i.appid];const r=(g&&g.release)||i.release||"";return `${tab==="new"?"上架":"預計"} ${esc(r||"日期未定")}${i.desc?`<span class="prc">${esc(nb(i.desc))}</span>`:""}`}
  if(tab==="free"){const n=i.status==="next";return `<span class="free">${n?"即將免費":"免費中"}</span> ${i.start&&n?tw(i.start)+" 起,":""}${i.end?"至 "+tw(i.end)+"(台北時間)":"(限時,結束時間不明)"}${i.desc?", "+priceHtml(i.desc):""}${i.note?`<br><span class="m">${esc(i.note)}</span>`:""}`}
  if(tab==="news")return tw(i.date);
