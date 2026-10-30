@@ -39,7 +39,7 @@ h4{margin:12px 0 2px;font-size:14px}
 .pc{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--ln);border-radius:6px;padding:2px 8px 2px 3px;font-size:13px;color:var(--mu);white-space:nowrap}
 .pc .pi{width:18px;height:18px;border-radius:4px}
 .pc.free{border-color:var(--og);color:var(--og);font-weight:700;background:rgba(23,128,61,.1)}
-.pc.none{border-style:dashed;opacity:.85}.pis{display:inline-flex;gap:4px;vertical-align:middle;margin-right:6px}.pi{display:inline-block;width:22px;height:22px;border-radius:5px;overflow:hidden;line-height:0}.pi svg,.pi img{width:100%;height:100%;display:block;object-fit:contain}.pi.ep{background:#fff;border:1px solid var(--ln);box-sizing:border-box}.pi.ep img{padding:2px;box-sizing:border-box}.low{color:var(--mu)}.nw{white-space:nowrap}
+.pc.none{border-style:dashed;opacity:.85}.pis{display:inline-flex;gap:4px;vertical-align:middle;margin-right:6px}.pi{display:inline-block;width:22px;height:22px;border-radius:5px;overflow:hidden;line-height:0}.pi svg,.pi img{width:100%;height:100%;display:block;object-fit:contain}.pi.ep{background:#fff;border:1px solid var(--ln);box-sizing:border-box}.pi.ep img{padding:2px;box-sizing:border-box}.low{color:var(--mu)}.nw{white-space:nowrap}.prc{display:block;font-weight:700;color:var(--tx);white-space:nowrap;margin-top:2px}
 .lowtag{display:inline-block;background:var(--np);color:#fff;border-radius:4px;padding:0 6px;font-size:12px;font-weight:600;white-space:nowrap}.lowtag.near{background:none;color:var(--np);border:1px solid var(--np)}.m a,.cmp a{font-weight:400;color:var(--ac)}.cmp td:last-child{white-space:nowrap}
 .best{display:inline-block;font-size:12px;font-weight:600;color:var(--og);border:1px solid var(--og);border-radius:4px;padding:0 6px;margin-left:4px;max-width:100%}
 .tw{overflow-x:auto;max-width:100%}table.cmp{border-collapse:collapse;width:100%;font-size:14px}.cmp td{padding:5px 8px 5px 0;border-bottom:1px solid var(--ln);vertical-align:top}.cmp tr.bst td{background:rgba(23,128,61,.1)}
@@ -543,21 +543,22 @@ function pctColor(p){const t=Math.min(1,Math.max(0,(p-10)/80));return `hsl(${Mat
 const money=(c,n)=>c+(/[A-Za-z]$/.test(c)?"\u00a0":"")+n;
 const isUsd=c=>/^(US\$|USD|\$)$/i.test(c);
 const toTwd=n=>`約 NT$ ${Math.round(parseFloat(String(n).replace(/,/g,""))*G.fx).toLocaleString()}`;   // 美元 → 台幣(用 games.json 裡最新的匯率)
+const nb=s=>String(s==null?"":s).replace(/(TWD|US\$|NT\$)\s+(?=\d)/g,"$1\u00a0");   // 幣別和金額之間不換行
 function priceHtml(d){
  d=d||"";let m=/^-(\d+)%\s+(\D*?)\s*([\d,.]+)\(原價\s+([\d,.]+)\)$/.exec(d);
  if(m){const p=+m[1],c=m[2].trim(),u=isUsd(c)&&G.fx;return `<span class="pct" style="color:${pctColor(p)}">-${p}%</span><s class="orig"${u?` title="${esc(money(c,m[4]))}"`:""}>${esc(u?toTwd(m[4]):money(c,m[4]))}</s><b class="now"${u?` title="${esc(money(c,m[3]))}"`:""}>${esc(u?toTwd(m[3]):money(c,m[3]))}</b>`}
  m=/^原價\s+(.+)$/.exec(d);if(m){const u=/^US\$\s*([\d,.]+)$/.exec(m[1]);return `<s class="orig"${u&&G.fx?` title="${esc(m[1])}"`:""}>${esc(u&&G.fx?toTwd(u[1]):m[1])}</s><b class="now">免費</b>`}
  if(d==="限時免費")return `<span class="pct" style="color:${pctColor(100)}">-100%</span><b class="now">免費</b>`;
- return esc(d)}
+ return d.length<=24?`<span class="nw">${esc(nb(d))}</span>`:esc(nb(d))}
 function meta(i){
  if(tab==="dlc"){const b=i.base||{};return (b.name?`<span class="m">需要遊戲:${esc(b.name)}</span><br>`:"")+priceHtml(i.desc)}
  if(tab==="popular"){const g=(G.apps&&G.apps[i.appid])||{},pr=g.price,top=((D.popular||[])[0]||{}).players||1;
-  let price="";if(pr){price=pr.final>0?(pr.pct>0?priceHtml(`-${pr.pct}%  ${pr.cur} ${Math.round(pr.final).toLocaleString()}(原價 ${Math.round(pr.orig).toLocaleString()})`):`<b>NT$ ${Math.round(pr.final).toLocaleString()}</b>`):`<b class="ok">免費遊玩</b>`}
+  let price="";if(pr){price=pr.final>0?(pr.pct>0?priceHtml(`-${pr.pct}%  ${pr.cur} ${Math.round(pr.final).toLocaleString()}(原價 ${Math.round(pr.orig).toLocaleString()})`):`<b class="nw">NT$\u00a0${Math.round(pr.final).toLocaleString()}</b>`):`<b class="ok">免費遊玩</b>`}
   return `<b>#${i.rank}</b> <b class="now" style="font-size:1.05em">${Number(i.players).toLocaleString()}</b> 人正在玩<br><span class="nw">今日最高 ${Number(i.peak).toLocaleString()} 人</span>${price?`<br>${price}`:""}<div class="pbar"><span style="width:${Math.max(3,Math.round(i.players/top*100))}%"></span></div>`}
  if(tab==="lows"){const r=((G.apps&&G.apps[i.appid])||{}).reviews;return priceHtml(i.desc)+(r&&r.total?`<br><span class="nw">Steam 好評 ${r.pct}%(${Number(r.total).toLocaleString()} 篇評論)</span>`:"")}
- if(tab==="mobile")return `<b>#${i.rank}</b> ${esc(i.desc)} ・ <span class="nw">★ ${esc(i.rating)}(${Number(i.count).toLocaleString()} 則評論)</span>`;
- if(tab==="new"||tab==="soon"){const g=G.apps&&G.apps[i.appid];const r=(g&&g.release)||i.release||"";return (tab==="new"?"上架 ":"預計 ")+esc(r||"日期未定")+(i.desc?","+esc(i.desc):"")}
- if(tab==="free"){const n=i.status==="next";return `<span class="free">${n?"即將免費":"免費中"}</span> ${i.start&&n?tw(i.start)+" 起,":""}${i.end?"至 "+tw(i.end)+"(台北時間)":"(限時,結束時間不明)"}${i.desc?", "+priceHtml(i.desc):""}`}
+ if(tab==="mobile")return `<b>#${i.rank}</b> <span class="nw">${esc(nb(i.desc))}</span> ・ <span class="nw">★ ${esc(i.rating)}(${Number(i.count).toLocaleString()} 則評論)</span>`;
+ if(tab==="new"||tab==="soon"){const g=G.apps&&G.apps[i.appid];const r=(g&&g.release)||i.release||"";return `${tab==="new"?"上架":"預計"} ${esc(r||"日期未定")}${i.desc?`<span class="prc">${esc(nb(i.desc))}</span>`:""}`}
+ if(tab==="free"){const n=i.status==="next";return `<span class="free">${n?"即將免費":"免費中"}</span> ${i.start&&n?tw(i.start)+" 起,":""}${i.end?"至 "+tw(i.end)+"(台北時間)":"(限時,結束時間不明)"}${i.desc?", "+priceHtml(i.desc):""}${i.note?`<br><span class="m">${esc(i.note)}</span>`:""}`}
  if(tab==="news")return tw(i.date);
  return priceHtml(i.desc)}
 function render(){
