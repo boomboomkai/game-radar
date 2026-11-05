@@ -631,6 +631,13 @@ def gp_labels(s):
     return out
 
 
+# 說明或領取步驟明確寫「台灣不能啟用 / 不開放」的限免金鑰:整筆略過
+TW_BLOCK = re.compile(r"(?:(?:\bnot\b|n't|excluding|except|restricted|blocked|unavailable|exclud\w*)[^.\n]{0,100}\b(?:taiwan|tw)\b)"
+                      r"|(?:\b(?:taiwan|tw)\b[^.\n]{0,80}(?:restrict\w*|exclud\w*|blocked|unavailable|not\s+(?:available|supported|activat\w*|redeem\w*)))", re.I)
+REGION_WARN = re.compile(r"region[- ]?(?:locked|restricted|lock)|regional\s+restriction|geo[- ]?(?:locked|restrict)"
+                         r"|not\s+available\s+in\s+(?:some|certain|all)\s+(?:countries|regions)", re.I)
+
+
 def parse_gamerpower(rows):
     items = []
     for g in rows:
@@ -645,6 +652,9 @@ def parse_gamerpower(rows):
         hit = len(rest) < len(raw) or BANNED_PLATFORM.search(title_store)
         if hit and not any(x.lower() not in ("pc", "windows") for x in rest):
             continue                      # 被排除的平台(itch.io、DRM-Free、Stove)之外沒有其他具體商店(只剩泛用的 PC),整筆略過
+        info = " ".join(str(g.get(k, "")) for k in ("description", "instructions"))
+        if TW_BLOCK.search(info):
+            continue                                      # 明確寫了台灣不能用 → 整筆略過
         labs = gp_labels(g.get("platforms"))
         m = re.match(r"(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2}:\d{2})", str(g.get("end_date", "")))
         for x in (gp_labels(sm.group(1)) if sm else []):          # 標題括號裡的商店若不在平台清單,補上去(只補認得的商店,避免把「(Remastered)」之類當成平台)
@@ -653,13 +663,20 @@ def parse_gamerpower(rows):
         title = re.sub(r"\s*\([^)]*\)\s*Giveaway\s*$", "", g.get("title", ""))
         title = re.sub(r"\s+Giveaway\s*$", "", title).strip()
         title = re.sub(r"\s*\((?:[^)]*(?:steam|epic|gog|ubisoft|origin|\bea\b|xbox|playstation|switch|battle\.net)[^)]*)\)\s*(?:key|code)?\s*$", "", title, flags=re.I).strip()   # 「Dwarven Realms (Steam) Key」→「Dwarven Realms」
+        is_key = bool(re.search(r"\bkey\b", g.get("title", ""), re.I))
+        title = re.sub(r"\s+(?:steam|gog|epic)?\s*key\s*$", "", title, flags=re.I).strip()      # 「Letter Quest Steam Key」→「Letter Quest」,方便和 Steam 商店比對
+        notes = []
+        if is_key:
+            notes.append("這是第三方商店(例如 Fanatical)送的金鑰,要註冊該商店帳號才能領取")
+        if is_key or REGION_WARN.search(info):
+            notes.append("金鑰可能有地區限制,領取前請確認「能否在台灣啟用」")
         worth = str(g.get("worth", ""))
         url = g.get("open_giveaway_url") or g.get("claim_url") or g.get("gamerpower_url") or g.get("open_giveaway") or ""
         items.append({"platform": next((l for l in labs if l != "PC"), labs[0] if labs else "其他"),
                       "platforms": labs or ["其他"], "title": title, "status": "now",
                       "end": f"{m[1]}T{m[2]}Z" if m else None,      # GamerPower 的結束時間當作 UTC
                       "desc": f"原價 US{worth}" if worth.startswith("$") else "",
-                      "url": url, "image": g.get("image") or g.get("thumbnail") or "",
+                      "url": url, "image": g.get("image") or g.get("thumbnail") or "", "note": ";".join(notes),
                       "blurb": re.sub(r"\s+", " ", g.get("description") or "")[:300]})
     return items
 
@@ -1232,11 +1249,16 @@ def region_rule(new, games):
     bt = {norm(t) for t in block.get("titles", [])}
     ba = {str(a) for a in block.get("appids", [])}
     bad = games.get("bad", {})
+
+    def blocked(t):
+        n = norm(t)
+        return n in bt or any(len(b) >= 8 and b in n for b in bt)      # 名稱夠長時,標題「包含」清單名稱也算
+
     for sec in ("free", "deals", "new", "soon"):
         out = []
         for it in new[sec]:
             aid = str(it.get("appid") or "")
-            if norm(it.get("title_en") or it["title"]) in bt or norm(it["title"]) in bt or (aid and aid in ba):
+            if blocked(it.get("title_en") or it["title"]) or blocked(it["title"]) or (aid and aid in ba):
                 continue
             if aid and ((aid in bad and aid not in games["apps"]) or (games["apps"].get(aid) or {}).get("nostore")):
                 continue                                              # Steam 沒有可用的商店頁
