@@ -23,3 +23,8 @@
 - `data.json` 的 `errors` 會記錄哪個來源失敗,失敗的來源會保留上一次的資料。
 - 端點是非官方的,改版時要修 `fetch_data.py` 對應的 `parse_*` 函式。
 - Repo 長時間沒活動時,GitHub 可能停用排程,到 Actions 頁重新啟用即可。
+
+## 搜尋遊戲與歷史價格
+- 頁面上方的搜尋框可查本站收錄的遊戲(支援中文名)與 CheapShark 上的遊戲(限英文名)。
+- 走勢圖使用 `history.json` 自行累積的台幣價格;全球歷史最低價即時查詢 CheapShark。
+- 網址 `?q=名稱&game=s<Steam appid>` 可直接分享查詢結果。
