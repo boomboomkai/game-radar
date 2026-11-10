@@ -207,7 +207,9 @@ body.searching #tabs,body.searching #chips,body.searching #tabnote,body.searchin
 <script>
 // 自己累積的價格走勢:目前只在後台(history.json)收集,資料夠多再改成 true 就會顯示
 const SHOW_TREND=false;
-const TABS=[["news","最新消息"],["free","限時免費"],["deals","特價消息"],["lows","歷史新低"],["popular","大家都在玩"],["dlc","DLC 特價"],["new","新上架"],["soon","即將上架"],["mobile","手機付費榜"]];
+const TABS=[["news","最新消息"],["free","限時免費"],["deals","特價消息"],["lows","歷史新低"],["popular","大家都在玩"],["dlc","DLC 特價"],["new","新上架"],["soon","即將上架"],["preorder","預購中"],["mobile","手機付費榜"]];
+// 預購中:還沒發售、但 Steam 已經開放購買(有價格)的遊戲;會從「即將上架」移到這裡
+const isPre=i=>{const g=G.apps&&G.apps[i.appid];return!!(g&&g.price&&g.price.final>0)};
 let D={free:[],deals:[],news:[]},G={apps:{}},H={},tab="free",plat="全部",page=1,gen="全部";
 const $=id=>document.getElementById(id);
 /* ===== 節日主題:節日當天自動切換(網址加 ?theme=名稱 可預覽,?theme=off 關閉) ===== */
@@ -605,19 +607,22 @@ function meta(i){
   return `<b>#${Number(i.rank)}</b> <b class="now" style="font-size:1.05em">${Number(i.players).toLocaleString()}</b> 人正在玩<br><span class="nw">今日最高 ${Number(i.peak).toLocaleString()} 人</span>${price?`<br>${price}`:""}<div class="pbar"><span style="width:${Math.max(3,Math.round(i.players/top*100))}%"></span></div>`}
  if(tab==="lows"){const r=((G.apps&&G.apps[i.appid])||{}).reviews;return priceHtml(i.desc)+(r&&r.total?`<br><span class="nw">Steam 好評 ${Number(r.pct)}%(${Number(r.total).toLocaleString()} 篇評論)</span>`:"")}
  if(tab==="mobile")return `<b>#${Number(i.rank)}</b> <span class="nw">${esc(nb(i.desc))}</span> ・ <span class="nw">★ ${esc(i.rating)}(${Number(i.count).toLocaleString()} 則評論)</span>`;
+ if(tab==="preorder"){const g=G.apps[i.appid],p=g.price,r=g.release||i.release||"";return `預計 ${esc(r||"日期未定")}<br>預購價 ${p.pct>0?priceHtml(`-${Number(p.pct)}%  ${p.cur} ${Math.round(p.final).toLocaleString()}(原價 ${Math.round(p.orig).toLocaleString()})`):`<b class="now">NT$ ${Math.round(p.final).toLocaleString()}</b>`}`}
  if(tab==="new"||tab==="soon"){const g=G.apps&&G.apps[i.appid];const r=(g&&g.release)||i.release||"";return `${tab==="new"?"上架":"預計"} ${esc(r||"日期未定")}${i.desc?`<span class="prc">${esc(nb(i.desc))}</span>`:""}`}
  if(tab==="free"){const n=i.status==="next";return `<span class="free">${n?"即將免費":"免費中"}</span> ${i.start&&n?tw(i.start)+" 起,":""}${i.end?"至 "+tw(i.end)+"(台北時間)":"(限時,結束時間不明)"}${i.desc?", "+priceHtml(i.desc):""}${i.note?`<br><span class="m">${esc(i.note)}</span>`:""}`}
  if(tab==="news")return tw(i.date);
  return priceHtml(i.desc)}
 function render(){
  $("tabs").innerHTML=TABS.map(([k,v])=>`<button role="tab" aria-selected="${k===tab}" data-t="${k}">${v}</button>`).join("");
- let items=tab==="lows"?[...lowsList()]:[...(D[tab]||[])].filter(i=>tab==="news"||hasPlat(i)).map(i=>tab==="free"?regionRule(i):i).filter(Boolean).filter(i=>!(tab==="free"&&noStore(i))).map(i=>["free","deals","new","soon"].includes(tab)?pcRule(i):i).filter(Boolean);
- if(tab==="soon"){const today=new Date(Date.now()+8*36e5).toISOString().slice(0,10);items=items.filter(i=>{const d=dt(i);return!/^\d{4}-\d\d-\d\d$/.test(d)||d>=today})}   // 已過發售日的不算「即將上架」(台北日期)
- $("tabnote").textContent="";
+ let items=tab==="lows"?[...lowsList()]:[...(D[tab==="preorder"?"soon":tab]||[])].filter(i=>tab==="news"||hasPlat(i)).map(i=>tab==="free"?regionRule(i):i).filter(Boolean).filter(i=>!(tab==="free"&&noStore(i))).map(i=>["free","deals","new","soon","preorder"].includes(tab)?pcRule(i):i).filter(Boolean);
+ if(tab==="soon")items=items.filter(i=>!isPre(i));
+ if(tab==="preorder")items=items.filter(isPre);
+ if(tab==="soon"||tab==="preorder"){const today=new Date(Date.now()+8*36e5).toISOString().slice(0,10);items=items.filter(i=>{const d=dt(i);return!/^\d{4}-\d\d-\d\d$/.test(d)||d>=today})}   // 已過發售日的不算「即將上架」(台北日期)
+ $("tabnote").textContent=tab==="preorder"?"還沒發售、但已經可以在 Steam 預購的遊戲。主機平台的預購狀態目前查不到,只列出有 Steam 版的遊戲。":"";
  if(tab==="news")items.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
  if(tab==="free")items.sort((a,b)=>(a.status==="next")-(b.status==="next"));
  if(tab==="mobile")items.sort((a,b)=>a.platform===b.platform?a.rank-b.rank:(a.platform==="iOS"?-1:1));
- if(tab==="new"||tab==="soon"){const k=x=>dt(x)||(tab==="new"?"0000":"9999");items.sort((a,b)=>tab==="new"?k(b).localeCompare(k(a)):k(a).localeCompare(k(b)))}
+ if(tab==="new"||tab==="soon"||tab==="preorder"){const k=x=>dt(x)||(tab==="new"?"0000":"9999");items.sort((a,b)=>tab==="new"?k(b).localeCompare(k(a)):k(a).localeCompare(k(b)))}
  const ps=["全部",...new Set(items.flatMap(pl))];if(!ps.includes(plat))plat="全部";
  $("chips").innerHTML=ps.map(p=>`<button aria-pressed="${p===plat}" data-p="${esc(p)}">${esc(p)}</button>`).join("");
  const byPlat=items.filter(i=>plat==="全部"||pl(i).includes(plat)),gc={};
@@ -630,7 +635,7 @@ function render(){
  const PER=10,pages=Math.max(1,Math.ceil(all.length/PER));
  if(tab==="lows"||tab==="popular"||tab==="dlc"){if(page>pages)page=pages;show=all.slice((page-1)*PER,page*PER)}
  $("pager").innerHTML=(tab==="lows"||tab==="popular"||tab==="dlc")&&pages>1?pagerHtml(page,pages,all.length):"";
- $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(pl(i)[0])}"><i></i><div><a href="${esc(safe(itemUrl(i)))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a>${ageBadge(i)}<div class="m">${tab==="free"?"":platLabel(i)}${meta(i)}${tab==="free"?"":bestChip(i)}</div>${genreLine(i)}${tab==="free"?freeChips(i):""}${lowChip(i)}</div>${cover(i)}${dtBlock(i)}</div>`).join("");
+ $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(pl(i)[0])}"><i></i><div><a href="${esc(safe(itemUrl(i)))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a>${ageBadge(i)}<div class="m">${tab==="free"?"":platLabel(i)}${meta(i)}${tab==="free"||tab==="preorder"?"":bestChip(i)}</div>${genreLine(i)}${tab==="free"?freeChips(i):""}${tab==="preorder"?"":lowChip(i)}</div>${cover(i)}${dtBlock(i)}</div>`).join("");
  $("msg").textContent=show.length?"":(D.updated?(tab==="lows"?"目前沒有確認處於歷史最低價的遊戲。":((tab==="popular"||tab==="dlc")&&D[tab]===undefined?"這個分頁的資料還在準備中,下次自動更新後就會出現。":"這個分類目前沒有資料。")):"目前還沒有資料,請稍後再回來看看。");
 }
 const shotPick={};
