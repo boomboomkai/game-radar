@@ -612,6 +612,7 @@ function meta(i){
 function render(){
  $("tabs").innerHTML=TABS.map(([k,v])=>`<button role="tab" aria-selected="${k===tab}" data-t="${k}">${v}</button>`).join("");
  let items=tab==="lows"?[...lowsList()]:[...(D[tab]||[])].filter(i=>tab==="news"||hasPlat(i)).map(i=>tab==="free"?regionRule(i):i).filter(Boolean).filter(i=>!(tab==="free"&&noStore(i))).map(i=>["free","deals","new","soon"].includes(tab)?pcRule(i):i).filter(Boolean);
+ if(tab==="soon"){const today=new Date(Date.now()+8*36e5).toISOString().slice(0,10);items=items.filter(i=>{const d=dt(i);return!/^\d{4}-\d\d-\d\d$/.test(d)||d>=today})}   // 已過發售日的不算「即將上架」(台北日期)
  $("tabnote").textContent="";
  if(tab==="news")items.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
  if(tab==="free")items.sort((a,b)=>(a.status==="next")-(b.status==="next"));

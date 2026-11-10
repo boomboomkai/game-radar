@@ -304,6 +304,12 @@ def fetch_rawg(days_from, days_to):
     return parse_rawg(json.loads(get(url)))
 
 
+def not_released(it, today):
+    """即將上架:發售日(YYYY-MM-DD)已經過去的移除;沒有明確日期的保留。"""
+    d = str(it.get("release_iso") or it.get("release") or "")
+    return not re.fullmatch(r"\d{4}-\d{2}-\d{2}", d) or d >= today
+
+
 def has_platform(it):
     """有至少一個具體平台(不是空白或「其他」)才保留"""
     return any(p and p != "其他" for p in (it.get("platforms") or [it.get("platform")]))
@@ -1436,6 +1442,9 @@ def main():
         new[sec] = merge_dupes(new[sec])
     for sec in ("free", "deals", "new", "soon", "mobile"):
         new[sec] = [i for i in new[sec] if has_platform(i)]      # 沒有平台的項目一律移除
+    from datetime import timedelta
+    today_tpe = datetime.now(timezone(timedelta(hours=8))).date().isoformat()
+    new["soon"] = [i for i in new["soon"] if not_released(i, today_tpe)]   # 來源暫時失敗而沿用舊資料時,舊清單可能已有過期項目
     try:
         fails = enrich(new)
         if fails:
