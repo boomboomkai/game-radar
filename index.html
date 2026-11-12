@@ -158,6 +158,14 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 #toast.on{opacity:1;transform:translate(-50%,0)}
 [role=tab] .fn{display:inline-block;min-width:18px;padding:0 5px;margin-left:2px;border-radius:999px;background:#ffd45a;color:#1a1300;font-size:12px;font-weight:700;line-height:18px;text-align:center}
 @media(prefers-reduced-motion:reduce){#toast,.fav{transition:none}}
+.gd>summary{list-style:none;display:inline-flex;align-items:center;gap:8px;user-select:none}
+.gd>summary::-webkit-details-marker{display:none}
+.gd>summary::before{content:"";width:6px;height:6px;margin:0 2px 3px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .25s ease}
+.gd[open]:not(.closing)>summary::before{transform:rotate(45deg) translate(-1px,-1px)}
+.gd .sc,.gd[open]:not(.closing) .so{display:none}
+.gd[open]:not(.closing) .sc{display:inline}
+.dtc{box-sizing:border-box;margin-top:6px;padding:14px 16px;border:1px solid rgb(var(--c1r) / .35);border-radius:10px;background:linear-gradient(180deg,rgb(var(--c1r) / .07),rgb(var(--bgr) / .55) 60px);box-shadow:inset 0 1px 0 rgb(var(--c1r) / .18),0 0 20px rgb(var(--c1r) / .08)}
+.dtc>:first-child{margin-top:0}
 /* ===== 遊戲搜尋與價格走勢 ===== */
 #sf{position:relative;margin:16px 0 4px}
 #q{width:100%;box-sizing:border-box;font:inherit;font-size:16px;color:var(--tx);background:var(--kc);border:1px solid rgb(var(--lnr) / .35);border-radius:10px;padding:11px 42px 11px 40px;outline:none;transition:border-color .15s,box-shadow .15s}
@@ -488,7 +496,7 @@ function detail(i){
   const vid=(g.movies||[]).filter(m=>m.mp4).slice(0,1).map(m=>`<video controls preload="none" poster="${esc(safe(m.thumb))}" src="${esc(safe(m.mp4))}"></video>`).join("");
   const rv=(r.top||[]).map(x=>`<div class="rv">${esc(x.text)}${x.text.length>=220?"…":""}<div class="m"><b class="${x.up?"ok":""}">${x.up?"推薦":"不推薦"}</b>,遊玩 ${Number(x.hours)} 小時</div></div>`).join("");
   more=`${shots?`<div class="shots">${shots}</div>`:""}${vid}<h4>Steam 評價</h4><div class="m">${sum}${g.metacritic?`;Metacritic ${esc(g.metacritic)}`:""}</div>${rv}${SHOW_TREND&&g.price?`<h4>價格走勢</h4>${chart(i.appid,g)}`:""}${cmpHtml(i,g)}`}
- return `<details><summary>${g?"展開:說明、平台、評論、比價":"展開:說明、平台"}</summary>${bl}${sel}${dlcHtml(g)}${more}</details>`}
+ return `<details class="gd"><summary><span class="so">${g?"展開:說明、平台、評論、比價":"展開:說明、平台"}</span><span class="sc">收合</span></summary><div class="dtc">${bl}${sel}${dlcHtml(g)}${more}</div></details>`}
 function lowChip(i){
  const g=G.apps&&G.apps[i.appid];if(!g||!g.low||!g.low.usd)return"";
  const fx=G.fx||(g.compare&&g.compare.fx);if(!fx)return"";
@@ -729,6 +737,16 @@ document.addEventListener("keydown",e=>{if(e.key!=="/"||e.ctrlKey||e.metaKey||e.
 $("tabs").addEventListener("keydown",e=>{const n={ArrowRight:1,ArrowLeft:-1}[e.key],home=e.key==="Home",end=e.key==="End";if(!n&&!home&&!end)return;e.preventDefault();
  const k=TAB_KEYS,x=k.indexOf(tab);tab=home?k[0]:end?k[k.length-1]:k[(x+n+k.length)%k.length];plat="全部";page=1;sort="";stUrl(true);render();
  const b=document.querySelector("[role=tab][aria-selected=true]");if(b){b.focus();b.scrollIntoView({inline:"center",block:"nearest"})}});
+/* 展開/收合:外框往下延伸出現、往上收回(系統設定減少動態時直接切換) */
+document.addEventListener("click",e=>{const sm=e.target.closest(".gd>summary");if(!sm)return;const d=sm.parentElement,c=d.querySelector(":scope>.dtc");
+ if(!c||!c.animate||matchMedia("(prefers-reduced-motion:reduce)").matches)return;e.preventDefault();
+ const cur=d._a?c.getBoundingClientRect().height:null;if(d._a){d._a.cancel();d._a=null}
+ const done=()=>{c.style.overflow="";d._a=null};c.style.overflow="hidden";
+ const end=(a,f)=>{let x=false;const g=()=>{if(x||d._a!==a)return;x=true;if(a.playState==="running")a.cancel();f()};a.onfinish=g;setTimeout(g,a.effect.getTiming().duration+80)};   // 分頁在背景時瀏覽器可能不送結束事件,用計時器備援
+ if(!d.open||d.classList.contains("closing")){d.classList.remove("closing");d.open=true;const h=c.scrollHeight;
+  d._a=c.animate([cur!=null?{height:cur+"px",opacity:1}:{height:"0px",opacity:0,transform:"translateY(-10px)",borderColor:"rgb(var(--c1r) / .9)"},{height:h+"px",opacity:1,transform:"none"}],{duration:Math.min(560,260+h*.2),easing:"cubic-bezier(.2,.8,.2,1)"});end(d._a,done)}
+ else{const h=cur!=null?cur:c.offsetHeight;d.classList.add("closing");
+  d._a=c.animate([{height:h+"px",opacity:1,transform:"none"},{height:"0px",opacity:0,transform:"translateY(-10px)"}],{duration:Math.min(420,200+h*.12),easing:"cubic-bezier(.4,0,.7,.2)"});end(d._a,()=>{d.open=false;d.classList.remove("closing");done()})}});
 const CS="https://www.cheapshark.com/api/1.0/games";
 const SR={q:"",sel:null,live:[],liveErr:false,liveBusy:false,idx:null,gl:false,hl:false,cs:{},pts:[],t:0,ctl:null};
 const sn=t=>String(t||"").normalize("NFKC").toLowerCase().replace(/[^0-9a-z぀-ヿ㐀-鿿]+/g,"");
