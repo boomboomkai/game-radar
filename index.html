@@ -198,6 +198,9 @@ body:has(#lb[open]){overflow:hidden}
 .lb-bar{bottom:calc(24px + env(safe-area-inset-bottom));flex-direction:column;gap:6px;padding:0 16px}
 #lbt{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:15px}
 .lb-tip{display:none}}
+#xfab{bottom:calc(146px + env(safe-area-inset-bottom,0px));font-weight:600}
+#xfab svg{width:18px;height:18px;transition:transform .25s}
+#xfab[data-m=close] svg{transform:rotate(180deg)}
 /* ===== 遊戲搜尋與價格走勢 ===== */
 #sf{position:relative;margin:16px 0 4px}
 #q{width:100%;box-sizing:border-box;font:inherit;font-size:16px;color:var(--tx);background:var(--kc);border:1px solid rgb(var(--lnr) / .35);border-radius:10px;padding:11px 42px 11px 40px;outline:none;transition:border-color .15s,box-shadow .15s}
@@ -207,7 +210,7 @@ body:has(#lb[open]){overflow:hidden}
 #sf>svg{position:absolute;left:13px;top:50%;width:18px;height:18px;transform:translateY(-50%);color:var(--mu);pointer-events:none}
 #qx{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:32px;height:32px;font-size:20px;line-height:1;background:none;border:0;border-radius:6px;color:var(--mu);cursor:pointer}
 #qx:hover{color:var(--tx)}
-body.searching #tabs,body.searching #chips,body.searching #sortbar,body.searching #tabnote,body.searching #list,body.searching #pager,body.searching #msg,body.searching #gfab,body.searching #gpanel{display:none!important}
+body.searching #tabs,body.searching #chips,body.searching #sortbar,body.searching #tabnote,body.searching #list,body.searching #pager,body.searching #msg,body.searching #gfab,body.searching #xfab,body.searching #gpanel{display:none!important}
 #sr{margin-top:12px}
 .sr-st{color:var(--mu);font-size:14px;margin:8px 0}
 .sr-rows{display:grid;gap:8px}
@@ -266,7 +269,7 @@ body.searching #tabs,body.searching #chips,body.searching #sortbar,body.searchin
 .sr-tile{padding:9px 10px}
 .sr-tile b{font-size:18px;white-space:normal}
 .sr-ch .sr-hit{touch-action:pan-y}
-#toast{bottom:calc(150px + env(safe-area-inset-bottom));max-width:calc(100vw - 40px);text-align:center}
+#toast{bottom:calc(210px + env(safe-area-inset-bottom));max-width:calc(100vw - 40px);text-align:center}
 }
 </style></head><body>
 <div class="bgfx" aria-hidden="true">
@@ -287,7 +290,7 @@ body.searching #tabs,body.searching #chips,body.searching #sortbar,body.searchin
 <form id="sf" role="search" autocomplete="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="搜尋遊戲名稱,查歷史價格(例如 Hades)  ・  按 / 快速搜尋" aria-label="搜尋遊戲名稱"><button id="qx" type="button" aria-label="清除搜尋" hidden>×</button></form><div id="sr" aria-live="polite" hidden></div><div role="tablist" id="tabs" aria-label="情報分類"></div><div id="chips" role="group" aria-label="平台篩選"></div><div id="sortbar" hidden><label for="sort">排序</label><select id="sort"></select></div><div id="tabnote" class="m"></div><div id="list"></div><div id="pager"></div><div id="msg" aria-live="polite"></div><div id="toast" role="status" aria-live="polite"></div><dialog id="lb" aria-label="遊戲畫面"><div class="lb-stage"><img id="lbi" alt="" draggable="false"></div><button type="button" class="lb-nav lb-prev" aria-label="上一張"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" class="lb-nav lb-next" aria-label="下一張"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button><button type="button" class="lb-x" aria-label="關閉">×</button><div class="lb-bar"><span id="lbt"></span><span id="lbn"></span><span class="lb-tip">← → 切換・Esc 關閉</span></div></dialog><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS、<a href="https://www.gamerpower.com" target="_blank" rel="noopener noreferrer">GamerPower</a>(限時免費)、Apple iTunes、Google Play(非官方)、匯率來自 <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a>。</div><details class="more"><summary>顯示更多說明</summary><div class="m">美元標價會自動以最新匯率換算成台幣(標示「約」),電腦上滑鼠移到價格上可看原本的美元價格(手機沒有這個功能)。<span id="fxn"></span>實際價格以商店為準。<br>DLC 特價分頁:列出 Steam 上目前有折扣的 DLC(依評論數由多到少);遊戲展開後的 DLC 清單每款最多列 8 個,特價中的排前面。<br>大家都在玩分頁:取自 Steam 官方公開的「本週最多人玩」榜單前 100 款,再查各款目前的同時在線人數並由多到少排序,每 6 小時更新。只有 Steam 公開這項資料,其他平台沒有。<br>歷史新低分頁:只列出目前有折扣、而且現價不高於歷史最低價的遊戲,依 Steam 評價(好評率與評論數綜合)由高到低排序,每頁 10 款。判斷方式:現價 ≤ CheapShark 歷史最低價(美元)換算台幣的 102%,匯率和各國定價差異會造成誤差,僅供參考。<br>手機付費榜依評分與評論數綜合排序,iOS 取自 App Store 台灣區付費榜,Android 靠關鍵字搜尋找候選,可能漏掉部分遊戲。史低價是 CheapShark 的美元紀錄換算,僅供參考。分級圖示依 Steam / RAWG 提供的 PEGI、ESRB 資料換算,僅供參考,非台灣官方分級,請以遊戲包裝或文化部公告為準。</div></details>
 <button id="gfab" class="fab" aria-expanded="false" aria-controls="gpanel" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg><span id="gfabt">類型</span></button>
 <div id="gpanel" role="dialog" aria-label="選擇遊戲類型" hidden><div class="gh"><span>遊戲類型</span><button id="gclose" aria-label="關閉">×</button></div><div id="gchips"></div></div>
-<button id="totop" class="fab" aria-label="回到最上方" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<button id="xfab" class="fab" type="button" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path id="xfi" d="M6 7l6 5 6-5M6 13l6 5 6-5"/></svg><span id="xfabt">全部展開</span></button><button id="totop" class="fab" aria-label="回到最上方" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 <script>
 // 自己累積的價格走勢:目前只在後台(history.json)收集,資料夠多再改成 true 就會顯示
 const SHOW_TREND=false;
@@ -723,7 +726,7 @@ function render(){
  $("pager").innerHTML=(tab==="lows"||tab==="popular"||tab==="dlc")&&pages>1?pagerHtml(page,pages,all.length):"";
  $("list").innerHTML=show.map(i=>`<div class="item" data-p="${esc(pl(i)[0])}"><i></i><div><a href="${esc(safe(itemUrl(i)))}" target="_blank" rel="noopener noreferrer">${esc(i.title)}</a>${tab==="news"?"":favBtn(i)}${ageBadge(i)}<div class="m">${tab==="free"?"":platLabel(i)}${meta(i)}${tab==="free"||tab==="preorder"?"":bestChip(i)}</div>${genreLine(i)}${tab==="free"?freeChips(i):""}${tab==="preorder"?"":lowChip(i)}</div>${cover(i)}${dtBlock(i)}</div>`).join("");
  $("msg").textContent=show.length?"":tab==="fav"?"還沒有收藏的遊戲。在任何一款遊戲旁按 ☆ 就能加入,之後降價或限免時,這裡會提醒你。":(D.updated?(tab==="lows"?"目前沒有確認處於歷史最低價的遊戲。":((tab==="popular"||tab==="dlc")&&D[tab]===undefined?"這個分頁的資料還在準備中,下次自動更新後就會出現。":"這個分類目前沒有資料。")):"目前還沒有資料,請稍後再回來看看。");
- renderSort(all.length);tickCd();if(ready())stUrl(false);
+ renderSort(all.length);tickCd();syncX();if(ready())stUrl(false);
 }
 const shotPick={};
 document.addEventListener("error",e=>{
@@ -828,6 +831,20 @@ lb.addEventListener("pointerup",e=>{if(lbX==null)return;const dx=e.clientX-lbX,d
  if(!tap&&Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)&&LB.list.length>1)return lbShow(LB.i+(dx<0?1:-1),dx<0?1:-1);
  if(tap&&e.target!==lbi&&!e.target.closest("button,.lb-bar"))lb.close()});   // 點圖片以外的空白處關閉
 lb.addEventListener("pointercancel",()=>{lbX=null;lbi.style.transition="";lbi.style.transform=""});
+/* 全部展開 / 全部收合(右下角按鈕,只作用在目前這一頁的遊戲) */
+const xfab=$("xfab");
+function syncX(){const ds=[...document.querySelectorAll("#list .gd")],all=ds.length>0&&ds.every(d=>d.open&&!d.classList.contains("closing"));
+ xfab.hidden=!ds.length;xfab.dataset.m=all?"close":"open";$("xfabt").textContent=all?"全部收合":"全部展開";
+ xfab.setAttribute("aria-label",all?"收合這一頁所有遊戲的詳細內容":"展開這一頁所有遊戲的詳細內容");
+ xfab.style.bottom=`calc(${gfab.hidden?84:146}px + env(safe-area-inset-bottom,0px))`}
+xfab.addEventListener("click",()=>{const ds=[...document.querySelectorAll("#list .gd")],open=xfab.dataset.m!=="close";
+ const anchor=[...document.querySelectorAll("#list .item")].find(it=>it.getBoundingClientRect().bottom>90),top=anchor?anchor.getBoundingClientRect().top:0;
+ ds.forEach(d=>{if(d._a){d._a.cancel();d._a=null}d.classList.remove("closing");const c=d.querySelector(":scope>.dtc");if(c)c.style.overflow="";d.open=open});
+ if(anchor)window.scrollBy(0,anchor.getBoundingClientRect().top-top);   // 停在原本看的那款遊戲,不因內容變長而跳走
+ if(open&&!matchMedia("(prefers-reduced-motion:reduce)").matches)ds.forEach(d=>{const c=d.querySelector(":scope>.dtc"),r=c&&c.getBoundingClientRect();
+  if(r&&r.bottom>0&&r.top<innerHeight&&c.animate)c.animate([{opacity:0,transform:"translateY(-8px)"},{opacity:1,transform:"none"}],{duration:300,easing:"ease-out"})});
+ syncX();toast(open?`已展開這一頁 ${ds.length} 款遊戲`:"已全部收合")});
+document.addEventListener("toggle",e=>{if(e.target.classList&&e.target.classList.contains("gd"))syncX()},true);
 const CS="https://www.cheapshark.com/api/1.0/games";
 const SR={q:"",sel:null,live:[],liveErr:false,liveBusy:false,idx:null,gl:false,hl:false,cs:{},pts:[],t:0,ctl:null};
 const sn=t=>String(t||"").normalize("NFKC").toLowerCase().replace(/[^0-9a-z぀-ヿ㐀-鿿]+/g,"");
