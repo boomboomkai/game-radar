@@ -187,6 +187,17 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 #lbn{font-variant-numeric:tabular-nums;color:var(--tx);background:rgba(10,15,30,.78);border:1px solid rgb(var(--lnr) / .35);border-radius:999px;padding:2px 12px}
 body:has(#lb[open]){overflow:hidden}
 @media(prefers-reduced-motion:reduce){#lb[open] .lb-stage{animation:none}#lbi{transition:none}}
+@media(pointer:coarse){.lb-tip{display:none}}
+@media(max-width:760px){
+#lb{height:100dvh;max-height:100dvh}
+.lb-stage{padding:calc(64px + env(safe-area-inset-top)) 6px calc(184px + env(safe-area-inset-bottom));cursor:auto}
+#lbi{width:100%;height:auto;max-height:100%;object-fit:contain;border-radius:8px}
+.lb-x{top:calc(12px + env(safe-area-inset-top));right:12px}
+.lb-nav{top:auto;margin-top:0;bottom:calc(96px + env(safe-area-inset-bottom));width:56px;height:56px}
+.lb-prev{left:calc(50% - 96px)}.lb-next{right:calc(50% - 96px)}
+.lb-bar{bottom:calc(24px + env(safe-area-inset-bottom));flex-direction:column;gap:6px;padding:0 16px}
+#lbt{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:15px}
+.lb-tip{display:none}}
 /* ===== 遊戲搜尋與價格走勢 ===== */
 #sf{position:relative;margin:16px 0 4px}
 #q{width:100%;box-sizing:border-box;font:inherit;font-size:16px;color:var(--tx);background:var(--kc);border:1px solid rgb(var(--lnr) / .35);border-radius:10px;padding:11px 42px 11px 40px;outline:none;transition:border-color .15s,box-shadow .15s}
@@ -230,6 +241,33 @@ body.searching #tabs,body.searching #chips,body.searching #sortbar,body.searchin
 .sr-more table{border-collapse:collapse;margin-top:6px}.sr-more td,.sr-more th{padding:3px 22px 3px 0;text-align:left;font-weight:400}.sr-more th{color:var(--mu)}
 .sr-note{color:var(--mu);font-size:13px;margin-top:12px;line-height:1.6}
 .sr-go{display:inline-block;margin-top:14px;padding:7px 16px;border-radius:999px;background:linear-gradient(135deg,var(--c1),var(--c2));color:#04101f!important;font-weight:700;text-decoration:none}
+/* ===== 手機版配置(寬度 640px 以下) ===== */
+@media(max-width:640px){
+.item{grid-template-columns:minmax(0,1fr)}
+.item>.cvw{grid-row:1;grid-column:1;width:auto;margin:10px 10px 0 12px}
+.item>.cvw .cv{width:100%}
+.item>.cvw:has(.cv.sq){justify-self:start}
+.item>.cvw .cv.sq{width:88px;aspect-ratio:1;border-radius:18px}
+.item>.cvw .ctrl{display:inline-flex;width:auto;margin:6px 0 0}
+.item>div{padding:8px 12px 8px 12px}
+.item>.dt{padding:0 12px 12px 12px}
+.fav{width:40px;height:40px}
+.fav svg{width:20px;height:20px}
+.pb{min-height:40px}
+#sortbar{margin:-4px 0 12px}
+#sort{padding:8px 12px}
+.sr-row{grid-template-columns:96px minmax(0,1fr);gap:2px 12px;padding:10px 12px 10px 10px}
+.sr-row img{width:96px;height:45px;grid-row:1 / span 2;align-self:center}
+.sr-p{grid-column:2;text-align:left;font-size:15px}
+.sr-card{padding:14px}
+.sr-h img{width:100%}
+.sr-h h2{font-size:20px}
+.sr-tiles{grid-template-columns:1fr 1fr;gap:8px}
+.sr-tile{padding:9px 10px}
+.sr-tile b{font-size:18px;white-space:normal}
+.sr-ch .sr-hit{touch-action:pan-y}
+#toast{bottom:calc(150px + env(safe-area-inset-bottom));max-width:calc(100vw - 40px);text-align:center}
+}
 </style></head><body>
 <div class="bgfx" aria-hidden="true">
 <svg class="art a1" viewBox="0 0 240 170"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M72 44h96c14 0 26 9 29 22l13 55c3 14-8 27-22 27-9 0-17-5-22-12l-15-24H89l-15 24c-5 7-13 12-22 12-14 0-25-13-22-27l13-55c3-13 15-22 29-22z"/><path d="M60 38c5-9 14-14 24-14h14M180 38c-5-9-14-14-24-14h-14"/><path d="M82 62v28M68 76h28"/><circle cx="164" cy="76" r="7"/><circle cx="182" cy="94" r="7"/><circle cx="164" cy="112" r="7"/><circle cx="146" cy="94" r="7"/><circle cx="104" cy="100" r="9"/><circle cx="136" cy="100" r="9"/><path d="M112 66h16"/></g></svg>
@@ -821,7 +859,7 @@ function srRows(){
  else st=`找到 ${n} 款`;
  return `<div class="sr-st">${esc(st)}${SR.liveErr?"(線上查詢暫時失敗,只顯示本站收錄的遊戲)":""}</div><div class="sr-rows">${a.join("")}${b.join("")}</div>`}
 function srChart(pts){
- const W=720,H0=240,L=62,R=78,T=16,B=28,xs=pts.map(p=>Date.parse(p[0])),ys=pts.map(p=>p[1]),x0=xs[0],x1=xs[xs.length-1],mx=Math.max(...ys,1);
+ const sm=innerWidth<640,W=sm?360:720,H0=sm?220:240,L=sm?44:62,R=sm?46:78,T=16,B=28,xs=pts.map(p=>Date.parse(p[0])),ys=pts.map(p=>p[1]),x0=xs[0],x1=xs[xs.length-1],mx=Math.max(...ys,1);
  const raw=mx*1.1/4,mag=10**Math.floor(Math.log10(raw)),step=[1,2,5,10].map(v=>v*mag).find(v=>v>=raw),top=step*4;
  const px=x=>L+(x1===x0?0:(x-x0)/(x1-x0))*(W-L-R),py=y=>T+(1-y/top)*(H0-T-B);
  let d=`M${px(xs[0]).toFixed(1)} ${py(ys[0]).toFixed(1)}`;for(let i=1;i<pts.length;i++)d+=`H${px(xs[i]).toFixed(1)}V${py(ys[i]).toFixed(1)}`;
@@ -879,10 +917,10 @@ $("q").addEventListener("keydown",e=>{if(e.key==="Escape"&&$("q").value){e.preve
 $("sf").addEventListener("submit",e=>e.preventDefault());
 $("qx").addEventListener("click",srClear);
 $("sr").addEventListener("click",e=>{const r=e.target.closest("[data-sg]");if(r)return srOpen(r.dataset.sg,true);if(e.target.closest("[data-sback]")){SR.sel=null;srUrl(true);srRender()}});
-$("sr").addEventListener("mousemove",e=>{if(!e.target.classList.contains("sr-hit"))return;const s=e.target.ownerSVGElement,b=s.getBoundingClientRect(),x=(e.clientX-b.left)*SR.w/b.width,p=SR.pts.reduce((a,c)=>Math.abs(c.x-x)<Math.abs(a.x-x)?c:a),l=$("srx"),d=$("srd"),t=$("srt");
+$("sr").addEventListener("pointermove",e=>{if(!e.target.classList.contains("sr-hit"))return;const s=e.target.ownerSVGElement,b=s.getBoundingClientRect(),x=(e.clientX-b.left)*SR.w/b.width,p=SR.pts.reduce((a,c)=>Math.abs(c.x-x)<Math.abs(a.x-x)?c:a),l=$("srx"),d=$("srd"),t=$("srt");
  l.setAttribute("x1",p.x);l.setAttribute("x2",p.x);l.setAttribute("visibility","visible");d.setAttribute("cx",p.x);d.setAttribute("cy",p.y);d.setAttribute("visibility","visible");
  t.hidden=false;t.textContent=`${p.d}:${p.v>0?twd(p.v):"免費"}`;const f=p.x/SR.w*100;t.style.left=f+"%";t.style.transform=f>60?"translateX(calc(-100% - 10px))":"translateX(10px)"});
-$("sr").addEventListener("mouseout",e=>{if(!e.target.classList.contains("sr-hit"))return;$("srx").setAttribute("visibility","hidden");$("srd").setAttribute("visibility","hidden");$("srt").hidden=true});
+$("sr").addEventListener("pointerout",e=>{if(!e.target.classList.contains("sr-hit")||e.pointerType==="touch")return;$("srx").setAttribute("visibility","hidden");$("srd").setAttribute("visibility","hidden");$("srt").hidden=true});
 window.addEventListener("popstate",()=>{readUrl();render();srFromUrl()});readUrl();
 srFromUrl();
 render();syncTop();
