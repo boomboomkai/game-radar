@@ -201,6 +201,16 @@ body:has(#lb[open]){overflow:hidden}
 #xfab{bottom:calc(146px + env(safe-area-inset-bottom,0px));font-weight:600}
 #xfab svg{width:18px;height:18px;transition:transform .25s}
 #xfab[data-m=close] svg{transform:rotate(180deg)}
+.lvb{position:relative;display:flex;align-items:center;gap:12px;margin:2px 0 16px;padding:10px 16px;border-radius:10px;text-decoration:none;color:#fff!important;font-weight:700;background:linear-gradient(135deg,rgba(145,70,255,.92),rgba(255,79,163,.85));box-shadow:0 0 18px rgba(145,70,255,.35);transition:transform .15s,box-shadow .15s}
+.lvb:hover{transform:translateY(-1px);box-shadow:0 0 26px rgba(145,70,255,.6)}
+.lvb svg{width:24px;height:24px;flex:none}
+.lvt{display:flex;flex-direction:column;line-height:1.3}
+.lvt small{font-weight:400;font-size:12px;opacity:.92}
+.lvb::after{content:"↗";margin-left:auto;font-size:18px;opacity:.9}
+.lvd{position:absolute;left:30px;top:8px;width:8px;height:8px;border-radius:50%;background:#ff3b5c;box-shadow:0 0 0 2px rgba(20,8,40,.9);animation:lvp 1.6s ease-in-out infinite}
+@keyframes lvp{50%{opacity:.35}}
+.sr-live{margin-left:8px;background:linear-gradient(135deg,#9146ff,#ff4fa3)!important;color:#fff!important}
+@media(prefers-reduced-motion:reduce){.lvd{animation:none}.lvb{transition:none}}
 /* ===== 遊戲搜尋與價格走勢 ===== */
 #sf{position:relative;margin:16px 0 4px}
 #q{width:100%;box-sizing:border-box;font:inherit;font-size:16px;color:var(--tx);background:var(--kc);border:1px solid rgb(var(--lnr) / .35);border-radius:10px;padding:11px 42px 11px 40px;outline:none;transition:border-color .15s,box-shadow .15s}
@@ -545,6 +555,10 @@ function platPanels(i,g){
 const dlcPrice=p=>!p?"":(p.final>0?(p.pct>0?`<span class="pct" style="color:${pctColor(p.pct)}">-${Number(p.pct)}%</span> <b class="now">NT$ ${Math.round(p.final).toLocaleString()}</b>`:`NT$ ${Math.round(p.final).toLocaleString()}`):`<b class="ok">免費</b>`);
 function dlcHtml(g){const l=(g&&g.dlc)||[];if(!l.length)return"";
  return `<h4>DLC・資料包(共 ${Number(g.dlc_n||l.length)} 個${(g.dlc_n||l.length)>l.length?`,列出 ${l.length} 個`:""})</h4><div class="dlcs">${l.map(x=>`<a class="dlc" href="https://store.steampowered.com/app/${encodeURIComponent(x.id)}" target="_blank" rel="noopener noreferrer"><span class="dn">${esc(x.name)}</span><span class="dp">${dlcPrice(x.p)}</span></a>`).join("")}</div>`}
+const LIVE_SITE="https://boring-dont-watch.vercel.app/live";
+const liveUrl=n=>`${LIVE_SITE}?game=${encodeURIComponent(String(n||"").slice(0,120))}&utm_source=game-radar`;
+const LIVE_SVG='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 9.2v5.6l4.8-2.8z" fill="currentColor"/></svg>';
+function liveBtn(name){return name?`<a class="lvb" href="${esc(liveUrl(name))}" target="_blank" rel="noopener">${LIVE_SVG}<span class="lvt">觀看遊戲直播<small>到「無聊別亂看」看 Twitch・YouTube 實況</small></span><i class="lvd" aria-hidden="true"></i></a>`:""}
 function detail(i){
  const g=(G.apps&&G.apps[i.appid])||null;
  const blurb=String(i.blurb||(g&&g.desc)||"").replace(/\s+/g," ").trim(),panels=platPanels(i,g);
@@ -558,7 +572,7 @@ function detail(i){
   const vid=(g.movies||[]).filter(m=>m.mp4).slice(0,1).map(m=>`<video controls preload="none" poster="${esc(safe(m.thumb))}" src="${esc(safe(m.mp4))}"></video>`).join("");
   const rv=(r.top||[]).map(x=>`<div class="rv">${esc(x.text)}${x.text.length>=220?"…":""}<div class="m"><b class="${x.up?"ok":""}">${x.up?"推薦":"不推薦"}</b>,遊玩 ${Number(x.hours)} 小時</div></div>`).join("");
   more=`${shots?`<div class="shots">${shots}</div>`:""}${vid}<h4>Steam 評價</h4><div class="m">${sum}${g.metacritic?`;Metacritic ${esc(g.metacritic)}`:""}</div>${rv}${SHOW_TREND&&g.price?`<h4>價格走勢</h4>${chart(i.appid,g)}`:""}${cmpHtml(i,g)}`}
- return `<details class="gd"><summary><span class="so">${g?"展開:說明、平台、評論、比價":"展開:說明、平台"}</span><span class="sc">收合</span></summary><div class="dtc">${bl}${sel}${dlcHtml(g)}${more}</div></details>`}
+ return `<details class="gd"><summary><span class="so">${g?"展開:說明、平台、評論、比價":"展開:說明、平台"}</span><span class="sc">收合</span></summary><div class="dtc">${bl}${liveBtn(i.title_en||(g&&srName(g.name))||i.title)}${sel}${dlcHtml(g)}${more}</div></details>`}
 function lowChip(i){
  const g=G.apps&&G.apps[i.appid];if(!g||!g.low||!g.low.usd)return"";
  const fx=G.fx||(g.compare&&g.compare.fx);if(!fx)return"";
@@ -905,7 +919,7 @@ function srDetail(){
  else tr=`<div class="sr-st">這款遊戲還沒有台幣價格紀錄,本站只會持續記錄出現在特價、限免或排行榜上的遊戲。</div>`;
  const url=appid?`https://store.steampowered.com/app/${appid}`:(best?"https://www.cheapshark.com/redirect?dealID="+best.dealID:"");
  const note=c.err?"CheapShark 暫時查不到這款遊戲,全球歷史最低價先不顯示。":c.busy?"正在查詢全球歷史最低價…":"";
- return `${SR.q?'<button type="button" class="sr-back" data-sback="1">← 回搜尋結果</button>':""}<article class="sr-card"><div class="sr-h">${img?`<img src="${esc(safe(img))}" alt="">`:""}<div><h2>${esc(title)}${appid?favBtn({appid,title,url:`https://store.steampowered.com/app/${appid}`,platforms:["Steam"],image:img}):""}</h2>${url?`<a class="sr-go" href="${esc(safe(url))}" target="_blank" rel="noopener noreferrer">前往商店</a>`:""}</div></div><div class="sr-tiles">${t}</div><h3>價格走勢(新台幣,Steam 台灣區)</h3>${tr}<div class="sr-note">${note?esc(note)+"<br>":""}走勢來自本站自動更新時記下的價格,從 2026-10-15 開始累積,兩筆紀錄之間的短期特價可能沒被記到。全球歷史最低價來自 <a href="https://www.cheapshark.com" target="_blank" rel="noopener noreferrer">CheapShark</a>,美元依匯率換算,僅供參考。</div></article>`}
+ return `${SR.q?'<button type="button" class="sr-back" data-sback="1">← 回搜尋結果</button>':""}<article class="sr-card"><div class="sr-h">${img?`<img src="${esc(safe(img))}" alt="">`:""}<div><h2>${esc(title)}${appid?favBtn({appid,title,url:`https://store.steampowered.com/app/${appid}`,platforms:["Steam"],image:img}):""}</h2>${url?`<a class="sr-go" href="${esc(safe(url))}" target="_blank" rel="noopener noreferrer">前往商店</a>`:""}<a class="sr-go sr-live" href="${esc(liveUrl(title))}" target="_blank" rel="noopener">▶ 觀看遊戲直播</a></div></div><div class="sr-tiles">${t}</div><h3>價格走勢(新台幣,Steam 台灣區)</h3>${tr}<div class="sr-note">${note?esc(note)+"<br>":""}走勢來自本站自動更新時記下的價格,從 2026-10-15 開始累積,兩筆紀錄之間的短期特價可能沒被記到。全球歷史最低價來自 <a href="https://www.cheapshark.com" target="_blank" rel="noopener noreferrer">CheapShark</a>,美元依匯率換算,僅供參考。</div></article>`}
 function srRender(){
  const on=srActive(),b=$("sr");document.body.classList.toggle("searching",on);b.hidden=!on;$("qx").hidden=!$("q").value;
  if(!on){b.innerHTML="";return}
