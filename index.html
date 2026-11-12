@@ -166,6 +166,27 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 .gd[open]:not(.closing) .sc{display:inline}
 .dtc{box-sizing:border-box;margin-top:6px;padding:14px 16px;border:1px solid rgb(var(--c1r) / .35);border-radius:10px;background:linear-gradient(180deg,rgb(var(--c1r) / .07),rgb(var(--bgr) / .55) 60px);box-shadow:inset 0 1px 0 rgb(var(--c1r) / .18),0 0 20px rgb(var(--c1r) / .08)}
 .dtc>:first-child{margin-top:0}
+.shots a{cursor:zoom-in}
+#lb{padding:0;border:0;margin:0;background:transparent;width:100vw;height:100vh;max-width:100vw;max-height:100vh;color:var(--tx);overflow:hidden}
+#lb::backdrop{background:rgba(3,6,14,.88);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.lb-stage{width:100%;height:100%;display:grid;place-items:center;padding:60px 96px 70px;box-sizing:border-box;touch-action:pan-y;user-select:none;cursor:grab}
+.lb-stage:active{cursor:grabbing}
+#lbi{max-width:100%;max-height:100%;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 0 1px rgb(var(--c1r) / .3);transition:transform .2s ease;-webkit-user-drag:none}
+#lb[open] .lb-stage{animation:lbIn .25s cubic-bezier(.2,.8,.2,1)}
+@keyframes lbIn{from{opacity:0;transform:scale(.96)}}
+.lb-nav,.lb-x{position:absolute;display:grid;place-items:center;border:1px solid rgb(var(--lnr) / .35);background:rgba(10,15,30,.78);color:var(--tx);cursor:pointer;transition:background .15s,border-color .15s,transform .15s}
+.lb-nav[hidden]{display:none}
+.lb-nav{top:50%;width:54px;height:54px;margin-top:-27px;border-radius:50%}
+.lb-prev{left:22px}.lb-next{right:22px}
+.lb-nav:hover,.lb-x:hover{border-color:var(--c1);background:rgba(22,64,104,.92)}
+.lb-nav:active{transform:scale(.92)}
+.lb-nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.lb-x{top:16px;right:22px;width:44px;height:44px;border-radius:10px;font-size:28px;line-height:1}
+.lb-bar{position:absolute;left:0;right:0;bottom:20px;display:flex;justify-content:center;align-items:center;gap:16px;font-size:14px;color:var(--mu);pointer-events:none}
+#lbt{color:var(--tx);font-weight:700}
+#lbn{font-variant-numeric:tabular-nums;color:var(--tx);background:rgba(10,15,30,.78);border:1px solid rgb(var(--lnr) / .35);border-radius:999px;padding:2px 12px}
+body:has(#lb[open]){overflow:hidden}
+@media(prefers-reduced-motion:reduce){#lb[open] .lb-stage{animation:none}#lbi{transition:none}}
 /* ===== 遊戲搜尋與價格走勢 ===== */
 #sf{position:relative;margin:16px 0 4px}
 #q{width:100%;box-sizing:border-box;font:inherit;font-size:16px;color:var(--tx);background:var(--kc);border:1px solid rgb(var(--lnr) / .35);border-radius:10px;padding:11px 42px 11px 40px;outline:none;transition:border-color .15s,box-shadow .15s}
@@ -225,7 +246,7 @@ body.searching #tabs,body.searching #chips,body.searching #sortbar,body.searchin
 <div class="fx" id="fx" aria-hidden="true"></div>
 <main>
 <header class="hd"><svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--c1)"/><stop offset=".55" style="stop-color:var(--c2)"/><stop offset="1" style="stop-color:var(--c3)"/></linearGradient></defs><polygon points="24,3 42,13.5 42,34.5 24,45 6,34.5 6,13.5" fill="rgba(53,224,255,.07)" stroke="url(#lg)" stroke-width="2.2" stroke-linejoin="round"/><g fill="none" stroke="url(#lg)" stroke-width="1.8" stroke-linecap="round"><path d="M16.5 15.5a10.5 10.5 0 0 1 15 0"/><path d="M19.8 18.6a6 6 0 0 1 8.4 0"/></g><path d="M15.5 22.5h17c2.2 0 4 1.4 4.6 3.5l1.4 5.3c.5 1.8-.8 3.5-2.6 3.5-1 0-1.8-.5-2.4-1.2l-2.3-3.3h-14.4l-2.3 3.3c-.6.7-1.4 1.2-2.4 1.2-1.8 0-3.1-1.7-2.6-3.5l1.4-5.3c.6-2.1 2.4-3.5 4.6-3.5z" fill="url(#lg)"/><path d="M17.4 25.2v4.4M15.2 27.4h4.4" stroke="#070a12" stroke-width="1.7" stroke-linecap="round"/><circle cx="30.3" cy="25.8" r="1.2" fill="#070a12"/><circle cx="33" cy="28" r="1.2" fill="#070a12"/></svg><div><h1>遊戲偵查隊</h1><div class="tag">GAME SCOUT SQUAD</div></div></header><div id="fest" hidden></div><div id="upd">載入中…</div>
-<form id="sf" role="search" autocomplete="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="搜尋遊戲名稱,查歷史價格(例如 Hades)  ・  按 / 快速搜尋" aria-label="搜尋遊戲名稱"><button id="qx" type="button" aria-label="清除搜尋" hidden>×</button></form><div id="sr" aria-live="polite" hidden></div><div role="tablist" id="tabs" aria-label="情報分類"></div><div id="chips" role="group" aria-label="平台篩選"></div><div id="sortbar" hidden><label for="sort">排序</label><select id="sort"></select></div><div id="tabnote" class="m"></div><div id="list"></div><div id="pager"></div><div id="msg" aria-live="polite"></div><div id="toast" role="status" aria-live="polite"></div><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS、<a href="https://www.gamerpower.com" target="_blank" rel="noopener noreferrer">GamerPower</a>(限時免費)、Apple iTunes、Google Play(非官方)、匯率來自 <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a>。</div><details class="more"><summary>顯示更多說明</summary><div class="m">美元標價會自動以最新匯率換算成台幣(標示「約」),電腦上滑鼠移到價格上可看原本的美元價格(手機沒有這個功能)。<span id="fxn"></span>實際價格以商店為準。<br>DLC 特價分頁:列出 Steam 上目前有折扣的 DLC(依評論數由多到少);遊戲展開後的 DLC 清單每款最多列 8 個,特價中的排前面。<br>大家都在玩分頁:取自 Steam 官方公開的「本週最多人玩」榜單前 100 款,再查各款目前的同時在線人數並由多到少排序,每 6 小時更新。只有 Steam 公開這項資料,其他平台沒有。<br>歷史新低分頁:只列出目前有折扣、而且現價不高於歷史最低價的遊戲,依 Steam 評價(好評率與評論數綜合)由高到低排序,每頁 10 款。判斷方式:現價 ≤ CheapShark 歷史最低價(美元)換算台幣的 102%,匯率和各國定價差異會造成誤差,僅供參考。<br>手機付費榜依評分與評論數綜合排序,iOS 取自 App Store 台灣區付費榜,Android 靠關鍵字搜尋找候選,可能漏掉部分遊戲。史低價是 CheapShark 的美元紀錄換算,僅供參考。分級圖示依 Steam / RAWG 提供的 PEGI、ESRB 資料換算,僅供參考,非台灣官方分級,請以遊戲包裝或文化部公告為準。</div></details>
+<form id="sf" role="search" autocomplete="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="搜尋遊戲名稱,查歷史價格(例如 Hades)  ・  按 / 快速搜尋" aria-label="搜尋遊戲名稱"><button id="qx" type="button" aria-label="清除搜尋" hidden>×</button></form><div id="sr" aria-live="polite" hidden></div><div role="tablist" id="tabs" aria-label="情報分類"></div><div id="chips" role="group" aria-label="平台篩選"></div><div id="sortbar" hidden><label for="sort">排序</label><select id="sort"></select></div><div id="tabnote" class="m"></div><div id="list"></div><div id="pager"></div><div id="msg" aria-live="polite"></div><div id="toast" role="status" aria-live="polite"></div><dialog id="lb" aria-label="遊戲畫面"><div class="lb-stage"><img id="lbi" alt="" draggable="false"></div><button type="button" class="lb-nav lb-prev" aria-label="上一張"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" class="lb-nav lb-next" aria-label="下一張"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button><button type="button" class="lb-x" aria-label="關閉">×</button><div class="lb-bar"><span id="lbt"></span><span id="lbn"></span><span class="lb-tip">← → 切換・Esc 關閉</span></div></dialog><div id="err"></div><div class="m" style="margin-top:12px">資料來源:Steam、<a href="https://rawg.io" target="_blank" rel="noopener noreferrer">RAWG</a>、各媒體 RSS、<a href="https://www.gamerpower.com" target="_blank" rel="noopener noreferrer">GamerPower</a>(限時免費)、Apple iTunes、Google Play(非官方)、匯率來自 <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a>。</div><details class="more"><summary>顯示更多說明</summary><div class="m">美元標價會自動以最新匯率換算成台幣(標示「約」),電腦上滑鼠移到價格上可看原本的美元價格(手機沒有這個功能)。<span id="fxn"></span>實際價格以商店為準。<br>DLC 特價分頁:列出 Steam 上目前有折扣的 DLC(依評論數由多到少);遊戲展開後的 DLC 清單每款最多列 8 個,特價中的排前面。<br>大家都在玩分頁:取自 Steam 官方公開的「本週最多人玩」榜單前 100 款,再查各款目前的同時在線人數並由多到少排序,每 6 小時更新。只有 Steam 公開這項資料,其他平台沒有。<br>歷史新低分頁:只列出目前有折扣、而且現價不高於歷史最低價的遊戲,依 Steam 評價(好評率與評論數綜合)由高到低排序,每頁 10 款。判斷方式:現價 ≤ CheapShark 歷史最低價(美元)換算台幣的 102%,匯率和各國定價差異會造成誤差,僅供參考。<br>手機付費榜依評分與評論數綜合排序,iOS 取自 App Store 台灣區付費榜,Android 靠關鍵字搜尋找候選,可能漏掉部分遊戲。史低價是 CheapShark 的美元紀錄換算,僅供參考。分級圖示依 Steam / RAWG 提供的 PEGI、ESRB 資料換算,僅供參考,非台灣官方分級,請以遊戲包裝或文化部公告為準。</div></details>
 <button id="gfab" class="fab" aria-expanded="false" aria-controls="gpanel" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg><span id="gfabt">類型</span></button>
 <div id="gpanel" role="dialog" aria-label="選擇遊戲類型" hidden><div class="gh"><span>遊戲類型</span><button id="gclose" aria-label="關閉">×</button></div><div id="gchips"></div></div>
 <button id="totop" class="fab" aria-label="回到最上方" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
@@ -733,7 +754,7 @@ function tickCd(){const now=Date.now();document.querySelectorAll(".cd").forEach(
  s.textContent=t;s.classList.toggle("hot",hot)})}
 setInterval(tickCd,30000);
 document.addEventListener("click",e=>{const b=e.target.closest("[data-fav]");if(b){e.preventDefault();toggleFav(b.dataset.fav)}});
-document.addEventListener("keydown",e=>{if(e.key!=="/"||e.ctrlKey||e.metaKey||e.altKey)return;const a=document.activeElement;if(a&&(/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)||a.isContentEditable))return;e.preventDefault();$("q").focus();$("q").select()});
+document.addEventListener("keydown",e=>{if(e.key!=="/"||$("lb").open||e.ctrlKey||e.metaKey||e.altKey)return;const a=document.activeElement;if(a&&(/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)||a.isContentEditable))return;e.preventDefault();$("q").focus();$("q").select()});
 $("tabs").addEventListener("keydown",e=>{const n={ArrowRight:1,ArrowLeft:-1}[e.key],home=e.key==="Home",end=e.key==="End";if(!n&&!home&&!end)return;e.preventDefault();
  const k=TAB_KEYS,x=k.indexOf(tab);tab=home?k[0]:end?k[k.length-1]:k[(x+n+k.length)%k.length];plat="全部";page=1;sort="";stUrl(true);render();
  const b=document.querySelector("[role=tab][aria-selected=true]");if(b){b.focus();b.scrollIntoView({inline:"center",block:"nearest"})}});
@@ -747,6 +768,28 @@ document.addEventListener("click",e=>{const sm=e.target.closest(".gd>summary");i
   d._a=c.animate([cur!=null?{height:cur+"px",opacity:1}:{height:"0px",opacity:0,transform:"translateY(-10px)",borderColor:"rgb(var(--c1r) / .9)"},{height:h+"px",opacity:1,transform:"none"}],{duration:Math.min(560,260+h*.2),easing:"cubic-bezier(.2,.8,.2,1)"});end(d._a,done)}
  else{const h=cur!=null?cur:c.offsetHeight;d.classList.add("closing");
   d._a=c.animate([{height:h+"px",opacity:1,transform:"none"},{height:"0px",opacity:0,transform:"translateY(-10px)"}],{duration:Math.min(420,200+h*.12),easing:"cubic-bezier(.4,0,.7,.2)"});end(d._a,()=>{d.open=false;d.classList.remove("closing");done()})}});
+/* 遊戲畫面:點擊截圖開懸浮視窗,箭頭/方向鍵/拖曳或滑動切換 */
+const lb=$("lb"),lbi=$("lbi"),LB={list:[],i:0};
+const lbMotion=()=>lbi.animate&&!matchMedia("(prefers-reduced-motion:reduce)").matches;
+function lbShow(n,dir){const L=LB.list;if(!L.length)return;LB.i=(n+L.length)%L.length;lbi.src=L[LB.i];$("lbn").textContent=`${LB.i+1} / ${L.length}`;
+ lb.querySelectorAll(".lb-nav").forEach(b=>b.hidden=L.length<2);
+ if(L.length>1)[1,-1].forEach(k=>{const im=new Image();im.src=L[(LB.i+k+L.length)%L.length]});   // 先載入前後兩張,切換時不用等
+ if(dir&&lbMotion())lbi.animate([{transform:`translateX(${dir*70}px)`,opacity:0},{transform:"none",opacity:1}],{duration:280,easing:"cubic-bezier(.2,.8,.2,1)"})}
+document.addEventListener("click",e=>{const a=e.target.closest(".shots a");if(!a||e.ctrlKey||e.metaKey||e.shiftKey||!lb.showModal)return;e.preventDefault();
+ const as=[...a.closest(".shots").querySelectorAll("a")].filter(x=>/^https?:\/\//.test(x.getAttribute("href")));LB.list=as.map(x=>x.getAttribute("href"));
+ const it=a.closest(".item"),t=it&&it.querySelector(":scope>div>a");$("lbt").textContent=t?t.textContent:"";lb.showModal();lbShow(Math.max(0,as.indexOf(a)))});
+lb.querySelector(".lb-prev").addEventListener("click",()=>lbShow(LB.i-1,-1));
+lb.querySelector(".lb-next").addEventListener("click",()=>lbShow(LB.i+1,1));
+lb.querySelector(".lb-x").addEventListener("click",()=>lb.close());
+lb.addEventListener("keydown",e=>{const d={ArrowLeft:-1,ArrowRight:1}[e.key];if(!d||LB.list.length<2)return;e.preventDefault();lbShow(LB.i+d,d)});
+lb.addEventListener("close",()=>{lbi.removeAttribute("src")});
+let lbX=null,lbY=0;
+lb.addEventListener("pointerdown",e=>{if(e.target.closest("button")||e.button>0)return;lbX=e.clientX;lbY=e.clientY;lbi.style.transition="none";try{lb.setPointerCapture(e.pointerId)}catch(_){}});
+lb.addEventListener("pointermove",e=>{if(lbX==null||LB.list.length<2)return;lbi.style.transform=`translateX(${e.clientX-lbX}px)`});
+lb.addEventListener("pointerup",e=>{if(lbX==null)return;const dx=e.clientX-lbX,dy=e.clientY-lbY,tap=Math.abs(dx)<6&&Math.abs(dy)<6;lbX=null;lbi.style.transition="";lbi.style.transform="";
+ if(!tap&&Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)&&LB.list.length>1)return lbShow(LB.i+(dx<0?1:-1),dx<0?1:-1);
+ if(tap&&e.target!==lbi&&!e.target.closest("button,.lb-bar"))lb.close()});   // 點圖片以外的空白處關閉
+lb.addEventListener("pointercancel",()=>{lbX=null;lbi.style.transition="";lbi.style.transform=""});
 const CS="https://www.cheapshark.com/api/1.0/games";
 const SR={q:"",sel:null,live:[],liveErr:false,liveBusy:false,idx:null,gl:false,hl:false,cs:{},pts:[],t:0,ctl:null};
 const sn=t=>String(t||"").normalize("NFKC").toLowerCase().replace(/[^0-9a-z぀-ヿ㐀-鿿]+/g,"");
