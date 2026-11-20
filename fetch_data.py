@@ -104,6 +104,24 @@ def parse_epic(d, en=None):
     return items
 
 
+def epic_promo_titles(country):
+    url = ("https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions"
+           f"?locale=en-US&country={country}&allowCountries={country}")
+    return {norm(e["title"]) for e in json.loads(get(url))["data"]["Catalog"]["searchStore"]["elements"]}
+
+
+def epic_tw_locked(items):
+    """GamerPower 的 Epic 限免,若美國的 Epic 官方限免清單有、台灣的沒有,代表台灣鎖區(例如 Mark of the Deep,
+    台灣商店頁顯示「此內容目前並未在你所在的地區中開放」),回傳這些名稱。兩邊都沒有的(發行商自辦的活動)無法判斷,保留。"""
+    cand = {norm(i["title"]) for i in items if i.get("src") == "gamerpower" and "Epic" in (i.get("platforms") or [])}
+    if not cand:
+        return set()
+    us, tw = epic_promo_titles("US"), epic_promo_titles("TW")
+    if not tw:
+        raise ValueError("台灣的 Epic 清單是空的,這次不判斷鎖區")
+    return {n for n in cand if n in us and n not in tw}
+
+
 def fetch_epic():
     url = ("https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions"
            "?locale=zh-Hant&country=TW&allowCountries=TW")
@@ -1448,6 +1466,12 @@ def main():
     from datetime import timedelta
     today_tpe = datetime.now(timezone(timedelta(hours=8))).date().isoformat()
     new["soon"] = [i for i in new["soon"] if not_released(i, today_tpe)]   # 來源暫時失敗而沿用舊資料時,舊清單可能已有過期項目
+    try:
+        locked = epic_tw_locked(new["free"])
+        if locked:
+            new["free"] = [i for i in new["free"] if norm(i["title"]) not in locked]
+    except Exception as ex:
+        errors.append(f"epic_region: {type(ex).__name__}: {ex}")
     try:
         fails = enrich(new)
         if fails:
