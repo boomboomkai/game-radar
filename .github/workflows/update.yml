@@ -16,17 +16,17 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803   # v6(固定版本編號,避免標籤被改)
         with:
           persist-credentials: false
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1   # v6
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
       - run: python fetch_data.py
         env:
           RAWG_API_KEY: ${{ secrets.RAWG_API_KEY }}   # 選用,沒設定會自動略過
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02   # v4
         with:
           name: data
           path: |
@@ -44,19 +44,27 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803   # v6
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093   # v4
         with:
           name: data
           path: new-data
       - name: 檢查並更新資料檔
         run: |
-          for f in data.json games.json history.json mobile_prices.json android_top.json; do
-            if [ -f "new-data/$f" ]; then
-              python3 -c "import json,sys; json.load(open(sys.argv[1], encoding='utf-8'))" "new-data/$f" && cp "new-data/$f" "$f"
-            fi
+          set -e
+          # 檢查 JSON 能不能讀(NaN、Infinity 也算壞掉:瀏覽器讀不了)
+          ok() { python3 -c "import json,sys; json.load(open(sys.argv[1], encoding='utf-8'), parse_constant=lambda c: int('bad ' + c))" "$1"; }
+          # 三個主要檔案是同一批資料:全部存在且都能讀才一起更新,只要有一個壞掉就整批不更新
+          for f in data.json games.json history.json; do
+            [ -f "new-data/$f" ] || { echo "缺少 $f,這次不更新"; exit 1; }
+            ok "new-data/$f" || { echo "$f 內容壞掉,這次不更新"; exit 1; }
+          done
+          cp new-data/data.json new-data/games.json new-data/history.json .
+          # 手機價格快取是選用的:有而且能讀才更新
+          for f in mobile_prices.json android_top.json; do
+            if [ -f "new-data/$f" ] && ok "new-data/$f"; then cp "new-data/$f" "$f"; fi
           done
           git config user.name "game-radar-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add data.json games.json history.json mobile_prices.json android_top.json 2>/dev/null || true
+          git add data.json games.json history.json mobile_prices.json android_top.json
           git diff --cached --quiet || (git commit -m "update data" && git push)

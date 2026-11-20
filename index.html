@@ -643,9 +643,11 @@ const AGE={0:"普遍級",6:"保護級",12:"輔12級",15:"輔15級",18:"限制級
 function ageBadge(i){
  const g=G.apps&&G.apps[i.appid];let a=i.age;
  if((a===undefined||a===null)&&g&&g.age!==undefined)a=g.age;
- if(a===undefined||a===null)return"";
+ a=Number(a);if(!(a in AGE))return"";   // 只接受已知的分級數字
  return `<span class="age" data-a="${a}" title="${AGE[a]} ${a}+(依 PEGI/ESRB 資料換算,非台灣官方分級)"><b>${a}<sup>+</sup></b><u>${AGE[a]}</u></span>`}
 const pl=i=>i.platforms||[i.platform];
+// 限免狀態依「現在時間」推算,頁面開著跨過開始或結束時間也會正確:now 免費中 / next 即將免費 / ended 已結束
+function freeState(i){const t=Date.now(),s=Date.parse(i.start),e=Date.parse(i.end);if(e<=t)return"ended";return i.status==="next"&&s>t?"next":"now"}
 const hasPlat=i=>pl(i).some(p=>p&&p!=="其他");   // 沒有平台(或只有「其他」)的項目不顯示
 // itch.io、DRM-Free、Stove、Meta / Rift(VR)的限免不顯示(領取不直覺 / 不是台灣常用平台;舊資料也一併過濾)
 const CTRL_SVG='<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 7.5h10a5 5 0 0 1 4.9 4l.9 4.4a2.6 2.6 0 0 1-4.5 2.2L16 15.5H8l-2.3 2.6a2.6 2.6 0 0 1-4.5-2.2l.9-4.4A5 5 0 0 1 7 7.5z"/><path d="M8 10v4M6 12h4" stroke="#fff" stroke-width="1.4" stroke-linecap="round" fill="none"/><circle cx="15.5" cy="11" r="1" fill="#fff"/><circle cx="18" cy="13" r="1" fill="#fff"/></svg>';
@@ -711,7 +713,7 @@ function meta(i){
  if(tab==="mobile")return `<b>#${Number(i.rank)}</b> <span class="nw">${esc(nb(i.desc))}</span> ・ <span class="nw">★ ${esc(i.rating)}(${Number(i.count).toLocaleString()} 則評論)</span>`;
  if(tab==="preorder"){const g=G.apps[i.appid],p=g.price,r=g.release||i.release||"";return `預計 ${esc(r||"日期未定")}<br>預購價 ${p.pct>0?priceHtml(`-${Number(p.pct)}%  ${p.cur} ${Math.round(p.final).toLocaleString()}(原價 ${Math.round(p.orig).toLocaleString()})`):`<b class="now">NT$ ${Math.round(p.final).toLocaleString()}</b>`}`}
  if(tab==="new"||tab==="soon"){const g=G.apps&&G.apps[i.appid];const r=(g&&g.release)||i.release||"";return `${tab==="new"?"上架":"預計"} ${esc(r||"日期未定")}${i.desc?`<span class="prc">${esc(nb(i.desc))}</span>`:""}`}
- if(tab==="free"){const n=i.status==="next";return `<span class="free">${n?"即將免費":"免費中"}</span> ${i.start&&n?tw(i.start)+" 起,":""}${i.end?"至 "+tw(i.end)+"(台北時間)":"(限時,結束時間不明)"}${cdSpan(i)}${i.desc?", "+priceHtml(i.desc):""}${i.note?`<br><span class="m">${esc(i.note)}</span>`:""}`}
+ if(tab==="free"){const fs=freeState(i),n=fs==="next";return `<span class="free">${fs==="ended"?"已結束":n?"即將免費":"免費中"}</span> ${i.start&&n?tw(i.start)+" 起,":""}${i.end?"至 "+tw(i.end)+"(台北時間)":"(限時,結束時間不明)"}${cdSpan(i)}${i.desc?", "+priceHtml(i.desc):""}${i.note?`<br><span class="m">${esc(i.note)}</span>`:""}`}
  if(tab==="news")return tw(i.date);
  return priceHtml(i.desc)}
 function render(){
@@ -722,7 +724,7 @@ function render(){
  if(tab==="soon"||tab==="preorder"){const today=new Date(Date.now()+8*36e5).toISOString().slice(0,10);items=items.filter(i=>{const d=dt(i);return!/^\d{4}-\d\d-\d\d$/.test(d)||d>=today})}   // 已過發售日的不算「即將上架」(台北日期)
  $("tabnote").textContent=tab==="preorder"?"還沒發售、但已經可以在 Steam 預購的遊戲。主機平台的預購狀態目前查不到,只列出有 Steam 版的遊戲。":"";
  if(tab==="news")items.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
- if(tab==="free")items.sort((a,b)=>(a.status==="next")-(b.status==="next"));
+ if(tab==="free"){const R={now:0,next:1,ended:2};items.sort((a,b)=>R[freeState(a)]-R[freeState(b)])}
  if(tab==="mobile")items.sort((a,b)=>a.platform===b.platform?a.rank-b.rank:(a.platform==="iOS"?-1:1));
  if(tab==="new"||tab==="soon"||tab==="preorder"){const k=x=>dt(x)||(tab==="new"?"0000":"9999");items.sort((a,b)=>tab==="new"?k(b).localeCompare(k(a)):k(a).localeCompare(k(b)))}
  items=applySort(items);
@@ -773,11 +775,12 @@ function priceOf(i){const g=G.apps&&G.apps[i.appid];if(g&&g.price)return g.price
  const m=/^-(\d+)%\s+(\D*?)\s*([\d,.]+)/.exec(i.desc||"");if(m){const v=parseFloat(m[3].replace(/,/g,""));return isUsd(m[2].trim())?(G.fx?v*G.fx:null):v}
  return i.desc==="限時免費"?0:null}
 function pctOf(i){const g=G.apps&&G.apps[i.appid];if(g&&g.price&&g.price.pct)return g.price.pct;const m=/^-(\d+)%/.exec(i.desc||"");return m?+m[1]:0}
-const isFreeNow=i=>(D.free||[]).some(x=>x.status!=="next"&&((i.appid&&x.appid==i.appid)||sn(x.title)===sn(i.title)));
-function favList(){return Object.values(FAV).sort((a,b)=>(b.at||"").localeCompare(a.at||"")).map(f=>({title:f.title,url:f.url,appid:f.appid,platforms:f.platforms&&f.platforms.length?f.platforms:["其他"],image:f.image,desc:f.desc}))}
-function favMeta(i){const f=FAV[favKey(i)]||{},now=priceOf(i);let s=`<span class="m">${esc(f.at||"")} 收藏</span>`;
+const isFreeNow=i=>(D.free||[]).some(x=>freeState(x)==="now"&&((i.appid&&x.appid==i.appid)||sn(x.title)===sn(i.title)));
+function curByKey(){const m={};["free","deals","lows","dlc","popular","new","soon","mobile"].forEach(k=>(D[k]||[]).forEach(i=>{const key=favKey(i);if(!m[key])m[key]=i}));return m}
+function favList(){const cur=curByKey();return Object.entries(FAV).sort((a,b)=>(b[1].at||"").localeCompare(a[1].at||"")).map(([k,f])=>({title:f.title,url:f.url,appid:f.appid,platforms:f.platforms&&f.platforms.length?f.platforms:["其他"],image:f.image,desc:(cur[k]||{}).desc||""}))}   // 現價只看最新資料,不用收藏當時的特價說明
+function favMeta(i){const f=FAV[favKey(i)]||{},now=isFreeNow(i)?0:priceOf(i);let s=`<span class="m">${esc(f.at||"")} 收藏</span>`;
  if(isFreeNow(i))s+=` <span class="lowtag">限時免費中</span>`;
- if(now!=null)s+=`<br>目前 <b class="now">${now>0?twd(now):"免費"}</b>`;
+ if(now!=null)s+=`<br>目前 <b class="now">${now>0?twd(now):"免費"}</b>`;else s+=`<br><span class="m">目前價格未知(這款不在本站最新的資料裡)</span>`;
  if(f.p>0&&now!=null&&now<f.p)s+=` <span class="lowtag">比收藏時便宜 ${twd(f.p-now)}</span>`;
  else if(f.p>0&&now!=null&&now>f.p)s+=` <span class="m">(收藏時 ${twd(f.p)})</span>`;
  return s}
@@ -802,11 +805,12 @@ const TAB_KEYS=TABS.map(t=>t[0]);
 function readUrl(){const u=new URLSearchParams(location.search),t=u.get("tab");tab=TAB_KEYS.includes(t)?t:"free";plat=(u.get("plat")||"全部").slice(0,40);gen=(u.get("genre")||"全部").slice(0,40);sort=(u.get("sort")||"").slice(0,10);page=Math.max(1,parseInt(u.get("page"))||1)}
 function stUrl(push){const u=new URLSearchParams(location.search);[["tab",tab==="free"?"":tab],["plat",plat==="全部"?"":plat],["genre",gen==="全部"?"":gen],["sort",sort],["page",page>1?String(page):""]].forEach(([k,v])=>v?u.set(k,v):u.delete(k));
  const s=u.toString(),h=location.pathname+(s?"?"+s:"")+location.hash;if(h!==location.pathname+location.search+location.hash)history[push?"pushState":"replaceState"](null,"",h)}
-function cdSpan(i){return i.end||i.start?`<span class="cd" data-end="${esc(i.end||"")}" data-start="${i.status==="next"?esc(i.start||""):""}"></span>`:""}
+function cdSpan(i){return i.end||i.start?`<span class="cd" data-end="${esc(i.end||"")}" data-start="${freeState(i)==="next"?esc(i.start||""):""}" data-r="${Date.now()}"></span>`:""}
 function left(ms){const m=Math.floor(ms/6e4),d=Math.floor(m/1440),h=Math.floor(m%1440/60),mm=m%60;return d?`${d} 天 ${h} 小時`:h?`${h} 小時 ${mm} 分`:`${Math.max(1,mm)} 分鐘`}
-function tickCd(){const now=Date.now();document.querySelectorAll(".cd").forEach(s=>{const st=Date.parse(s.dataset.start),en=Date.parse(s.dataset.end);let t="",hot=false;
+function tickCd(){const now=Date.now();let cross=false;document.querySelectorAll(".cd").forEach(s=>{const st=Date.parse(s.dataset.start),en=Date.parse(s.dataset.end),r=+s.dataset.r||now;let t="",hot=false;
+ if((st>r&&st<=now)||(en>r&&en<=now))cross=true;   // 跨過開始或結束時間:重畫,讓標籤和排序跟著更新
  if(st>now)t=`${left(st-now)}後開始`;else if(en){if(en<=now)t="已結束";else{t=`剩 ${left(en-now)}`;hot=en-now<864e5}}
- s.textContent=t;s.classList.toggle("hot",hot)})}
+ s.textContent=t;s.classList.toggle("hot",hot)});if(cross)render()}
 setInterval(tickCd,30000);
 document.addEventListener("click",e=>{const b=e.target.closest("[data-fav]");if(b){e.preventDefault();toggleFav(b.dataset.fav)}});
 document.addEventListener("keydown",e=>{if(e.key!=="/"||$("lb").open||e.ctrlKey||e.metaKey||e.altKey)return;const a=document.activeElement;if(a&&(/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)||a.isContentEditable))return;e.preventDefault();$("q").focus();$("q").select()});
@@ -939,13 +943,13 @@ async function srLoadCs(key){
  catch(e){c.err=true}
  c.busy=false;if(SR.sel===key)srRender()}
 function srOpen(key,push){SR.sel=key;srHist();srUrl(push);srLoadCs(key);window.scrollTo({top:0})}
-function srClear(){SR.q="";SR.sel=null;SR.live=[];if(SR.ctl)SR.ctl.abort();$("q").value="";srUrl(true);srRender();$("q").focus()}
-function srFromUrl(){const u=new URLSearchParams(location.search),q=(u.get("q")||"").slice(0,80),g=u.get("game");
+function srClear(){clearTimeout(SR.t);SR.q="";SR.sel=null;SR.live=[];if(SR.ctl)SR.ctl.abort();$("q").value="";srUrl(true);srRender();$("q").focus()}
+function srFromUrl(){clearTimeout(SR.t);const u=new URLSearchParams(location.search),q=(u.get("q")||"").slice(0,80),g=u.get("game");
  SR.q=q;$("q").value=q;SR.sel=/^[sc]\d+$/.test(g||"")?g:null;if(srActive())srHist();if(q)srLive(q);if(SR.sel)srLoadCs(SR.sel);srRender()}
 $("q").addEventListener("input",e=>{srHist();clearTimeout(SR.t);const v=e.target.value.slice(0,80);$("qx").hidden=!v;SR.t=setTimeout(()=>{SR.q=v.trim();SR.sel=null;srLive(SR.q);srUrl(false);srRender()},220)});
 $("q").addEventListener("focus",srHist);
 $("q").addEventListener("keydown",e=>{if(e.key==="Escape"&&$("q").value){e.preventDefault();srClear()}});
-$("sf").addEventListener("submit",e=>e.preventDefault());
+$("sf").addEventListener("submit",e=>{e.preventDefault();clearTimeout(SR.t);SR.q=$("q").value.slice(0,80).trim();SR.sel=null;srLive(SR.q);srUrl(false);srRender();$("q").blur()});   // 立即搜尋,手機會收起鍵盤
 $("qx").addEventListener("click",srClear);
 $("sr").addEventListener("click",e=>{const r=e.target.closest("[data-sg]");if(r)return srOpen(r.dataset.sg,true);if(e.target.closest("[data-sback]")){SR.sel=null;srUrl(true);srRender()}});
 $("sr").addEventListener("pointermove",e=>{if(!e.target.classList.contains("sr-hit"))return;const s=e.target.ownerSVGElement,b=s.getBoundingClientRect(),x=(e.clientX-b.left)*SR.w/b.width,p=SR.pts.reduce((a,c)=>Math.abs(c.x-x)<Math.abs(a.x-x)?c:a),l=$("srx"),d=$("srd"),t=$("srt");

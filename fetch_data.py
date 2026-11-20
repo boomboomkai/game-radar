@@ -3,6 +3,7 @@
 任何一個來源失敗時,保留該來源上一次的資料,並把錯誤記在 data.json 的 errors。"""
 import difflib
 import json
+import math
 import os
 import re
 import time
@@ -203,6 +204,9 @@ def sanitize_numbers(o):
     elif isinstance(o, dict):
         for k, v in list(o.items()):
             if k in NUM_KEYS:
+                if isinstance(v, float) and not math.isfinite(v):
+                    o[k] = None                     # NaN、Infinity 寫進 JSON 後瀏覽器會讀不了
+                    continue
                 if v is None or (isinstance(v, (int, float)) and not isinstance(v, bool)):
                     continue
                 if isinstance(v, str) and re.fullmatch(r"-?\d+(\.\d+)?", v.strip()):
@@ -237,7 +241,8 @@ def parse_rss(text, platform, limit=8):
             date = parsedate_to_datetime(raw).astimezone(timezone.utc).isoformat()
         except Exception:
             try:
-                date = datetime.fromisoformat(raw.replace("Z", "+00:00")).isoformat()
+                d = datetime.fromisoformat(raw.strip().replace("Z", "+00:00"))
+                date = (d if d.tzinfo else d.replace(tzinfo=timezone.utc)).astimezone(timezone.utc).isoformat()   # 統一成 UTC,排序才正確
             except Exception:
                 date = ""
         if title and link:
@@ -390,15 +395,19 @@ _FX = {}
 _STORES = {}
 _IOS = {}
 MOBILE = Path(__file__).parent / "mobile_prices.json"
-ALLOW_EMPTY = {"ios_free", "ios_deals", "steam_free", "steam_ftk", "cheapshark_free", "manual_free"}   # 這些來源沒有項目是正常的(要累積價格紀錄才看得出降價)
+ALLOW_EMPTY = {"gamerpower", "ios_free", "ios_deals", "steam_free", "steam_ftk", "cheapshark_free", "manual_free"}   # 這些來源沒有項目是正常的(要累積價格紀錄才看得出降價)
 
 
 def get_fx(prev):
     """美元換台幣匯率;抓不到就沿用上一次的數字"""
+    good = lambda r: isinstance(r, (int, float)) and math.isfinite(r) and 10 < r < 100   # 台幣匯率合理範圍;0、負數、NaN 都不收
     try:
-        return float(json.loads(get("https://open.er-api.com/v6/latest/USD"))["rates"]["TWD"])
+        r = float(json.loads(get("https://open.er-api.com/v6/latest/USD"))["rates"]["TWD"])
+        if good(r):
+            return r
     except Exception:
-        return prev
+        pass
+    return prev if good(prev) else None
 
 
 def store_names():
@@ -1441,6 +1450,14 @@ def enrich(new):
     return fails
 
 
+def ended(i):
+    """限免活動的結束時間已過(沿用舊資料時用來剔除過期活動)。"""
+    try:
+        return datetime.fromisoformat(str(i.get("end") or "").replace("Z", "+00:00")) <= datetime.now(timezone.utc)
+    except ValueError:
+        return False
+
+
 def main():
     old = load(OUT, {})   # 檔案不存在、是空的或內容壞掉時,都當作沒有舊資料
     new = {"free": [], "deals": [], "news": [], "new": [], "soon": [], "mobile": [], "pool": [], "popular": [], "dlc": []}
@@ -1453,7 +1470,7 @@ def main():
                 raise ValueError("沒有解析到任何項目")
         except Exception as ex:
             errors.append(f"{src}: {type(ex).__name__}: {ex}")
-            items = [i for i in old.get(section, []) if i.get("src") == src]  # 保留舊資料
+            items = [i for i in old.get(section, []) if i.get("src") == src and not ended(i)]  # 保留舊資料(已結束的活動不保留)
         for i in items:
             i["src"] = src
         counts[src] = len(items)
@@ -1500,7 +1517,7 @@ def main():
     new["errors"] = errors
     sanitize_numbers(new)
     new["errors"] = [redact(e) for e in new.get("errors", [])]
-    OUT.write_text(json.dumps(new, ensure_ascii=False, indent=1), "utf-8")
+    OUT.write_text(json.dumps(new, ensure_ascii=False, indent=1, allow_nan=False), "utf-8")
     print(f"new={len(new['new'])} soon={len(new['soon'])}", end=" ")
     print(f"free={len(new['free'])} deals={len(new['deals'])} news={len(new['news'])} errors={len(errors)}")
     for e in errors:
