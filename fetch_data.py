@@ -666,6 +666,9 @@ def parse_gamerpower(rows):
         for x in (gp_labels(sm.group(1)) if sm else []):          # 標題括號裡的商店若不在平台清單,補上去(只補認得的商店,避免把「(Remastered)」之類當成平台)
             if x not in labs and x in ("Steam", "Epic", "GOG", "EA", "Ubisoft", "PlayStation", "Xbox", "Nintendo", "iOS", "Android"):
                 labs.append(x)
+        if (re.search(r"epic games store\s+(?:mobile|app)", info, re.I) and "Epic" not in labs
+                and any(x in labs for x in ("iOS", "Android"))):
+            labs.append("Epic")   # 在 Epic 手機 App 領的限免(GamerPower 只標 iOS/Android):iPhone 版只在歐盟開放,前端 regionRule 會依台灣規則處理
         title = re.sub(r"\s*\([^)]*\)\s*Giveaway\s*$", "", g.get("title", ""))
         title = re.sub(r"\s+Giveaway\s*$", "", title).strip()
         title = re.sub(r"\s*\((?:[^)]*(?:steam|epic|gog|ubisoft|origin|\bea\b|xbox|playstation|switch|battle\.net)[^)]*)\)\s*(?:key|code)?\s*$", "", title, flags=re.I).strip()   # 「Dwarven Realms (Steam) Key」→「Dwarven Realms」
