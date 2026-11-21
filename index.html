@@ -211,6 +211,7 @@ body:has(#lb[open]){overflow:hidden}
 @keyframes lvp{50%{opacity:.35}}
 .sr-live{margin-left:8px;background:linear-gradient(135deg,#9146ff,#ff4fa3)!important;color:#fff!important}
 @media(prefers-reduced-motion:reduce){.lvd{animation:none}.lvb{transition:none}}
+.tww{display:inline-flex;align-items:center;padding:2px 8px;border-radius:6px;font-size:12px;font-weight:600;color:#ffcc66;border:1px solid rgba(255,204,102,.55);background:rgba(255,204,102,.08);white-space:nowrap}
 /* ===== 遊戲搜尋與價格走勢 ===== */
 #sf{position:relative;margin:16px 0 4px}
 #q{width:100%;box-sizing:border-box;font:inherit;font-size:16px;color:var(--tx);background:var(--kc);border:1px solid rgb(var(--lnr) / .35);border-radius:10px;padding:11px 42px 11px 40px;outline:none;transition:border-color .15s,box-shadow .15s}
@@ -540,7 +541,7 @@ function platPanels(i,g){
  const out=[];
  PORD.forEach(k=>{
   if(!keys.has(k))return;let o=null;
-  if(free.has(k)){const mob=k==="iOS"||k==="Android";o={html:`<b class="ok">限時免費</b>${i.end?` 至 ${tw(i.end)}(台北時間)`:"(結束時間不明)"}${i.desc?`<br>${priceHtml(i.desc)}`:""}`,url:mob?searchUrl(k,i):i.url,btn:mob?"到商店查看":"前往領取"}}
+  if(free.has(k)){const mob=k==="iOS"||k==="Android";o={html:`<b class="ok">限時免費</b>${k==="Epic"&&i.tw_warn?" "+TWW:""}${i.end?` 至 ${tw(i.end)}(台北時間)`:"(結束時間不明)"}${i.desc?`<br>${priceHtml(i.desc)}`:""}`,url:mob?searchUrl(k,i):i.url,btn:mob?"到商店查看":"前往領取"}}
   else if(k==="Steam"){const p=g&&g.price;
    if(noStore(i))o={html:"這款遊戲沒有 Steam 商店頁面(或在台灣區看不到),點商店連結會被導回 Steam 首頁。",url:sdb(i),btn:"在 SteamDB 查看"};
    else if(p)o={html:p.final>0?`<b class="now">NT$ ${Math.round(p.final).toLocaleString()}</b>${p.pct>0?` <span class="m">(-${Number(p.pct)}%,原價 ${Math.round(p.orig).toLocaleString()})</span>`:""}`:`<b class="ok">免費遊玩</b>`,url:`https://store.steampowered.com/app/${encodeURIComponent(i.appid)}`,btn:"前往 Steam 商店"};
@@ -592,8 +593,10 @@ function cmpHtml(i,g){
  const cons=[["PlayStation","PS5"],["Xbox","Xbox"],["Switch","Nintendo Switch"]].map(([n,q])=>`<a href="https://www.google.com/search?q=${nm}+${encodeURIComponent(q)}+價格" target="_blank" rel="noopener noreferrer">${n}</a>`).join("、");
  return `<h4>各平台價格比較</h4><div class="tw"><table class="cmp">${tr}</table></div><div class="m">美元價格以 1 美元約 ${c.fx?c.fx.toFixed(1):"?"} 台幣估算。第三方商店的金鑰可能有地區限制,手機版內容可能和電腦版不同,價格不含稅與手續費。主機版沒有公開價格資料,請自行搜尋:${cons}</div>`}
 const PRICE_RE={Epic:/Epic/,GOG:/^GOG/i,EA:/^(Origin|EA)\b/i,Ubisoft:/Ubisoft|Uplay/i,iOS:/iOS/,Android:/Android/};
+// Epic 官方的台灣限免清單裡找不到的 GamerPower 活動(抓資料時標記 tw_warn)
+const TWW='<span class="tww" title="Epic 官方的台灣限免清單裡沒有這款,台灣帳號可能無法領取">⚠ 台灣地區可能不適用</span>';
 function freeChips(i){
- const g=G.apps&&G.apps[i.appid],next=i.status==="next";
+ const g=G.apps&&G.apps[i.appid],next=freeState(i)==="next";
  const free=new Set(pl(i).map(p=>PK[p]).filter(Boolean));
  if(free.size>1)free.delete("PC");                       // 有具體商店時,不顯示泛用的 Windows 圖示
  const rows=[...(i.prices||[]),...cmpRows(g)];
@@ -605,7 +608,7 @@ function freeChips(i){
  unk.forEach(p=>chips.push([0,`<span class="pc free">${esc(p)} ${next?"即將免費":"免費"}</span>`]));
  if(!free.size&&!unk.length)chips.push([0,`<span class="pc free">平台未知 ${next?"即將免費":"免費"}</span>`]);
  PORD.forEach(k=>{
-  if(free.has(k)){chips.push([0,`<span class="pc free">${icon(k)}${next?"即將免費":"免費"}</span>`]);return}
+  if(free.has(k)){chips.push([0,`<span class="pc free">${icon(k)}${next?"即將免費":"免費"}</span>${k==="Epic"&&i.tw_warn?TWW:""}`]);return}
   if(k==="PC")return;
   if(k==="Steam"){
    {const f=g&&g.price&&g.price.final;if(f>0)chips.push([1,`<span class="pc">${icon(k)}NT$ ${Math.round(f).toLocaleString()}</span>`]);else if(f===0)chips.push([1,`<span class="pc">${icon(k)}免費遊玩</span>`])}
