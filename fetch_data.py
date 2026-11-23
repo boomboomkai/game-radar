@@ -95,11 +95,16 @@ def parse_epic(d, en=None):
         url = (f"https://store.epicgames.com/zh-Hant/p/{slug}" if slug
                else "https://store.epicgames.com/zh-Hant/free-games")
         price = (((e.get("price") or {}).get("totalPrice") or {}).get("fmtPrice") or {}).get("originalPrice", "")
+        images = {entry.get("type"): entry["url"] for entry in (e.get("keyImages") or [])
+                  if isinstance(entry, dict) and isinstance(entry.get("url"), str)
+                  and entry["url"].startswith("https://")}
+        image = next((images[k] for k in ("OfferImageWide", "DieselStoreFrontWide",
+                      "Thumbnail", "OfferImageTall") if k in images), "")
         for key, status in (("promotionalOffers", "now"), ("upcomingPromotionalOffers", "next")):
             for grp in promos.get(key) or []:
                 for o in grp.get("promotionalOffers", []):
                     if (o.get("discountSetting") or {}).get("discountPercentage") == 0:
-                        items.append({"platform": "Epic", "title": e["title"], "title_en": (en or {}).get(e.get("id")), "blurb": re.sub(r"\s+", " ", e.get("description") or "")[:300], "status": status,
+                        items.append({"platform": "Epic", "image": image, "title": e["title"], "title_en": (en or {}).get(e.get("id")), "blurb": re.sub(r"\s+", " ", e.get("description") or "")[:300], "status": status,
                                       "start": o.get("startDate"), "end": o.get("endDate"),
                                       "desc": f"原價 {price}" if price and re.search(r"[1-9]", price) else "", "url": url})
     return items
